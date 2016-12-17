@@ -105,7 +105,7 @@ module.exports = {
         console.log('InsertDbService - saveImageProduct - url connexion ', urlConnection);
         console.log('InsertDbService - saveImageProduct - imagePath ',imagePath);
 
-        var idProduct = 41;
+       // var idProduct = 41;
 
         //Connect to the db
         MongoClient.connect(urlConnection).then(function (db) {
@@ -126,7 +126,7 @@ module.exports = {
             console.log('saveImageProduct - update');
 
             collection.update(
-                {idProduct: idProduct},
+                {idProduct: parseInt(idProduct)},
                 // {price: '999999999999999'}
 
                 { $set: { image: [ imagePath ] } },

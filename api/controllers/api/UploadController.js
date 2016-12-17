@@ -29,15 +29,16 @@ module.exports = {
             if (uploadedFiles[0].fd) {
                 var filePath = uploadedFiles[0].fd;
                 var productId = 1;
+                var filePathFinal = '/images/product/'+idProduct+ '.png';
 
                 // copy of the file to assets/images/
-                fs.createReadStream(filePath).pipe(fs.createWriteStream('assets/images/product/'+productId+ '.png'));
+                fs.createReadStream(filePath).pipe(fs.createWriteStream('assets'+filePathFinal));
             }
 
             // add the imagePath for this product
 
             console.log('UploadController - saveImageProduct - start' );
-            InsertDbService.saveImageProduct(idProduct, filePath);
+            InsertDbService.saveImageProduct(idProduct, filePathFinal);
 
         });
 

@@ -1,7 +1,7 @@
 // PROJECT SETTINGS
 
 module.exports.project = {
-  name: 'Ymple Commerce',
+  name: 'Ymple',
   author: 'WASD Inc.',
   description: 'OPEN SHOP for FLIT electronics.',
   version: '0.2.0',
