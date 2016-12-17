@@ -1,5 +1,5 @@
 <h1>
-<a href="http://www.ymple.com"><img alt="YmpleCommerce" src="http://www.ymple.com/img/logo_ymple.png" title="YmpleCommerce"/>Ymple ECommerce</a>
+<a href="http://www.ymple.com"><img alt="YmpleCommerce" src="http://www.ymple.com/img/logo_ymple.png" title="YmpleCommerce"/>Ymple E-Commerce</a>
 </h1>
 
 Version 0.1.1 (released 11.2016)
@@ -20,14 +20,6 @@ System Dependencies
 * Sails.js v0.12
 
 How To Run
-
-- With Node Package ( Not the last version)
-
-    npm install YmpleCommerce
-    
-    run a mongodb instance on port 27017 
-
-    run node app.js
 
 
 - With Github
