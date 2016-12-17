@@ -66,7 +66,7 @@ module.exports = {
 
                 var result = {};
                 result.templateToInclude = 'product';
-                result.newIdProduct = data;
+                result.idProduct = data;
                 return res.view('back/menu.ejs', result);
 
             }
@@ -232,6 +232,15 @@ module.exports = {
 
                 result.product = {};
                 result.product = products[0];
+
+                if (products[0].idProduct){
+                result.idProduct = products[0].idProduct;
+                }
+                else
+                {
+                    result.idProduct = 0;
+                }
+
                 console.info('edit query result', products);
                 console.info('edit - result', result);
                 result.templateToInclude = 'productModification';
