@@ -21,6 +21,14 @@ System Dependencies
 
 How To Run
 
+- With Node Package ( Not the last version)
+
+    npm install YmpleCommerce
+
+    run a mongodb instance on port 27017
+
+    run node app.js
+
 
 - With Github
 
