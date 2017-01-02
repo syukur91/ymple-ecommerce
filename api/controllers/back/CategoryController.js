@@ -11,7 +11,7 @@ module.exports = {
     /**
      * `CategoryController.list()`
      */
-    list: function (req, res) {
+   /* list: function (req, res) {
 
         var result = {
             admin: req.session.user
@@ -24,7 +24,75 @@ module.exports = {
         result.templateToInclude = 'categoryList';
 
         return res.view('back/menu.ejs', result);
+    },*/
+
+
+    list: function (req, res) {
+        var result = {
+            admin: req.session.user
+        };
+        var skip = 0;
+        var page = 1;
+
+        if (req.query.hasOwnProperty('page')) {
+            skip = (req.query.page - 1) * 10;
+            page = req.query.page;
+        }
+
+        var queryOptions = {
+            where: {},
+            skip: skip,
+            limit: 10,
+            sort: 'createdAt DESC'
+        };
+
+        result.page = page;
+
+        async.waterfall([
+            function GetTotalCount(next) {
+                Category.count(function (err, num) {
+                    if (err) return next(err);
+
+                    result.pages = [];
+
+                    for (var i = 0, count = parseInt(num / queryOptions.limit); i <= count; i++) {
+                        result.pages.push(i + 1);
+                    }
+
+                    return next(null);
+                });
+            },
+
+            function GetProducts(next) {
+                Category.find(queryOptions, function (err, products) {
+                    if (err) next(err);
+
+                    result.products = products;
+
+                    return next(null);
+                });
+            },
+
+            function GetEditProduct(next) {
+                if (!req.params.hasOwnProperty('id')) {
+                    return next(null);
+                    return;
+                }
+
+                Category.findOne(req.params.id, function (err, product) {
+                    if (err) next(err);
+                    result.edit = product;
+
+                    return next(null);
+                });
+            }
+        ], function (err) {
+            if (err) return res.serverError(err);
+            result.templateToInclude = 'categoryList';
+            return res.view('back/menu.ejs', result);
+        });
     },
+
 
     /**
      * `CategoryController.create()`
@@ -61,20 +129,16 @@ module.exports = {
             var data = {};
             data = req.body;
 
-            console.log('create data', data);
+            console.log('CategoryController - createValidation', data);
 
-            Category.create(data, function (err, product) {
-                if (err) {
-                    return res.serverError(err);
-                }
-                else {
-                    var result = {};
-                    result.templateToInclude = 'categoryCreationOk';
-                    return res.view('back/menu.ejs', result);
-                    //return res.ok('create of the product done', req.body);
-                }
-                //return res.redirect('/admin/product');
-            });
+            InsertDbService.insertCategory(data);
+            InsertDbService.incrementId('category');
+
+            var result = {};
+            result.templateToInclude = 'categoryCreationOk';
+            return res.view('back/menu.ejs', result);
+            //return res.ok('create of the product done', req.body);
+
 
         }
         else {

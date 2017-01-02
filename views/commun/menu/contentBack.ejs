@@ -12,6 +12,11 @@
         <%- include ../../back/product/create %>
         <% } %>
 
+        <% if (templateToInclude == 'moduleInstallNew') { %>
+        <%- include ../../back/module/installNew %>
+        <% } %>
+
+
         <% if (templateToInclude == 'customerList') { %>
         <%- include ../../commun/navbar.light.ejs %>
         <%- include ../../back/customer/list.ejs %>
@@ -62,6 +67,9 @@
         <%- include ../../commun/navbar.light.ejs %>
         <%- include ../../back/product/modification.ejs %>
         <% } %>
+
+
+
 
         <%# [END]: template to manage the product%>
         <% } %>
