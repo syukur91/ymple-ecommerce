@@ -99,22 +99,7 @@ module.exports = {
 
 
             //return res.json({photos: photos.length});
-        });
-        ,
-
-
-
-        console.log('productController - newIdProduct:', doc );
-
-        var result = {};
-        result.templateToInclude = 'product';
-        result.newIdProduct = newIdProduct;
-        return res.view('back/menu.ejs', result);
-
-        /* return res.json({
-         todo: 'new() is not implemented yet!'
-         });*/
-   // },*/
+        });*/
 
     detail: function (req, res) {
         var result = {
@@ -143,7 +128,7 @@ module.exports = {
         });
     },
 
-    manage: function (req, res) {
+    list: function (req, res) {
         var result = {
             admin: req.session.user
         };
