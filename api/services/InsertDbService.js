@@ -62,7 +62,7 @@ module.exports = {
         //Connect to the db
         MongoClient.connect(urlConnection).then(function (db) {
 
-            console.log('data.name' , data.name);
+            console.log('data.name', data.name);
 
             var date = new Date();
 
@@ -70,25 +70,28 @@ module.exports = {
 
             var updatedAt = date.toISOString();
 
-            console.log ('date',  date);
+            console.log('date', date);
 
             var idProduct = parseInt(data.idProduct);
             var price = parseInt(data.price);
             var stock = data.stock;
             var video = data.video;
             var description = data.description;
+            var name = data.name;
 
-            var dataToInsert = {name:data.name,
-            idProduct:idProduct,
-            price:price,
-            stock:stock,
-            video: video,
-            description:  description,
-            createdAt: createdAt,
-            updatedAt: updatedAt
+
+            var dataToInsert = {
+                name: name,
+                idProduct: idProduct,
+                price: price,
+                stock: stock,
+                video: video,
+                description: description,
+                createdAt: createdAt,
+                updatedAt: updatedAt
             }
 
-            console.log ( 'insert test2');
+            console.log('insert test2');
 
             var collection = db.collection('product');
             //var lotsOfDocs = [{'hello': 'doc3'}, {'hello': 'doc4'}];
@@ -99,13 +102,49 @@ module.exports = {
     },
 
 
+    insertCategory: function (data) { // Insert a category in table category
+
+        var MongoClient = require('mongodb').MongoClient;
+        console.log('InsertDbService - url connexion ', urlConnection);
+
+        //Connect to the db
+        MongoClient.connect(urlConnection).then(function (db) {
+
+            var date = new Date();
+            var createdAt = date.toISOString();
+            var updatedAt = date.toISOString();
+
+            var idCategory = parseInt(data.idCategory);
+            var name = data.name;
+            var description = data.description;
+            var tag = data.tag;
+
+            var dataToInsert = {
+                name: name,
+                idCategory: idCategory,
+                //price: price,
+                //stock: stock,
+                //video: video,
+                description: description,
+                createdAt: createdAt,
+                updatedAt: updatedAt
+            }
+            console.log('InsertDbService - insertCategory - dataToInsert', dataToInsert);
+            var collection = db.collection('category');
+            //var lotsOfDocs = [{'hello': 'doc3'}, {'hello': 'doc4'}];
+            collection.insert(dataToInsert);
+
+        });
+    },
+
+
     saveImageProduct: function (idProduct, imagePath) { // Insert a product in table product
 
         var MongoClient = require('mongodb').MongoClient;
         console.log('InsertDbService - saveImageProduct - url connexion ', urlConnection);
-        console.log('InsertDbService - saveImageProduct - imagePath ',imagePath);
+        console.log('InsertDbService - saveImageProduct - imagePath ', imagePath);
 
-       // var idProduct = 41;
+        // var idProduct = 41;
 
         //Connect to the db
         MongoClient.connect(urlConnection).then(function (db) {
@@ -129,7 +168,7 @@ module.exports = {
                 {idProduct: parseInt(idProduct)},
                 // {price: '999999999999999'}
 
-                { $set: { image: [ imagePath ] } },
+                {$set: {image: [imagePath]}},
                 {upsert: true})
 
 
@@ -143,7 +182,7 @@ module.exports = {
         var MongoClient = mongodb.MongoClient;
         var Collection = mongodb.Collection;
 
-       // Promise.promisifyAll(Collection.prototype);
+        // Promise.promisifyAll(Collection.prototype);
         //Promise.promisifyAll(MongoClient);
 
 

@@ -108,7 +108,7 @@
                         <td>
 
 
-                            <a href="/admin/product/edit/<%= product.id %>" class="btn btn-xs btn-primary"   button-action="edit">EDIT</a>
+                            <a href="/admin/category/edit/<%= product.id %>" class="btn btn-xs btn-primary"   button-action="edit">EDIT</a>
 </td><td>
 
                             <button class="btn btn-xs btn-danger" button-action="delete">DELETE</button>
@@ -122,11 +122,8 @@
 
                 <div style="text-align: center;">
                     <ul class="pagination">
-                        <a href="/admin/product">&laquo;</a>
-                        <a href="/admin/product">&raquo;</a>
-
-
-
+                        <a href="/admin/category">&laquo;</a>
+                        <a href="/admin/category">&raquo;</a>
 
                         <% if (page == 1 ) {%>
                         <!--li class="active"><a href="/admin/product?page=<%#= loop.index %>"><%#= loop.index %></a></li>
