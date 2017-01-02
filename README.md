@@ -21,9 +21,9 @@ System Dependencies
 
 How To Run
 
-- With Node Package ( Not the last version)
+- With Node Package
 
-    npm install YmpleCommerce
+    npm install ymple-commerce
 
     run a mongodb instance on port 27017
 
@@ -43,6 +43,8 @@ How To Run
 
     go to the url http://localhost:1338/admin/install
 
+
+### [Screenshot](http://www.ymple.com/screenshot.html)
 
 Contributing
 --------
