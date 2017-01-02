@@ -23,13 +23,14 @@
                         <img class="img-rounded-ymple" src="/images/new_prod_trans.jpg">
                         <% } %>
                     </a>
-                    <%= i %>
+
                     <%# if (product.thumbnail){ %>
                     <%#  product.thumbnail  } else {  "http://lorempixel.com/500/500" } %>
                     <div class="caption text-left">
-                        <h3><%= product.name %></h3>Product id:<%= product.idProduct %>
+                        <h3><%= product.name %></h3>
 
-                        <span class="badge badge-info pull-right"><%= sails.config.project.currency.symbol %> <%= product.price | 'currency' %></span></h3>
+                        <span class="badge badge-info pull-right"><%= sails.config.project.currency.symbol %>
+                            <%= product.price | 'currency' %></span></h3>
                         <p class="ellipsis">
                             <%= product.description | 'description' %>
                         </p>

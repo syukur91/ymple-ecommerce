@@ -65,7 +65,7 @@ module.exports = {
                 console.log('productController - result', data);
 
                 var result = {};
-                result.templateToInclude = 'product';
+                result.templateToInclude = 'moduleInstallNew';
                 result.idProduct = data;
                 return res.view('back/menu.ejs', result);
 

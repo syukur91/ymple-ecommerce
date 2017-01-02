@@ -30,7 +30,7 @@ module.exports.routes = {
     // create the new product in db 
     '/admin/product/create/validation': 'back/productController.productNewValidation',
     'GET    /admin/product/create': 'back/productController.create',
-    'GET    /admin/product/manager': 'back/productController.manage',// display all the product available
+    'GET    /admin/product/list': 'back/productController.list',// display all the product available
     'GET    /admin/product/preview/:id': 'back/productController.detail',// display the detail about one product
     'GET    /admin/product/edit/:id': 'back/productController.edit',// edit the product
 
@@ -51,8 +51,11 @@ module.exports.routes = {
 
     // page to manage the modules
     'GET    /admin/module': {view: 'back/module/index'},
+    'GET    /admin/module/create': 'back/moduleController.create',
+    'GET    /admin/module/list': 'back/moduleController.list',
 
-    // install page 
+
+    // install page
     'GET    /admin/install': {view: 'back/install/index'}
 
 };

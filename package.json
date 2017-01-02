@@ -1,8 +1,8 @@
 {
-  "name": "YmpleCommerce",
+  "name": "ymple-commerce",
   "private": false,
-  "version": "0.1.0",
-  "description": "a Sails application",
+  "version": "0.2.0",
+  "description": "a Sails E-Commerce application",
   "keywords": [],
   "dependencies": {
     "async": "^2.1.4",

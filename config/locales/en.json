@@ -82,11 +82,17 @@
 
   "Hello!": "Hola!",
   "Hello %s, how are you today?": "¿Hola %s, como estas?",
-  "name": "name",
+  "name": "Name",
   "order": "order",
   "menu_manager": "menu manager",
   "name_shop": "shop name",
   "placeholder_url": "Please enter the representative image URL input",
-  "placeholder_description": "Enter the description"
+  "placeholder_description": "Enter the description",
+  "toto": "toto",
+  "category": "Category",
+  "category_placeholder":"Enter the category",
+  "module_name":"Module Name",
+  "add":"Add",
+  "search": "Search"
 
 }

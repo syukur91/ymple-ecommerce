@@ -2,10 +2,24 @@ list of the collection mongodb existing:
 
 product ( contain the list of product) 
 
+Field: name, description, idCategory, createdAt, updatedAt
+
+
+
 user ( contain the list of customer) 
 
 category ( to create and contain the list of product category) 
-- field: name, description, idCategory, createdAt, updatedAt
+Field: name, description, idCategory, createdAt, updatedAt
+
+
+
+#### module ####
+
+Field: idModule, name, description,  createdAt, updatedAt, category
+
+
+Page: new, list( list + manage)
+
 
 
 
