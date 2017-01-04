@@ -1,79 +1,52 @@
 <%- include ../../commun/navbar.light.ejs %>
 
-
 <div class="">
-    <h4 style="color:forestgreen"><a href="/admin"></a>Install New Module</h4>
-
+    <h4 style="color:forestgreen"><a href="/admin"></a>Module Installation</h4>
 
     <form role="form" action="/admin/product/create/validation" method="POST">
         <div class="row">
-
-
             <div class="col-sm-12">
                 <label> <%= __('name') %>    </label>
                            <input type="text" class="form-control" id="name" name="name"
                                   placeholder="<%= __('Please enter your name') %>" value="">
-
                 <input type="hidden" name="idProduct" id="idProduct" value="<%= idProduct %>">
-
             </div>
-
         </div>
         <br>
-
         <div class="row">
             <div class="col-sm-12">
                 <label> <%= __('category') %> </label>
-                           <input type="text" class="form-control" id="stock" name="stock"
-                                  placeholder="<%= __('category_placeholder') %>" value="">
-            </div>
+                <select name="related" class="form-control">            
+                    <option value="payment">Payment</option>
+                    <option value="productPage">Product Page</option>
+                    <option value="traffic">Traffic</option>
+                    <option value="shipping">Shipping</option>
+                    <option value="administration">Administration</option>
+                    <option value="customer">Customers</option>
 
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-sm-12">
-                <label> <%= __('representative picture') %> </label>
-                           <input type="text" class="form-control" id="thumbnail" name="thumbnail"
-                                  placeholder="<%= __('representative image URL input please') %>" value="">
-            </div>
-
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-sm-12">
-                <label> <%= __('module_name') %> </label>
-                            <Select name="related" class="form-control">            
-                    <Option value=""> <%= __('No') %></option>
-                    {% for product in products %}
-                    <option value="{{ product.id %>">{{ product.name
-                        %>
-                    </option>
-                    {% endfor %}
                 </select>
-            </div>
-
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-sm-12">
-                <label> <%= __('description') %> </label>
-                <textarea class="form-control" name="description" id="description" cols="30" rows="4"
-                          placeholder="<%= __('the product to explain MARKDOWN format as input please') %> ">
-                </textarea>
             </div>
         </div>
         <br>
         <div class="row">
             <div class="col-sm-12" style="text-align: center;align-content: center">
-                <% if (typeof edit == 'object' && edit) { %>         
-                <Button type="submit" class="btn btn-primary btn-lg pull-right"> <%= __('modify') %></button>          
-                <% } else { %>          
-                <Button type="submit" class="btn btn-primary btn-lg "> <%= __('search') %></button>
-
-                <Button type="submit" class="btn btn-primary btn-lg "> <%= __('add') %></button>
-                <% } %>
+                        
+                <button type="submit" style="margin-left: -40px;" class="btn btn-primary"> <%= __('search') %></button>
             </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-sm-12">
+                <label> <%= __('Found Modules') %> </label>
+                            <select name="related" class="form-control">            
+                    <option value="paypal">Paypal</option>
 
+                </select>
+            </div>
+        </div>
+        <br>
+        <div class="col-sm-12" style="text-align: center;align-content: center">
+            <Button type="submit" class="btn btn-primary "> <%= __('add') %></button>
         </div>
     </form>
 </div>
