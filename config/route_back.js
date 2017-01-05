@@ -53,6 +53,8 @@ module.exports.routes = {
     'GET    /admin/module': {view: 'back/module/index'},
     'GET    /admin/module/create': 'back/moduleController.create',
     'GET    /admin/module/list': 'back/moduleController.list',
+    'GET    /admin/module/search': 'back/moduleController.search',
+
 
 
     // install page
