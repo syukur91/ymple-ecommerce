@@ -288,10 +288,25 @@ module.exports = {
     },
 
     search: function(req, res){ // read data from the core_module database and go back to module/create with the list of modules available
-        
-         return res.json({
-         todo: 'new() is not implemented yet!'
-         });
+
+
+        var listModule = ReadDbService.getListCoreModule().then(function(data){
+
+            console.log('listModule', data);
+
+            //console.log('search - list Module', listModule);
+
+            return res.json({
+                todo: 'new() is not implemented yet!'
+            });
+            //return res.json({photos: photos.length});
+        });
+
+
+
+
+
+
     }
 
 

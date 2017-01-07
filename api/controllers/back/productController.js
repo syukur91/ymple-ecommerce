@@ -16,6 +16,7 @@ module.exports = {
      */
     create: function (req, res) {
 
+
         async.waterfall([
 
             function getNewIdProducT (next) {
@@ -61,43 +62,22 @@ module.exports = {
             }
             else
             {
-
                 console.log('productController - result', data);
-
                 var result = {};
                 result.templateToInclude = 'product';
                 result.idProduct = data;
                 return res.view('back/menu.ejs', result);
-
             }
-
-            //result.templateToInclude  = 'adminUserProfile';
-
-           // return res.view('back/menu.ejs', result);
         });
-
-            //result.templateToInclude  = 'adminUserProfile';
-
-            //return res.view('back/menu.ejs', result);
-        },
+    },
 
 
 
    /*     function (req, res) {
-
-        // get the new idProduct
-
-        //console.log('create test service - last id', ReadDbService.getNewIdProduct());
-
         async.waterfall([
-
         var newIdProduct = ReadDbService.getNewIdProduct('product').then(function(doc){
-
                     console.log('promise return value:', doc);
-
             return doc;
-
-
             //return res.json({photos: photos.length});
         });*/
 
@@ -111,13 +91,10 @@ module.exports = {
                 Product.findOne(req.params.id, function (err, product) {
                     if (err) return res.serverError(err);
                     if (!product) return res.serverError('NO_PRODUCT_FOUND');
-
                     // URLIFY
                     //product.description = Urlify(product.description);
-
                     result.cart = req.session.cart;
                     result.product = product;
-
                     return next(null, result);
                 });
             }
