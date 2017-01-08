@@ -49,15 +49,17 @@ module.exports.routes = {
     // page of admin preference
     'GET    /admin/preference': {view: 'back/preference'},
 
+
+    // install page
+    'GET    /admin/install': {view: 'back/install/index'},
+
     // page to manage the modules
     'GET    /admin/module': {view: 'back/module/index'},
     'GET    /admin/module/create': 'back/moduleController.create',
     'GET    /admin/module/list': 'back/moduleController.list',
-    'GET    /admin/module/search': 'back/moduleController.search',
+    'GET    /admin/module/search': 'back/moduleController.search', // return the list of module to be added
+    'GET    /admin/module/install': 'back/moduleController.install' // install one module as a service
 
 
-
-    // install page
-    'GET    /admin/install': {view: 'back/install/index'}
 
 };
