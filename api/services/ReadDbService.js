@@ -36,13 +36,10 @@ module.exports = {
 
     getNewIdProduct: function (fieldName) { // initialize the counter for name field, for example the productId
 
-        return  getNewIdProduct(fieldName);
+        return getNewIdProduct(fieldName);
 
         function getNewIdProduct() { // return the new id product to use
             var MongoClient = require('mongodb').MongoClient;
-
-            //var url = "mongodb://localhost:27017/ymple-commerce";
-
             return new Promise(
                 function (resolve, reject) {
                     MongoClient.connect(url, function (err, db) {
@@ -58,35 +55,21 @@ module.exports = {
 
     getListCoreModule: function () {
 
-
         return new Promise(
-
             function (resolve, reject) {
 
                 var MongoClient = require('mongodb').MongoClient;
-
                 var fieldName = 'product';
 
                 MongoClient.connect(url, function (err, db) {
-                    var col = db.collection('core_module');
-                    var data = col.find({}).toArray(function (err, docs) {
+                    var collectionName = "core_module";
+                    var col = db.collection(collectionName);
+                    var data = col.find({}).toArray(function (err, data) {
                         db.close();
-
-                        console.log('getListCoreModule - docs', docs);
-
-                        resolve(docs);//docs[0].name.toString()); // returns to the function that calls the callback
+                        console.log('getListCoreModule - data', data);
+                        resolve(data);//docs[0].name.toString()); // returns to the function that calls the callback
                     });
                 })
             })
-
-
-
-
-
-
-
-
     }
-
-
 };
