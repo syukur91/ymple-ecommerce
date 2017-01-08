@@ -20,6 +20,11 @@ Field: idModule, name, description,  createdAt, updatedAt, category
 
 Page: new, list( list + manage)
 
+#### core_module ####
+
+contain the module list available in the core
+
+
 
 
 
