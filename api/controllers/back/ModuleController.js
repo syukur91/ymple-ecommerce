@@ -18,13 +18,13 @@ module.exports = {
 
         async.waterfall([
 
-            function getNewIdProducT (next) {
+            function getNewIdProducT(next) {
 
                 //var data = 1111;
 
                 //console.log('next value 1rst function', data );
 
-                var newIdProduct = ReadDbService.getNewIdProduct('product').then(function(idProduct){
+                var newIdProduct = ReadDbService.getNewIdProduct('product').then(function (idProduct) {
 
                     console.log('promise return value:', idProduct);
 
@@ -38,29 +38,28 @@ module.exports = {
 
             /*function GetUserAndOrders (thumbnail, next) {
 
-                console.info('value 2nd function', thumbnail);
+             console.info('value 2nd function', thumbnail);
 
-                var data2 = 20;
+             var data2 = 20;
 
-                return next(null, data2);
+             return next(null, data2);
 
-            },*/
+             },*/
 
             /*function GetUserAndOrders2 (thumbnail, next) {
 
-                console.info('value 3rd function', thumbnail);
-                  var data2 = 20;
+             console.info('value 3rd function', thumbnail);
+             var data2 = 20;
 
-                return next(null, data2);
+             return next(null, data2);
 
-            }*/
+             }*/
 
         ], function (err, data) {
             if (err) {
-                return res.serverError (err);
+                return res.serverError(err);
             }
-            else
-            {
+            else {
 
                 console.log('productController - result', data);
 
@@ -73,33 +72,32 @@ module.exports = {
 
             //result.templateToInclude  = 'adminUserProfile';
 
-           // return res.view('back/menu.ejs', result);
+            // return res.view('back/menu.ejs', result);
         });
 
-            //result.templateToInclude  = 'adminUserProfile';
+        //result.templateToInclude  = 'adminUserProfile';
 
-            //return res.view('back/menu.ejs', result);
-        },
-
-
-
-   /*     function (req, res) {
-
-        // get the new idProduct
-
-        //console.log('create test service - last id', ReadDbService.getNewIdProduct());
-
-        async.waterfall([
-
-        var newIdProduct = ReadDbService.getNewIdProduct('product').then(function(doc){
-
-                    console.log('promise return value:', doc);
-
-            return doc;
+        //return res.view('back/menu.ejs', result);
+    },
 
 
-            //return res.json({photos: photos.length});
-        });*/
+    /*     function (req, res) {
+
+     // get the new idProduct
+
+     //console.log('create test service - last id', ReadDbService.getNewIdProduct());
+
+     async.waterfall([
+
+     var newIdProduct = ReadDbService.getNewIdProduct('product').then(function(doc){
+
+     console.log('promise return value:', doc);
+
+     return doc;
+
+
+     //return res.json({photos: photos.length});
+     });*/
 
     detail: function (req, res) {
         var result = {
@@ -218,11 +216,10 @@ module.exports = {
                 result.product = {};
                 result.product = products[0];
 
-                if (products[0].idProduct){
-                result.idProduct = products[0].idProduct;
+                if (products[0].idProduct) {
+                    result.idProduct = products[0].idProduct;
                 }
-                else
-                {
+                else {
                     result.idProduct = 0;
                 }
 
@@ -255,9 +252,9 @@ module.exports = {
 
             data = req.body;
 
-            InsertDbService.insertProduct(data);
+            CoreInsertDbService.insertProduct(data);
 
-            InsertDbService.incrementId('product');
+            CoreInsertDbService.incrementId('product');
 
             var result = {};
 
@@ -265,19 +262,19 @@ module.exports = {
 
             return res.view('back/menu.ejs', result);
 
-            console.log('productController - productNewValidation - req.body',data );
+            console.log('productController - productNewValidation - req.body', data);
 
-           /* Product.create(data, function (err, product) {
-                if (err) {
-                    return res.serverError(err);
-                }
-                else {
+            /* Product.create(data, function (err, product) {
+             if (err) {
+             return res.serverError(err);
+             }
+             else {
 
-                    // once created we increment the id produit in counter table
-                    //return res.ok('create of the product done', req.body);
-                }
-                //return res.redirect('/admin/product');
-            });*/
+             // once created we increment the id produit in counter table
+             //return res.ok('create of the product done', req.body);
+             }
+             //return res.redirect('/admin/product');
+             });*/
         }
         else {
             var result = {};
@@ -287,15 +284,12 @@ module.exports = {
         }
     },
 
-    search: function(req, res){ // read data from the core_module database and go back to module/create with the list of modules available
+    search: function (req, res) { // read data from the core_module database and go back to module/create with the list of modules available
 
 
-        ReadDbService.getListCoreModule().then(function(data){
+        CoreReadDbService.getListCoreModule().then(function (data) {
 
             console.log('ModuleController - listModule', data);
-
-
-
 
             var result = {};
             result.templateToInclude = 'moduleInstallNew';
@@ -303,20 +297,17 @@ module.exports = {
             result.listCoreModule = data;
             return res.view('back/menu.ejs', result);
 
-         });
+        });
     },
 
-    install: function(req, res) { // read data from the core_module database and go back to module/create with the list of modules available
+    install: function (req, res) { // read data from the core_module database and go back to module/create with the list of modules available
 
         return res.json({
             todo: 'install() is not implemented yet!'
         });
     }
-
-
-
-
-    };
+    
+};
 
 function Urlify(text) {
     var urlRegex = /(https?:\/\/[^\s]+)/g;
