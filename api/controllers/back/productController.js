@@ -25,7 +25,7 @@ module.exports = {
 
                 //console.log('next value 1rst function', data );
 
-                var newIdProduct = ReadDbService.getNewIdProduct('product').then(function(idProduct){
+                var newIdProduct = CoreReadDbService.getNewIdProduct('product').then(function(idProduct){
 
                     console.log('promise return value:', idProduct);
 
@@ -75,7 +75,7 @@ module.exports = {
 
    /*     function (req, res) {
         async.waterfall([
-        var newIdProduct = ReadDbService.getNewIdProduct('product').then(function(doc){
+        var newIdProduct = CoreReadDbService.getNewIdProduct('product').then(function(doc){
                     console.log('promise return value:', doc);
             return doc;
             //return res.json({photos: photos.length});
@@ -232,9 +232,9 @@ module.exports = {
 
             data = req.body;
 
-            InsertDbService.insertProduct(data);
+            CoreInsertDbService.insertProduct(data);
 
-            InsertDbService.incrementId('product');
+            CoreInsertDbService.incrementId('product');
 
             var result = {};
 

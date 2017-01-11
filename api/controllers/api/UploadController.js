@@ -38,7 +38,7 @@ module.exports = {
             // add the imagePath for this product
 
             console.log('UploadController - saveImageProduct - start' );
-            InsertDbService.saveImageProduct(idProduct, filePathFinal);
+            CoreInsertDbService.saveImageProduct(idProduct, filePathFinal);
 
         });
 
