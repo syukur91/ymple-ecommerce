@@ -131,8 +131,8 @@ module.exports = {
 
             console.log('CategoryController - createValidation', data);
 
-            InsertDbService.insertCategory(data);
-            InsertDbService.incrementId('category');
+            CoreInsertDbService.insertCategory(data);
+            CoreInsertDbService.incrementId('category');
 
             var result = {};
             result.templateToInclude = 'categoryCreationOk';
