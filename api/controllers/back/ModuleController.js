@@ -24,7 +24,7 @@ module.exports = {
 
                 //console.log('next value 1rst function', data );
 
-                var newIdProduct = ReadDbService.getNewIdProduct('product').then(function (idProduct) {
+                var newIdProduct = CoreReadDbService.getNewIdProduct('product').then(function (idProduct) {
 
                     console.log('promise return value:', idProduct);
 
@@ -294,7 +294,10 @@ module.exports = {
             var result = {};
             result.templateToInclude = 'moduleInstallNew';
             result.idProduct = 0;
+            result.listCoreModule='';
+            if (data){
             result.listCoreModule = data;
+            }
             return res.view('back/menu.ejs', result);
 
         });
@@ -306,7 +309,7 @@ module.exports = {
             todo: 'install() is not implemented yet!'
         });
     }
-    
+
 };
 
 function Urlify(text) {
