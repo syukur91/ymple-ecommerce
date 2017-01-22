@@ -39,11 +39,13 @@
                 <label> <%= __('Found Modules') %> </label>
                 <select name="related" class="form-control">            
                     <!--option value="paypal">Paypal</option-->
+                    <% if (typeof listCoreModule  == 'object') { %>
                     <% listCoreModule.forEach(function(module){ %>
                     <% if (module.name) { %>
                     <option value="paypal"><%= module.name %></option>
                     <% }%>
                     <% }); %>
+                    <% }%>
                 </select>
             </div>
         </div>
