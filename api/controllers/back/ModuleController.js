@@ -126,7 +126,7 @@ module.exports = {
         });
     },
 
-    list: function (req, res) {
+    configure: function (req, res) {
         var result = {
             admin: req.session.user
         };
@@ -304,6 +304,11 @@ module.exports = {
     },
 
     install: function (req, res) { // read data from the core_module database and go back to module/create with the list of modules available
+
+
+        // get the module name and add it in the db and table module with the configuration
+
+        console.log('ModuleController - install', req);
 
         return res.json({
             todo: 'install() is not implemented yet!'
