@@ -69,6 +69,10 @@
         <% } %>
 
 
+        <% if (templateToInclude == 'installModuleDone') { %>
+        <%- include ../../commun/navbar.light.ejs %>
+        <%- include ../../back/module/installModuleDone.ejs %>
+        <% } %>
 
 
         <%# [END]: template to manage the product%>
