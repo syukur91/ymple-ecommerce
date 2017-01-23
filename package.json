@@ -1,7 +1,7 @@
 {
-  "name": "ymple-commerce",
+  "name": "ymple-ecommerce",
   "private": false,
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "a Sails E-Commerce application",
   "keywords": [],
   "dependencies": {
@@ -45,7 +45,7 @@
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/Ymple/ymple-commerce.git"
+    "url": "git://github.com/Ymple/ymple-ecommerce.git"
   },
   "author": "FabienThetis",
   "license": "",
