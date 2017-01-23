@@ -305,14 +305,50 @@ module.exports = {
 
     install: function (req, res) { // read data from the core_module database and go back to module/create with the list of modules available
 
+        var output;
+        var allParam = req.params.all(); // get the module name and add it in the db and table module with the configuration
 
-        // get the module name and add it in the db and table module with the configuration
+        console.log('ModuleController - install - reqAllParam', allParam); // name contains the name of the module to install
 
-        console.log('ModuleController - install', req);
+        if (allParam.moduleToInstall){
 
-        return res.json({
-            todo: 'install() is not implemented yet!'
-        });
+            var moduleToInstall = allParam.moduleToInstall;
+
+            console.log('ModuleController - install - moduleToInstall', moduleToInstall);
+
+            // we add a line to the module table
+
+            CoreInsertDbService.installAndActiveCoreModule(moduleToInstall);
+
+
+            //console.log ('configuration', sails.config);
+
+
+            var result = {};
+            //result.templateToInclude = '../../back/module/installDone.ejs';
+            //result.isTemplateToIncludeFullPath = 1;
+
+            result.templateToInclude = 'installModuleDone';
+
+           // console.log('typeof',  typeof result.isTemplateToIncludeFullPath );
+
+            output =  res.view('back/menu.ejs', result);
+
+
+        }
+        else {
+
+            // return to the module page
+        }
+
+      //  console.log('ModuleController - install', req);
+
+        /*return res.json({
+            todo: 'install() is not implemented yet!'+ allParam
+        });*/
+
+        return output;
+
     }
 
 };

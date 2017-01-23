@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <label> <%= __('category') %> </label>
-                <select name="related" class="form-control">            
+                <select  name="related" class="form-control">            
                     <option value="payment">Payment</option>
                     <option value="productPage">Product Page</option>
                     <option value="traffic">Traffic</option>
@@ -33,16 +33,20 @@
                   <a class="btn btn-primary" style="margin-left: -40px;" href="/admin/module/search/"><%= __('search') %></a>
             </div>
         </div>
+        </form>
+
         <br>
-        <div class="row">
+    <form role="form" action="/admin/module/install/" method="POST">
+
+    <div class="row">
             <div class="col-sm-12">
                 <label> <%= __('Found Modules') %> </label>
-                <select name="related" class="form-control">            
+                <select name="moduleToInstall" class="form-control">            
                     <!--option value="paypal">Paypal</option-->
                     <% if (typeof listCoreModule  == 'object') { %>
                     <% listCoreModule.forEach(function(module){ %>
                     <% if (module.name) { %>
-                    <option value="paypal"><%= module.name %></option>
+                    <option value="<%= module.name %>"><%= module.name %></option>
                     <% }%>
                     <% }); %>
                     <% }%>
@@ -51,7 +55,7 @@
         </div>
         <br>
         <div class="col-sm-12" style="text-align: center;align-content: center">
-              <a class="btn btn-primary" style="margin-left: -40px;" href="/admin/module/install/"><%= __('Install') %></a>
+              <button class="btn btn-primary" style="margin-left: -40px;" type="submit"><%= __('Install') %></button>
         </div>
     </form>
 </div>
