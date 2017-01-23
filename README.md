@@ -1,5 +1,5 @@
 <h1>
-<a href="http://www.ymple.com"><img alt="YmpleCommerce" src="http://www.ymple.com/img/logo_ymple.png" title="YmpleCommerce"/>Ymple E-Commerce</a>
+<a href="http://www.ymple.com"><img alt="YmpleEcommerce" src="http://www.ymple.com/img/logo_ymple.png" title="YmpleEcommerce"/>Ymple Ecommerce</a>
 </h1>
 
 Version 0.1.1 (released 11.2016)
@@ -23,7 +23,7 @@ How To Run
 
 - With Node Package
 
-    npm install ymple-commerce
+    npm install ymple-ecommerce
 
     run a mongodb instance on port 27017
 
@@ -38,11 +38,14 @@ How To Run
     For Ubuntu and Centos run: 
     $ npm install bcrypt
 
-    Go to the folder ymple-commerce and run :
+    Go to the folder ymple-ecommerce and run :
     $ node app.js
 
-    go to the url http://localhost:1338/admin/install
+    Installation Url:  http://localhost:1338/admin/install
 
+    Back End Url: http://localhost:1338/admin
+
+    Front End Url: http://localhost:1338
 
 ### [Screenshot](http://www.ymple.com/screenshot.html)
 
@@ -51,7 +54,7 @@ Contributing
 
 YmpleCommerce is an Open Source project.
 
-If you want to contribute code to Ymple-Commerce, read the [CONTRIBUTING.md][7] file in this repository or read the [tutorials about contribution][8] on the documentation site.
+If you want to contribute code to Ymple-Ecommerce, read the [CONTRIBUTING.md][7] file in this repository or read the [tutorials about contribution][8] on the documentation site.
 
 
 ========
