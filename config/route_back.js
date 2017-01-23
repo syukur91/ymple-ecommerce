@@ -58,7 +58,7 @@ module.exports.routes = {
     'GET    /admin/module/create': 'back/moduleController.create',
     'GET    /admin/module/configure': 'back/moduleController.configure',
     'GET    /admin/module/search': 'back/moduleController.search', // return the list of module to be added
-    'GET    /admin/module/install': 'back/moduleController.install' // install one module as a service
+    '/admin/module/install': 'back/moduleController.install' // install one module as a service
 
 
 
