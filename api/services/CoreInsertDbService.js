@@ -176,6 +176,10 @@ module.exports = {
         });
     },
 
+    installAndActiveCoreModule: function(){ // active a module
+
+    },
+
     otherMethod: function () {
 
         var mongodb = require('mongodb');
