@@ -176,7 +176,46 @@ module.exports = {
         });
     },
 
-    installAndActiveCoreModule: function(){ // active a module
+    installAndActiveCoreModule: function(nameModule){ // active a module
+
+        MongoClient = this.getConnexion();
+
+        MongoClient.connect(urlConnection).then(function (db) {//Connect to the db
+
+
+            var date = new Date();
+            var createdAt = date.toISOString();
+            var updatedAt = date.toISOString();
+
+            var idModule = 0;
+            var name = nameModule;
+            var description = nameModule;
+            var category = 'category';
+            var configuration = '{}';
+
+            var data = {
+                name: name,
+                idModule: idModule,
+                category: category,
+                configuration: configuration,
+                description: description,
+                createdAt: createdAt,
+                updatedAt: updatedAt
+            }
+            console.log('InsertDbService - installAndActiveCoreModule - data', data);
+            var collection = db.collection('core_module_installed');
+            collection.insert(data);
+
+        });
+    },
+
+    getConnexion: function(){
+
+        var MongoClient = require('mongodb').MongoClient;
+        console.log('InsertDbService - url connexion ', urlConnection);
+
+        return MongoClient;
+
 
     },
 
