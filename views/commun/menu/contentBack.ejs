@@ -27,10 +27,16 @@
         <%- include ../../back/admin.order.ejs %>
         <% } %>
 
-        <% if (templateToInclude == 'adminProductManager') { %>
+        <% if (templateToInclude == 'list_product') { %>
         <%- include ../../commun/navbar.light.ejs %>
         <%- include ../../back/product/list.ejs %>
         <% } %>
+
+        <% if (templateToInclude == 'list_module') { %>
+        <%- include ../../commun/navbar.light.ejs %>
+        <%- include ../../back/module/list.ejs %>
+        <% } %>
+
 
         <% if (templateToInclude == 'categoryList') { %>
         <%- include ../../commun/navbar.light.ejs %>
