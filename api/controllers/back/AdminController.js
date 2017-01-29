@@ -78,7 +78,7 @@ module.exports = {
             if (err) return res.serverError(err);
 
 
-            result.templateToInclude = 'adminProductManager';
+            result.templateToInclude = 'list_product';
 
 
             return res.view('back/menu.ejs', result);

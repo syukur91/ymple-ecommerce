@@ -127,69 +127,23 @@ module.exports = {
     },
 
     configure: function (req, res) {
-        var result = {
-            admin: req.session.user
-        };
-        var skip = 0;
-        var page = 1;
 
-        if (req.query.hasOwnProperty('page')) {
-            skip = (req.query.page - 1) * 10;
-            page = req.query.page;
-        }
 
-        var queryOptions = {
-            where: {},
-            skip: skip,
-            limit: 10,
-            sort: 'createdAt DESC'
-        };
+        CoreReadDbService.getListCoreModule().then(function (data) {
 
-        result.page = page;
+            console.log('ModuleController - search', data);
 
-        async.waterfall([
-            function GetTotalCount(next) {
-                Product.count(function (err, num) {
-                    if (err) return next(err);
-
-                    result.pages = [];
-
-                    for (var i = 0, count = parseInt(num / queryOptions.limit); i <= count; i++) {
-                        result.pages.push(i + 1);
-                    }
-
-                    return next(null);
-                });
-            },
-
-            function GetProducts(next) {
-                Product.find(queryOptions, function (err, products) {
-                    if (err) next(err);
-
-                    result.products = products;
-
-                    return next(null);
-                });
-            },
-
-            function GetEditProduct(next) {
-                if (!req.params.hasOwnProperty('id')) {
-                    return next(null);
-                    return;
-                }
-
-                Product.findOne(req.params.id, function (err, product) {
-                    if (err) next(err);
-                    result.edit = product;
-
-                    return next(null);
-                });
+            var result = {};
+            result.templateToInclude = 'list_module';
+            result.idProduct = 0;
+            result.listCoreModule='';
+            if (data){
+                result.listModule = data;
             }
-        ], function (err) {
-            if (err) return res.serverError(err);
-            result.templateToInclude = 'adminProductManager';
             return res.view('back/menu.ejs', result);
+
         });
+
     },
 
     edit: function (req, res, id) {
@@ -289,7 +243,7 @@ module.exports = {
 
         CoreReadDbService.getListCoreModule().then(function (data) {
 
-            console.log('ModuleController - listModule', data);
+            console.log('ModuleController - search', data);
 
             var result = {};
             result.templateToInclude = 'moduleInstallNew';
@@ -325,6 +279,7 @@ module.exports = {
 
 
             var result = {};
+            result.nameModule = moduleToInstall;
             //result.templateToInclude = '../../back/module/installDone.ejs';
             //result.isTemplateToIncludeFullPath = 1;
 

@@ -56,7 +56,7 @@ module.exports.routes = {
     // page to manage the modules
     'GET    /admin/module': {view: 'back/module/index'},
     'GET    /admin/module/create': 'back/moduleController.create',
-    'GET    /admin/module/configure': 'back/moduleController.configure',
+    'GET    /admin/module/configure/': 'back/moduleController.configure',
     'GET    /admin/module/search': 'back/moduleController.search', // return the list of module to be added
     '/admin/module/install': 'back/moduleController.install' // install one module as a service
 
