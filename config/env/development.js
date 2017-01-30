@@ -23,7 +23,8 @@ module.exports = {
 
   port: 1339,
   template:{"moduleInstallNew": 'back/module/installNew.ejs',
-    'installModuleDone': 'back/module/installModuleDone.ejs'
+    'installModuleDone': 'back/module/installModuleDone.ejs',
+    'edit_module': 'back/module/edit.ejs'
   }
 
 };

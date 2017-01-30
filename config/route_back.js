@@ -58,7 +58,11 @@ module.exports.routes = {
     'GET    /admin/module/create': 'back/moduleController.create',
     'GET    /admin/module/configure/': 'back/moduleController.configure',
     'GET    /admin/module/search': 'back/moduleController.search', // return the list of module to be added
-    '/admin/module/install': 'back/moduleController.install' // install one module as a service
+    '/admin/module/install/': 'back/moduleController.install', // edit a module
+    '/admin/module/edit/:nameModule': 'back/moduleController.edit', // edit a module
+    '/admin/module/inactivate/:nameModule': 'back/moduleController.inactivate', // inactivate a module
+
+    '/admin/module/paypal/': 'back/moduleController.paypal'
 
 
 

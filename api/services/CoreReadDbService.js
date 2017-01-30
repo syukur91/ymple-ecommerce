@@ -62,7 +62,7 @@ module.exports = {
                 var fieldName = 'product';
 
                 MongoClient.connect(url, function (err, db) {
-                    var collectionName = "core_module";
+                    var collectionName = "core_module_installed";
                     var col = db.collection(collectionName);
                     var data = col.find({}).toArray(function (err, data) {
                         db.close();

@@ -234,7 +234,7 @@ module.exports = {
             var result = {};
             result.templateToInclude = 'productCreationKo';
             return res.view('back/menu.ejs', result);
-            //return res.ok('missing one parameter');
+
         }
     },
 
@@ -288,23 +288,119 @@ module.exports = {
            // console.log('typeof',  typeof result.isTemplateToIncludeFullPath );
 
             output =  res.view('back/menu.ejs', result);
-
-
         }
         else {
-
             // return to the module page
         }
-
-      //  console.log('ModuleController - install', req);
-
-        /*return res.json({
-            todo: 'install() is not implemented yet!'+ allParam
-        });*/
-
         return output;
+    },
 
+    edit: function(req, res){
+
+        var nameModule = req.params.nameModule;
+        console.log('ModuleController - edit',req.params.nameModule);
+        var result = {};
+        result.templateToInclude = 'edit_module';
+        result.nameModule = nameModule;
+        return res.view('back/menu.ejs', result);
+    },
+
+    inactivate:function(req, res, nameModule){
+
+        console.log('ModuleController - inactivate', nameModule);
+
+    },
+
+
+    paypal: function (req, res){
+
+        var paypal = require('paypal-rest-sdk');
+        //Create config options, with parameters (mode, client_id, secret).
+
+        paypal.configure({
+
+        'mode': 'sandbox', //sandbox or live
+            'client_id': 'EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM',
+            'client_secret': 'EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM'
+        });
+       // For multiple configuration support, have a look at the sample
+       // Invoke the rest api (eg: store a credit card) with required parameters (eg: data, config_options, callback).
+
+        var card_data = {
+            "type": "visa",
+            "number": "4417119669820331",
+            "expire_month": "11",
+            "expire_year": "2018",
+            "cvv2": "123",
+            "first_name": "Joe",
+            "last_name": "Shopper"
+        };
+
+        paypal.creditCard.create(card_data, function(error, credit_card){
+            if (error) {
+                console.log(error);
+                throw error;
+            } else {
+                console.log("Create Credit-Card Response");
+                console.log(credit_card);
+            }
+        })
+
+        return res.ok('paypal paiementmissing one parameter');
+
+
+
+
+
+  /*      var create_payment_json = {
+            "intent": "sale",
+            "payer": {
+                "payment_method": "credit_card",
+                "funding_instruments": [{
+                    "credit_card": {
+                        "type": "visa",
+                        "number": "4417119669820331",
+                        "expire_month": "11",
+                        "expire_year": "2018",
+                        "cvv2": "874",
+                        "first_name": "Joe",
+                        "last_name": "Shopper",
+                        "billing_address": {
+                            "line1": "52 N Main ST",
+                            "city": "Johnstown",
+                            "state": "OH",
+                            "postal_code": "43210",
+                            "country_code": "US"
+                        }
+                    }
+                }]
+            },
+            "transactions": [{
+                "amount": {
+                    "total": "7",
+                    "currency": "USD",
+                    "details": {
+                        "subtotal": "5",
+                        "tax": "1",
+                        "shipping": "1"
+                    }
+                },
+                "description": "This is the payment transaction description."
+            }]
+        };
+
+        paypal.payment.create(create_payment_json, function (error, payment) {
+            if (error) {
+                throw error;
+            } else {
+                console.log("Create Payment Response");
+                console.log(payment);
+            }
+        });
+*/
     }
+
+
 
 };
 

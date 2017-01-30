@@ -80,6 +80,15 @@
         <%- include ../../back/module/installModuleDone.ejs %>
         <% } %>
 
+        <% if (templateToInclude == 'edit_module') { %>
+        <%- include ../../commun/navbar.light.ejs %>
+        <%- include ../../back/module/edit.ejs %>
+        <% } %>
+
+
+
+
+
 
         <%# [END]: template to manage the product%>
         <% } %>
