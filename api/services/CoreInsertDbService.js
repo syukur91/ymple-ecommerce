@@ -140,12 +140,9 @@ module.exports = {
 
     saveImageProduct: function (idProduct, imagePath) { // Insert a product in table product
 
-        var MongoClient = require('mongodb').MongoClient;
-        console.log('InsertDbService - saveImageProduct - url connexion ', urlConnection);
         console.log('InsertDbService - saveImageProduct - imagePath ', imagePath);
 
-        // var idProduct = 41;
-
+        MongoClient = this.getConnexion();
         //Connect to the db
         MongoClient.connect(urlConnection).then(function (db) {
 
@@ -191,7 +188,7 @@ module.exports = {
             var name = nameModule;
             var description = nameModule;
             var category = 'category';
-            var configuration = '{}';
+            var configuration = {UsernameApi:xxx, passwordApi:xxx, firmaApi:xxx};
 
             var data = {
                 name: name,
@@ -200,7 +197,8 @@ module.exports = {
                 configuration: configuration,
                 description: description,
                 createdAt: createdAt,
-                updatedAt: updatedAt
+                updatedAt: updatedAt,
+                isActive: 1
             }
             console.log('InsertDbService - installAndActiveCoreModule - data', data);
             var collection = db.collection('core_module_installed');
