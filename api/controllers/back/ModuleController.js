@@ -302,12 +302,35 @@ module.exports = {
         var result = {};
         result.templateToInclude = 'edit_module';
         result.nameModule = nameModule;
+        result.listConfiguration=[];
+        result.listConfiguration[0]='configuration1';
+        result.listConfiguration[1]= 'configuration2';
+
+
+        //{userNameApi:'userNameApi',passwordApi:'passwordApi'};
         return res.view('back/menu.ejs', result);
     },
 
     inactivate:function(req, res, nameModule){
 
         console.log('ModuleController - inactivate', nameModule);
+
+    },
+
+
+    editValidation: function(req, res){ // validate the edit of one module
+
+        var allParam = req.params.all();
+        // get the parameters and update the table core_module_installed ( field configuration , field is active)
+        console.log('ModuleController.js - editValidation - req', allParam);
+
+
+        return res.ok('Edit is done', req.body);
+
+
+
+
+
 
     },
 
