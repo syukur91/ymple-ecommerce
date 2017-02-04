@@ -180,6 +180,11 @@ module.exports = {
         MongoClient.connect(urlConnection).then(function (db) {//Connect to the db
 
 
+
+            var usernameApi = '';
+            var passwordApi = '';
+            var firmaApi = '';
+
             var date = new Date();
             var createdAt = date.toISOString();
             var updatedAt = date.toISOString();
@@ -188,7 +193,7 @@ module.exports = {
             var name = nameModule;
             var description = nameModule;
             var category = 'category';
-            var configuration = {UsernameApi:xxx, passwordApi:xxx, firmaApi:xxx};
+            var configuration = {usernameApi:usernameApi, passwordApi:passwordApi, firmaApi:firmaApi};
 
             var data = {
                 name: name,

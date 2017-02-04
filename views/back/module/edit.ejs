@@ -1,21 +1,37 @@
-
 <div class="">
     <h4 style="color:forestgreen"><a href="/admin"></a>Module Configuration</h4>
-    <form role="form" action="/admin/category/create/validation" method="POST">
+    <form role="form" action="/admin/module/edit/validation/<%= nameModule %>" method="POST">
         <div class="row">
             <div class="col-sm-12">
                 <label> <%= __('name') %> </label>
-                           <input disabled type="text" class="form-control" id="name" name="name"
-                                  placeholder="" value="<%= nameModule %>">
+                 <input disabled type="text" class="form-control" id="name" name="name" placeholder=""
+                        value="<%= nameModule %>">
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-12">
+                <label> <%= __('Category') %> </label>
+                 <input disabled type="text" class="form-control" id="name" name="name" placeholder="" value="">
             </div>
         </div>
 
         <br>
         <div class="row">
             <div class="col-sm-12">
-                <label> <%= __('representative picture') %> </label>
-                           <input type="text" class="form-control" id="thumbnail" name="thumbnail"
-                                  placeholder="<%= __('placeholder_url') %>" value="">
+                <label> <%= __('Configuration') %> </label><br>
+
+                <% if (typeof listConfiguration == 'object' && listConfiguration) { %>
+
+                <% listConfiguration.forEach(function(configuration){ %>
+                <%= configuration %>
+                <input type="text" class="form-control" id="thumbnail" name="thumbnail"
+                       placeholder="<%= __('placeholder_url') %>" value="<%= configuration %>">
+
+                <% }) %>
+                <% } %>
+
             </div>
         </div>
         <br>
@@ -27,7 +43,7 @@
                     <% if (typeof products == 'object' && products) { %>
                     <% products.forEach(function(product){ %>
                     <option value="<% product.id %>"
-                        <% product.name  %>
+                    <% product.name %>
                     </option>
                     <% }); %>
                     <% } %>
@@ -37,23 +53,24 @@
         <div class="row">
             <div class="col-sm-12">
                 <label style="align-content: center;text-align: center">  <%= __('tags') %> </label>
-                           <input type="text" class="form-control" id="tags" name="tags" placeholder="<%= __('Please enter tags separated by commas') %>" value="">
+                           <input type="text" class="form-control" id="tags" name="tags"
+                                  placeholder="<%= __('Please enter tags separated by commas') %>" value="">
             </div>
         </div>
-<br>
+        <br>
         <div class="row">
             <div class="col-sm-12">
-                <label style="align-content: center;text-align: center">  <%= __('Active') %> </label>
-                <input type="checkbox" name="isActive" value="">
+                <label style="align-content: center;text-align: center">  <%= __('Activate') %> </label>
+                <input type="checkbox" name="isActive" value="1">
             </div>
         </div>
-
-        <br>
+        
         <br>
         <div class="row">
             <div class="col-sm-12" style="text-align: center;align-content: center">
 
-                <% if (typeof edit == 'object' && edit) { %> 
+                <% if (typeof edit == 'object' && edit) { %>
+                 
                 <Button type="submit" class="btn btn-primary btn-lg pull-center"> <%= __('modify') %></button>
                 <% } else { %>
                 <Button type="submit" class="btn btn-primary btn-lg pull-center"> <%= __('Save') %></button>
