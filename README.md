@@ -2,11 +2,14 @@
 <a href="http://www.ymple.com"><img alt="YmpleEcommerce" src="http://www.ymple.com/img/logo_ymple.png" title="YmpleEcommerce"/>Ymple Ecommerce</a>
 </h1>
 
-Version 0.1.1 (released 11.2016)
+Version 0.1.1 (released 2016.11)
 
-Version 0.2.0 will be released in 3.2017
+Version 0.2.0 will be released in 2017.4
 
-Version 0.3.0 will be released in 9.2017
+Version 0.3.0 will be released in 2017.7
+
+Version 0.4.0 will be released in 2017.10
+
 
 
 ### [Website](http://www.ymple.com/)
@@ -24,28 +27,34 @@ How To Run
 - With Node Package
 
     npm install ymple-ecommerce
-
     run a mongodb instance on port 27017
-
     run node app.js
-
 
 - With Github
 
-
     Clone the Git project
-
     For Ubuntu and Centos run: 
-    $ npm install bcrypt
+    npm install bcrypt
 
-    Go to the folder ymple-ecommerce and run :
-    $ node app.js
 
-    Installation Url:  http://localhost:1338/admin/install
+- INSTALLATION
 
-    Back End Url: http://localhost:1338/admin
+     Configure and run a mongodb instance ( the default configuration is  host: 'localhost', port: 27017)
 
-    Front End Url: http://localhost:1338
+     node app.js
+
+- FRONT END
+
+     Navigate to http://localhost:1338
+
+     Go to http://localhost:1339/login
+
+     Click on Sign Up to create the first user to be able to log in.
+
+- BACK END
+
+     You can access at http://localhost:1339/admin
+
 
 ### [Screenshot](http://www.ymple.com/screenshot.html)
 
