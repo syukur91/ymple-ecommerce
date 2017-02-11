@@ -177,7 +177,7 @@ module.exports = {
       function GetOrder (next) {
         Order.findOne(req.params.id).populate('owner').exec(function (err, order) {
           if (err) return res.serverError (err);
-          if (order.status === 'PAID') return next('ALREADY_PAID');
+          if (order && order.status && order.status === 'PAID') return next('ALREADY_PAID');
 
           result.order = order;
 
@@ -187,16 +187,27 @@ module.exports = {
     ], function (err) {
       if (err) return res.redirect('/order/'+req.params.id+'?error='+err);
 
-      return res.view('pay.ejs', result)
+      return res.view('front/pay.ejs', result)
     });
   },
 
   create: function (req, res)	{
+
+
+
+
+    console.log('enter OderController - create');
+
+
+    /*return res.json({
+      todo: 'update() is not implemented yet!'
+    });*/
+
     var result = {
       products: []
     };
 
-    var order = {
+   /* var order = {
       name: req.body.name,
       email: req.body.email,
       phone: req.body.phone,
@@ -207,7 +218,14 @@ module.exports = {
       shipping: 0,
       price: 0,
       products: []
-    }
+    }*/
+
+
+    console.log ( 'cart session', req.session.cart); // in the cart we have all the product
+
+
+
+
 
     async.waterfall([
       function CheckOrder (next) {
@@ -218,8 +236,18 @@ module.exports = {
 
         var cart = req.session.cart;
 
+        console.log('create the order');
+        console.log('cart', cart);
+
+
+
         async.map(cart, function (item, done) {
-          Product.findOne(item.id, function (err, product) {
+
+
+          console.log('cart - item', item );
+
+
+         /* Product.findOne(item.id, function (err, product) {
             if (err) done (err);
             if (!product) done ('NO_PRODUCT_FOUND');
             if (!product.isSelling) done ('NOT_SELLING');
@@ -229,7 +257,9 @@ module.exports = {
             order.products.push(product);
 
             done(null); return;
-          });
+          });*/
+
+
         }, function (err) {
           if (err) next(err);
 
@@ -240,7 +270,7 @@ module.exports = {
         });
       },
 
-      function GetUser (next) {
+      /*function GetUser (next) {
         if ( !req.session.hasOwnProperty('user') ) {
           return next(null);
         }
@@ -264,9 +294,9 @@ module.exports = {
             return next(null);
           });
         });
-      },
+      },*/
 
-      function CreateOrder (next) {
+      /*function CreateOrder (next) {
         Order.create(order, function (err, created) {
           if (err) next (err);
 
@@ -275,7 +305,7 @@ module.exports = {
 
           return next(null);
         });
-      }
+      }*/
     ], function (err) {
       if (err) return res.serverError(err);
 
@@ -285,6 +315,15 @@ module.exports = {
 
       return res.redirect('/pay/' + result.order.id);
     });
+
+    /*return res.json({
+     todo: 'update() is not implemented yet!'
+     });*/
+
+//    return res.redirect('/pay/' + result.order.id);
+    return res.redirect('/pay/1');
+
+
   }
 };
 

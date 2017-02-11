@@ -131,8 +131,8 @@ module.exports = {
         async.map(products, function (item, done) {
           Product.findOne(item.id, function (err, product) {
             if (err) done (err);
-            if (!product) done ('NO_PRODUCT_FOUND');
-            if (product.stock === 0 || ( product.stock !== -1 && product.stock - item.quantity <= 0 )) done('SOLD_OUT');
+            //if (!product) done ('NO_PRODUCT_FOUND');
+            //if (product.stock === 0 || ( product.stock !== -1 && product.stock - item.quantity <= 0 )) done('SOLD_OUT');
 
             var prodcutInfo = {
               id: product.id,
