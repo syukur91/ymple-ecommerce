@@ -47,13 +47,13 @@ How To Run
 
      Navigate to http://localhost:1338
 
-     Go to http://localhost:1339/login
+     Go to http://localhost:1338/login
 
      Click on Sign Up to create the first user to be able to log in.
 
 - BACK END
 
-     You can access at http://localhost:1339/admin
+     You can access at http://localhost:1338/admin
 
 
 ### [Screenshot](http://www.ymple.com/screenshot.html)
