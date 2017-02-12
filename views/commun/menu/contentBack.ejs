@@ -22,9 +22,9 @@
         <%- include ../../back/customer/list.ejs %>
         <% } %>
 
-        <% if (templateToInclude == 'adminOrderManager') { %>
+        <% if (templateToInclude == 'order_list') { %>
         <%- include ../../commun/navbar.light.ejs %>
-        <%- include ../../back/admin.order.ejs %>
+        <%- include ../../back/order/list.ejs %>
         <% } %>
 
         <% if (templateToInclude == 'list_product') { %>
@@ -43,9 +43,9 @@
         <%- include ../../back/category/list.ejs %>
         <% } %>
 
-        <% if (templateToInclude == 'adminUserProfile') { %>
+        <% if (templateToInclude == 'admin_profile') { %>
         <%- include ../../commun/navbar.light.ejs %>
-        <%- include ../../back/user/profile.ejs %>
+        <%- include ../../back/admin/profile.ejs %>
         <% } %>
 
         <%# [START]: template to manage the product%>

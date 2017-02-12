@@ -1,6 +1,5 @@
-
 <div class="">
-    <h3>ORDER MANAGER</h3>
+    <h1><i class="fa fa-fw fa-truck"> </i> <%= __('Order History') %> </h1>
     <hr/>
 
     <div class="row clearfix">
@@ -9,23 +8,14 @@
                 <thead>
                 <tr>
                     <th>#</th>
-
-                    <th> <%= __('one generation') %> </th>
-                                
+                    <th> <%= __('one generation') %> </th>          
                     <th> <%= __('name') %> </th>
-                                
                     <th> <%= __('products') %> </th>
-                                
                     <Th> <%= __('Price') %> </th>
-                                
                     <Th> <%= __('Telephone') %> </th>
-                                
                     <Th> <%= __('address') %> </th>
-                                
                     <Th> <%= __('shipping') %> </th>
-                                
                     <Th> <%= __('Payment') %> </th>
-                                
                     <Th> <%= __('state') %> </th>
                     <th></th>
                 </tr>
@@ -45,13 +35,9 @@
                     <td>
 
                         <% order.products.forEach(function(product){ %>
-
                         <a href="/product/view/<%= product.id %>"><%= product.name %></a>
-
                         <%= product.quantity %>
-
                         <% }); %>
-
                     </td>
                     <td><%= order.price | currency %></td>
                     <td><%= order.phone %></td>
@@ -62,12 +48,9 @@
                         <Span class="badge badge-success"> <%= __('advance payment') %> </span>
                             
                         <% } else { %>
-
-                                      <Span class="badge badge-warning"> <%= __('arrears') %> </span>
-                                      
+                                      <Span class="badge badge-warning"> <%= __('arrears') %> </span>              
                         <% } %>
-
-                                    
+       
                     </Td>
                                 
                     <Td><span class="badge badge-default"> <%= order.payment %>
@@ -79,13 +62,10 @@
                                       <Span class="badge badge-default"> <%= __('standby payment') %> </span>
 
                         <% } %>
-
                                       
                         <% if (order.status == 'PAID') { %>
                                       <Span class="badge badge-info"> <%= __('payment received') %> </span>
-
-
-                                      
+                             
                         <% } %>
 
                         <% if  (order.status == 'SENT') { %>
@@ -155,38 +135,29 @@
                 <ul class="pagination">
                     <li><a href="/admin/order">&laquo;</a></li>
 
-
                     <% pages.forEach(function (index) { %>
-
 
                     <% if (typeof loop == 'object' && page == loop.index) { %>
                     <li class="active"><a href="/admin/order?page=<%= loop.index %>"><%= loop.index %>
                         </a></li>
                     <% } else { %>
-                    <li><a href="/admin/order?page=<%#= loop.index %>"><%#=  loop.index   %>
+                    <li><a href="/admin/order?page=<%#= loop.index %>">
+                            <%#=  loop.index   %>
                         </a></li>
-                    <% }  %>
-
+                    <% } %>
 
                     <% if (typeof loop == 'object' && loop.last) { %>
                     <li><a href="/admin/order?page=<%= loop.index %>">&raquo;</a></li>
-                    <% }  %>
+                    <% } %>
 
-
-
-                    <% });  %>
-
-
-
+                    <% }); %>
                 </ul>
             </div>
         </div>
     </div>
 </div>
 
-
 <%#- include ../commun/library.ejs %>
-
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -195,7 +166,6 @@
             if (!confirm('Do you really want to delete this?')) {
                 return;
             }
-
             var product_id = $(this).data('id');
 
             $.ajax({

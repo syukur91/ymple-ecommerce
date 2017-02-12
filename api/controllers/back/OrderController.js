@@ -76,7 +76,7 @@ module.exports = {
       if (err) return res.serverError(err);
 
 
-      result.templateToInclude  = 'adminOrderManager';
+      result.templateToInclude  = 'order_list';
       // res.json(result);
       return res.view('back/menu.ejs', result);
     });

@@ -33,8 +33,8 @@ module.exports.routes = {
     'GET    /checkout': 'front/CartController.checkout',
 
     'POST   /paid': 'front/OrderController.paid',
-    'GET    /pay/:id': 'front/OrderController.pay',
-    'GET    /order': 'OrderController.create',
+    '/pay/:id': 'front/OrderController.pay',
+    '/order': 'front/OrderController.create',
     'GET    /order/cancel/:id': 'front/OrderController.cancel',
     'GET    /order/delivery/:id': 'front/OrderController.delivery',
     'GET    /order/check': 'front/OrderController.check',
