@@ -16,21 +16,17 @@
            <a class="nav-link" href="#">About</a>
          </li>
        </-->
+        <div> <a class="navbar-brand" href="/"><%= sails.config.project.name %> <img src="/images/ymple/logo.png" alt="Smiley face" height="60" width="70"></a>
+        </div>
+
+        <ul class="nav navbar-nav navbar-right" style="margin-left: 200px">
 
 
-        <ul class="nav navbar-nav navbar-right">
 
 
-            <li>
-
-              <div> <a class="navbar-brand" href="/"><%= sails.config.project.name %> <img src="/images/ymple/logo.png" alt="Smiley face" height="60" width="70"></a>
-              </div>
-            </li>
-
-
-            <li class="">
-                <a class="navbar-brand" href="/cart"><i
-                            class="fa fa-fw fa-shopping-cart"></i> <%= __('shopping basket') %>
+            <li style="float:right;">
+                <a class="navbar-brand" href="/cart">
+                    <i class="fa fa-fw fa-shopping-cart"></i> <%= __('shopping basket') %>
                     <% if (this.cart) {
                         cart.length
                     } %>
@@ -43,15 +39,15 @@
             </li>
             <% } %>
 
-            <li class="navbar-brand">
+            <li class="navbar-brand"  style="float:right;">
                 <% if (typeof user !== 'object' && typeof admin !== 'object') { %>
                 <a href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i>
                     <%= __('login') %>
                 </a>
 
-                <a href="/admin"><i class="fa fa-sign-in" aria-hidden="true"></i>
+                <!--a href="/admin"><i class="fa fa-sign-in" aria-hidden="true"></i>
                     <%= 'Back End' %>
-                </a>
+                </a-->
 
                 <% } %>
 
@@ -62,8 +58,8 @@
                 <a href="/profile"><i class="fa fa-user" aria-hidden="true"></i>
                     user &nbsp;<%= user.name %></a>
 
-                <a href="/admin"><i class="fa fa-sign-in" aria-hidden="true"></i>
-                    <%= 'Back End' %>
+                <a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i>
+                    <%= 'Logout' %>
                 </a>
 
                 <% } else { %>
