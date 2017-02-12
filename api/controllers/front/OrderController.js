@@ -191,41 +191,55 @@ module.exports = {
     });
   },
 
+
+  // create the order based on the client information and the cart
   create: function (req, res)	{
 
 
-
-
     console.log('enter OderController - create');
-
+    console.log('req.body', req.body);
+console.log('test', req.body['name']);
 
     /*return res.json({
       todo: 'update() is not implemented yet!'
     });*/
 
     var result = {
-      products: []
+      product: []
     };
 
-   /* var order = {
-      name: req.body.name,
-      email: req.body.email,
-      phone: req.body.phone,
-      address: req.body.address,
-      postcode: req.body.postcode,
-      comment: req.body.comment,
-      payment: req.body.payment,
+    // use cart to get the cart element
+
+
+     var  name = getValueFromReq(req.body, 'name');
+    var  email = getValueFromReq(req.body, 'email');
+    var  phone = getValueFromReq(req.body, 'phone');
+    var  address = getValueFromReq(req.body, 'address');
+    var  postcode = getValueFromReq(req.body, 'postcode');
+    var  comment = getValueFromReq(req.body, 'comment');
+    var  payment = getValueFromReq(req.body, 'payment');
+    var cart = getValueFromReq(req.session, 'cart');
+
+    // creation of the order json
+    var order = {
+      name: name,
+      email: email,
+      phone:phone,
+      address: address,
+      postcode: postcode,
+      comment: comment,
+      payment:payment,
       shipping: 0,
       price: 0,
-      products: []
-    }*/
+      list_product: [],
+      cart: cart
+    }
 
 
+    console.log('order', order);
     console.log ( 'cart session', req.session.cart); // in the cart we have all the product
 
-
-
-
+    console.log('session user', req.session.user); 
 
     async.waterfall([
       function CheckOrder (next) {
@@ -239,9 +253,20 @@ module.exports = {
         console.log('create the order');
         console.log('cart', cart);
 
+      },
+
+    ], function (err) {
+      if (err) return res.serverError(err);
+
+      req.session.cart = [];
+
+      if ( result.order.payment === 'TRANSFER' ) return res.redirect('/account');
+
+      return res.redirect('/pay/' + result.order.id);
+    });
 
 
-        async.map(cart, function (item, done) {
+        /*async.map(cart, function (item, done) {
 
 
           console.log('cart - item', item );
@@ -257,7 +282,7 @@ module.exports = {
             order.products.push(product);
 
             done(null); return;
-          });*/
+          });
 
 
         }, function (err) {
@@ -267,8 +292,11 @@ module.exports = {
             order.shipping = SHIPPING_FEE;
 
           return next(null);
-        });
-      },
+        });*/
+
+
+
+
 
       /*function GetUser (next) {
         if ( !req.session.hasOwnProperty('user') ) {
@@ -306,15 +334,7 @@ module.exports = {
           return next(null);
         });
       }*/
-    ], function (err) {
-      if (err) return res.serverError(err);
 
-      req.session.cart = [];
-
-      if ( result.order.payment === 'TRANSFER' ) return res.redirect('/account');
-
-      return res.redirect('/pay/' + result.order.id);
-    });
 
     /*return res.json({
      todo: 'update() is not implemented yet!'
@@ -334,4 +354,17 @@ function GetSessionData (req) {
   };
 
   return result;
+}
+
+function getValueFromReq(data, name){
+
+  var output = '';
+
+  if (data[name]){
+    output = data[name];
+  }
+
+  return output;
+
+
 }
