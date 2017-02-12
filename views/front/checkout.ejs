@@ -8,7 +8,7 @@
     <h3 style="color:forestgreen"> <%= __('Checking out') %> <a href="/cart" class="btn btn-warning pull-right"> <%= __('change') %> </a>
     </h3>
 
-    <H2> <%= __('You Cart is currently empty') %> </h2>
+    <h3> <%= __('You Cart is currently empty') %> </h3>
 
             <table class="table table-hover">
                 <thead>
@@ -124,37 +124,29 @@
                     </div>
                 </div>
 
-        <H2> <%= __('delivery method') %> </h2>
-                
-                     
-        <Div class="form-horizontal">
+        <h3> <%= __('Delivery method') %> </h3>
+                          
+        <div class="row" style="align-content: center;text-align: center">
                       
-            <Div class="form-group">
-                            
-                <Div class="col-sm-2">
-                                   <Select class="form-control" name="shipping">
+            <div class="col-sm-6">
+                     <Select class="form-control" name="shipping">
                                         
                         <Option value="PRE"> <%= __('freight prepaid') %> </option>
                                         
                         <Option value="POST"> <%= __('postpaid courier') %> </option>
-                                       </Select>
-
-
+                     </Select>
                 </div>
-                <Label id="shipping"
-                       class="control-label"> <%= __('prepaid shipping will be automatically added 3,000 raw courier.') %> </Label>
-                          
-            </Div>
-                    
-        </Div>
 
-                 <H2> <%= __('Payment') %> </h2>
+            <div class="col-sm-6">        
+                <label class=""> <%= __('prepaid shipping will be automatically added 3,000 raw courier.') %> </label>   
+            </div>    
+        </div>
 
-        <div class="form-horizontal">
-            <div class="form-group">
+        <h3> <%= __('Payment') %> </h3>
+
+        <div class="row" style="align-content: center;text-align: center">
                 <div class="col-sm-2">
                     <select id="payment" class="form-control" name="payment">
-
 
                         <Option value="TRANSFER"> <%= __('Bank Transfer') %> </option>
                                         
@@ -168,7 +160,6 @@
 
                 <Label id="payment-label" class="control-label"> Bank 1005-102-532536 </label>
                           
-            </Div>
             Sails
                       
             <% if (!sails.config.project.paymentMethods.iamport.using) { %>
