@@ -245,16 +245,27 @@ module.exports = {
         console.log('session user', req.session.user);
 
         async.waterfall([
+
+            function getNewIdOrder (next) {
+
+                var newIdOrder = CoreReadDbService.getNewIdOrder().then(function(idOrder){
+
+                    console.log('promise return value - create order - id:', idOrder);
+
+                    return next(null, idOrder);
+                });
+            },
+            
             function CheckOrder(next) {
-                if (!req.session.hasOwnProperty('cart') || req.session.cart.length <= 0) {
-                    next('NO_PRODUCT_FOUND');
-                    return;
-                }
+               //if (!req.session.hasOwnProperty('cart') || req.session.cart.length <= 0) {
+               //     next('NO_PRODUCT_FOUND');
+                //    return;
+               // }
 
-                var cart = req.session.cart;
+                //var cart = req.session.cart;
 
-                console.log('create the order');
-                console.log('cart', cart);
+                console.log('create the order - function 2 - idOrder', next); // test if we get the new id order
+                //console.log('cart', cart);
 
             },
 
