@@ -8,330 +8,374 @@
 var SHIPPING_FEE = 3000;
 
 module.exports = {
-  find: function (req, res) {
-    return res.view('complete.ejs', { failed: true });
-  },
+    find: function (req, res) {
+        return res.view('complete.ejs', {failed: true});
+    },
 
-  check: function (req, res) {
-    Order.findOne(req.body.merchant_uid, function (err, order) {
-      if (err) return res.serverError (err);
+    check: function (req, res) {
+        Order.findOne(req.body.merchant_uid, function (err, order) {
+            if (err) return res.serverError(err);
 
-      if (!order) {
-        sails.log ('ORDER_NOT_FOUND');
-        return res.json({ confirm: false, message: 'ORDER_NOT_FOUND' });
-      }
+            if (!order) {
+                sails.log('ORDER_NOT_FOUND');
+                return res.json({confirm: false, message: 'ORDER_NOT_FOUND'});
+            }
 
-      if ( order.price !== amount ) {
-        sails.log({ abuser: order.email });
-        return res.json({ confirm: false, reason: 'PRICE_NOT_MATCH' });
-      }
+            if (order.price !== amount) {
+                sails.log({abuser: order.email});
+                return res.json({confirm: false, reason: 'PRICE_NOT_MATCH'});
+            }
 
-      return res.json({ confirm: true });
-    });
-  },
-
-  paid: function (req, res) {
-    sails.log('PAID:' + req.body);
-
-    Order.findOne(req.body.merchant_uid, function (err, order) {
-      if (err) return res.serverError (err);
-
-      if (!order) {
-        sails.log ('ORDER_NOT_FOUND');
-        return res.json({ result: 'fail', message: 'ORDER_NOT_FOUND' });
-      }
-
-      order.status = 'PAID';
-
-      if ( req.body.hasOwnProperty('apply_num') )
-        order.paymentLog = req.body;
-      else
-        order.paymentCheck = req.body;
-
-      order.save(function (err, saved) {
-        if (err) sails.log (err);
-
-        return res.json(saved);
-      });
-    });
-  }, // iamport 서버 응답용
-
-  change: function (req, res) {
-    var result = GetSessionData(req);
-
-    async.waterfall([
-      function GetOrder (next) {
-        Order.findOne(req.params.id, function (err, order) {
-          if (err) return next (err);
-
-          if ( req.query.hasOwnProperty('type') )
-            order.status = req.query.type;
-
-          return next(null, order);
+            return res.json({confirm: true});
         });
-      },
+    },
 
-      function SetOrder (order, next) {
-        order.save(function (err, saved) {
-          if (err) return next (err);
+    paid: function (req, res) {
+        sails.log('PAID:' + req.body);
 
-          result.order = saved;
+        Order.findOne(req.body.merchant_uid, function (err, order) {
+            if (err) return res.serverError(err);
 
-          return next(null);
+            if (!order) {
+                sails.log('ORDER_NOT_FOUND');
+                return res.json({result: 'fail', message: 'ORDER_NOT_FOUND'});
+            }
+
+            order.status = 'PAID';
+
+            if (req.body.hasOwnProperty('apply_num'))
+                order.paymentLog = req.body;
+            else
+                order.paymentCheck = req.body;
+
+            order.save(function (err, saved) {
+                if (err) sails.log(err);
+
+                return res.json(saved);
+            });
         });
-      }
-    ], function (err) {
-      if (err) return res.serverError(err);
+    }, // iamport 서버 응답용
 
-      res.redirect('/admin/order');
-    });
-  },
+    change: function (req, res) {
+        var result = GetSessionData(req);
 
-  findOne: function (req, res) {
-    var result = GetSessionData(req);
+        async.waterfall([
+            function GetOrder(next) {
+                Order.findOne(req.params.id, function (err, order) {
+                    if (err) return next(err);
 
-    async.waterfall([
-      function GetOrder (next) {
-        Order.findOne(req.params.id).populate('owner').exec(function (err, order) {
-          if (err) return next (err);
+                    if (req.query.hasOwnProperty('type'))
+                        order.status = req.query.type;
 
-          result.order = order;
+                    return next(null, order);
+                });
+            },
 
-          return next(null);
+            function SetOrder(order, next) {
+                order.save(function (err, saved) {
+                    if (err) return next(err);
+
+                    result.order = saved;
+
+                    return next(null);
+                });
+            }
+        ], function (err) {
+            if (err) return res.serverError(err);
+
+            res.redirect('/admin/order');
         });
-      }
-    ], function (err) {
-      if (err) return res.serverError(err);
+    },
 
-      if ( req.query.hasOwnProperty('error') ) result.error = req.query.error.toUpperCase();
+    findOne: function (req, res) {
+        var result = GetSessionData(req);
 
-      return res.view('order.ejs', result);
-    });
+        async.waterfall([
+            function GetOrder(next) {
+                Order.findOne(req.params.id).populate('owner').exec(function (err, order) {
+                    if (err) return next(err);
 
-  },
+                    result.order = order;
 
-  cancel: function (req, res) {
-    var result = GetSessionData(req);
+                    return next(null);
+                });
+            }
+        ], function (err) {
+            if (err) return res.serverError(err);
 
-    async.waterfall([
-      function GetOrder (next) {
-        Order.findOne(req.params.id).populate('owner').exec(function (err, order) {
-          if (err) return next (err);
-          if (!order) return next ('NO_ORDER_FOUND');
+            if (req.query.hasOwnProperty('error')) result.error = req.query.error.toUpperCase();
 
-          if (order.owner.id !== req.session.user.id)
-            return next ('NO_PERMISSION');
-
-          order.status = 'CANCEL';
-
-          order.save(function (err, order) {
-            if (err) return next (err);
-
-            result.order = order;
-
-            return next(null);
-          });
+            return res.view('order.ejs', result);
         });
-      }
-    ], function (err) {
-      if (err) return res.serverError (err);
 
-      result.message = '주문을 취소하셨습니다.';
+    },
 
-      return res.view('message.ejs', result);
-    });
-  },
+    cancel: function (req, res) {
+        var result = GetSessionData(req);
 
-  delivery: function (req, res) {
-    var result = GetSessionData(req);
+        async.waterfall([
+            function GetOrder(next) {
+                Order.findOne(req.params.id).populate('owner').exec(function (err, order) {
+                    if (err) return next(err);
+                    if (!order) return next('NO_ORDER_FOUND');
 
-    async.waterfall([
-      function GetOrder (next) {
-        Order.findOne(req.params.id, function (err, order) {
-          if (err) return next (err);
+                    if (order.owner.id !== req.session.user.id)
+                        return next('NO_PERMISSION');
 
-          if ( !order.hasOwnProperty('delivery') || order.delivery === undefined )
-            return res.json({'message': '택배 번호가 없습니다.'});
+                    order.status = 'CANCEL';
 
-          result.order = order;
+                    order.save(function (err, order) {
+                        if (err) return next(err);
 
-          return next(null);
+                        result.order = order;
+
+                        return next(null);
+                    });
+                });
+            }
+        ], function (err) {
+            if (err) return res.serverError(err);
+
+            result.message = '주문을 취소하셨습니다.';
+
+            return res.view('message.ejs', result);
         });
-      }
-    ], function (err) {
-      if (err) return res.serverError (err);
+    },
 
-      result.message = '준비중입니다.';
+    delivery: function (req, res) {
+        var result = GetSessionData(req);
 
-      return res.json(result);
-    });
-  },
+        async.waterfall([
+            function GetOrder(next) {
+                Order.findOne(req.params.id, function (err, order) {
+                    if (err) return next(err);
 
-  pay: function (req, res) {
-    var result = {
-      user: (req.session.hasOwnProperty('user')) ? req.session.user : undefined,
-      cart: (req.session.hasOwnProperty('cart')) ? req.session.cart : undefined
-    }
+                    if (!order.hasOwnProperty('delivery') || order.delivery === undefined)
+                        return res.json({'message': '택배 번호가 없습니다.'});
 
-    async.waterfall([
-      function GetOrder (next) {
-        Order.findOne(req.params.id).populate('owner').exec(function (err, order) {
-          if (err) return res.serverError (err);
-          if (order && order.status && order.status === 'PAID') return next('ALREADY_PAID');
+                    result.order = order;
 
-          result.order = order;
+                    return next(null);
+                });
+            }
+        ], function (err) {
+            if (err) return res.serverError(err);
 
-          return next(null);
+            result.message = '준비중입니다.';
+
+            return res.json(result);
         });
-      },
-    ], function (err) {
-      if (err) return res.redirect('/order/'+req.params.id+'?error='+err);
+    },
 
-      return res.view('front/pay.ejs', result)
-    });
-  },
-
-  create: function (req, res)	{
-
-
-
-
-    console.log('enter OderController - create');
-
-
-    /*return res.json({
-      todo: 'update() is not implemented yet!'
-    });*/
-
-    var result = {
-      products: []
-    };
-
-   /* var order = {
-      name: req.body.name,
-      email: req.body.email,
-      phone: req.body.phone,
-      address: req.body.address,
-      postcode: req.body.postcode,
-      comment: req.body.comment,
-      payment: req.body.payment,
-      shipping: 0,
-      price: 0,
-      products: []
-    }*/
-
-
-    console.log ( 'cart session', req.session.cart); // in the cart we have all the product
-
-
-
-
-
-    async.waterfall([
-      function CheckOrder (next) {
-        if ( !req.session.hasOwnProperty('cart') || req.session.cart.length <= 0 ) {
-          next('NO_PRODUCT_FOUND');
-          return;
+    pay: function (req, res) {
+        var result = {
+            user: (req.session.hasOwnProperty('user')) ? req.session.user : undefined,
+            cart: (req.session.hasOwnProperty('cart')) ? req.session.cart : undefined
         }
 
-        var cart = req.session.cart;
+        async.waterfall([
+            function GetOrder(next) {
+                Order.findOne(req.params.id).populate('owner').exec(function (err, order) {
+                    if (err) return res.serverError(err);
+                    if (order && order.status && order.status === 'PAID') return next('ALREADY_PAID');
 
-        console.log('create the order');
-        console.log('cart', cart);
+                    result.order = order;
+
+                    return next(null);
+                });
+            },
+        ], function (err) {
+            if (err) return res.redirect('/order/' + req.params.id + '?error=' + err);
+
+            return res.view('front/pay.ejs', result)
+        });
+    },
 
 
+    // create the order based on the client information and the cart
+    create: function (req, res) {
 
-        async.map(cart, function (item, done) {
+
+        if (!req.session.user){
+            return res.redirect('/login');
+        }
+
+        console.log('enter OderController - create');
+        console.log('req.body', req.body);
+        console.log('test', req.body['name']);
+
+        /*return res.json({
+         todo: 'update() is not implemented yet!'
+         });*/
+
+        var result = {
+            product: []
+        };
+
+        // use cart to get the cart element
 
 
-          console.log('cart - item', item );
+        var name = getValueFromReq(req.body, 'name');
+        var email = getValueFromReq(req.body, 'email');
+        var phone = getValueFromReq(req.body, 'phone');
+        var address = getValueFromReq(req.body, 'address');
+        var postcode = getValueFromReq(req.body, 'postcode');
+        var comment = getValueFromReq(req.body, 'comment');
+        var payment = getValueFromReq(req.body, 'payment');
+        var cart = getValueFromReq(req.session, 'cart');
+
+        // creation of the order json
+        var order = {
+            name: name,
+            email: email,
+            phone: phone,
+            address: address,
+            postcode: postcode,
+            comment: comment,
+            payment: payment,
+            shipping: 0,
+            price: 0,
+            list_product: [],
+            cart: cart
+        }
+
+
+        console.log('order', order);
+        console.log('cart session', req.session.cart); // in the cart we have all the product
+        console.log('session user', req.session.user);
+
+        async.waterfall([
+
+            function getNewIdOrder (next) {
+
+                var newIdOrder = CoreReadDbService.getNewIdOrder().then(function(idOrder){
+
+                    console.log('promise return value - create order - id:', idOrder);
+
+                    return next(null, idOrder);
+                });
+            },
+            
+            function CheckOrder(next) {
+               //if (!req.session.hasOwnProperty('cart') || req.session.cart.length <= 0) {
+               //     next('NO_PRODUCT_FOUND');
+                //    return;
+               // }
+
+                //var cart = req.session.cart;
+
+                console.log('create the order - function 2 - idOrder', next); // test if we get the new id order
+                //console.log('cart', cart);
+
+            },
+
+        ], function (err) {
+            if (err) return res.serverError(err);
+
+            req.session.cart = [];
+
+            if (result.order.payment === 'TRANSFER') return res.redirect('/account');
+
+            return res.redirect('/pay/' + result.order.id);
+        });
+
+
+        /*async.map(cart, function (item, done) {
+
+
+         console.log('cart - item', item );
 
 
          /* Product.findOne(item.id, function (err, product) {
-            if (err) done (err);
-            if (!product) done ('NO_PRODUCT_FOUND');
-            if (!product.isSelling) done ('NOT_SELLING');
+         if (err) done (err);
+         if (!product) done ('NO_PRODUCT_FOUND');
+         if (!product.isSelling) done ('NOT_SELLING');
 
-            order.price += product.price * item.quantity;
-            product.quantity = item.quantity;
-            order.products.push(product);
+         order.price += product.price * item.quantity;
+         product.quantity = item.quantity;
+         order.products.push(product);
 
-            done(null); return;
-          });*/
+         done(null); return;
+         });
 
 
-        }, function (err) {
-          if (err) next(err);
+         }, function (err) {
+         if (err) next(err);
 
-          if ( req.body.shipping === 'PRE' )
-            order.shipping = SHIPPING_FEE;
+         if ( req.body.shipping === 'PRE' )
+         order.shipping = SHIPPING_FEE;
 
-          return next(null);
-        });
-      },
+         return next(null);
+         });*/
 
-      /*function GetUser (next) {
-        if ( !req.session.hasOwnProperty('user') ) {
-          return next(null);
-        }
 
-        User.findOne(req.session.user.id, function(err, user) {
-          if (err) next (err);
-          if (!req.body.hasOwnProperty('remember') || !req.body.remember) {
-            return next(null);
-          }
+        /*function GetUser (next) {
+         if ( !req.session.hasOwnProperty('user') ) {
+         return next(null);
+         }
 
-          user.address = order.address;
-          user.postcode = order.postcode;
+         User.findOne(req.session.user.id, function(err, user) {
+         if (err) next (err);
+         if (!req.body.hasOwnProperty('remember') || !req.body.remember) {
+         return next(null);
+         }
 
-          user.save(function (err, user) {
-            result.user = user;
+         user.address = order.address;
+         user.postcode = order.postcode;
 
-            order.owner = user.id;
-            order.email = user.email;
-            req.session.user = user;
+         user.save(function (err, user) {
+         result.user = user;
 
-            return next(null);
-          });
-        });
-      },*/
+         order.owner = user.id;
+         order.email = user.email;
+         req.session.user = user;
 
-      /*function CreateOrder (next) {
-        Order.create(order, function (err, created) {
-          if (err) next (err);
+         return next(null);
+         });
+         });
+         },*/
 
-          result.order = created;
-          EmailService.sendAlertEmail();
+        /*function CreateOrder (next) {
+         Order.create(order, function (err, created) {
+         if (err) next (err);
 
-          return next(null);
-        });
-      }*/
-    ], function (err) {
-      if (err) return res.serverError(err);
+         result.order = created;
+         EmailService.sendAlertEmail();
 
-      req.session.cart = [];
+         return next(null);
+         });
+         }*/
 
-      if ( result.order.payment === 'TRANSFER' ) return res.redirect('/account');
 
-      return res.redirect('/pay/' + result.order.id);
-    });
-
-    /*return res.json({
-     todo: 'update() is not implemented yet!'
-     });*/
+        /*return res.json({
+         todo: 'update() is not implemented yet!'
+         });*/
 
 //    return res.redirect('/pay/' + result.order.id);
-    return res.redirect('/pay/1');
+        return res.redirect('/pay/1');
 
 
-  }
+    }
 };
 
-function GetSessionData (req) {
-  var result = {
-    user: (req.session.hasOwnProperty('user')) ? req.session.user : undefined,
-    cart: (req.session.hasOwnProperty('cart')) ? req.session.cart : undefined
-  };
+function GetSessionData(req) {
+    var result = {
+        user: (req.session.hasOwnProperty('user')) ? req.session.user : undefined,
+        cart: (req.session.hasOwnProperty('cart')) ? req.session.cart : undefined
+    };
 
-  return result;
+    return result;
+}
+
+function getValueFromReq(data, name) {
+
+    var output = '';
+
+    if (data[name]) {
+        output = data[name];
+    }
+
+    return output;
+
+
 }

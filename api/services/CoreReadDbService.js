@@ -28,29 +28,38 @@ module.exports = {
     },
 
 
-    test: function () {
+    getNewIdProduct: function () { // initialize the counter for name field, for example the productId
 
-        return 'test ok service';
+        var fieldName = 'product';
+        return this.getNewId(fieldName);
+
     },
 
+    getNewId: function (fieldName) { // return the new id product to use
+    var MongoClient = require('mongodb').MongoClient;
+    return new Promise(
+        function (resolve, reject) {
+            MongoClient.connect(url, function (err, db) {
+                var col = db.collection('counter');
+                var data = col.find({id: fieldName}).toArray(function (err, docs) {
+                    db.close();
+                    if (docs[0]){
 
-    getNewIdProduct: function (fieldName) { // initialize the counter for name field, for example the productId
+                        resolve(docs[0].seq);//docs[0].name.toString()); // returns to the function that calls the callback
 
-        return getNewIdProduct(fieldName);
+                    }
+                    else{
+                        resolve(1);
+                    }
+                });
+            })
+        })
+    },
 
-        function getNewIdProduct() { // return the new id product to use
-            var MongoClient = require('mongodb').MongoClient;
-            return new Promise(
-                function (resolve, reject) {
-                    MongoClient.connect(url, function (err, db) {
-                        var col = db.collection('counter');
-                        var data = col.find({id: fieldName}).toArray(function (err, docs) {
-                            db.close();
-                            resolve(docs[0].seq);//docs[0].name.toString()); // returns to the function that calls the callback
-                        });
-                    })
-                })
-        }
+    getNewIdOrder: function () { // initialize the counter for name field, for example the productId
+
+        var fieldName = 'order';
+        return this.getNewId(fieldName);
     },
 
     getListCoreModule: function () {

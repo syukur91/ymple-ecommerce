@@ -1,7 +1,6 @@
 <div class="container" style="margin-bottom: 70px;">
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 
-
         <!-- class="nav navbar-nav">
          <li class="nav-item active">
            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
@@ -17,20 +16,19 @@
          </li>
        </-->
 
+        <ul class="nav navbar-nav navbar-right" style="">
 
-        <ul class="nav navbar-nav navbar-right">
-
-
-            <li>
-
-              <div> <a class="navbar-brand" href="/"><%= sails.config.project.name %> <img src="/images/ymple/logo.png" alt="Smiley face" height="60" width="70"></a>
-              </div>
+            <li style="float:left;">
+                <img src="/images/ymple/logo.png" alt="Smiley face" height="45" width="50"></a>
             </li>
 
+            <li style="float:left;">
+                <a class="navbar-brand" href="/" style="color: black;"><%= sails.config.project.name %></a>
+            </li>
 
-            <li class="">
-                <a class="navbar-brand" href="/cart"><i
-                            class="fa fa-fw fa-shopping-cart"></i> <%= __('shopping basket') %>
+            <li style="float:right;">
+                <a class="navbar-brand" href="/cart">
+                    <i class="fa fa-fw fa-shopping-cart"></i> <%= __('shopping basket') %>
                     <% if (this.cart) {
                         cart.length
                     } %>
@@ -43,15 +41,15 @@
             </li>
             <% } %>
 
-            <li class="navbar-brand">
+            <li class="navbar-brand"  style="float:right;">
                 <% if (typeof user !== 'object' && typeof admin !== 'object') { %>
                 <a href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i>
                     <%= __('login') %>
                 </a>
 
-                <a href="/admin"><i class="fa fa-sign-in" aria-hidden="true"></i>
+                <!--a href="/admin"><i class="fa fa-sign-in" aria-hidden="true"></i>
                     <%= 'Back End' %>
-                </a>
+                </a-->
 
                 <% } %>
 
@@ -62,8 +60,8 @@
                 <a href="/profile"><i class="fa fa-user" aria-hidden="true"></i>
                     user &nbsp;<%= user.name %></a>
 
-                <a href="/admin"><i class="fa fa-sign-in" aria-hidden="true"></i>
-                    <%= 'Back End' %>
+                <a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i>
+                    <%= 'Logout' %>
                 </a>
 
                 <% } else { %>

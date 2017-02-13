@@ -7,15 +7,12 @@
 
 var Promise = require('bluebird');
 
-
 module.exports = {
-
 
     /**
      * `Admin/productController.new()`
      */
     create: function (req, res) {
-
 
         async.waterfall([
 
@@ -25,18 +22,13 @@ module.exports = {
 
                 //console.log('next value 1rst function', data );
 
-                var newIdProduct = CoreReadDbService.getNewIdProduct('product').then(function(idProduct){
+                var newIdProduct = CoreReadDbService.getNewIdProduct().then(function(idProduct){
 
                     console.log('promise return value:', idProduct);
 
-                    //return doc;
-
                     return next(null, idProduct);
-                    //return res.json({photos: photos.length});
                 });
-
             },
-
             /*function GetUserAndOrders (thumbnail, next) {
 
                 console.info('value 2nd function', thumbnail);
@@ -70,8 +62,6 @@ module.exports = {
             }
         });
     },
-
-
 
    /*     function (req, res) {
         async.waterfall([
