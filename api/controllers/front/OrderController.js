@@ -225,7 +225,7 @@ module.exports = {
         var cart = getValueFromReq(req.session, 'cart');
 
         // creation of the order json
-        var order = {
+        var data = {
             name: name,
             email: email,
             phone: phone,
@@ -240,7 +240,7 @@ module.exports = {
         }
 
 
-        console.log('order', order);
+        console.log('order', data);
         console.log('cart session', req.session.cart); // in the cart we have all the product
         console.log('session user', req.session.user);
 
@@ -255,19 +255,41 @@ module.exports = {
                     return next(null, idOrder);
                 });
             },
-            
-            function CheckOrder(next) {
-               //if (!req.session.hasOwnProperty('cart') || req.session.cart.length <= 0) {
+
+            function createOrder(next) {
+
+                data['idOrder'] = next;
+
+                CoreInsertDbService.insertOrder(data);
+                console.log('orderController - increment id [START]');
+
+
+                //if (!req.session.hasOwnProperty('cart') || req.session.cart.length <= 0) {
                //     next('NO_PRODUCT_FOUND');
                 //    return;
                // }
 
                 //var cart = req.session.cart;
-
                 console.log('create the order - function 2 - idOrder', next); // test if we get the new id order
                 //console.log('cart', cart);
 
+                return next(null);
+
             },
+
+
+
+            function incrementOrder(next){
+
+
+
+                console.log('increment order - [START]');
+                CoreInsertDbService.incrementId('order');
+                console.log('increment order - [DONE]');
+
+            }
+
+
 
         ], function (err) {
             if (err) return res.serverError(err);
@@ -282,9 +304,7 @@ module.exports = {
 
         /*async.map(cart, function (item, done) {
 
-
          console.log('cart - item', item );
-
 
          /* Product.findOne(item.id, function (err, product) {
          if (err) done (err);
@@ -298,7 +318,6 @@ module.exports = {
          done(null); return;
          });
 
-
          }, function (err) {
          if (err) next(err);
 
@@ -307,7 +326,6 @@ module.exports = {
 
          return next(null);
          });*/
-
 
         /*function GetUser (next) {
          if ( !req.session.hasOwnProperty('user') ) {
@@ -345,7 +363,6 @@ module.exports = {
          return next(null);
          });
          }*/
-
 
         /*return res.json({
          todo: 'update() is not implemented yet!'
