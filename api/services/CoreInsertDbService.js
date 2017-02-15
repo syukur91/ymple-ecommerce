@@ -11,6 +11,34 @@ var transporter = nodemailer.createTransport({
 var urlConnection = "mongodb://localhost:27017/ymple-commerce";
 
 
+getValueFromArray= function(data, element, type){
+
+
+    //return 10;
+
+    var output = '';
+
+   // console.log('enter function getValueArray');
+
+    // console.log('data.element',data.[element] );
+    if (data && data[element]) {
+
+     if (type == 'int'){
+
+     //  output = parseInt(data[element])
+     }
+     else{
+     output = data[element];
+     }
+
+
+     }
+
+     return output;
+
+
+},
+
 module.exports = {
     sendAlertEmail: function () {
         var mailOptions = {
@@ -42,7 +70,7 @@ module.exports = {
 
         MongoClient.connect(urlConnection).then(function (db) {
 
-            console.log('InsertDbService - incrementId - error');
+            //console.log('InsertDbService - incrementId - error');
 
             var collectionCounter1 = db.collection('counter');
 
@@ -100,6 +128,100 @@ module.exports = {
 
         });
     },
+
+
+
+
+    insertOrder: function (data) { // Insert an order
+
+        var MongoClient = require('mongodb').MongoClient;
+        //console.log('InsertDbService - url connexion ', urlConnection);
+
+        //Connect to the db
+        MongoClient.connect(urlConnection).then(function (db) {
+
+            //console.log('data.name', data);
+
+            var date = new Date();
+            var createdAt = date.toISOString();
+            var updatedAt = date.toISOString();
+
+            console.log('insertOrder - date2', date);
+            console.log('insertOrder - test', data['idOrder']);
+
+            var idOrder = getValueFromArray(data,'idOrder' , '');
+           // console.log('idOrder', idOrder);
+            var name = getValueFromArray(data,'name' , '');
+           // console.log('FTH1');
+            var email = getValueFromArray(data,'email' , '');
+            var phone = getValueFromArray(data,'phone' , '');
+            var address = getValueFromArray(data,'address' , '');
+           // console.log('adress');
+            var postcode = getValueFromArray(data,'postcode' , 'int');
+            var comment = getValueFromArray(data,'comment' , '');
+            var payment = getValueFromArray(data,'payment' , '');
+            var shipping = getValueFromArray(data,'shipping' , '');
+            var price = getValueFromArray(data,'price' , 'int');
+            var list_product = getValueFromArray(data,'list_product' , '');
+            var cart = getValueFromArray(data,'cart' , '');
+
+//            console.log('insertOrder - cart', cart);
+
+            var dataToInsert = {
+                idOrder: idOrder,
+                name: name,
+                email: email,
+                phone: phone,
+                address: address,
+                postcode: postcode,
+                comment: comment,
+                payment: payment,
+                shipping: shipping,
+                price: price,
+                list_product: list_product,
+                cart: cart,
+                createdAt: createdAt,
+                updatedAt: updatedAt
+            }
+
+          //  console.log('insertOrder - dataToInsert', dataToInsert);
+
+            var collection = db.collection('order');
+            collection.insert(dataToInsert , function( error, result) {
+                if ( error ) console.log ( error ); //info about what went wrong
+                if ( result ){
+
+
+
+console.log ('[START]: increment id order');
+
+                    var fieldName = 'product';
+                    var collectionCounter1 = db.collection('counter');
+
+                    collectionCounter1.insert({toto: "toto"});
+
+                    collectionCounter1.update(
+                        {_id: fieldName},
+                        {$inc: {seq: 1}}, function( error, result) {
+                            if ( error ) console.log ( error );
+                            if ( result ){console.log ( result );}}//info about what went wrong
+                    )
+                    console.log ('[END]: increment id order');
+
+  //                  console.log ( result ); //the _id of new object if successful
+//
+
+                }
+            });
+            console.log('insertOrder - [DONE]');
+
+
+
+
+        });
+    },
+
+
 
 
     insertCategory: function (data) { // Insert a category in table category
