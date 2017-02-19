@@ -41,6 +41,10 @@ How To Run
 
      Configure and run a mongodb instance ( the default configuration is  host: 'localhost', port: 27017)
 
+     Create a mongoDb database name ymple-commerce
+
+     [IMPORTANT]: Go to http://localhost:1338/install
+
      node app.js
 
 - FRONT END
