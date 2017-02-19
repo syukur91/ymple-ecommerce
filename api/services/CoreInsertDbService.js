@@ -8,34 +8,26 @@ var transporter = nodemailer.createTransport({
     auth: sails.config.project.nodemailer.auth
 });
 
-var urlConnection = "mongodb://localhost:27017/ymple-commerce";
+var urlConnection = "mongodb://localhost:27017/ymple-commerce"; // get the connexion.js database name
 
 
 getValueFromArray = function (data, element, type) {
 
-
     //return 10;
 
     var output = '';
-
     // console.log('enter function getValueArray');
-
     // console.log('data.element',data.[element] );
     if (data && data[element]) {
 
         if (type == 'int') {
-
             //  output = parseInt(data[element])
         }
         else {
             output = data[element];
         }
-
-
     }
-
     return output;
-
 
 },
 
@@ -55,32 +47,23 @@ getValueFromArray = function (data, element, type) {
         },
 
         test: function () {
-
             return 'test ok service';
         },
-
 
         incrementId: function (fieldName) { // increment the idProduct in the table counter
 
             console.log('InsertDbService - incrementId', fieldName);
-
             var MongoClient = require('mongodb').MongoClient;
-
-            //var url = "mongodb://localhost:27017/ymple-commerce";
-
             MongoClient.connect(urlConnection).then(function (db) {
 
                 //console.log('InsertDbService - incrementId - error');
-
                 var collectionCounter1 = db.collection('counter');
-
                 collectionCounter1.update(
                     {_id: fieldName},
                     {$inc: {seq: 1}}
                 )
             });
         },
-
 
         insertProduct: function (data) { // Insert a product in table product
 
@@ -91,13 +74,9 @@ getValueFromArray = function (data, element, type) {
             MongoClient.connect(urlConnection).then(function (db) {
 
                 console.log('data.name', data.name);
-
                 var date = new Date();
-
                 var createdAt = date.toISOString();
-
                 var updatedAt = date.toISOString();
-
                 console.log('date', date);
 
                 var idProduct = parseInt(data.idProduct);
@@ -106,7 +85,6 @@ getValueFromArray = function (data, element, type) {
                 var video = data.video;
                 var description = data.description;
                 var name = data.name;
-
 
                 var dataToInsert = {
                     name: name,
@@ -128,7 +106,6 @@ getValueFromArray = function (data, element, type) {
 
             });
         },
-
 
         insertOrder: function (data) { // Insert an order
 
@@ -162,7 +139,7 @@ getValueFromArray = function (data, element, type) {
                 var list_product = getValueFromArray(data, 'list_product', '');
                 var cart = getValueFromArray(data, 'cart', '');
 
-//            console.log('insertOrder - cart', cart);
+                //console.log('insertOrder - cart', cart);
 
                 var dataToInsert = {
                     idOrder: idOrder,
@@ -180,7 +157,6 @@ getValueFromArray = function (data, element, type) {
                     createdAt: createdAt,
                     updatedAt: updatedAt
                 }
-
                 //  console.log('insertOrder - dataToInsert', dataToInsert);
 
                 var collection = db.collection('order');
@@ -188,7 +164,8 @@ getValueFromArray = function (data, element, type) {
                     if (error) console.log(error); //info about what went wrong
                     if (result) {
 
-
+                        console.log('insert order result.ops', result.ops);
+                        console.log('insert order result - object id', result.ops[0]._id);
                         console.log('[START]: increment id order');
 
                         var fieldName = 'order';
@@ -201,20 +178,14 @@ getValueFromArray = function (data, element, type) {
                             {$inc: {seq: 1}}, function (error, result) {
                                 if (error) console.log(error);
                                 if (result) {
-                                    console.log(result);
+                                    //console.log(result);
                                 }
-                            }//info about what went wrong
+                            }
                         )
                         console.log('[END]: increment id order');
-
-                        //                  console.log ( result ); //the _id of new object if successful
-//
-
                     }
                 });
                 console.log('insertOrder - [DONE]');
-
-
             });
         },
 
@@ -290,27 +261,18 @@ getValueFromArray = function (data, element, type) {
                 //console.log('data.name' , data.name);
 
                 var date = new Date();
-
                 var createdAt = date.toISOString();
-
                 var updatedAt = date.toISOString();
-
                 var collection = db.collection('product');
                 //var lotsOfDocs = [{'hello': 'doc3'}, {'hello': 'doc4'}];
-
                 //collection.insert(dataToInsert);
 
                 console.log('saveImageProduct - update');
 
                 collection.update(
                     {idProduct: parseInt(idProduct)},
-                    // {price: '999999999999999'}
-
                     {$set: {image: [imagePath]}},
                     {upsert: true})
-
-
-                //      { $set: { reorder: false, tags: [ "literature", "translated" ] } })
             });
         },
 
