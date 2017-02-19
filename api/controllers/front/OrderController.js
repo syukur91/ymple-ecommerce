@@ -279,15 +279,15 @@ module.exports = {
 
 
 
-            function incrementOrder(next){
+          //  function incrementOrder(next){
 
 
 
-                console.log('increment order - [START]');
-                CoreInsertDbService.incrementId('order');
-                console.log('increment order - [DONE]');
+                //console.log('increment order - [START]');
+                //CoreInsertDbService.incrementId('order');
+                //console.log('increment order - [DONE]');
 
-            }
+          //  }
 
 
 
