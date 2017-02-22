@@ -28,6 +28,7 @@ How To Run
 
     npm install ymple-ecommerce
     run a mongodb instance on port 27017
+    Configure the file connections.js , set the section mongodbServer
     run node app.js
 
 - With Github
@@ -44,6 +45,7 @@ How To Run
      Create a mongoDb database name ymple-commerce
 
      [IMPORTANT]: Go to http://localhost:1338/install
+     Go to http://localhost:1338/admin/install/database
 
      node app.js
 

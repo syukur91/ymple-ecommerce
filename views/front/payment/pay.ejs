@@ -1,13 +1,13 @@
-<% include templates.navbar.ejs %>
+<% include ../templates.navbar.ejs %>
 
 <div class="container">
 
 
-    <H2> {{__ ( 'payment orders')}} </ h2>
+    <h2> {{__ ( 'payment orders')}} </h2>
       
-    <Hr/>
 
-      
+          <div id="paypal-button"  style="    text-align: -webkit-center;"></div>
+
     <div style="text-align: center; margin: 150px;">
           
         <% if (order && order.payment && order.payment === 'TRANSFER' && order.status === 'PREPARE') { %>
@@ -29,6 +29,50 @@
         <% } %>
           
     </div>
+
+
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+
+    <script>
+        paypal.Button.render({
+
+            env: 'sandbox', //'production', // Optional: specify 'sandbox' environment
+
+            client: {
+                production:'EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM',
+                sandbox: 'EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM'
+            },
+
+            payment: function() {
+
+                var env    = this.props.env;
+                var client = this.props.client;
+
+                return paypal.rest.payment.create(env, client, {
+                    transactions: [
+                        {
+                            amount: { total: '0.01', currency: 'EUR' }
+                        }
+                    ]
+                });
+            },
+
+            commit: true, // Optional: show a 'Pay Now' button in the checkout flow
+
+            onAuthorize: function(data, actions) {
+
+                // Optional: display a confirmation page here
+                console.log('payment ok');
+                return actions.payment.execute().then(function() {
+
+
+
+                    // Show a success page to the buyer
+                });
+            }
+
+        }, '#paypal-button');
+    </script>
 </div>
 
 
