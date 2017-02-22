@@ -168,6 +168,9 @@ module.exports = {
     },
 
     pay: function (req, res) {
+
+
+
         var result = {
             user: (req.session.hasOwnProperty('user')) ? req.session.user : undefined,
             cart: (req.session.hasOwnProperty('cart')) ? req.session.cart : undefined
@@ -187,7 +190,7 @@ module.exports = {
         ], function (err) {
             if (err) return res.redirect('/order/' + req.params.id + '?error=' + err);
 
-            return res.view('front/pay.ejs', result)
+            return res.view('front/payment/pay.ejs', result)
         });
     },
 
