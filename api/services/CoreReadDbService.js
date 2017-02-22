@@ -3,7 +3,12 @@
 var nodemailer = require('nodemailer');
 
 
-var url = "mongodb://localhost:27017/ymple-commerce";
+var host = sails.config.connections.mongodbServer.host;
+var port = sails.config.connections.mongodbServer.port;
+var database = sails.config.connections.mongodbServer.database;
+//var urlConnection = "mongodb://localhost:27017/ymple-commerce"; // get the connexion.js database name
+var url = "mongodb://" + host+ ":" + port+ '/'+ database;
+//var url = "mongodb://localhost:27017/ymple-commerce";
 
 
 // create reusable transporter object using SMTP transport
