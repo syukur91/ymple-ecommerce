@@ -34,12 +34,12 @@
                     </td>
                     <td>
 
-                        <% order.products.forEach(function(product){ %>
+                        <% if (order.products) { order.products.forEach(function(product){ %>
                         <a href="/product/view/<%= product.id %>"><%= product.name %></a>
                         <%= product.quantity %>
-                        <% }); %>
+                        <% })}; %>
                     </td>
-                    <td><%= order.price | currency %></td>
+                    <td><%= order.price %></td>
                     <td><%= order.phone %></td>
                     <td><%= order.address %></td>
                     <td>
