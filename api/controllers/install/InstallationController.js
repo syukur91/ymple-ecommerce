@@ -13,9 +13,16 @@ module.exports = {
     console.log('[START]: firstInstallation');
 
 
-    CoreInsertDbService.installCounter('order');
+    CoreInsertDbService.installCounter('order'); // create the collection order
 
-    CoreInsertDbService.installCounter('product');
+    CoreInsertDbService.installCounter('product'); // create the collection product
+
+    CoreInsertDbService.firstInstallCoreModule('paypal');
+    CoreInsertDbService.firstInstallCoreModule('stripe');
+
+    // create the collection core_module and core_module_installed
+
+
 
 
     console.log('[END]: firstInstallation');
