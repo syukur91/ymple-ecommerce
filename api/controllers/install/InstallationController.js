@@ -28,7 +28,7 @@ module.exports = {
     console.log('[END]: firstInstallation');
 
     return res.json({
-      todo: 'installation Database done'
+      status: 'installation Database done'
     });
 
   },
