@@ -129,7 +129,7 @@ module.exports = {
     configure: function (req, res) {
 
 
-        CoreReadDbService.getListCoreModule().then(function (data) {
+        CoreReadDbService.getListCoreModuleInstalled().then(function (data) {
 
             console.log('ModuleController - search', data);
 
