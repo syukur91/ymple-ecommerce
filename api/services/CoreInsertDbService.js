@@ -319,6 +319,46 @@ getValueFromArray = function (data, element, type) {
             });
         },
 
+
+        firstInstallCoreModule: function (nameModule) { // active a module
+
+            MongoClient = this.getConnexion();
+
+            MongoClient.connect(urlConnection).then(function (db) {//Connect to the db
+
+
+                var usernameApi = '';
+                var passwordApi = '';
+                var firmaApi = '';
+
+                var date = new Date();
+                var createdAt = date.toISOString();
+                var updatedAt = date.toISOString();
+
+                var idModule = 0;
+                var name = nameModule;
+                var description = nameModule;
+                var category = 'category';
+                var configuration = {usernameApi: usernameApi, passwordApi: passwordApi, firmaApi: firmaApi};
+
+                var data = {
+                    name: name,
+                    idModule: idModule,
+                    category: category,
+                    configuration: configuration,
+                    description: description,
+                    createdAt: createdAt,
+                    updatedAt: updatedAt,
+                    isActive: 1
+                }
+                console.log('InsertDbService - installAndActiveCoreModule - data', data);
+                var collection = db.collection('core_module');
+                collection.insert(data);
+
+            });
+        },
+
+
         getConnexion: function () {
 
             var MongoClient = require('mongodb').MongoClient;
