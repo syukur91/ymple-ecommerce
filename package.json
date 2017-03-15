@@ -1,7 +1,7 @@
 {
   "name": "ymple-ecommerce",
   "private": false,
-  "version": "0.2.7",
+  "version": "0.2.9",
   "description": "a Sails E-Commerce application",
   "keywords": [],
   "dependencies": {
