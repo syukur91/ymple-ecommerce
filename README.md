@@ -20,9 +20,6 @@ How To Run
 - With Node Package
 
     npm install ymple-ecommerce
-    run a mongodb instance on port 27017
-    Configure the file connections.js , set the section mongodbServer
-    run node app.js
 
 - With Github
 
@@ -42,11 +39,7 @@ How To Run
 - FRONT END
 
      Navigate to http://localhost:1338
-
-     Go to http://localhost:1338/login
-
      You can loggin with the user:  admin@admin.com and password: admin
-
 
 - BACK END
 
