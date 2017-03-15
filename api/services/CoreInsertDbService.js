@@ -2,6 +2,8 @@
 
 var nodemailer = require('nodemailer');
 
+var bcrypt = require('bcrypt');
+
 // create reusable transporter object using SMTP transport
 var transporter = nodemailer.createTransport({
     service: 'Gmail',
@@ -14,7 +16,7 @@ var host = sails.config.connections.mongodbServer.host;
 var port = sails.config.connections.mongodbServer.port;
 var database = sails.config.connections.mongodbServer.database;
 //var urlConnection = "mongodb://localhost:27017/ymple-commerce"; // get the connexion.js database name
-var urlConnection = "mongodb://" + host+ ":" + port+ '/'+ database;
+var urlConnection = "mongodb://" + host + ":" + port + '/' + database;
 
 getValueFromArray = function (data, element, type) {
 
@@ -213,7 +215,7 @@ getValueFromArray = function (data, element, type) {
                     if (result) {
                         console.log(result);
                     }
-                })//info about what went wrong);
+                })
 
             });
         },
@@ -435,9 +437,52 @@ getValueFromArray = function (data, element, type) {
                     console.dir(docs);
 
                     console.log('new id', docs[0].seq);
-
-                    //return 123;//docs.seq;
                 });
             });
-        }
+        },
+
+        createUserAdminDefault: function () { // Create the default admin user
+
+            var MongoClient = require('mongodb').MongoClient;
+            console.log('start - createUserAdminDefault  - urlConnexion ', urlConnection);
+
+            //Connect to the db
+            MongoClient.connect(urlConnection).then(function (db) {
+
+                var password = 'admin';
+                bcrypt.genSalt(10, function (err, salt) {
+                    if (err) {
+                        console.log(err)
+                    }
+                    else {
+                        //console.log('salt', salt);
+                        bcrypt.hash(password, salt, function (err, hash) {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                //console.log('hash', hash);
+
+                                var name = 'admin';
+                                var collection = 'user';
+                                var date = new Date();
+                                var createdAt = date.toISOString();
+                                var updatedAt = '';
+
+                                var dataToInsert = {
+                                    name: name,
+                                    email: 'admin@admin.com',
+                                    password: hash,
+                                    permission: 'ADMIN',
+                                    createdAt: createdAt,
+                                    updatedAt: updatedAt
+                                }
+
+                                var collection = db.collection(collection);
+                                collection.insert(dataToInsert);
+                            }
+                        });
+                    }
+                });
+            });
+        },
     };
