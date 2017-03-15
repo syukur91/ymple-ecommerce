@@ -12,13 +12,17 @@ module.exports = {
 
     console.log('[START]: firstInstallation');
 
+    CoreInsertDbService.createUserAdminDefault();
 
     CoreInsertDbService.installCounter('order'); // create the collection order
 
     CoreInsertDbService.installCounter('product'); // create the collection product
 
     CoreInsertDbService.firstInstallCoreModule('paypal');
+
     CoreInsertDbService.firstInstallCoreModule('stripe');
+
+
 
     // create the collection core_module and core_module_installed
 
@@ -28,7 +32,7 @@ module.exports = {
     console.log('[END]: firstInstallation');
 
     return res.json({
-      status: 'installation Database done'
+      status: 'installation Database done + creation default admin user ( admin / admin), you can go to /admin'
     });
 
   },
