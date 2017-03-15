@@ -13,21 +13,10 @@ module.exports = {
     console.log('[START]: firstInstallation');
 
     CoreInsertDbService.createUserAdminDefault();
-
     CoreInsertDbService.installCounter('order'); // create the collection order
-
     CoreInsertDbService.installCounter('product'); // create the collection product
-
     CoreInsertDbService.firstInstallCoreModule('paypal');
-
     CoreInsertDbService.firstInstallCoreModule('stripe');
-
-
-
-    // create the collection core_module and core_module_installed
-
-
-
 
     console.log('[END]: firstInstallation');
 
@@ -36,36 +25,25 @@ module.exports = {
     });
 
   },
-	
-
+  
   /**
    * `InstallationController.initDatabaseCounter()`
    */
   initCounterProduct: function (req, res) {
-
-
     var counterType = 'product';
-
     CoreInsertDbService.initCounterProduct(counterType);
-
     return res.json({
       todo: 'initDatabaseCounter() done'
     });
   },
 
-
   initCounterOrder: function (req, res){ //
-
     var counterType = 'order';
-
     CoreInsertDbService.initCounterOrder(counterType);
 
     return res.json({
       todo: 'initDatabaseCounter() done'
     });
-
-
   }
-
 };
 
