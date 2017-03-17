@@ -43,22 +43,12 @@
       <h3>{{ product.name }}
         {% if product.stock < 0 %}
 
-
-
-
-
-
         <Span class = "badge badge-success"> {{__ ( 'In Stock')}} </span>
                  {% Elseif product.stock> 0%}
                  <Span class = "badge badge-success"> {{__ ( 'Inventory')}}: {{product.stock}} </span>
                  {% Else%}
                  <Span class = "badge"> {{__ ( 'Out of stock')}} </span>
                  {% Endif%}
-
-
-
-
-
 
       </h3>
       <hr>
@@ -68,19 +58,11 @@
 
       <div class="form-group form-inline">
 
-
-
-
         <Label for = "quantity"> {{__ ( 'Unit')}}: </label>
                  <Input type = "text" class = "form-control" id = "quantity" name = "quantity" value = "1">
                </Div>
              <button data-id="{{ product.id }}" data-role="add" class="btn btn-default btn-lg"> {{__ ( 'Add to Cart')}} </button>
              <Button data-id = "{{product.id}}" data-role = "buy" class = "btn btn-primary btn-lg"> {{__ ( 'Purchase')}} </button>
-
-
-
-
-
 
       <hr>
 
