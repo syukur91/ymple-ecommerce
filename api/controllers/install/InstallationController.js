@@ -35,10 +35,15 @@ module.exports = {
 
                 msg = 'Installation already done';
             }
-      
+
             console.log('[END]: firstInstallation');
-            var dataView = {status: msg};
-            return res.view('install/installation_done.ejs', dataView);
+            var dataView = []; //{status: msg};
+            dataView.templateToInclude = 'install_installation_done';
+            dataView.status = msg;
+            return res.view('back/menu.ejs', dataView);
+
+
+           // return res.view('install/installation_done.ejs', dataView);
         })
     },
 
