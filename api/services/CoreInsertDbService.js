@@ -321,13 +321,10 @@ getValueFromArray = function (data, element, type) {
             });
         },
 
-
         firstInstallCoreModule: function (nameModule) { // active a module
 
             MongoClient = this.getConnexion();
-
             MongoClient.connect(urlConnection).then(function (db) {//Connect to the db
-
 
                 var usernameApi = '';
                 var passwordApi = '';
@@ -362,13 +359,9 @@ getValueFromArray = function (data, element, type) {
 
 
         getConnexion: function () {
-
             var MongoClient = require('mongodb').MongoClient;
             console.log('InsertDbService - url connexion ', urlConnection);
-
             return MongoClient;
-
-
         },
 
         otherMethod: function () {
@@ -376,10 +369,6 @@ getValueFromArray = function (data, element, type) {
             var mongodb = require('mongodb');
             var MongoClient = mongodb.MongoClient;
             var Collection = mongodb.Collection;
-
-            // Promise.promisifyAll(Collection.prototype);
-            //Promise.promisifyAll(MongoClient);
-
 
             //Connect to the db
             MongoClient.connect(urlConnection).then(function (err, db) {
@@ -394,7 +383,6 @@ getValueFromArray = function (data, element, type) {
                 var lotsOfDocs = [{'hello': 'doc3'}, {'hello': 'doc4'}];
 
                 collection.insert(doc1);
-
                 collection.insert(doc2, {w: 1}, function (err, result) {
                 });
 
@@ -485,4 +473,31 @@ getValueFromArray = function (data, element, type) {
                 });
             });
         },
-    };
+
+        setInstallationDone: function () {         // set to done the installation step inserting data in installation collection
+
+            console.log('[start]: CoreInsertDbService - setInstallation done')
+
+            var MongoClient = require('mongodb').MongoClient;
+            console.log('start - createUserAdminDefault  - urlConnexion ', urlConnection);
+
+            MongoClient.connect(urlConnection).then(function (db) {//Connect to the db
+
+                var date = new Date();
+                var createdAt = date.toISOString();
+                var data = {
+                    status: 'done',
+                    createAt: createdAt
+                }
+                console.log('InsertDbService - setInstallationDone - data', data);
+                var collection = db.collection('installation');
+
+                collection.insert(data, function (err, result) {
+
+                    console.log('insert err', err);
+                    console.log('insert result', result);
+                });
+            })
+            console.log('[end]: CoreInsertDbService - setInstallation done')
+        }
+    }
