@@ -105,7 +105,35 @@ module.exports = {
                     });
                 })
             })
-    }
+    },
+
+    getStatusInstallation: function () {
+
+        return new Promise(
+            function (resolve, reject) {
+
+                var MongoClient = require('mongodb').MongoClient;
+
+                MongoClient.connect(url, function (err, db) {
+                    var collectionName = "installation";
+                    var col = db.collection(collectionName);
+                    var data = col.find({}).toArray(function (err, data) {
+                        db.close();
+                        console.log('getStatusInstallation', data);
+                        var output;
+
+                        if (data.status =='done'){
+                            output = true;
+                        }
+                        else {
+                            output = false;
+                        }
+
+                        resolve(data);//docs[0].name.toString()); // returns to the function that calls the callback
+                    });
+                })
+            })
+    },
 
 
 };

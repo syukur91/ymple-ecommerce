@@ -8,60 +8,63 @@
 module.exports = {
 
 
-  firstInstallation: function (req, res){ // first command execute , need to be checked if already used
+    firstInstallation: function (req, res) { // first command execute , need to be checked if already used
 
-    console.log('[START]: firstInstallation');
-
-
-    CoreInsertDbService.installCounter('order'); // create the collection order
-
-    CoreInsertDbService.installCounter('product'); // create the collection product
-
-    CoreInsertDbService.firstInstallCoreModule('paypal');
-    CoreInsertDbService.firstInstallCoreModule('stripe');
-
-    // create the collection core_module and core_module_installed
+        console.log('[START]: firstInstallation');
 
 
+        CoreReadDbService.getStatusInstallation().then(function (data) {
 
 
-    console.log('[END]: firstInstallation');
+            var msg = '';
 
-    return res.json({
-      status: 'installation Database done'
-    });
+            if (data == false) {
 
-  },
-	
+                CoreInsertDbService.setInstallationDone();
 
-  /**
-   * `InstallationController.initDatabaseCounter()`
-   */
-  initCounterProduct: function (req, res) {
+                CoreInsertDbService.createUserAdminDefault();
+                CoreInsertDbService.installCounter('order'); // create the collection order
+                CoreInsertDbService.installCounter('product'); // create the collection product
+                CoreInsertDbService.firstInstallCoreModule('paypal');
+                CoreInsertDbService.firstInstallCoreModule('stripe');
 
+                msg = 'Installation Database done + creation default admin user ( admin / admin), you can go to /admin';
 
-    var counterType = 'product';
+            }
+            else {
 
-    CoreInsertDbService.initCounterProduct(counterType);
+                msg = 'Installation already done';
+            }
 
-    return res.json({
-      todo: 'initDatabaseCounter() done'
-    });
-  },
-
-
-  initCounterOrder: function (req, res){ //
-
-    var counterType = 'order';
-
-    CoreInsertDbService.initCounterOrder(counterType);
-
-    return res.json({
-      todo: 'initDatabaseCounter() done'
-    });
+            console.log('[END]: firstInstallation');
+            var dataView = []; //{status: msg};
+            dataView.templateToInclude = 'install_installation_done';
+            dataView.status = msg;
+            return res.view('back/menu.ejs', dataView);
 
 
-  }
+           // return res.view('install/installation_done.ejs', dataView);
+        })
+    },
 
+    /**
+     * `InstallationController.initDatabaseCounter()`
+     */
+    initCounterProduct: function (req, res) {
+        var counterType = 'product';
+        CoreInsertDbService.initCounterProduct(counterType);
+        return res.json({
+            todo: 'initDatabaseCounter() done'
+        });
+    },
+
+    initCounterOrder: function (req, res) { //
+        var counterType = 'order';
+        CoreInsertDbService.initCounterOrder(counterType);
+
+        return res.json({
+            todo: 'initDatabaseCounter() done'
+        });
+    }
 };
 

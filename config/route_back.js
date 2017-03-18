@@ -52,6 +52,7 @@ module.exports.routes = {
 
     // install page
     'GET    /admin/install': {view: 'install/index'},
+    '/install': 'install/InstallationController.firstInstallation',
 
     '/admin/install/database': 'install/InstallationController.firstInstallation',
 

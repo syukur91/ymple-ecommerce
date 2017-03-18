@@ -3,17 +3,10 @@
 </h1>
 
 Version 0.1.1 (released 2016.11)
-
 Version 0.2.0 will be released in 2017.4
-
-Version 0.3.0 will be released in 2017.7
-
-Version 0.4.0 will be released in 2017.10
-
-
+Version 0.3.0 will be released in 2017.10
 
 ### [Website](http://www.ymple.com/)
-
 
 Open Source E-Commerce Solution for Everyone built with Sails.js (Node.js + MongoDB)
 
@@ -27,9 +20,6 @@ How To Run
 - With Node Package
 
     npm install ymple-ecommerce
-    run a mongodb instance on port 27017
-    Configure the file connections.js , set the section mongodbServer
-    run node app.js
 
 - With Github
 
@@ -40,27 +30,20 @@ How To Run
 
 - INSTALLATION
 
-     Configure and run a mongodb instance ( the default configuration is  host: 'localhost', port: 27017)
-
-     Create a mongoDb database name ymple-commerce
-
-     [IMPORTANT]: Go to http://localhost:1338/install
-     Go to http://localhost:1338/admin/install/database
+     [1]Configure and run a mongodb instance ( the default is  host: 'localhost', port: 27017)
+     [2]Create a mongoDb database with name ymple
+     [3] Go to http://localhost:1338/install
 
      node app.js
 
 - FRONT END
 
      Navigate to http://localhost:1338
-
-     Go to http://localhost:1338/login
-
-     Click on Sign Up to create the first user to be able to log in.
+     You can loggin with the user:  admin@admin.com and password: admin
 
 - BACK END
 
      You can access at http://localhost:1338/admin
-
 
 ### [Screenshot](http://www.ymple.com/screenshot.html)
 
