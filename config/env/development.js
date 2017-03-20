@@ -21,7 +21,7 @@ module.exports = {
   //   connection: 'someMongodbServer'
   // }
 
-  port: 1339,
+  port: 1338,
   template:{"moduleInstallNew": 'back/module/installNew.ejs',
     'installModuleDone': 'back/module/installModuleDone.ejs',
     'edit_module': 'back/module/edit.ejs'
