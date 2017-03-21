@@ -1,16 +1,19 @@
 /* Copyright 2016 PayPal */
 "use strict";
-var paypal = require('../../');
+var paypal = require('paypal-rest-sdk');
 
 
 module.exports = {
 
 
     paymentActionWithPaypal: function() {
+
+
+
         paypal.configure({
-            'mode': 'security-test-sandbox',
-            'client_id': '<CLIENT_ID>',
-            'client_secret': '<CLIENT_SECRET>'
+            'mode': 'sandbox', //sandbox or live
+            'client_id': 'EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM',
+            'client_secret': 'EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM'
         });
 
 
@@ -64,12 +67,31 @@ module.exports = {
     paymentActionWithCreditCard: function(){
 
 
+        paypal.configure({
+            'mode': 'sandbox', //sandbox or live
+            'client_id': 'EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM',
+            'client_secret': 'EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM'
+        });
 
-        /* Copyright 2015-2016 PayPal, Inc. */
-        "use strict";
 
-        var paypal = require('../../');
-        require('../configure');
+       /* 'mode': 'sandbox', //sandbox or live
+            'client_id': '',
+            'client_secret': ''
+*/
+
+
+        /*paypal.configure({
+            'mode': 'live', // live
+            'client_id': '',
+            'client_secret': ''
+        });*/
+
+
+
+
+
+        console.log('[start]: paymentActionWithCreditCard');
+
 
         var create_payment_json = {
             "intent": "sale",
@@ -78,30 +100,30 @@ module.exports = {
                 "funding_instruments": [{
                     "credit_card": {
                         "type": "visa",
-                        "number": "4417119669820331",
-                        "expire_month": "11",
-                        "expire_year": "2018",
-                        "cvv2": "874",
-                        "first_name": "Joe",
-                        "last_name": "Shopper",
+                        "number": "",
+                        "expire_month": "",
+                        "expire_year": "",
+                        "cvv2":"" ,
+                        "first_name": "",
+                        "last_name": "",
                         "billing_address": {
-                            "line1": "52 N Main ST",
-                            "city": "Johnstown",
-                            "state": "OH",
-                            "postal_code": "43210",
-                            "country_code": "US"
+                            "line1": "",
+                            "city": "",
+                            "state": "PI",
+                            "postal_code": "56028",
+                            "country_code": "IT"
                         }
                     }
                 }]
             },
             "transactions": [{
                 "amount": {
-                    "total": "7",
-                    "currency": "USD",
+                    "total": "0.10",
+                    "currency": "EUR",
                     "details": {
-                        "subtotal": "5",
-                        "tax": "1",
-                        "shipping": "1"
+                        "subtotal": "0.10",
+                        "tax": "0",
+                        "shipping": "0"
                     }
                 },
                 "description": "This is the payment transaction description."
@@ -115,6 +137,10 @@ module.exports = {
                 console.log("Create Payment Response");
                 console.log(payment);
             }
+
+            return  'transaction done';
+
+
         });
     }
 
