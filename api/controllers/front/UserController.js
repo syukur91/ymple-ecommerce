@@ -119,22 +119,39 @@ module.exports = {
       },
 
       function Validate (user, next) {
-        bcrypt.compare(req.body.password, user.password, function(err, isSuccess) {
-          if (err) return next(err);
 
-          if ( isSuccess ) {
-            req.session.authenticated = true;
-            req.session.user = user;
-          }
 
-          return next(null, isSuccess);
-        });
+        if (user && user.password) {
+
+          bcrypt.compare(req.body.password, user.password, function (err, isSuccess) {
+            if (err) return next(err);
+
+            if (isSuccess) {
+              req.session.authenticated = true;
+              req.session.user = user;
+            }
+            else { // login view with error message
+              var dataView = [];
+              dataView.message = 'user or password not correct';
+              return res.view('front/login.ejs', dataView);
+
+//              return res.redirect('/login?error_login');
+            }
+
+            return next(null, isSuccess);
+          });
+        }
       }
     ], function (err, isSuccess) {
       if (err) return res.serverError(err);
-      if ( !isSuccess ) return res.serverError('Or permission. The password is different.');
+      if ( !isSuccess ) {
+        return res.serverError('Or permission. The password is different.');
+      }
+      else{
+        return res.redirect('/');
+      }
 
-      return res.redirect('/');
+
     });
   },
 
