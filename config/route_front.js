@@ -14,6 +14,8 @@ module.exports.routes = {
 // USER
 
     'POST   /login': 'front/UserController.login',
+    '/login': 'front/UserController.login',
+
     'POST   /signup': 'front/UserController.create',
     'POST   /reset': 'front/UserController.reset',
     'GET    /logout': 'front/UserController.logout',
