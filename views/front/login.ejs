@@ -1,8 +1,6 @@
-
 <!-- Navigation Bar -->
 <%- include ../front/templates.navbar.ejs %>
 <!-- Navigation Bar -->
-
 
 <br><br><br>
 
@@ -13,11 +11,7 @@
       <div class="row" id="login-window">
         <h3><%= __('login') %></h3>
 
-
-
         <form role="form" action='/login' method="POST">
-
-
 
           <div class="form-group">
             <label for="email"><%= __('e-mail') %></label>
@@ -31,9 +25,14 @@
             <div class="input-group">
               <div class="input-group-addon">?</div>
               <input type="password" class="form-control" id="password" name="password" />
+
             </div>
+
           </div>
-          <hr />
+          <% if  (typeof message != 'undefined') {  %>
+          <div style="color: red;"><%= message %></div>
+          <% } %>
+          <hr/>
 
           <button type="submit" class="btn btn-primary pull-right"><%= __('login') %></button>
             <button type="button" id="signup" class="btn btn-default"><%= __('Sign Up') %></button>
