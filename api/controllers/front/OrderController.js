@@ -11,7 +11,6 @@ module.exports = {
     find: function (req, res) {
         return res.view('complete.ejs', {failed: true});
     },
-
     check: function (req, res) {
         Order.findOne(req.body.merchant_uid, function (err, order) {
             if (err) return res.serverError(err);
@@ -25,7 +24,6 @@ module.exports = {
                 sails.log({abuser: order.email});
                 return res.json({confirm: false, reason: 'PRICE_NOT_MATCH'});
             }
-
             return res.json({confirm: true});
         });
     },
@@ -54,7 +52,7 @@ module.exports = {
                 return res.json(saved);
             });
         });
-    }, // iamport 서버 응답용
+    },
 
     change: function (req, res) {
         var result = GetSessionData(req);
@@ -169,8 +167,6 @@ module.exports = {
 
     pay: function (req, res) {
 
-
-
         var result = {
             user: (req.session.hasOwnProperty('user')) ? req.session.user : undefined,
             cart: (req.session.hasOwnProperty('cart')) ? req.session.cart : undefined
@@ -183,6 +179,7 @@ module.exports = {
                     if (order && order.status && order.status === 'PAID') return next('ALREADY_PAID');
 
                     result.order = order;
+                    result.amount = 10;
 
                     return next(null);
                 });
