@@ -6,17 +6,15 @@ var paypal = require('paypal-rest-sdk');
 module.exports = {
 
 
-    paymentActionWithPaypal: function() {
+    paymentActionWithPaypal: function(req, res, mode, client_id, client_secret) {
 
-
+        // we get the mode, client_id, and client_secret from collection
 
         paypal.configure({
-            'mode': 'sandbox', //sandbox or live
-            'client_id': 'EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM',
-            'client_secret': 'EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM'
+            'mode': mode, //sandbox or live
+            'client_id': client_id,
+            'client_secret': client_secret
         });
-
-
 
         var create_payment_json = {
             "intent": "sale",
@@ -57,20 +55,26 @@ module.exports = {
                 throw error;
             } else {
                 console.log("Create Payment Response");
+                console.log('payment', payment.links[1].href);
                 console.log(JSON.stringify(payment, null, 2));
+
+                var redirectUrl = payment.links[1].href;
+
+                res.redirect(redirectUrl); // redirect to paypal approval_url
+
+
             }
         });
     },
 
 
 
-    paymentActionWithCreditCard: function(){
-
+    paymentActionWithCreditCard: function(req, res, mode, client_id, client_secret){
 
         paypal.configure({
-            'mode': 'sandbox', //sandbox or live
-            'client_id': 'EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM',
-            'client_secret': 'EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM'
+            'mode': mode, //sandbox or live
+            'client_id': client_id,
+            'client_secret': client_secret
         });
 
 
@@ -85,8 +89,6 @@ module.exports = {
             'client_id': '',
             'client_secret': ''
         });*/
-
-
 
 
 
@@ -142,8 +144,50 @@ module.exports = {
 
 
         });
-    }
+    },
 
+
+    paymentPaypalExecute: function(){
+
+
+        // we retrieve from the redirect the value payerId and paymentId
+
+        var mode = '';
+        var client_id  = '';
+        var client_secret = '';
+
+        paypal.configure({
+            'mode': mode,//'live', //sandbox or live
+            'client_id': client_id,
+            'client_secret': client_secret
+        });
+
+
+
+        var payerId = "";
+
+        var execute_payment_json = {
+            "payer_id": payerId,
+            "transactions": [{
+                "amount": {
+                    "currency": "USD",
+                    "total": "0.07"
+                }
+            }]
+        };
+
+        var paymentId = '';
+
+        paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
+            if (error) {
+                console.log(error.response);
+                throw error;
+            } else {
+                console.log("Get Payment Response");
+                console.log(JSON.stringify(payment));
+            }
+        });
+    }
 
 
 }
