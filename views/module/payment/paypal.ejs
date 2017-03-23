@@ -1,5 +1,5 @@
 <div class="">
-    <h4 style="color:forestgreen"><a href="/admin"></a>Module Configuration</h4>
+    <h4 style="color:forestgreen"><a href="/admin"></a>Module Configuration For Payment</h4>
     <form role="form" action="/admin/module/<%= nameModule %>/edit/validation" method="POST">
         <div class="row">
             <div class="col-sm-12">
@@ -27,7 +27,7 @@
                 <% listConfiguration.forEach(function(configuration){ %>
                 <%= configuration %>
                 <input type="text" class="form-control" id="thumbnail" name="thumbnail"
-                       placeholder="<%= __('placeholder_url') %>" value="<%= configuration %>">
+                       placeholder="" value="<%= configuration %>">
 
                 <% }) %>
                 <% } %>
@@ -54,7 +54,7 @@
             <div class="col-sm-12">
                 <label style="align-content: center;text-align: center">  <%= __('tags') %> </label>
                            <input type="text" class="form-control" id="tags" name="tags"
-                                  placeholder="<%= __('Please enter tags separated by commas') %>" value="">
+                                  placeholder="" value="">
             </div>
         </div>
         <br>
@@ -64,7 +64,7 @@
                 <input type="checkbox" name="isActive" value="1">
             </div>
         </div>
-        
+
         <br>
         <div class="row">
             <div class="col-sm-12" style="text-align: center;align-content: center">

@@ -93,7 +93,10 @@
         <% } %>
 
 
-
+        <% if (templateToInclude == 'view_module_payment_paypal') { %>
+        <%- include ../../commun/navbar.light.ejs %>
+        <%- include ../../module/payment/paypal.ejs %>
+        <% } %>
 
 
 
