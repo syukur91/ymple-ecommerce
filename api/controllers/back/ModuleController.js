@@ -297,14 +297,28 @@ module.exports = {
 
     edit: function(req, res){
 
+
         var nameModule = req.params.nameModule;
-        console.log('ModuleController - edit',req.params.nameModule);
         var result = {};
-        result.templateToInclude = 'edit_module';
+        if (nameModule == 'paypal'){
+            result.templateToInclude = 'view_module_payment_'+nameModule;
+            result.listConfiguration=[];
+            result.listConfiguration[0]='Mode';
+            result.listConfiguration[1]= 'Client Id';
+            result.listConfiguration[2]= 'Client Secret';
+
+        }
+        else{
+            result.templateToInclude = 'edit_module';
+            result.listConfiguration=[];
+            result.listConfiguration[0]='configuration1';
+            result.listConfiguration[1]= 'configuration2';
+        }
+
+        console.log('ModuleController - edit',req.params.nameModule);
+
         result.nameModule = nameModule;
-        result.listConfiguration=[];
-        result.listConfiguration[0]='configuration1';
-        result.listConfiguration[1]= 'configuration2';
+
 
 
         //{userNameApi:'userNameApi',passwordApi:'passwordApi'};
