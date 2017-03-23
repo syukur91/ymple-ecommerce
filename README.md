@@ -31,7 +31,9 @@ How To Run
 - INSTALLATION
 
      [1]Configure and run a mongodb instance ( the default is  host: 'localhost', port: 27017)
+
      [2]Create a mongoDb database with name ymple
+     
      [3] Go to http://localhost:1338/install
 
      node app.js
