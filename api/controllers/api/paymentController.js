@@ -44,5 +44,22 @@ module.exports = {
 
         return res.ok('Payment Paypal Cancelled');
 
+    },
+
+    paypalExecuteConfirmationSuccess: function (req, res) {
+
+
+        return res.ok('Payment Paypal Confirmation done');
+
+    },
+
+    paypalExecuteConfirmationError: function (req, res) {
+
+
+        return res.ok('Payment Paypal Confirmation error');
+
     }
+
+
+
 }
