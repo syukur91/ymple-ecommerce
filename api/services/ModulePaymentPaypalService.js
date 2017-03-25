@@ -6,9 +6,23 @@ var paypal = require('paypal-rest-sdk');
 module.exports = {
 
 
+
+
     paymentActionWithPaypal: function(req, res, mode, client_id, client_secret) {
 
         // we get the mode, client_id, and client_secret from collection
+
+        var idPayment = req.params.idPayment;
+
+        var baseUrl = req.baseUrl;
+
+        console.log('req.path', req.path);
+
+        var urlPath = req.path; // containing the id payment
+
+        var redirectUrlSuccess = baseUrl+'/payment/paypal/execute/success/'+idPayment;
+
+        var redirectUrlCancel= baseUrl+'/payment/paypal/execute/cancel/'+idPayment;
 
         paypal.configure({
             'mode': mode, //sandbox or live
@@ -22,8 +36,8 @@ module.exports = {
                 "payment_method": "paypal"
             },
             "redirect_urls": {
-                "return_url": "http://return.url",
-                "cancel_url": "http://cancel.url"
+                "return_url": redirectUrlSuccess,
+                "cancel_url": redirectUrlCancel
             },
             "transactions": [{
                 "item_list": {
@@ -147,14 +161,30 @@ module.exports = {
     },
 
 
-    paymentPaypalExecute: function(){
+    paymentPaypalExecute: function(req, res, mode, client_id, client_secret){
+
+
+
+
+        var idPayment = req.params.idPayment;
+
+        var baseUrl = req.baseUrl;
+
+        // console.log('req.path', req.path);
+
+        // var urlPath = req.path; // containing the id payment
+
+        var redirectUrlConfirmationSuccess = baseUrl+'/payment/paypal/execute/confirmation/success/'+idPayment;
+        var redirectUrlConfirmationError = baseUrl+'/payment/paypal/execute/confirmation/error/'+idPayment;
+
+
+
 
 
         // we retrieve from the redirect the value payerId and paymentId
 
-        var mode = '';
-        var client_id  = '';
-        var client_secret = '';
+
+        console.log('ModulePaymentPaypalService - paymentPaypalExecute - req.query', req.query);
 
         paypal.configure({
             'mode': mode,//'live', //sandbox or live
@@ -164,7 +194,9 @@ module.exports = {
 
 
 
-        var payerId = "";
+        var payerId = req.query.PayerID;
+
+        var paymentId = req.query.paymentId;
 
         var execute_payment_json = {
             "payer_id": payerId,
@@ -176,15 +208,22 @@ module.exports = {
             }]
         };
 
-        var paymentId = '';
+
 
         paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
             if (error) {
                 console.log(error.response);
+
+                res.redirect(redirectUrlConfirmationError); // confirmation of the execute
+
                 throw error;
             } else {
+
+
                 console.log("Get Payment Response");
                 console.log(JSON.stringify(payment));
+
+                res.redirect(redirectUrlConfirmationSuccess); // confirmation of the execute
             }
         });
     }

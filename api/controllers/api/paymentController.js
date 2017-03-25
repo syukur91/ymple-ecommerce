@@ -8,7 +8,7 @@
 module.exports = {
 
 
-    paypalPay: function(req, res){
+    paypalPay: function (req, res) {
 
         console.log('[start]: payment controller');
 
@@ -16,6 +16,10 @@ module.exports = {
         var client_id = 'EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM';
         var client_secret = 'EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM';
 
+
+        console.log('paymentController - req', req);
+
+        //process.exit();
 
         ModulePaymentPaypalService.paymentActionWithPaypal(req, res, mode, client_id, client_secret);
 
@@ -25,9 +29,7 @@ module.exports = {
 
     },
 
-
-    paypalExecute: function(req,res){
-
+    paypalExecuteSuccess: function (req, res) {
 
         var mode = 'sandbox';
         var client_id = 'EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM';
@@ -35,7 +37,29 @@ module.exports = {
 
         ModulePaymentPaypalService.paymentPaypalExecute(req, res, mode, client_id, client_secret);
 
+    },
+
+    paypalExecuteCancel: function (req, res) {
+
+
+        return res.ok('Payment Paypal Cancelled');
+
+    },
+
+    paypalExecuteConfirmationSuccess: function (req, res) {
+
+
+        return res.ok('Payment Paypal Confirmation done');
+
+    },
+
+    paypalExecuteConfirmationError: function (req, res) {
+
+
+        return res.ok('Payment Paypal Confirmation error');
 
     }
-};
 
+
+
+}
