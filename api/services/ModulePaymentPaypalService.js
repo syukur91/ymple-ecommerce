@@ -6,9 +6,23 @@ var paypal = require('paypal-rest-sdk');
 module.exports = {
 
 
+
+
     paymentActionWithPaypal: function(req, res, mode, client_id, client_secret) {
 
         // we get the mode, client_id, and client_secret from collection
+
+        var idPayment = req.params.idPayment;
+
+        var baseUrl = req.baseUrl;
+
+        console.log('req.path', req.path);
+
+        var urlPath = req.path; // containing the id payment
+
+        var redirectUrlSuccess = baseUrl+'/payment/paypal/execute/success/'+idPayment;
+
+        var redirectUrlCancel= baseUrl+'/payment/paypal/execute/cancel/'+idPayment;
 
         paypal.configure({
             'mode': mode, //sandbox or live
@@ -22,8 +36,8 @@ module.exports = {
                 "payment_method": "paypal"
             },
             "redirect_urls": {
-                "return_url": "http://return.url",
-                "cancel_url": "http://cancel.url"
+                "return_url": redirectUrlSuccess,
+                "cancel_url": redirectUrlCancel
             },
             "transactions": [{
                 "item_list": {
