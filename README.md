@@ -6,7 +6,7 @@ Version 0.1.1 (released 2016.11)
 Version 0.2.0 will be released in 2017.4
 Version 0.3.0 will be released in 2017.10
 
-### [Website](http://www.ymple.com/)
+### [www.ymple.com](http://www.ymple.com/)
 
 Open Source E-Commerce Solution for Everyone built with Sails.js (Node.js + MongoDB)
 
