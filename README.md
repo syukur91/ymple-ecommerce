@@ -3,20 +3,22 @@
 </h1>
 
 Version 0.1.1 (released 2016.11)
-Version 0.2.0 will be released in 2017.4
-Version 0.3.0 will be released in 2017.10
+
+Version 0.2.0 will released in 2017.4
 
 ### [www.ymple.com](http://www.ymple.com/)
 
 Open Source E-Commerce Solution for Everyone built with Sails.js (Node.js + MongoDB)
 
 System Dependencies
+--------
+
 * Node.js v4.4.1
 * MongoDB v3.2.6
 * Sails.js v0.12
 
 How To Run
-
+--------
 - With Node Package
 
     npm install ymple-ecommerce
@@ -36,6 +38,8 @@ How To Run
 
      [3] Go to http://localhost:1338/install
 
+     [4] Default login credential : admin@admin.com / admin
+
      node app.js
 
 - FRONT END
@@ -49,6 +53,16 @@ How To Run
 
 ### [Screenshot](http://www.ymple.com/screenshot.html)
 
+
+Community
+--------
+
+### [Gitter](https://gitter.im/Ymple)
+
+### [Stackoverflow](http://stackoverflow.com/search?q=ymple)
+
+
+
 Contributing
 --------
 
@@ -58,4 +72,4 @@ If you want to contribute code to Ymple-Ecommerce, read the [CONTRIBUTING.md][7]
 
 
 ========
-Code licensed under GPL v2 License.
+Code licensed under GPL v3 License.

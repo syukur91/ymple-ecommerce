@@ -10,6 +10,10 @@ module.exports = {
 
     paymentActionWithPaypal: function(req, res, mode, client_id, client_secret) {
 
+
+        // using the req.session we set the item and amount for paypal json data
+
+
         // we get the mode, client_id, and client_secret from collection
 
         var idPayment = req.params.idPayment;
