@@ -1,29 +1,40 @@
 <% include ../../library/library.ejs %>
-
 <% include ../templates.navbar.ejs %>
 
 <div class="container">
 
 
-    <h2><%= __( 'Order Summary ') %> </h2>
+    <h2 style="color:#26816a"><%= __('Order Summary ') %> </h2>
 
       
     <div>List of articles</div>
 
 
-    <h2><%= __( 'Customer information') %> </h2>
+    <ul>
+        <% cart.forEach(function(cartItem){ %>
+        Name: <%= cartItem.name %> <br>
+        Price <%= cartItem.price %> <br>
+        Quantity: <%= cartItem.quantity %> <br>
+        <% }); %>
+    </ul>
+
+
+    <h2 style="color:#26816a"><%= __('Customer information') %> </h2>
 
       
     <div>Customer information</div>
 
 
+    <ul>
+        Name: <%= user.name %> <br>
+        Price <%= user.email %> <br>
+    </ul>
+
     <br><br>
 
-    <div style="text-align: center">
+    <div>
 
-
-        <a href="/payment/paypal/pay/1" ><img src="/images/express-checkout-paypal.png" style="max-width: 150px"></a>
-
+        <a href="/payment/paypal/pay/1"><img src="/images/express-checkout-paypal.png" style="max-width: 150px"></a>
 
     </div>
 
@@ -51,14 +62,9 @@
           
     </div-->
 
-
-
 </div>
 
 <%- include ./paypal/paypal.ejs %>
-
-
-
 <% if (sails.config.project.paymentMethods.iamport.using){ %>
 <% if (order.payment === 'CARD' && order.status === 'PREPARE'){ %>
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment.js"></script>
