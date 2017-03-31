@@ -1,8 +1,8 @@
 {
   "name": "ymple-ecommerce",
   "private": false,
-  "version": "0.2.15",
-  "description": "a Nodejs Sailsjs Sails Node Sails Ecommerce application",
+  "version": "0.2.16",
+  "description": "a Nodejs and Sailsjs Ecommerce Framework",
   "keywords": [],
   "dependencies": {
     "async": "^2.1.4",
