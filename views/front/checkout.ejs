@@ -8,16 +8,19 @@
     <h3 style="color:forestgreen"> <%= __('Checking out') %> <a href="/cart" class="btn btn-warning pull-right"> <%= __('change') %> </a>
     </h3>
 
+        <% if ( typeof cart == 'undefined' ){ %>
+
     <h3> <%= __('You Cart is currently empty') %> </h3>
+
+        <% } %>
 
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th>No.</th>
 
                     <Th> <%= __('name') %> </th>
                     <th> <%= __('Price') %> </th>
-                    <th> <%= __('Unit') %> </th>
+                    <th> <%= __('Quantity') %> </th>
                     <th> <%= __('total') %> </th>
 
                 </tr>
@@ -37,7 +40,7 @@
                 <% }) %>
 
                 <tr>
-                    <td colspan="2"></td>
+                    <td colspan="1"></td>
                     <td>
                         <% __('Sum') %>
                     </td>
