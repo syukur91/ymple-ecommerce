@@ -12,41 +12,11 @@
 
     <%- include product/list.ejs %>
 
-    
+
 </div><!-- /.container -->
 </div><!-- PRODUCT -->
 
 <%- include layout %>
 
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        var $add = $('button[data-role="add"]');
-        var $buy = $('button[data-role="buy"]');
-        $add.on('click', AddToCart);
-        $buy.on('click', AddToCart);
-        function AddToCart() {
-            var product_id = $(this).data('id');
-            var quantity = $(this).parent().find('input').val();
-            var loc = '/';
-
-            if ($(this).data('role') === 'buy') {
-                loc = '/cart';
-            }
-
-            $.ajax({
-                type: 'GET',
-                url: '/cart/add/' + product_id + '?quantity=' + quantity,
-                success: function (data, status) {
-                    window.location = loc;
-                    return;
-                },
-                error: function (error) {
-                    console.log(error);
-                    return;
-                }
-            });
-        }
-    });
-</script>
-
+<%- include product/javascript.ejs%>
