@@ -1,178 +1,116 @@
-<%include templates.navbar.ejs%>
+<% include templates.navbar.ejs %>
 
 <br>
 
 <div class="container">
     <form role="form" id="order" action="/order" method="POST">
 
-    <h3 style="color:forestgreen"> <%= __('Checking out') %> <a href="/cart" class="btn btn-warning pull-right"> <%= __('change') %> </a>
-    </h3>
+        <h3 style="color:forestgreen"> <%= __('Checking out') %> <a href="/cart"
+                                                                    class="btn btn-warning pull-right"> <%= __('change') %> </a>
+        </h3>
 
-    <h3> <%= __('You Cart is currently empty') %> </h3>
+        <% if ( typeof cart == 'undefined' ){ %>
 
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th>No.</th>
+        <h3> <%= __('You Cart is currently empty') %> </h3>
 
-                    <Th> <%= __('name') %> </th>
-                    <th> <%= __('Price') %> </th>
-                    <th> <%= __('Unit') %> </th>
-                    <th> <%= __('total') %> </th>
+        <% } %>
 
-                </tr>
-                </thead>
-                <tbody>
+        <table class="table table-hover">
+            <thead>
+            <tr>
 
-                <% cart.forEach(function(product){ %>
-                <tr data-id="{{ product.id %>">
-                    <!--td>{{ loop.index %></td-->
+                <Th> <%= __('name') %> </th>
+                <th> <%= __('Price') %> </th>
+                <th> <%= __('Quantity') %> </th>
+                <th> <%= __('total') %> </th>
+
+            </tr>
+            </thead>
+            <tbody>
+
+            <% cart.forEach(function(product){ %>
+            <tr data-id="{{ product.id %>">
+                <!--td>{{ loop.index %></td-->
 
 
-                    <td><%= product.name %></td>
-                    <td><%= sails.config.project.currency.symbol %><%= product.price | 'currency' %></td>
-                    <td><%= product.quantity %></td>
-                    <td><%= sails.config.project.currency.symbol %><%= (product.price * product.quantity) | 'currency' %></td>
-                </tr>
-                <% }) %>
+                <td><%= product.name %></td>
+                <td><%= sails.config.project.currency.symbol %><%= product.price | 'currency' %></td>
+                <td><%= product.quantity %></td>
+                <td><%= sails.config.project.currency.symbol %><%= (product.price * product.quantity) | 'currency' %></td>
+            </tr>
+            <% }) %>
 
-                <tr>
-                    <td colspan="2"></td>
-                    <td>
-                        <% __('Sum') %>
-                    </td>
-                    <td><%= total %></td>
-                    <td><%= sails.config.project.currency.symbol %><%= summary | 'currency' %></td>
-                </tr>
-                </tbody>
-            </table>
+            <tr>
+                <td colspan="1"><b> <%= __('Sum') %></b></td>
+                <td>
 
-            <h2>
-                <% __('Shipping information input') %>
-            </h2>
+                </td>
+                <td><%= total %></td>
+                <td><%= sails.config.project.currency.symbol %><%= summary | 'currency' %></td>
+            </tr>
+            </tbody>
+        </table>
 
-                <div class="row" style="align-content: center;text-align: center">
 
-                    <div class="col-sm-6" >
-                        <Label> <%= __('Name') %> </label>
-                                       <Input type="text" class="form-control" id="name" name="name" placeholder="<%= __('Please enter the address') %>"
-                                              value="<% if (typeof user == 'object' && user) {} %>" required>
-                    </div>
 
-                    <div class="col-sm-6">
-                        <Label> <%= __('Phone') %> </label>
-                                       <Input type="text" class="form-control" id="phone" name="phone" placeholder="<%= __('Please enter the address') %>"
-                                              value="<% if (typeof user == 'object' && user) {} %>" required>
-                    </div>
-                                
-                    <!--div class="col-sm-6">
-                                       <label > <%= __('Zip') %> </label>
-                                       <input type="text" class="form-control" id="postcode" name="postcode" placeholder="<%= __('Please enter your zip code') %>"
-                                              value="<% if (typeof user == 'object' && user) {
-                        user.postcode } %> " required>
-                    </div-->
-                </div>
 
-                <div class="row" style="align-content: center;text-align: center">
+        <%- include checkout/customer_information.ejs %>
 
-                <div class="col-sm-6">
-                        <Label> <%= __('address') %> </label>
-                                       <Input type="text" class="form-control" id="address" name="address" placeholder="<%= __('Please enter the address') %>"
-                                              value="<% if (typeof user == 'object' && user) {} %>" required>
-                    </div>
+<br>
+        <%- include checkout/delivery_information.ejs %>
 
-                    <div class="col-sm-6">
-                        <Label> <%= __('zip') %> </label>
-                                       <Input type="text" class="form-control" id="address" name="address" placeholder="<%= __('Please enter the address') %>"
-                                              value="<% if (typeof user == 'object' && user) {} %>" required>
-                    </div>
-                                
-                    <!--div class="col-sm-6">
-                                       <label > <%= __('Zip') %> </label>
-                                       <input type="text" class="form-control" id="postcode" name="postcode" placeholder="<%= __('Please enter your zip code') %>"
-                                              value="<% if (typeof user == 'object' && user) {
-                                                  user.postcode } %> " required>
-                    </div-->
-                </div>
-
-                <div class="row" style="align-content: center;text-align: center">
-
-            <div class="col-sm-6">
-                <Label> <%= __('Email') %> </label>
-                               <Input type="text" class="form-control" id="email" name="email" placeholder="<%= __('Please enter the address') %>"
-                                      value="<% if (typeof user == 'object' && user) {} %>" required>
-            </div>
-                     
-        </div>
-
-                <div class="row" style="align-content: center;text-align: center">
-                            
-                    <div class="col-sm-6">
-                                       <Label for="comment"> <%= __('delivery Notice') %> </label>
-                                       <Textarea class="form-control" name="comment" id="comment" cols="30" rows="3"
-                                                 placeholder="<%= __('Please enter a description for this product MARKDOWN form') %> "> </textarea>    
-                    </div>
-
-                    <div class="col-sm-6">
-                        <div class="checkbox">
-                                           <Label for="comment"> <%= __('Save this address as the default shipping') %> </label><br>
-
-                            <input type="checkbox" name="remember" checked>
-                                <% __('Save this address as the default shipping') %>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-
-        <h3> <%= __('Delivery method') %> </h3>
+<br>
+<div>
+    <h4 style="color:forestgreen">
+    <%= __('Delivery Type') %> </h4>
                           
-        <div class="row" style="align-content: center;text-align: center">
-                      
+        <div class="row" style="text-align: center">
+
             <div class="col-sm-6">
-                     <Select class="form-control" name="shipping">
-                                        
-                        <Option value="PRE"> <%= __('freight prepaid') %> </option>
-                                        
-                        <Option value="POST"> <%= __('postpaid courier') %> </option>
-                     </Select>
-                </div>
+                 <Select class="form-control" name="shipping">
+                                    
+                    <Option value="PRE"> <%= __('freight prepaid') %> </option>
+                                    
+                    <Option value="POST"> <%= __('postpaid courier') %> </option>
+                </Select>
+            </div>
 
-            <div class="col-sm-6">        
-                <label class=""> <%= __('prepaid shipping will be automatically added 3,000 raw courier.') %> </label>   
-            </div>    
+
+                
         </div>
+</div>
 
-        <h3> <%= __('Payment') %> </h3>
+
+        <br>
+        <div>
+            <h4 style="color:forestgreen">
+            <%= __('Payment Method') %> </h4>
 
         <div class="row" style="align-content: center;text-align: center">
-                <div class="col-sm-2">
-                    <select id="payment" class="form-control" name="payment">
+            <div class="col-sm-2">
+                <select id="payment" class="form-control" name="payment">
 
-                        <Option value="TRANSFER"> <%= __('Bank Transfer') %> </option>
-                                        
-                        <% if (sails.config.project.paymentMethods.iamport.using)  { %>
-                                      
-                        <Option value="CARD"> <%= __('cards') %> </option>
+                    <option value="bank_transfer"> <%= __('Bank Transfer') %> </option>                
+                                 
+                    <option value="credit_card"> <%= __('Credit Card') %> </option>
 
-                        <% } %>
-                    </select>
-                </div>
+                    <option value="paypal"> <%= __('Paypal') %> </option>
 
-                <Label id="payment-label" class="control-label"> Bank 1005-102-532536 </label>
-                          
-            Sails
-                      
-            <% if (!sails.config.project.paymentMethods.iamport.using) { %>
-                       <P
-                    class="help-block"> <%= __('payment methods except for the current account transfers are not supported, so please understand.') %> </P>
-            <% } %>
+
+                </select>
+            </div>
+
+
+        </div>
         </div>
 
+
+        <br><br>
         <button type="submit" class="btn btn-info btn-lg">
             <%= __('order') %>
         </button>
-        </form>
-    </div>
+    </form>
+</div>
 
 <%- include ../library/library.ejs %>
 

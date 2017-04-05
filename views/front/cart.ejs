@@ -15,11 +15,10 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th>No.</th>
 
                     <th> <%= __('name') %> </th>
                     <th> <%= __('Price') %> </th>
-                    <th> <%= __('Unit') %> </th>
+                    <th> <%= __('Quantity') %> </th>
                     <th> <%= __('total') %> </th>
 
                     <th></th>
@@ -44,7 +43,7 @@
                 <% }) %>
 
                 <tr>
-                    <td colspan="3"><%= __('Sum') %></td>
+                    <td colspan="2"><%= __('Sum') %></td>
                     <td><%= total %></td>
                     <td colspan><%= sails.config.project.currency.symbol %><%= summary | 'currency' %></td>
                     <td><a href="/checkout" class="btn btn-success"><%= __('Order') %></a></td>
