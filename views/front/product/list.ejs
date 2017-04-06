@@ -1,6 +1,5 @@
 <div class="container">
 
-
     <% products.forEach(function(product, i){ %>
     <% if (i == 0 || i == 4 || i == 8 || i == 12 || i == 16  ) { %>
     <div class="row">
@@ -8,7 +7,7 @@
         <div class="col-sm-3 col-md-3">
             <div class="thumbnail">
                 <a href="/product/<%= product.id %>">
-                    <% if (product.image){ %>
+                    <% if (product.image ){ %>
                     <img class="img-rounded-ymple" src="<%= product.image[0] %>">
                     <% }else { %>
                     <img class="img-rounded-ymple" src="/images/new_prod_trans.jpg">
@@ -21,14 +20,16 @@
                     <h3><%= product.name %></h3>
 
                         <span class="badge badge-info pull-right"><%= sails.config.project.currency.symbol %>
-                            <%= product.price | 'currency' %></span></h3>
-                    <p class="ellipsis">
-                        <%= product.description | 'description' %>
-                    </p>
+                            <%= product.price  %>
+                        </span>
+                    </h3>
+
+                    <p class="ellipsis"> <%= product.description %> </p>
+
                     <p>
                         <input type="text" style="width: 20px;" value="1"/>
                         <button data-id="<%= product.id %>" data-role="add" class="btn btn-default"><%= __('Add to Cart') %></button>
-                        <button data-id="<%= product.id %>" data-role="buy" class="btn btn-primary"><%= __('purchase') %></button>
+                        <button data-id="<%= product.id %>" data-role="buy"  class="btn btn-primary"><%= __('purchase') %></button>
                     </p>
                 </div>
             </div>

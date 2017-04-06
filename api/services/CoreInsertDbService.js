@@ -92,6 +92,8 @@ getValueFromArray = function (data, element, type) {
                 var video = data.video;
                 var description = data.description;
                 var name = data.name;
+                var image = [];
+                image[0]= '/images/product/'+idProduct+'.png';
 
                 var dataToInsert = {
                     name: name,
@@ -101,7 +103,8 @@ getValueFromArray = function (data, element, type) {
                     video: video,
                     description: description,
                     createdAt: createdAt,
-                    updatedAt: updatedAt
+                    updatedAt: updatedAt,
+                    image: image
                 }
 
                 console.log('insert test2');
