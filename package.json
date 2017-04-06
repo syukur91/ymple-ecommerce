@@ -1,7 +1,13 @@
 {
   "name": "ymple-ecommerce",
-  "private": false,
-  "version": "0.2.17",
+ 
+"author": {
+    "name": "Fabien Thetis",
+    "email": "@thetisfabien"
+  },
+
+ "private": false,
+  "version": "0.2.18",
   "description": "a Nodejs and Sailsjs Ecommerce Framework",
   "keywords": [],
   "dependencies": {
@@ -48,8 +54,13 @@
     "type": "git",
     "url": "git://github.com/Ymple/ymple-ecommerce.git"
   },
-  "author": "FabienThetis",
-  "license": "",
+
+"licenses": [
+    {
+      "type": "MIT",
+      "url": "http://www.opensource.org/licenses/MIT"
+    }
+  ],
   "devDependencies": {
     "bootstrap": "^4.0.0-alpha.2",
     "tether": "^1.3.4"
