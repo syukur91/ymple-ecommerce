@@ -36,6 +36,8 @@ module.exports = {
               quantity: item.quantity
             };
 
+            console.log('CartController - prodcutInfo', prodcutInfo);
+
             cart.push(prodcutInfo);
             return done(null, product);
           });
@@ -65,6 +67,8 @@ module.exports = {
       if (!product) return res.serverError('NO_PRODUCT_FOUND');
 
 
+
+      console.log('CartController - add - req', req.query)
 
       var quantity = 1;
 
@@ -150,7 +154,7 @@ module.exports = {
           result.cart = cart;
 
           for ( var i in cart ) {
-            result.summary += cart[i].price * cart[i].quantity;
+            result.summary += parseInt(cart[i].price) * parseInt(cart[i].quantity);
             result.total += cart[i].quantity;
           }
 
@@ -177,7 +181,7 @@ module.exports = {
 function AddToSessionCart (session, id, quantity) {
   var product = {
     id: id,
-    quantity: quantity
+    quantity: parseInt(quantity)
   };
 
   if ( session.hasOwnProperty('cart') ) {
@@ -186,7 +190,7 @@ function AddToSessionCart (session, id, quantity) {
 
     for ( var i in cart ) {
       if ( cart[i].id == id ) {
-        session.cart[i].quantity += quantity;
+        session.cart[i].quantity += parseInt(quantity);
         isAlreadyExist = true;
       }
     }
