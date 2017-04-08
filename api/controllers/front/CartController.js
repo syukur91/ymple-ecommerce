@@ -154,7 +154,7 @@ module.exports = {
           result.cart = cart;
 
           for ( var i in cart ) {
-            result.summary += cart[i].price * cart[i].quantity;
+            result.summary += parseInt(cart[i].price) * parseInt(cart[i].quantity);
             result.total += cart[i].quantity;
           }
 
