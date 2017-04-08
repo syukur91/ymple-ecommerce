@@ -10,7 +10,6 @@
             console.log('this', $(this));
 
             var product_id = $(this).data('id');
-            var quantity = $(this).parent().find('input').val('quantity');
 
             var quantityId = 'quantity-'+product_id;
 
@@ -33,7 +32,7 @@
                 type: 'GET',
                 url: '/cart/add/' + product_id + '?quantity=' + quantity,
                 success: function (data, status) {
-                    
+
                     window.location = loc;
                     return;
                 },
