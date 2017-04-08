@@ -1,15 +1,9 @@
 module.exports.routes = {
 
-
-
-
     // INDEX
     'GET    /'                    : 'front/ProductController.list',
     'GET    /login'               : { view: 'front/login' },
     'GET    /account'             : { view: 'front/account'},
-
-
-
 
 // USER
 
