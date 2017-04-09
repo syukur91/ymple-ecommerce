@@ -84,7 +84,7 @@ module.exports = {
     ], function (err) {
       if (err) return res.serverError (err);
 
-      return res.view('front/profile.ejs', result);
+      return res.view('front/profile/profile.ejs', result);
     });
   },
 
