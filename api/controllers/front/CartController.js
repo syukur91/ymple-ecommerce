@@ -57,7 +57,7 @@ module.exports = {
     ], function (err, result) {
       if (err) return res.serverError (err);
 
-      return res.view('front/cart.ejs', result);
+      return res.view('front/cart/cart.ejs', result);
     });
   },
 
@@ -165,7 +165,7 @@ module.exports = {
     ], function (err, result) {
       if (err) return res.serverError(err);
 
-      return res.view('front/checkout.ejs', result);
+      return res.view('front/checkout/checkout.ejs', result);
     });
   },
 
