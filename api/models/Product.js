@@ -62,6 +62,10 @@ module.exports = {
     provider: {
       model: 'Provider'
     },
+
+    image: {
+      type: 'ARRAY'
+    },
     category: {
       model: 'Category',
       // required: true

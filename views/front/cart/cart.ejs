@@ -1,10 +1,10 @@
-<%include templates.navbar.ejs%>
+<%include ../templates.navbar.ejs%>
 
 <br><br>
 
 <div class="container">
 
-    <h2> <%= __('cart') %> <a href="/cart/clear" class="btn btn-warning pull-right"> <%= __('Empty Cart') %> </a></h2>
+    <h3 style="color:forestgreen"><i class="fa fa-fw fa-shopping-cart" aria-hidden="true"></i> <%= __('Cart') %> <a href="/cart/clear" class="btn btn-warning pull-right"> <%= __('Empty Cart') %> </a></h3>
     <hr/>
 
     <% if (cart.length <= 0) { %>
@@ -56,7 +56,7 @@
 </div>
 
 
-<%- include ../library/library.ejs %>
+<%- include ../../library/library.ejs %>
 
 
 <script type="text/javascript">
