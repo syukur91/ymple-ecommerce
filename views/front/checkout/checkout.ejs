@@ -53,62 +53,51 @@
 
 
 
-
-        <%- include customer_information.ejs %>
-
-<br>
-        <%- include delivery_information.ejs %>
-
-<br>
-<div>
-    <h4 style="color:forestgreen">
-    <%= __('Delivery Type') %> </h4>
-                          
-        <div class="row" style="text-align: center">
-
-            <div class="col-sm-6">
-                 <Select class="form-control" name="shipping">
-                                    
-                    <Option value="PRE"> <%= __('freight prepaid') %> </option>
-                                    
-                    <Option value="POST"> <%= __('postpaid courier') %> </option>
-                </Select>
-            </div>
+        <br>
+        <% if (typeof isLogin != 'undefined' && isLogin) { %>
 
 
-                
-        </div>
-</div>
-
+        <%- include payment-delivery-method.ejs %>
 
         <br>
-        <div>
-            <h4 style="color:forestgreen">
-            <%= __('Payment Method') %> </h4>
 
-        <div class="row" style="align-content: center;text-align: center">
-            <div class="col-sm-2">
-                <select id="payment" class="form-control" name="payment">
-
-                    <option value="bank_transfer"> <%= __('Bank Transfer') %> </option>                
-                                 
-                    <option value="credit_card"> <%= __('Credit Card') %> </option>
-
-                    <option value="paypal"> <%= __('Paypal') %> </option>
-
-
-                </select>
-            </div>
-
-
-        </div>
-        </div>
-
-
-        <br><br>
         <button type="submit" class="btn btn-info btn-lg">
             <%= __('order') %>
         </button>
+
+
+        <% } else {%>
+
+        <div class="row">
+
+
+            <div class="col-sm-6 ">
+                <a type="submit" class="btn">       <%= __('Register to Continue') %>   </a>
+            </div>
+
+
+            <div class="col-sm-6 ">
+                <a href="/login?redirect_url=/checkout" type="submit" class="btn ">       <%= __('Login to Continue') %>   </a>
+            </div>
+        </div>
+
+
+
+        <%- include customer_information.ejs %>
+
+        <br>
+
+
+        <%- include delivery_information.ejs %>
+
+        <br>
+
+<%}%>
+
+
+
+
+
     </form>
 </div>
 
