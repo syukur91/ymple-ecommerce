@@ -223,6 +223,36 @@ getValueFromArray = function (data, element, type) {
             });
         },
 
+        installSubscriptionNewsletter: function (email) { // Insert an order
+
+            if (email) {
+
+                var MongoClient = require('mongodb').MongoClient;
+
+                //Connect to the db
+                MongoClient.connect(urlConnection).then(function (db) {
+
+                    var date = new Date();
+                    var createdAt = date.toISOString();
+                    var updatedAt = date.toISOString();
+
+                    var collection = db.collection('front_subscription_newsletter');
+                    var data = {createdAt: createdAt, updatedAt: updatedAt, email: email};
+                    collection.insert(data, function (error, result) {
+                        if (error) console.log(error);
+                        if (result) {
+                            console.log(result);
+                        }
+                    })
+
+                });
+
+            }
+            else{
+                return false;
+            }
+        },
+
 
         insertCategory: function (data) { // Insert a category in table category
 

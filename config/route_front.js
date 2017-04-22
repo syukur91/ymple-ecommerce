@@ -40,7 +40,7 @@ module.exports.routes = {
     'GET    /image/:id': 'front/FileController.retrieve',
     'GET    /test': 'front/FileController.test',
 
-    'GET    /subscription_newsletter': 'front/SubscriptionController.newsletter'
+    'GET    /subscription_newsletter': 'front/SubscriptionController.newsletter' //add in table front_subscription_newsletter data
 
 
 }
