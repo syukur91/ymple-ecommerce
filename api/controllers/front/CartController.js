@@ -116,10 +116,20 @@ module.exports = {
   },
 
   checkout: function (req, res) {
+
+
+    // need to check the login status
+    var isLogin = false;
+
+    if (req.session.user){
+      isLogin = true;
+    }
+
     var result = {
       user: (req.session.hasOwnProperty('user')) ? req.session.user : undefined,
       total: 0,
-      summary: 0
+      summary: 0,
+      isLogin : isLogin
     };
 
     async.waterfall([
