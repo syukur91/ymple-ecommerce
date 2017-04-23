@@ -73,7 +73,7 @@ module.exports = {
             function (resolve, reject) {
 
                 var MongoClient = require('mongodb').MongoClient;
-                var fieldName = 'product';
+                //var fieldName = 'product';
 
                 MongoClient.connect(url, function (err, db) {
                     var collectionName = "core_module";
@@ -86,6 +86,26 @@ module.exports = {
                 })
             })
     },
+
+    getCategoryList: function () { // return the category list
+
+        return new Promise(
+            function (resolve, reject) {
+
+                var MongoClient = require('mongodb').MongoClient;
+
+                MongoClient.connect(url, function (err, db) {
+                    var collectionName = "category";
+                    var col = db.collection(collectionName);
+                    var data = col.find({}).toArray(function (err, data) {
+                        db.close();
+                        console.log('getListCoreModule - data', data);
+                        resolve(data);//docs[0].name.toString()); // returns to the function that calls the callback
+                    });
+                })
+            })
+    },
+
 
     getListCoreModuleInstalled: function () {
 
