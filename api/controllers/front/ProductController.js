@@ -85,7 +85,19 @@ module.exports = {
 
                     return next(null);
                 });
-            }
+            },
+
+            function getCategoryList(next) {
+
+                var newIdProduct = CoreReadDbService.getCategoryList().then(function (categoryList) {
+
+                    console.log('promise return value categoryList:', categoryList);
+                    result.categoryList = categoryList;
+                    return next(null, categoryList);
+                });
+
+            },
+
         ], function (err) {
             if (err) return res.serverError(err);
 
