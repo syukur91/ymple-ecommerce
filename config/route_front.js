@@ -5,8 +5,7 @@ module.exports.routes = {
     'GET    /login'               : { view: 'front/login' },
     'GET    /account'             : { view: 'front/account'},
 
-// USER
-
+    // USER
     'POST   /login': 'front/UserController.login',
     '/login': 'front/UserController.login',
 
@@ -39,6 +38,9 @@ module.exports.routes = {
     // FILE & UPLOAD
     'GET    /upload': 'front/FileController.upload',
     'GET    /image/:id': 'front/FileController.retrieve',
-    'GET    /test': 'front/FileController.test'
+    'GET    /test': 'front/FileController.test',
+
+    'GET    /subscription_newsletter': 'front/SubscriptionController.newsletter' //add in table front_subscription_newsletter data
+
 
 }
