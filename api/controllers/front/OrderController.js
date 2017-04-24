@@ -167,10 +167,22 @@ module.exports = {
 
     pay: function (req, res) {
 
+
+        console.log('OrderController - pay', req.session);
+
         var result = {
             user: (req.session.hasOwnProperty('user')) ? req.session.user : undefined,
             cart: (req.session.hasOwnProperty('cart')) ? req.session.cart : undefined
         }
+
+        if (req.session.orderReference) {
+
+            result.orderReference = req.session.orderReference;
+        } else {
+            result.orderReference = 0;
+
+        }
+
 
         async.waterfall([
             function GetOrder(next) {
@@ -192,11 +204,9 @@ module.exports = {
     },
 
 
-    // create the order based on the client information and the cart
-    create: function (req, res) {
+    create: function (req, res) { // create the order based on the client information and the cart
 
-
-        if (!req.session.user){
+        if (!req.session.user) {
             return res.redirect('/login');
         }
 
@@ -204,16 +214,9 @@ module.exports = {
         console.log('req.body', req.body);
         console.log('test', req.body['name']);
 
-        /*return res.json({
-         todo: 'update() is not implemented yet!'
-         });*/
-
         var result = {
             product: []
         };
-
-        // use cart to get the cart element
-
 
         var name = getValueFromReq(req.body, 'name');
         var email = getValueFromReq(req.body, 'email');
@@ -239,139 +242,33 @@ module.exports = {
             cart: cart
         }
 
-
         console.log('order', data);
         console.log('cart session', req.session.cart); // in the cart we have all the product
         console.log('session user', req.session.user);
 
+        req.session['orderReference'] = 0;
+
         async.waterfall([
 
-            function getNewIdOrder (next) {
+            function getNewIdOrder(next) {
 
-                var newIdOrder = CoreReadDbService.getNewIdOrder().then(function(idOrder){
+                var newIdOrder = CoreReadDbService.getNewIdOrder().then(function (idOrder) {
 
                     console.log('promise return value - create order - id:', idOrder);
 
-                    return next(null, idOrder);
+                    req.session['orderReference'] = idOrder;
+
+
+                    data['idOrder'] = next;
+
+                    CoreInsertDbService.insertOrder(data);
+                    console.log('orderController - increment id [START]');
+
+                    console.log('create the order - function 2 - idOrder', next); // test if we get the new id order
+
+                    return res.redirect('/pay/' + idOrder);
                 });
-            },
-
-            function createOrder(next) {
-
-                data['idOrder'] = next;
-
-                CoreInsertDbService.insertOrder(data);
-                console.log('orderController - increment id [START]');
-
-
-                //if (!req.session.hasOwnProperty('cart') || req.session.cart.length <= 0) {
-               //     next('NO_PRODUCT_FOUND');
-                //    return;
-               // }
-
-                //var cart = req.session.cart;
-                console.log('create the order - function 2 - idOrder', next); // test if we get the new id order
-                //console.log('cart', cart);
-
-                return next(null);
-
-            },
-
-
-
-          //  function incrementOrder(next){
-
-
-
-                //console.log('increment order - [START]');
-                //CoreInsertDbService.incrementId('order');
-                //console.log('increment order - [DONE]');
-
-          //  }
-
-
-
-        ], function (err) {
-            if (err) return res.serverError(err);
-
-            req.session.cart = [];
-
-            if (result.order.payment === 'TRANSFER') return res.redirect('/account');
-
-            return res.redirect('/pay/' + result.order.id);
-        });
-
-
-        /*async.map(cart, function (item, done) {
-
-         console.log('cart - item', item );
-
-         /* Product.findOne(item.id, function (err, product) {
-         if (err) done (err);
-         if (!product) done ('NO_PRODUCT_FOUND');
-         if (!product.isSelling) done ('NOT_SELLING');
-
-         order.price += product.price * item.quantity;
-         product.quantity = item.quantity;
-         order.products.push(product);
-
-         done(null); return;
-         });
-
-         }, function (err) {
-         if (err) next(err);
-
-         if ( req.body.shipping === 'PRE' )
-         order.shipping = SHIPPING_FEE;
-
-         return next(null);
-         });*/
-
-        /*function GetUser (next) {
-         if ( !req.session.hasOwnProperty('user') ) {
-         return next(null);
-         }
-
-         User.findOne(req.session.user.id, function(err, user) {
-         if (err) next (err);
-         if (!req.body.hasOwnProperty('remember') || !req.body.remember) {
-         return next(null);
-         }
-
-         user.address = order.address;
-         user.postcode = order.postcode;
-
-         user.save(function (err, user) {
-         result.user = user;
-
-         order.owner = user.id;
-         order.email = user.email;
-         req.session.user = user;
-
-         return next(null);
-         });
-         });
-         },*/
-
-        /*function CreateOrder (next) {
-         Order.create(order, function (err, created) {
-         if (err) next (err);
-
-         result.order = created;
-         EmailService.sendAlertEmail();
-
-         return next(null);
-         });
-         }*/
-
-        /*return res.json({
-         todo: 'update() is not implemented yet!'
-         });*/
-
-//    return res.redirect('/pay/' + result.order.id);
-        return res.redirect('/pay/1');
-
-
+            }]);
     }
 };
 
