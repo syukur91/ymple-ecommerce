@@ -72,31 +72,24 @@
 
 
             <div class="col-sm-6 ">
-                <a type="submit" class="btn">       <%= __('Register to Continue') %>   </a>
+                <a type="submit" class="btn btn-primary">       <%= __('Register to Continue') %>   </a>
             </div>
 
 
             <div class="col-sm-6 ">
-                <a href="/login?redirect_url=/checkout" type="submit" class="btn ">       <%= __('Login to Continue') %>   </a>
+                <a href="/login?redirect_url=/checkout" type="submit" class="btn btn-primary">       <%= __('Login to Continue') %>   </a>
             </div>
         </div>
-
-
+        <br>
 
         <%- include customer_information.ejs %>
 
         <br>
 
-
         <%- include delivery_information.ejs %>
 
         <br>
-
 <%}%>
-
-
-
-
 
     </form>
 </div>
