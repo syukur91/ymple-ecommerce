@@ -78,7 +78,7 @@ module.exports = {
 
       result.templateToInclude  = 'order_list';
       // res.json(result);
-      return res.view('back/menu.ejs', result);
+      return res.view('back/commun/main.ejs', result);
     });
   },
 

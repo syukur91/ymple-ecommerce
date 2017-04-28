@@ -89,7 +89,7 @@ module.exports = {
         ], function (err) {
             if (err) return res.serverError(err);
             result.templateToInclude = 'categoryList';
-            return res.view('back/menu.ejs', result);
+            return res.view('back/commun/main.ejs', result);
         });
     },
 
@@ -103,7 +103,7 @@ module.exports = {
 
         result.templateToInclude = 'categoryCreate';
 
-        return res.view('back/menu.ejs', result);
+        return res.view('back/commun/main.ejs', result);
 
         /* return res.json({
          todo: 'new() is not implemented yet!'
@@ -136,7 +136,7 @@ module.exports = {
 
             var result = {};
             result.templateToInclude = 'categoryCreationOk';
-            return res.view('back/menu.ejs', result);
+            return res.view('back/commun/main.ejs', result);
             //return res.ok('create of the product done', req.body);
 
 
@@ -144,7 +144,7 @@ module.exports = {
         else {
             var result = {};
             result.templateToInclude = 'categoryCreationKo';
-            return res.view('back/menu.ejs', result);
+            return res.view('back/commun/main.ejs', result);
             //return res.ok('missing one parameter');
         }
     }
