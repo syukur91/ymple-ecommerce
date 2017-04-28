@@ -66,18 +66,18 @@ module.exports = {
                 var result = {};
                 result.templateToInclude = 'moduleInstallNew';
                 result.idProduct = data;
-                return res.view('back/menu.ejs', result);
+                return res.view('back/commun/main.ejs', result);
 
             }
 
             //result.templateToInclude  = 'adminUserProfile';
 
-            // return res.view('back/menu.ejs', result);
+            // return res.view('back/commun/main.ejs', result);
         });
 
         //result.templateToInclude  = 'adminUserProfile';
 
-        //return res.view('back/menu.ejs', result);
+        //return res.view('back/commun/main.ejs', result);
     },
 
 
@@ -126,7 +126,7 @@ module.exports = {
         });
     },
 
-    configure: function (req, res) {
+    list: function (req, res) {
 
 
         CoreReadDbService.getListCoreModuleInstalled().then(function (data) {
@@ -140,7 +140,7 @@ module.exports = {
             if (data){
                 result.listModule = data;
             }
-            return res.view('back/menu.ejs', result);
+            return res.view('back/commun/main.ejs', result);
 
         });
 
@@ -180,13 +180,13 @@ module.exports = {
                 console.info('edit query result', products);
                 console.info('edit - result', result);
                 result.templateToInclude = 'productModification';
-                return res.view('back/menu.ejs', result);
+                return res.view('back/commun/main.ejs', result);
             });
 
         }
         else {
             result.templateToInclude = 'productModification';
-            return res.view('back/menu.ejs', result);
+            return res.view('back/commun/main.ejs', result);
         }
 
 
@@ -214,7 +214,7 @@ module.exports = {
 
             result.templateToInclude = 'productCreationOk';
 
-            return res.view('back/menu.ejs', result);
+            return res.view('back/commun/main.ejs', result);
 
             console.log('productController - productNewValidation - req.body', data);
 
@@ -233,7 +233,7 @@ module.exports = {
         else {
             var result = {};
             result.templateToInclude = 'productCreationKo';
-            return res.view('back/menu.ejs', result);
+            return res.view('back/commun/main.ejs', result);
 
         }
     },
@@ -252,7 +252,7 @@ module.exports = {
             if (data){
             result.listCoreModule = data;
             }
-            return res.view('back/menu.ejs', result);
+            return res.view('back/commun/main.ejs', result);
 
         });
     },
@@ -287,7 +287,7 @@ module.exports = {
 
            // console.log('typeof',  typeof result.isTemplateToIncludeFullPath );
 
-            output =  res.view('back/menu.ejs', result);
+            output =  res.view('back/commun/main.ejs', result);
         }
         else {
             // return to the module page
@@ -322,7 +322,7 @@ module.exports = {
 
 
         //{userNameApi:'userNameApi',passwordApi:'passwordApi'};
-        return res.view('back/menu.ejs', result);
+        return res.view('back/commun/main.ejs', result);
     },
 
     inactivate:function(req, res, nameModule){

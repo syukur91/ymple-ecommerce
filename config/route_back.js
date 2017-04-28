@@ -31,7 +31,6 @@ module.exports.routes = {
     '/admin/product/create/validation': 'back/productController.productNewValidation',
     'GET    /admin/product/create': 'back/productController.create',
     'GET    /admin/product/list': 'back/productController.list',// display all the product available
-    'GET    /admin/product/preview/:id': 'back/productController.detail',// display the detail about one product
     'GET    /admin/product/edit/:id': 'back/productController.edit',// edit the product
 
     // url to use the profile of the admin user
@@ -60,15 +59,17 @@ module.exports.routes = {
     // page to manage the modules
     'GET    /admin/module': {view: 'back/module/index'},
     'GET    /admin/module/create': 'back/moduleController.create',
-    'GET    /admin/module/configure/': 'back/moduleController.configure',
+    'GET    /admin/module/list/': 'back/moduleController.list',
     'GET    /admin/module/search': 'back/moduleController.search', // return the list of module to be added
     '/admin/module/install/': 'back/moduleController.install', // edit a module
-    '/admin/module/:nameModule/edit': 'back/moduleController.edit', // edit a module
+    '/admin/module/edit/:nameModule': 'back/moduleController.edit', // edit a module
     '/admin/module/:nameModule/edit/validation': 'back/moduleController.editValidation', // validate the edit of one module, update the configuration
 
     '/admin/module/inactivate/:nameModule': 'back/moduleController.inactivate', // inactivate a module
 
-    '/admin/module/paypal/': 'back/moduleController.paypal'
+    '/admin/module/paypal/': 'back/moduleController.paypal',
+
+    '/admin/product/preview/:id': 'back/productController.preview'
 
 
 

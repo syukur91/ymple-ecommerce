@@ -58,7 +58,7 @@ module.exports = {
                 var result = {};
                 result.templateToInclude = 'product';
                 result.idProduct = data;
-                return res.view('back/menu.ejs', result);
+                return res.view('back/commun/main.ejs', result);
             }
         });
     },
@@ -71,7 +71,7 @@ module.exports = {
             //return res.json({photos: photos.length});
         });*/
 
-    detail: function (req, res) {
+    preview: function (req, res) {
         var result = {
             user: (req.session.hasOwnProperty('user')) ? req.session.user : undefined
         };
@@ -89,9 +89,14 @@ module.exports = {
                 });
             }
         ], function (err, result) {
-            if (err) res.serverError(err);
+            if (err) {res.serverError(err);}
+            else {
 
-            return res.view('back/product/detail.ejs', result);
+                result.templateToInclude = 'product_preview';
+
+                return res.view('back/commun/main.ejs', result);
+
+            }
         });
     },
 
@@ -157,7 +162,7 @@ module.exports = {
         ], function (err) {
             if (err) return res.serverError(err);
             result.templateToInclude = 'list_product';
-            return res.view('back/menu.ejs', result);
+            return res.view('back/commun/main.ejs', result);
         });
     },
 
@@ -196,13 +201,13 @@ module.exports = {
                 console.info('edit query result', products);
                 console.info('edit - result', result);
                 result.templateToInclude = 'productModification';
-                return res.view('back/menu.ejs', result);
+                return res.view('back/commun/main.ejs', result);
             });
 
         }
         else {
             result.templateToInclude = 'productModification';
-            return res.view('back/menu.ejs', result);
+            return res.view('back/commun/main.ejs', result);
         }
 
 
@@ -230,7 +235,7 @@ module.exports = {
 
             result.templateToInclude = 'productCreationOk';
 
-            return res.view('back/menu.ejs', result);
+            return res.view('back/commun/main.ejs', result);
 
             console.log('productController - productNewValidation - req.body',data );
 
@@ -249,10 +254,45 @@ module.exports = {
         else {
             var result = {};
             result.templateToInclude = 'productCreationKo';
-            return res.view('back/menu.ejs', result);
+            return res.view('back/commun/main.ejs', result);
             //return res.ok('missing one parameter');
         }
-    }
+    },
+
+    previewold: function (req, res) {
+
+        console.log ('[start]: productController - preview ');
+
+        var result = {
+            user: (req.session.hasOwnProperty('user')) ? req.session.user : undefined
+        };
+
+        async.waterfall([
+            function GetProduct(next) {
+                Product.findOne(req.params.id, function (err, product) {
+                    if (err) return res.serverError(err);
+                    if (!product) return res.serverError('NO_PRODUCT_FOUND');
+
+                    // URLIFY
+                    product.description = Urlify(product.description);
+
+                    result.cart = req.session.cart;
+                    result.product = product;
+
+                    return next(null, result);
+                });
+            }
+        ], function (err, result) {
+            if (err) {res.serverError(err);}
+            else{
+
+            return res.view('back/product/preview.ejs', result);
+            }
+        });
+    },
+
+
+
 };
 
 function Urlify(text) {
