@@ -42,6 +42,10 @@
                     </thead>
                     <tbody>
                     <% products.forEach(function(product){ %>
+
+
+                    <%if ( product.name ) { %>
+
                     <tr data-id="<%= product.id %>">
                         <td>
                             <%#= loop.index %>
@@ -103,7 +107,7 @@
                         <td>
 
 
-                            <a href="/product/<%= product.id %>" class="btn btn-xs btn-default" button-action="edit">PREVIEW</a>
+                            <a href="/admin/product/preview/<%= product.id %>" class="btn btn-xs btn-default" button-action="edit">PREVIEW</a>
 
                         </td>
                         <td>
@@ -118,7 +122,10 @@
                         </td>
                     </tr>
 
+                    <%}%>
                     <% } ); %>
+
+
 
                     </tbody>
                 </table>
