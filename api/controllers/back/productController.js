@@ -89,9 +89,14 @@ module.exports = {
                 });
             }
         ], function (err, result) {
-            if (err) res.serverError(err);
+            if (err) {res.serverError(err);}
+            else {
 
-            return res.view('back/product/preview.ejs', result);
+                result.templateToInclude = 'product_preview';
+
+                return res.view('back/commun/main.ejs', result);
+
+            }
         });
     },
 
