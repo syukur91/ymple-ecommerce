@@ -31,6 +31,7 @@ var urlConnection = "mongodb://" + host + ":" + port + '/' + database;
                 var name = req.body.name;
                 var email = req.body.email;
                 var subscriptionConfirmed = 0 ;
+                var token = 0 ;
 
                 bcrypt.genSalt(10, function (err, salt) {
                     if (err) {
@@ -55,7 +56,8 @@ var urlConnection = "mongodb://" + host + ":" + port + '/' + database;
                                     permission: 'Customer',
                                     createdAt: createdAt,
                                     updatedAt: updatedAt,
-                                    subcriptionConfirmed: subscriptionConfirmed
+                                    subcriptionConfirmed: subscriptionConfirmed,
+                                    token: token
                                 }
 
                                 var collection = db.collection(collection);
