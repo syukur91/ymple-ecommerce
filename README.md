@@ -15,7 +15,6 @@ System Dependencies
 
 * Node.js v4.4.1
 * MongoDB v3.2.6
-* Sails.js v0.12
 
 How To Run
 --------
