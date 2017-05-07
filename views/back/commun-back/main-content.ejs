@@ -1,0 +1,123 @@
+<!-- Page Content -->
+<div id="page-content-wrapper">
+    <div class="container-fluid">
+
+        <% if (typeof templateToInclude == 'string') { %>
+
+        <% if (templateToInclude == 'admin') { %>
+        <%- include ../admin %>
+        <% } %>
+
+        <% if (templateToInclude == 'product') { %>
+        <%- include ../product/create %>
+        <% } %>
+
+        <% if (templateToInclude == 'moduleInstallNew') { %>
+        <%- include ../module/installNew %>
+        <% } %>
+
+
+        <% if (templateToInclude == 'customerList') { %>
+        <%- include ./navbar.light.ejs %>
+        <%- include ../customer/list.ejs %>
+        <% } %>
+
+        <% if (templateToInclude == 'order_list') { %>
+        <%- include ./navbar.light.ejs %>
+        <%- include ../order/list.ejs %>
+        <% } %>
+
+        <% if (templateToInclude == 'list_product') { %>
+        <%- include ./navbar.light.ejs %>
+        <%- include ../product/list.ejs %>
+        <% } %>
+
+        <% if (templateToInclude == 'list_module') { %>
+        <%- include ./navbar.light.ejs %>
+        <%- include ../module/list.ejs %>
+        <% } %>
+
+
+        <% if (templateToInclude == 'categoryList') { %>
+        <%- include ./navbar.light.ejs %>
+        <%- include ../category/list.ejs %>
+        <% } %>
+
+        <% if (templateToInclude == 'admin_profile') { %>
+        <%- include ./navbar.light.ejs %>
+        <%- include ../admin/profile.ejs %>
+        <% } %>
+
+        <%# [START]: template to manage the product%>
+
+        <% if (templateToInclude == 'productCreationOk') { %>
+        <%- include ../product/creationOk.ejs %>
+        <% } %>
+
+
+
+        <% if (templateToInclude == 'categoryCreationOk') { %>
+        <%- include ../category/creationOk.ejs %>
+        <% } %>
+
+        <% if (templateToInclude == 'categoryCreationKo') { %>
+        <%- include ../category/creationKo.ejs %>
+        <% } %>
+
+
+        <% if (templateToInclude == 'productCreationKo') { %>
+        <%- include ../product/creationKo.ejs %>
+        <% } %>
+
+        <% if (templateToInclude == 'productModification') { %>
+        <%- include ./navbar.light.ejs %>
+        <%- include ../product/modification.ejs %>
+        <% } %>
+
+
+        <% if (templateToInclude == 'installModuleDone') { %>
+        <%- include ./navbar.light.ejs %>
+        <%- include ../module/installModuleDone.ejs %>
+        <% } %>
+
+        <% if (templateToInclude == 'edit_module') { %>
+        <%- include ./navbar.light.ejs %>
+        <%- include ../module/edit.ejs %>
+        <% } %>
+
+
+
+        <% if (templateToInclude == 'install_installation_done') { %>
+        <%- include ./navbar.light.ejs %>
+        <%- include ../../install/installation_done.ejs %>
+        <% } %>
+
+
+        <% if (templateToInclude == 'view_module_payment_paypal') { %>
+        <%- include ./navbar.light.ejs %>
+        <%- include ../module/payment/paypal.ejs %>
+        <% } %>
+
+
+
+        <% if (templateToInclude == 'product_preview') { %>
+        <%- include ./navbar.light.ejs %>
+        <%- include ../product/preview.ejs %>
+        <% } %>
+
+
+
+
+        <%# [END]: template to manage the product%>
+        <% } %>
+
+
+        <% if (templateToInclude == 'categoryCreate') { %>
+        <%- include ../category/create %>
+        <% } %>
+
+    </div>
+</div>
+
+
+<!-- /#page-content-wrapper -->
