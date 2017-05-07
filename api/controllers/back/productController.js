@@ -58,7 +58,7 @@ module.exports = {
                 var result = {};
                 result.templateToInclude = 'product';
                 result.idProduct = data;
-                return res.view('back/commun/main.ejs', result);
+                return res.view('back/commun-back/main.ejs', result);
             }
         });
     },
@@ -94,7 +94,7 @@ module.exports = {
 
                 result.templateToInclude = 'product_preview';
 
-                return res.view('back/commun/main.ejs', result);
+                return res.view('back/commun-back/main.ejs', result);
 
             }
         });
@@ -162,7 +162,7 @@ module.exports = {
         ], function (err) {
             if (err) return res.serverError(err);
             result.templateToInclude = 'list_product';
-            return res.view('back/commun/main.ejs', result);
+            return res.view('back/commun-back/main.ejs', result);
         });
     },
 
@@ -201,13 +201,13 @@ module.exports = {
                 console.info('edit query result', products);
                 console.info('edit - result', result);
                 result.templateToInclude = 'productModification';
-                return res.view('back/commun/main.ejs', result);
+                return res.view('back/commun-back/main.ejs', result);
             });
 
         }
         else {
             result.templateToInclude = 'productModification';
-            return res.view('back/commun/main.ejs', result);
+            return res.view('back/commun-back/main.ejs', result);
         }
 
 
@@ -235,7 +235,7 @@ module.exports = {
 
             result.templateToInclude = 'productCreationOk';
 
-            return res.view('back/commun/main.ejs', result);
+            return res.view('back/commun-back/main.ejs', result);
 
             console.log('productController - productNewValidation - req.body',data );
 
@@ -254,7 +254,7 @@ module.exports = {
         else {
             var result = {};
             result.templateToInclude = 'productCreationKo';
-            return res.view('back/commun/main.ejs', result);
+            return res.view('back/commun-back/main.ejs', result);
             //return res.ok('missing one parameter');
         }
     },

@@ -40,7 +40,7 @@ module.exports = {
             var dataView = []; //{status: msg};
             dataView.templateToInclude = 'install_installation_done';
             dataView.status = msg;
-            return res.view('back/commun/main.ejs', dataView);
+            return res.view('back/commun-back/main.ejs', dataView);
 
 
            // return res.view('install/installation_done.ejs', dataView);

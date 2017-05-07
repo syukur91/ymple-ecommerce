@@ -5,8 +5,8 @@
     "email": "@thetisfabien"
   },
   "private": false,
-  "version": "0.2.27",
-  "description": "a Nodejs and Sailsjs Ecommerce Framework",
+  "version": "0.2.29",
+  "description": "a Nodejs and Sailsjs Ecommerce Framework ( Node.js + Sails.js)",
   "keywords": [],
   "dependencies": {
     "async": "^2.1.4",
