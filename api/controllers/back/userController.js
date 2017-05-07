@@ -92,7 +92,7 @@ module.exports = {
 
             result.templateToInclude = 'admin_profile';
 
-            return res.view('back/commun/main.ejs', result);
+            return res.view('back/commun-back/main.ejs', result);
         });
     },
 
