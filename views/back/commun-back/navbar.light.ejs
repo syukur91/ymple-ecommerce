@@ -16,9 +16,7 @@
                 <li>
                     <a href="#">ADMIN PANEL</a>
                 </li>
-                <li>
-                    <a href="#"></a>
-                </li>
+
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -46,7 +44,12 @@
                 <!--li class="visible-xs"><a href="#">Login</a></li>
                 <li class="visible-xs"><a href="#">Register</a></li-->
 
-                <li class=" dropdown " style="float: right">
+
+                <li style="float: right"><a href="#">DEMO MODE &nbsp;<input id="toggle-one" type="checkbox" checked data-toggle="toggle"></a>
+                    </li>
+
+
+                <li class="" style="float: right">
                     <a href="#" class="dropdown-toggle navbar-ymple" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ENG<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li class=" dropdown">
@@ -59,8 +62,20 @@
                     </ul>
                 </li>
 
-                <li><a href="#"></a></li>
+
+
             </ul>
         </div><!--/.navbar-collapse -->
     </div>
 </nav>
+
+
+<script>
+    $(function() {
+        $('#toggle-one').change(function() {
+            console.log('event toggle');
+            console.log ($(this).prop('checked')); 
+
+        })
+    })
+</script>
