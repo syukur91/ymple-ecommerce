@@ -111,8 +111,10 @@ getValueFromArray = function (data, element, type) {
 
                 var collection = db.collection('product');
                 //var lotsOfDocs = [{'hello': 'doc3'}, {'hello': 'doc4'}];
+                if ( sails.config.demoMode != 1 ) {
 
-                collection.insert(dataToInsert);
+                    collection.insert(dataToInsert);
+                }
 
             });
         },
@@ -170,31 +172,36 @@ getValueFromArray = function (data, element, type) {
                 //  console.log('insertOrder - dataToInsert', dataToInsert);
 
                 var collection = db.collection('order');
-                collection.insert(dataToInsert, function (error, result) {
-                    if (error) console.log(error); //info about what went wrong
-                    if (result) {
 
-                        console.log('insert order result.ops', result.ops);
-                        console.log('insert order result - object id', result.ops[0]._id);
-                        console.log('[START]: increment id order');
+                if ( sails.config.demoMode != 1 ) {
 
-                        var fieldName = 'order';
-                        var collectionCounter1 = db.collection('counter');
+                    collection.insert(dataToInsert, function (error, result) {
+                        if (error) console.log(error); //info about what went wrong
+                        if (result) {
 
-                        //collectionCounter1.insert({toto: "toto"});
+                            console.log('insert order result.ops', result.ops);
+                            console.log('insert order result - object id', result.ops[0]._id);
+                            console.log('[START]: increment id order');
 
-                        collectionCounter1.update(
-                            {_id: fieldName},
-                            {$inc: {seq: 1}}, function (error, result) {
-                                if (error) console.log(error);
-                                if (result) {
-                                    //console.log(result);
+                            var fieldName = 'order';
+                            var collectionCounter1 = db.collection('counter');
+
+                            //collectionCounter1.insert({toto: "toto"});
+
+                            collectionCounter1.update(
+                                {_id: fieldName},
+                                {$inc: {seq: 1}}, function (error, result) {
+                                    if (error) console.log(error);
+                                    if (result) {
+                                        //console.log(result);
+                                    }
                                 }
-                            }
-                        )
-                        console.log('[END]: increment id order');
-                    }
-                });
+                            )
+                            console.log('[END]: increment id order');
+                        }
+                    });
+                }
+
                 console.log('insertOrder - [DONE]');
             });
         },
@@ -213,12 +220,16 @@ getValueFromArray = function (data, element, type) {
 
                 var collection = db.collection('counter');
                 var data = {_id: counterType, id: counterType, seq: 1};
-                collection.insert(data, function (error, result) {
+
+                if ( sails.config.demoMode != 1 ) {
+
+                    collection.insert(data, function (error, result) {
                     if (error) console.log(error);
                     if (result) {
                         console.log(result);
                     }
                 })
+                }
 
             });
         },
@@ -238,12 +249,16 @@ getValueFromArray = function (data, element, type) {
 
                     var collection = db.collection('front_subscription_newsletter');
                     var data = {createdAt: createdAt, updatedAt: updatedAt, email: email};
-                    collection.insert(data, function (error, result) {
-                        if (error) console.log(error);
-                        if (result) {
-                            console.log(result);
-                        }
-                    })
+
+                    if ( sails.config.demoMode != 1 ) {
+
+                        collection.insert(data, function (error, result) {
+                            if (error) console.log(error);
+                            if (result) {
+                                console.log(result);
+                            }
+                        })
+                    }
 
                 });
 
@@ -284,7 +299,10 @@ getValueFromArray = function (data, element, type) {
                 console.log('InsertDbService - insertCategory - dataToInsert', dataToInsert);
                 var collection = db.collection('category');
                 //var lotsOfDocs = [{'hello': 'doc3'}, {'hello': 'doc4'}];
-                collection.insert(dataToInsert);
+
+                if ( sails.config.demoMode != 1 ) {
+                    collection.insert(dataToInsert);
+                }
 
             });
         },
@@ -308,11 +326,13 @@ getValueFromArray = function (data, element, type) {
                 //collection.insert(dataToInsert);
 
                 console.log('saveImageProduct - update');
+                if ( sails.config.demoMode != 1 ) {
 
                 collection.update(
                     {idProduct: parseInt(idProduct)},
                     {$set: {image: [imagePath]}},
                     {upsert: true})
+                }
             });
         },
 
@@ -349,7 +369,11 @@ getValueFromArray = function (data, element, type) {
                 }
                 console.log('InsertDbService - installAndActiveCoreModule - data', data);
                 var collection = db.collection('core_module_installed');
-                collection.insert(data);
+
+                if ( sails.config.demoMode != 1 ) {
+
+                    collection.insert(data);
+                }
 
             });
         },
@@ -385,8 +409,10 @@ getValueFromArray = function (data, element, type) {
                 }
                 console.log('InsertDbService - installAndActiveCoreModule - data', data);
                 var collection = db.collection('core_module');
-                collection.insert(data);
+                if ( sails.config.demoMode != 1 ) {
 
+                    collection.insert(data);
+                }
             });
         },
 
@@ -499,7 +525,10 @@ getValueFromArray = function (data, element, type) {
                                 }
 
                                 var collection = db.collection(collection);
-                                collection.insert(dataToInsert);
+                                if ( sails.config.demoMode != 1 ) {
+
+                                    collection.insert(dataToInsert);
+                                }
                             }
                         });
                     }
@@ -525,11 +554,14 @@ getValueFromArray = function (data, element, type) {
                 console.log('InsertDbService - setInstallationDone - data', data);
                 var collection = db.collection('installation');
 
-                collection.insert(data, function (err, result) {
+                if ( sails.config.demoMode != 1 ) {
 
-                    console.log('insert err', err);
-                    console.log('insert result', result);
-                });
+                    collection.insert(data, function (err, result) {
+
+                        console.log('insert err', err);
+                        console.log('insert result', result);
+                    });
+                }
             })
             console.log('[end]: CoreInsertDbService - setInstallation done')
         }
