@@ -104,29 +104,20 @@
                         <% } %>
 
                         </td>
+
                         <td>
-
-
                             <a href="/admin/product/preview/<%= product.id %>" class="btn btn-xs btn-default" button-action="edit">PREVIEW</a>
-
                         </td>
                         <td>
-
-
-                            <a href="/admin/product/edit/<%= product.id %>" class="btn btn-xs btn-primary"
-                               button-action="edit">EDIT</a>
+                            <a href="/admin/product/edit/<%= product.id %>" class="btn btn-xs btn-primary" button-action="edit">EDIT</a>
                         </td>
                         <td>
-
-                            <button class="btn btn-xs btn-danger" button-action="delete">DELETE</button>
+                            <a href="/admin/product/delete/<%= product.id %>" class="btn btn-xs btn-danger" button-action="delete">DELETE</a>
                         </td>
                     </tr>
 
                     <%}%>
                     <% } ); %>
-
-
-
                     </tbody>
                 </table>
 
