@@ -27,9 +27,15 @@
         <%- include ../order/list.ejs %>
         <% } %>
 
-        <% if (templateToInclude == 'list_product') { %>
+        <% if (templateToInclude == 'product_list') { %>
         <%- include ./navbar.light.ejs %>
         <%- include ../product/list.ejs %>
+        <% } %>
+
+
+        <% if (templateToInclude == 'product_delete_ok') { %>
+        <%- include ./navbar.light.ejs %>
+        <%- include ../product/delete-ok.ejs %>
         <% } %>
 
         <% if (templateToInclude == 'list_module') { %>
@@ -105,7 +111,10 @@
         <%- include ../product/preview.ejs %>
         <% } %>
 
-
+        <% if (templateToInclude == 'product_delete') { %>
+        <%- include ./navbar.light.ejs %>
+        <%- include ../product/delete.ejs %>
+        <% } %>
 
 
         <%# [END]: template to manage the product%>

@@ -32,6 +32,8 @@ module.exports.routes = {
     'GET    /admin/product/create': 'back/productController.create',
     'GET    /admin/product/list': 'back/productController.list',// display all the product available
     'GET    /admin/product/edit/:id': 'back/productController.edit',// edit the product
+    'GET    /admin/product/delete/:id': 'back/productController.delete',
+    'GET    /admin/product/delete/confirmation/:id': 'back/productController.deleteConfirmation',
 
     // url to use the profile of the admin user
     'GET    /admin/administrator/edit/': 'back/userController.profile',

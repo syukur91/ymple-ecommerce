@@ -161,7 +161,7 @@ module.exports = {
             }
         ], function (err) {
             if (err) return res.serverError(err);
-            result.templateToInclude = 'list_product';
+            result.templateToInclude = 'product_list';
             return res.view('back/commun-back/main.ejs', result);
         });
     },
@@ -179,7 +179,6 @@ module.exports = {
             var productId = req.params.id;
             var queryOptions = {
                 where: {id: productId},
-//         skip: skip,
                 limit: 10,
                 sort: 'createdAt DESC'
             };
@@ -209,11 +208,52 @@ module.exports = {
             result.templateToInclude = 'productModification';
             return res.view('back/commun-back/main.ejs', result);
         }
+    },
+
+    deleteConfirmation: function (req, res, id) {
+
+        var result = {};
+        console.info('modification product id: ', req.params.id);
+        console.info(req.params.id.length);
+
+        if (req.params.id && (req.params.id.length > 0 )) {
+            // we retrieve the product informations
+            var productId = req.params.id;
 
 
-        /* return res.json({
-         todo: 'new() is not implemented yet!'
-         });*/
+            CoreDeleteDbService.deleteProduct(productId);
+
+            result.templateToInclude = 'product_delete_ok';
+            return res.view('back/commun-back/main.ejs', result);
+
+
+
+        }
+        else {
+            result.templateToInclude = 'product_list';
+            return res.view('back/commun-back/main.ejs', result);
+        }
+    },
+
+
+
+    delete: function (req, res, id) {  // display the delete page for validation
+
+        var result = {};
+
+        //console.info('modification product id: ', req.params.id);
+        //console.info(req.params.id.length);
+
+        if (req.params.id && (req.params.id.length > 0 )) {
+            // we retrieve the product informations
+            var productId = req.params.id;
+
+
+            result.templateToInclude = 'product_delete';
+            result.idProduct = productId;
+
+            return res.view('back/commun-back/main.ejs', result);
+        }
     },
 
 
