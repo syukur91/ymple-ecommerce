@@ -4,7 +4,7 @@
 
     <% if (typeof loop == 'edit' && edit) { %>
     <form role="form" action="/product/{{ edit.id }}" method="POST">
-        <% }else {%>
+        <% }else { %>
         <form role="form" action="/product" method="POST">
             <% } %>
 
@@ -19,60 +19,50 @@
                     <tr>
                         <th>#</th>
 
-
-                        <Th> <%= __( 'one generation') %></th>
-                                    
-                        <Th> <%= __( 'name')%></th>
-                                    
-                        <Th style="width: 200px;"> <%= __( 'Photo') %></th>
-                                    
-                        <Th> <%= __( 'Price') %></th>
-                                    
-                        <Th> <%= __( 'Inventory') %></th>
-                                    
-                        <Th> <%= __( 'product') %></th>
-                                    
-                        <Th> <%= __( 'tags') %></th>
-                                    
-                        <Th> <%= __( 'state') %></th>
-
-
+                        <th> <%= __('one generation') %></th>
+                        <th> <%= __('name') %></th>            
+                        <th style="width: 200px;"> <%= __('Photo') %></th>
+                        <th> <%= __('Price') %></th>
+                        <th> <%= __('Inventory') %></th>
+                        <th> <%= __('product') %></th>
+                        <th> <%= __('tags') %></th>
+                        <th> <%= __('state') %></th>
                         <th></th>
                     </tr>
                     </thead>
                     <tbody>
                     <% products.forEach(function(product){ %>
                     <tr data-id="<%= product.id %>">
-                        <td><%#= loop.index %></td>
+                        <td>
+                            <%#= loop.index %>
+                        </td>
                         <td><%= product.createdAt %></td>
                         <td><%= product.name %></td>
                         <td class="ellipsis">
 
-
-
-                            <% if (typeof photos == 'object') {%>
+                            <% if (typeof photos == 'object') { %>
 
                             <% photos.forEach(function(photo) { %>
                             <a href="<%= product.photos %>"></a>&nbsp;
-                            <% });  %>
+                            <% }); %>
 
-                            <%}%>
+                            <% } %>
 
                         </td>
-                        <td><%= product.price|'currency' %></td>
+                        <td><%= product.price | 'currency' %></td>
                         <td>
                             <% if (product.stock > 0) { %>
                             <%= product.stock %>
 
-                            <%}%>
+                            <% } %>
 
                             <% if (product.stock == 0)  { %>
 
-
                             <%= __('No stock') %>
 
-                                           <% } else { %>
-                                           <%= __( 'Unavailable')%>
+                                          
+                            <% } else { %>
+                                           <%= __('Unavailable') %>
                             <% } %>
                         </td>
                         <td><%= product.related %></td>
@@ -80,42 +70,39 @@
 
                         <td>
 
-                            <%if (typeof product.tags == 'object') {%>
+                            <% if (typeof product.tags == 'object') { %>
                             <% product.tags.forEach(function(tag){ %>
                             <%= tag %>
 
-                            <% });  %>
+                            <% }); %>
 
-                            <%}%>
+                            <% } %>
                         </td>
                         <% if (product.isSelling) { %>
                         <td>
-<button class="btn btn-xs btn-success" button-action="status"> <%= __( 'sale')%></button>
-</td>
- <%}  else { %>         
-     <td>                       <button class="btn btn-xs btn-warning" button-action="status"> <%= __( 'Sell Stop')%>
+                            <button class="btn btn-xs btn-success" button-action="status"> <%= __('sale') %></button>
+                        </td>
+                        <% }  else { %>
+                                 
+                        <td>
+                            <button class="btn btn-xs btn-warning" button-action="status"> <%= __('Sell Stop') %>
                             </button>
-                       </td>     <% } %>
+                        </td>
+                        <% } %>
+                        
+                        </td>
 
-
+                        <td>
+                            <a href="/admin/category/edit/<%= product.id %>" class="btn btn-xs btn-primary"
+                               button-action="edit">EDIT</a>
                         </td>
                         <td>
-
-
-                            <a href="/product/<%= product.id %>" class="btn btn-xs btn-default" button-action="edit">PREVIEW</a>
-
-</td>
-                        <td>
-
-
-                            <a href="/admin/category/edit/<%= product.id %>" class="btn btn-xs btn-primary"   button-action="edit">EDIT</a>
-</td><td>
-
-                            <button class="btn btn-xs btn-danger" button-action="delete">DELETE</button>
+                            <a href="/admin/category/delete/<%= product.id %>" class="btn btn-xs btn-danger"
+                               button-action="delete">DELETE</a>
                         </td>
                     </tr>
 
-                    <% } );  %>
+                    <% } ); %>
 
                     </tbody>
                 </table>
@@ -125,32 +112,28 @@
                         <a href="/admin/category">&laquo;</a>
                         <a href="/admin/category">&raquo;</a>
 
-                        <% if (page == 1 ) {%>
+                        <% if (page == 1 ) { %>
                         <!--li class="active"><a href="/admin/product?page=<%#= loop.index %>"><%#= loop.index %></a></li>
 
 
-                        <%} else { %>
+                        <% } else { %>
 
 
                         <li><a href="/admin/product?page=<%#= loop.index %>"><%#= loop.index %></a></li-->
 
                         <% } %>
 
-
-
                         <% if (typeof loop == 'object' ) { %>
                         <a href="/admin/product?page=<%#= loop.index %>">&raquo;</a>
-                        <%}   %>
-
+                        <% } %>
 
                     </ul>
                 </div>
             </div>
         </div>
 
-        </form>
+    </form>
 </div>
-
 
 
 <script type="text/javascript">
@@ -197,7 +180,6 @@
         });
     });
 </script>
-
 
 
 <!-- STYLESHEETS -->
