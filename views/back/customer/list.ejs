@@ -11,11 +11,11 @@
                     <th>#</th>
 
 
-                    <Th> <%= __('one generation') %> </th>
+                    <Th> <%= __('Date') %> </th>
                                 
                     <Th> <%= __('name') %> </th>
                                 
-                    <Th> <%= __('E') %> </th>
+                    <Th> <%= __('Email') %> </th>
                                 
                     <Th> <%= __('Telephone') %> </th>
                                 
@@ -36,7 +36,7 @@
                 <% users.forEach(function(user) { %>
 
                 <tr data-id="<%= 'order.id' %>">
-                    <td><%= 'loop.index' %></td>
+                    <td><%= '-' %></td>
                     <td><%= user.createdAt %> </td> <!--|date('Y-m-d', '-540') %></td-->
                     <td><%= user.name %></td>
                     <td><%= user.email %></td>
@@ -57,8 +57,8 @@
                         <% }  %>
                     </td>
                     <td>
-                        <a href="/user/<%= user.id %>" class="btn btn-xs btn-default">RAW</a>
-                        <button class="btn btn-xs btn-danger" button-action="delete">DELETE</button>
+                        <a href="/user/<%= user.id %>" class="btn btn-xs btn-default">DETAILS</a>
+                        <button class="btn btn-xs btn-danger" button-action="delete">EDIT</button>
                     </td>
                 </tr>
 

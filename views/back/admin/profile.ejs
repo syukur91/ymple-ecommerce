@@ -6,69 +6,67 @@
 
 
 <div class="">
-    <h4 class = "submenu"><%= __('Profile') %></h4>
+    <h4 class = "submenu"><%= __('PROFILE') %></h4>
     <hr/>
 
     <div class="row">
-        <div class="col-sm-6">
             <br>
             <form class="form-horizontal" role="form" action="/user/<%= user.id %>" method="POST">
-                <div class="form-group">
 
-
-                    <Label for="email" class="col-sm-4 control-label"> <%= __('E') %> </label>
-                              
-                    <div class="col-sm-8">
-                                    <P class="form-control-static"> <%= user.email %> </p>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label> Name </label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" class="form-control" id="name" name="name" placeholder="Please enter your name"
+                                                                                            value="<%= user.name%>">
+                    </div>
+                    <div class="col-sm-6">
+                        <label style="align-content: center;text-align: center"> Email</label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="form-control" id="price" name="price" placeholder="Please enter the price"
+                                                       value="<%= user.email%>">
                     </div>
                 </div>
-                        
-                <div class="form-group">
-                              <Label for="name" class="col-sm-4 control-label"> <%= __('name') %> </label>
-                              
-                    <div class="col-sm-8">
-                                    <Input type="text" class="form-control" name="name" id="name"
-                                           placeholder="<%= __('name') %>" value="<%= user.name %>">
+
+<br>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label> Telefone </label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text"
+                                                                                            class="form-control" id="name" name="name" placeholder="Please enter your name"
+                                                                                            value="<%= user.phone%>">
+                    </div>
+                    <div class="col-sm-6">
+                        <label style="align-content: center;text-align: center">  Address </label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="form-control" id="price" name="price" placeholder="Please enter the price" value="<%= user.address %>">
                     </div>
                 </div>
-                        
-                <div class="form-group">
-                              <Label for="phone" class="col-sm-4 control-label"> <%= __('Telephone') %> </label>
-                              
-                    <Div class="col-sm-8">
-                                    <Input type="text" class="form-control" name="phone" id="phone"
-                                           placeholder="<%= __('Telephone') %>" value="<%= user.phone %>">
-                    </Div>
+
+                <br>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label> Zip </label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text"
+                                                                                            class="form-control" id="name" name="name" placeholder="Please enter your name"
+                                                                                            value="<%= user.postcode%>">
+                    </div>
+                    <div class="col-sm-6">
+                        <label style="align-content: center;text-align: center">   </label>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<input type="text" class="form-control" id="price" name="price" placeholder="Please enter the price" value="<%= user.address %>">
+                    </div>
                 </div>
+
                         
-                <div class="form-group">
-                              <Label for="address" class="col-sm-4 control-label"> <%= __('address') %> </label>
-                              
-                    <Div class="col-sm-8">
-                                    <input type="text" class="form-control" name="address" id="address"
-                                           placeholder="<%= __('juso') %>" value="<%= user.address %>">
-                    </Div>
-                </div>
-                        
-                <div class="form-group">
-                              <Label for="postcode" class="col-sm-4 control-label"> <%= __('Zip') %> </label>
-                              
-                    <Div class="col-sm-8">
-                                    <Input type="text" class="form-control" name="postcode" id="postcode"
-                                           placeholder="<%= __('Zip') %>" value="<%= user.postcode %>">
-                    </Div>
-                </div>
                 <hr/>
+                        
+                <div class="row">
+                    <div class="col-sm-6">
                   
                 <Button type="submit" class="btn btn-primary pull-right"> <%= __('Save') %> </button>
+
+                        </div></div>
             </form>
         </div>
 
-        <div class="col-sm-6">
-            What to write in here
 
-        </div>
-    </div>
-    <hr/>
+
 </div>
 
