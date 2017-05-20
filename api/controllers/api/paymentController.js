@@ -10,17 +10,12 @@ module.exports = {
 
     paypalPay: function (req, res) {
 
-
+        var idOrder = req.params.idPayment;
         console.log('[start]: payment controller');
-
         console.log('api - paymentController - id', req.params.idPayment);
-
         console.log('api - paymentController - req.session', req.session);
 
-
         // get all the information about this order
-
-
 
         var modeDemo = true;
 
@@ -34,23 +29,14 @@ module.exports = {
             var mode = 'live';
             var client_id = 'EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM';
             var client_secret = 'EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM';
-
-
         }
-
-
-
-
-        var idOrder = 0 ;
 
 
         CoreReadDbService.getItemPaymentFromOrder(idOrder).then(function (dataOrder) {
 
 
             console.log('paypalpay - getItemPaymentFromOrder', dataOrder);
-
             var itemList = getItemListFromDataOrder(dataOrder);
-
             var amount = getAmountFromDataOrder(dataOrder);
 
             //console.log('paymentController - req', req);
@@ -58,14 +44,8 @@ module.exports = {
             //process.exit();
 
             ModulePaymentPaypalService.paymentActionWithPaypal(req, res, mode, client_id, client_secret, itemList, amount);
-
-
         });
-
-
         console.log('[end]: payment controller');
-
-
     },
 
     paypalExecuteSuccess: function (req, res) {
@@ -75,34 +55,23 @@ module.exports = {
         var client_secret = 'EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM';
 
         ModulePaymentPaypalService.paymentPaypalExecute(req, res, mode, client_id, client_secret);
-
     },
 
     paypalExecuteCancel: function (req, res) {
 
-
         return res.ok('Payment Paypal Cancelled');
-
     },
 
     paypalExecuteConfirmationSuccess: function (req, res) {
 
-
         return res.ok('Payment Paypal Confirmation done');
-
     },
 
     paypalExecuteConfirmationError: function (req, res) {
 
-
         return res.ok('Payment Paypal Confirmation error');
-
     }
-
-
 }
-
-
 
 
 function getItemListFromDataOrder(input){
