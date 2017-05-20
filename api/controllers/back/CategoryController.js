@@ -7,26 +7,6 @@
 
 module.exports = {
 
-
-    /**
-     * `CategoryController.list()`
-     */
-   /* list: function (req, res) {
-
-        var result = {
-            admin: req.session.user
-        };
-
-        result.products = [];
-        result.pages = [];
-        result.page = '';
-
-        result.templateToInclude = 'categoryList';
-
-        return res.view('back/menu.ejs', result);
-    },*/
-
-
     list: function (req, res) {
         var result = {
             admin: req.session.user
@@ -138,7 +118,7 @@ module.exports = {
         }
     },
 
-
+    // confirmation to delete the category
     deleteConfirmation: function (req, res, id) {
 
         var result = {};
@@ -146,25 +126,18 @@ module.exports = {
         console.info(req.params.id.length);
 
         if (req.params.id && (req.params.id.length > 0 )) {
-            // we retrieve the product informations
-            var productId = req.params.id;
 
+            var categoryId = req.params.id;
 
-            CoreDeleteDbService.deleteProduct(productId);
-
+            CoreDeleteDbService.deleteCategory(categoryId);
             result.templateToInclude = 'category_delete_ok';
             return res.view('back/commun-back/main.ejs', result);
-
-
-
         }
         else {
             result.templateToInclude = 'category_list';
             return res.view('back/commun-back/main.ejs', result);
         }
     },
-
-
 
     /**
      * `CategoryController.update()`
@@ -192,15 +165,11 @@ module.exports = {
             var result = {};
             result.templateToInclude = 'categoryCreationOk';
             return res.view('back/commun-back/main.ejs', result);
-            //return res.ok('create of the product done', req.body);
-
-
         }
         else {
             var result = {};
             result.templateToInclude = 'categoryCreationKo';
             return res.view('back/commun-back/main.ejs', result);
-            //return res.ok('missing one parameter');
         }
     }
 

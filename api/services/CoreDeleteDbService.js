@@ -50,6 +50,29 @@ getValueFromArray = function (data, element, type) {
             });
         },
 
+
+        deleteCategory: function (categoryId) { // Insert a product in table product
+
+            var MongoClient = require('mongodb').MongoClient;
+            console.log('CoreDeleteDbService - url connexion ', urlConnection);
+            console.log('coredeleteservice - category id', categoryId);
+
+            MongoClient.connect(urlConnection).then(function (db) {
+
+                if (sails.config.demoMode != 1) {
+
+                    var collection = db.collection('category');
+                    collection.deleteOne({_id: ObjectId(categoryId)}, function (err, result) {
+
+                        console.log(err);
+                        console.log('result', result);
+                    });
+                }
+            });
+        },
+
+
+
         getConnexion: function () {
             var MongoClient = require('mongodb').MongoClient;
             console.log('InsertDbService - url connexion ', urlConnection);
