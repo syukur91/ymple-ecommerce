@@ -8,7 +8,7 @@ module.exports = {
 
 
 
-    paymentActionWithPaypal: function(req, res, mode, client_id, client_secret) {
+    paymentActionWithPaypal: function(req, res, mode, client_id, client_secret, itemList, amount) {
 
 
         // using the req.session we set the item and amount for paypal json data
@@ -44,26 +44,9 @@ module.exports = {
                 "cancel_url": redirectUrlCancel
             },
             "transactions": [{
-                "item_list": {
-                    "items": [{
-                        "name": "item",
-                        "sku": "item",
-                        "price": "0.03",
-                        "currency": "USD",
-                        "quantity": 1
-                    }]
-                },
-                "amount": {
-                    "currency": "USD",
-                    "total": "0.07",
-                    "details": {
-                        "subtotal": "0.03",
-                        "tax": "0.01",
-                        "shipping": "0.02",
-                        "handling_fee": "0.01"
-                    }
-                },
-                "description": "This is the payment description."
+                "item_list": itemList,
+                "amount": amount,
+                "description": "This is the payment description with Ymple."
             }]
         };
 

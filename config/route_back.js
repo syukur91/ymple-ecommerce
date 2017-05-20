@@ -42,10 +42,15 @@ module.exports.routes = {
 
     'GET    /admin/category/list': 'back/CategoryController.list',
     'GET    /admin/category/create': 'back/CategoryController.create',
+    '/admin/category/edit/:id': 'back/CategoryController.edit',
+    '/admin/category/delete/:id': 'back/CategoryController.delete',
+    '/admin/category/delete/confirmation/:id': 'back/CategoryController.deleteConfirmation',
+
+
     'POST    /admin/category/create/validation': 'back/CategoryController.createValidation',
 
     'GET    /admin/order/manage': 'back/OrderController.manage',
-    'GET    /admin/customer/list': 'back/AdminController.user',
+    'GET    /admin/customer/list': 'back/CustomerController.user',
 
     // page of admin preference
     'GET    /admin/preference': {view: 'back/preference'},

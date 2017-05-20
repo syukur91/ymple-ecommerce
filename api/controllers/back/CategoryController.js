@@ -7,26 +7,6 @@
 
 module.exports = {
 
-
-    /**
-     * `CategoryController.list()`
-     */
-   /* list: function (req, res) {
-
-        var result = {
-            admin: req.session.user
-        };
-
-        result.products = [];
-        result.pages = [];
-        result.page = '';
-
-        result.templateToInclude = 'categoryList';
-
-        return res.view('back/menu.ejs', result);
-    },*/
-
-
     list: function (req, res) {
         var result = {
             admin: req.session.user
@@ -101,15 +81,63 @@ module.exports = {
 
         var result = {};
 
-        result.templateToInclude = 'categoryCreate';
+        result.templateToInclude = 'category_create';
 
         return res.view('back/commun-back/main.ejs', result);
 
-        /* return res.json({
-         todo: 'new() is not implemented yet!'
-         });*/
     },
 
+
+    edit: function (req, res) { // edit one category
+
+        var result = {};
+
+        result.templateToInclude = 'category_edit';
+
+        return res.view('back/commun-back/main.ejs', result);
+
+    },
+
+
+    delete: function (req, res, id) {  // display the delete page for validation
+
+        var result = {};
+
+        //console.info('modification product id: ', req.params.id);
+        //console.info(req.params.id.length);
+
+        if (req.params.id && (req.params.id.length > 0 )) {
+            // we retrieve the product informations
+            var productId = req.params.id;
+
+
+            result.templateToInclude = 'category_delete';
+            result.idProduct = productId;
+
+            return res.view('back/commun-back/main.ejs', result);
+        }
+    },
+
+    // confirmation to delete the category
+    deleteConfirmation: function (req, res, id) {
+
+        var result = {};
+        console.info('modification product id: ', req.params.id);
+        console.info(req.params.id.length);
+
+        if (req.params.id && (req.params.id.length > 0 )) {
+
+            var categoryId = req.params.id;
+
+            CoreDeleteDbService.deleteCategory(categoryId);
+            result.templateToInclude = 'category_delete_ok';
+            return res.view('back/commun-back/main.ejs', result);
+        }
+        else {
+            result.templateToInclude = 'category_list';
+            return res.view('back/commun-back/main.ejs', result);
+        }
+    },
 
     /**
      * `CategoryController.update()`
@@ -137,15 +165,11 @@ module.exports = {
             var result = {};
             result.templateToInclude = 'categoryCreationOk';
             return res.view('back/commun-back/main.ejs', result);
-            //return res.ok('create of the product done', req.body);
-
-
         }
         else {
             var result = {};
             result.templateToInclude = 'categoryCreationKo';
             return res.view('back/commun-back/main.ejs', result);
-            //return res.ok('missing one parameter');
         }
     }
 
