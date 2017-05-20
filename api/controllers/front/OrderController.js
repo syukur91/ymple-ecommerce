@@ -259,7 +259,7 @@ module.exports = {
                     req.session['orderReference'] = idOrder;
 
 
-                    data['idOrder'] = next;
+                    data['idOrder'] = idOrder;
 
                     CoreInsertDbService.insertOrder(data);
                     console.log('orderController - increment id [START]');
