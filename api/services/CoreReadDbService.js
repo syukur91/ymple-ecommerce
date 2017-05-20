@@ -155,22 +155,25 @@ module.exports = {
             })
     },
 
-
-
-
-    getItemPaymentFromOrder: function () { // return the data and item information about one order
+    getItemPaymentFromOrder: function (idOrder) { // return the data and item information about one order
 
     return new Promise(
         function (resolve, reject) {
 
+            var collectionName = "order";
+
+            console.log('getItemPaymentFromOrder - idOrder', idOrder);
+
+
             var MongoClient = require('mongodb').MongoClient;
 
             MongoClient.connect(url, function (err, db) {
-                var collectionName = "category";
+
                 var col = db.collection(collectionName);
-                var data = col.find({}).toArray(function (err, data) {
-                    db.close();
-                    console.log('getListCoreModule - data', data);
+
+                col.find({idOrder : parseInt(idOrder)}).toArray(function (err, data) {
+                    //db.close();
+                    console.log('getItemPaymentFromOrder - data', data);
 
                     resolve(data);    //docs[0].name.toString()); // returns to the function that calls the callback
                 });
