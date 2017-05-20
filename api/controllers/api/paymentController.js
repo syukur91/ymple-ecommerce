@@ -10,18 +10,57 @@ module.exports = {
 
     paypalPay: function (req, res) {
 
+
         console.log('[start]: payment controller');
 
-        var mode = 'sandbox';
-        var client_id = 'EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM';
-        var client_secret = 'EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM';
+        console.log('api - paymentController - id', req.params.idPayment);
+
+        console.log('api - paymentController - req.session', req.session);
 
 
-        console.log('paymentController - req', req);
+        // get all the information about this order
 
-        //process.exit();
 
-        ModulePaymentPaypalService.paymentActionWithPaypal(req, res, mode, client_id, client_secret);
+
+        var modeDemo = true;
+
+        if (modeDemo) {
+            var mode = 'sandbox';
+            var client_id = 'EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM';
+            var client_secret = 'EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM';
+        }
+        else {
+
+            var mode = 'live';
+            var client_id = 'EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM';
+            var client_secret = 'EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM';
+
+
+        }
+
+
+
+
+        var idOrder = 0 ;
+
+
+        CoreReadDbService.getItemPaymentFromOrder(idOrder).then(function (dataOrder) {
+
+
+            console.log('paypalpay - getItemPaymentFromOrder', dataOrder);
+
+            var itemList = getItemListFromDataOrder(dataOrder);
+
+            var amount = getAmountFromDataOrder(dataOrder);
+
+            //console.log('paymentController - req', req);
+
+            //process.exit();
+
+            ModulePaymentPaypalService.paymentActionWithPaypal(req, res, mode, client_id, client_secret, itemList, amount);
+
+
+        });
 
 
         console.log('[end]: payment controller');
@@ -61,5 +100,59 @@ module.exports = {
     }
 
 
+}
+
+
+
+
+function getItemListFromDataOrder(input){
+
+    var output =  {
+        "items": [{
+            "name": "item1",
+            "sku": "item12222",
+            "price": "0.03",
+            "currency": "USD",
+            "quantity": 1
+        },
+
+
+            {
+                "name": "item2",
+                "sku": "item2",
+                "price": "0.03",
+                "currency": "USD",
+                "quantity": 1
+            }
+        ]
+    };
+
+    return output;
+
 
 }
+
+function getAmountFromDataOrder(input) {
+
+    var output = {
+        "currency": "USD",
+        "total": "0.10",
+        "details": {
+            "subtotal": "0.06",
+            "tax": "0.02",
+            "shipping": "0.02",
+            "handling_fee": "0.00"
+        }
+    };
+
+    return output;
+}
+
+
+
+
+
+
+
+
+
