@@ -5,6 +5,11 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
+
+
+const async = require('promise-async')
+
+
 module.exports = {
 
 
@@ -32,19 +37,54 @@ module.exports = {
         }
 
 
-        CoreReadDbService.getItemPaymentFromOrder(idOrder).then(function (dataOrder) {
+        async.waterfall([
+            function (callback) {
+
+                CoreReadDbService.getItemPaymentFromOrder(idOrder).then(function (dataOrder) {
+
+                    callback(null, dataOrder);
+                });
+
+            },
+
+            function (arg1, callback) {
+
+                console.log('arg1', arg1);
+
+                CoreReadDbService.returnItemWithPriceForOrder(arg1).then(function (dataWithPriceOrder) {
+                    console.log('paypalPay - dataWithPriceOrder', dataWithPriceOrder);
+
+                    callback(null, arg1, dataWithPriceOrder)
+
+                })
+
+            },
+
+            function (arg1, arg2, callback) {
+                var dataOrder;
+
+                console.log('arg1 at the end', arg1);
+                console.log('arg2 at the end', arg2);
+                console.log('paypalpay - getItemPaymentFromOrder');
+                var itemList = getItemListFromDataOrder(dataOrder);
+                var amount = getAmountFromDataOrder(dataOrder);
+
+                //process.exit();
+
+                ModulePaymentPaypalService.paymentActionWithPaypal(req, res, mode, client_id, client_secret, itemList, amount);
+
+                callback(null, 'done')
+            }
 
 
-                    console.log ( 'fth2 - dataOrder', dataOrder);
-            var itemList = getItemListFromDataOrder(dataOrder);
-            var amount = getAmountFromDataOrder(dataOrder);
+        ]).then(function (value) {
+            console.log(value === 'done') // => true
 
-            //console.log('paymentController - req', req);
+            console.log('end of call list ');
 
-            //process.exit();
+        })
 
-            ModulePaymentPaypalService.paymentActionWithPaypal(req, res, mode, client_id, client_secret, itemList, amount);
-        });
+
         console.log('[end]: payment controller');
     },
 
@@ -74,9 +114,9 @@ module.exports = {
 }
 
 
-function getItemListFromDataOrder(input){
+function getItemListFromDataOrder(input) {
 
-    var output =  {
+    var output = {
         "items": [{
             "name": "item1",
             "sku": "item12222",
