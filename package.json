@@ -6,7 +6,7 @@
   },
   "homepage": "http://www.ymple.com",
   "private": false,
-  "version": "0.2.38",
+  "version": "0.2.40",
   "description": "a Nodejs and Sailsjs Ecommerce Solution ( E-commerce )",
   "keywords": [
     "ecommerce",
@@ -21,7 +21,7 @@
     "async": "^2.1.4",
     "bcrypt": "^0.8.7",
     "bluebird": "^3.4.6",
-    "connect-mongo": "^0.4.1",
+    "connect-mongo": "^0.*.*",
     "ejs": "~2.4.2",
     "formidable": "^1.0.15",
     "grunt": "0.4.2",
