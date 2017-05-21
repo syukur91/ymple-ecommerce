@@ -1,1 +1,0 @@
-sails generate controller <controller name> [action names separated by spaces...]
