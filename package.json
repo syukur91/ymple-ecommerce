@@ -47,7 +47,7 @@
     "sails-disk": "~0.10.0",
     "sails-hook-autoreload": "^0.13.2",
     "sails-hook-nested-services": "^0.1.0",
-    "sails-mongo": "~0.10.x",
+    "sails-mongo": "^0.10.9",
     "shortid": "^2.0.1",
     "skipper-gridfs": "^0.5.2",
     "swig": "^1.4.2"
