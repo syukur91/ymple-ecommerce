@@ -35,7 +35,7 @@ module.exports = {
         CoreReadDbService.getItemPaymentFromOrder(idOrder).then(function (dataOrder) {
 
 
-            console.log('paypalpay - getItemPaymentFromOrder', dataOrder);
+                    console.log ( 'fth2 - dataOrder', dataOrder);
             var itemList = getItemListFromDataOrder(dataOrder);
             var amount = getAmountFromDataOrder(dataOrder);
 
