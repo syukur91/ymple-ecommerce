@@ -29,7 +29,19 @@ How To Run
     npm install bcrypt
 
 
-- INSTALLATION
+- INSTALLATION NPM
+
+npm install ymple-ecommerce
+
+cd ymple-ecommerce
+
+npm install connect-mongo --save
+
+npm install bcrypt --save
+
+
+
+- CONFIGURATION
 
      [1]Configure and run a mongodb instance ( the default is  host: 'localhost', port: 27017)
 
