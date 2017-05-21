@@ -56,9 +56,9 @@ How To Run
 Community
 --------
 
-### [Gitter](https://gitter.im/Ymple)
+### [Gitter](https://gitter.im/Ymple/ymple-commerce)
 
-### [Stackoverflow](http://stackoverflow.com/search?q=ymple)
+### [Stackoverflow](http://http://stackoverflow.com/search?q=ymple+ecommerce)
 
 
 
