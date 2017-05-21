@@ -197,8 +197,13 @@ module.exports = {
 
                     var col = db.collection(collection);
 
+
+                    var idProduct = input[0].id;
+
+                    var findQuery =  {_id: ObjectId(idProduct)};
+
                     col.find(
-                        {_id: ObjectId("58ed29cbf91f110ff9a89193"), _id: ObjectId('58ed29f2f91f110ff9a89194')}
+                       findQuery
                     ).toArray(function (err, data) {
                         //db.close();
                         console.log(err);
@@ -209,7 +214,7 @@ module.exports = {
                     })
                 })
             })
-        
+
         return promise;
 
     },

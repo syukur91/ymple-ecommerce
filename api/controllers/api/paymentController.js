@@ -42,14 +42,16 @@ module.exports = {
 
                 CoreReadDbService.getItemPaymentFromOrder(idOrder).then(function (dataOrder) {
 
-                    callback(null, dataOrder);
+                    var itemCart = dataOrder[0].cart;
+
+                    callback(null, itemCart);
                 });
 
             },
 
             function (arg1, callback) {
 
-                console.log('arg1', arg1);
+                console.log('arg1 - itemCart', arg1);
 
                 CoreReadDbService.returnItemWithPriceForOrder(arg1).then(function (dataWithPriceOrder) {
                     console.log('paypalPay - dataWithPriceOrder', dataWithPriceOrder);
@@ -66,8 +68,8 @@ module.exports = {
                 console.log('arg1 at the end', arg1);
                 console.log('arg2 at the end', arg2);
                 console.log('paypalpay - getItemPaymentFromOrder');
-                var itemList = getItemListFromDataOrder(dataOrder);
-                var amount = getAmountFromDataOrder(dataOrder);
+                var itemList = getItemListFromDataOrder(arg2);
+                var amount = getAmountFromDataOrder(arg2);
 
                 //process.exit();
 
@@ -118,9 +120,9 @@ function getItemListFromDataOrder(input) {
 
     var output = {
         "items": [{
-            "name": "item1",
+            "name":input[0].name,
             "sku": "item12222",
-            "price": "0.03",
+            "price": input[0].price,
             "currency": "USD",
             "quantity": 1
         },
@@ -129,7 +131,7 @@ function getItemListFromDataOrder(input) {
             {
                 "name": "item2",
                 "sku": "item2",
-                "price": "0.03",
+                "price": "0.00",
                 "currency": "USD",
                 "quantity": 1
             }
@@ -145,11 +147,11 @@ function getAmountFromDataOrder(input) {
 
     var output = {
         "currency": "USD",
-        "total": "0.10",
+        "total": input[0].price,
         "details": {
-            "subtotal": "0.06",
-            "tax": "0.02",
-            "shipping": "0.02",
+            "subtotal": input[0].price,
+            "tax": "0.00",
+            "shipping": "0.00",
             "handling_fee": "0.00"
         }
     };
