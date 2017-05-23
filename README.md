@@ -1,5 +1,5 @@
 <h1>
-<a href="http://www.ymple.com"><img alt="YmpleEcommerce" src="http://www.ymple.com/img/logo_ymple.png" title="YmpleEcommerce"/>Ymple Ecommerce</a>
+<a href="http://www.ymple.com"><img alt="Ymple Ecommerce" src="http://www.ymple.com/assets/img/colors/blue/logo_big.png" title="Ymple Ecommerce"/>Ymple Ecommerce</a>
 </h1>
 
 Version 0.1.1 (released 2016.11)
