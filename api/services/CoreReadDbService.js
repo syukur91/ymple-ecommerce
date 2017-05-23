@@ -197,7 +197,6 @@ module.exports = {
 
                     var col = db.collection(collection);
 
-
                     var idProduct = input[0].id;
 
                     var findQuery =  {_id: ObjectId(idProduct)};
@@ -218,4 +217,42 @@ module.exports = {
         return promise;
 
     },
+
+    getConfigurationModule: function (input) { // return the data and item information about one order
+
+        var promise = new Promise(
+            function (resolve, reject) {
+
+                var collection = "core_module_installed";
+
+               // console.log('getItemPaymentFromOrder - idOrder', input);
+
+
+                var MongoClient = require('mongodb').MongoClient;
+
+                MongoClient.connect(url, function (err, db) {
+
+                    var col = db.collection(collection);
+
+                    var findQuery =  {name: input};
+
+                    col.find(
+                        findQuery
+                    ).toArray(function (err, data) {
+                        //db.close();
+                        console.log(err);
+
+                        console.log('getConfigurationModule - data', data);
+
+                        resolve(data);
+                    })
+                })
+            })
+
+        return promise;
+
+    },
+
+
+
 };

@@ -13,7 +13,7 @@ Open Source E-Commerce Solution for Everyone built with Sails.js (Node.js + Mong
 System Dependencies
 --------
 
-* Node.js v4.4.1
+* Node.js v4.4.1, v5, v7
 * MongoDB v3.2.6
 
 How To Run

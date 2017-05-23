@@ -22,15 +22,15 @@
             <div class="col-sm-12">
                 <label> <%= __('Configuration') %> </label><br>
 
-                <% if (typeof listConfiguration == 'object' && listConfiguration) { %>
 
-                <% listConfiguration.forEach(function(configuration){ %>
-                <%= configuration %>
+                <% for (var prop in listConfiguration) { %>
+
+
+                <%= prop %>
                 <input type="text" class="form-control" id="thumbnail" name="thumbnail"
-                       placeholder="<%= __('placeholder_url') %>" value="<%= configuration %>">
+                       placeholder="<%= __('placeholder_url') %>" value=" <%= listConfiguration[prop] %>">
 
-                <% }) %>
-                <% } %>
+                <%   } %>
 
             </div>
         </div>

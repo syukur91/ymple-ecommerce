@@ -20,10 +20,6 @@ module.exports = {
 
             function getNewIdProducT(next) {
 
-                //var data = 1111;
-
-                //console.log('next value 1rst function', data );
-
                 var newIdProduct = CoreReadDbService.getNewIdProduct('product').then(function (idProduct) {
 
                     console.log('promise return value:', idProduct);
@@ -33,27 +29,7 @@ module.exports = {
                     return next(null, idProduct);
                     //return res.json({photos: photos.length});
                 });
-
-            },
-
-            /*function GetUserAndOrders (thumbnail, next) {
-
-             console.info('value 2nd function', thumbnail);
-
-             var data2 = 20;
-
-             return next(null, data2);
-
-             },*/
-
-            /*function GetUserAndOrders2 (thumbnail, next) {
-
-             console.info('value 3rd function', thumbnail);
-             var data2 = 20;
-
-             return next(null, data2);
-
-             }*/
+            }
 
         ], function (err, data) {
             if (err) {
@@ -136,8 +112,8 @@ module.exports = {
             var result = {};
             result.templateToInclude = 'list_module';
             result.idProduct = 0;
-            result.listCoreModule='';
-            if (data){
+            result.listCoreModule = '';
+            if (data) {
                 result.listModule = data;
             }
             return res.view('back/commun-back/main.ejs', result);
@@ -146,54 +122,54 @@ module.exports = {
 
     },
 
-    edit: function (req, res, id) {
+    /* edit: function (req, res, id) {
 
-        var result = {};
-        // we take the id of the product and get all the product details to set the template
-        //     console.info('modification product - req: ', req);
-        console.info('modification product id: ', req.params.id);
-        console.info(req.params.id.length);
+     var result = {};
+     // we take the id of the product and get all the product details to set the template
+     //     console.info('modification product - req: ', req);
+     console.info('modification product id: ', req.params.id);
+     console.info(req.params.id.length);
 
-        if (req.params.id && (req.params.id.length > 0 )) {
-            // we retrieve the product informations
-            var productId = req.params.id;
-            var queryOptions = {
-                where: {id: productId},
-//         skip: skip,
-                limit: 10,
-                sort: 'createdAt DESC'
-            };
+     if (req.params.id && (req.params.id.length > 0 )) {
+     // we retrieve the product informations
+     var productId = req.params.id;
+     var queryOptions = {
+     where: {id: productId},
+     //         skip: skip,
+     limit: 10,
+     sort: 'createdAt DESC'
+     };
 
-            Product.find(queryOptions, function (err, products) {
-                if (err) next(err);
+     Product.find(queryOptions, function (err, products) {
+     if (err) next(err);
 
-                result.product = {};
-                result.product = products[0];
+     result.product = {};
+     result.product = products[0];
 
-                if (products[0].idProduct) {
-                    result.idProduct = products[0].idProduct;
-                }
-                else {
-                    result.idProduct = 0;
-                }
+     if (products[0].idProduct) {
+     result.idProduct = products[0].idProduct;
+     }
+     else {
+     result.idProduct = 0;
+     }
 
-                console.info('edit query result', products);
-                console.info('edit - result', result);
-                result.templateToInclude = 'productModification';
-                return res.view('back/commun-back/main.ejs', result);
-            });
+     console.info('edit query result', products);
+     console.info('edit - result', result);
+     result.templateToInclude = 'productModification';
+     return res.view('back/commun-back/main.ejs', result);
+     });
 
-        }
-        else {
-            result.templateToInclude = 'productModification';
-            return res.view('back/commun-back/main.ejs', result);
-        }
+     }
+     else {
+     result.templateToInclude = 'productModification';
+     return res.view('back/commun-back/main.ejs', result);
+     }
 
 
-        /* return res.json({
-         todo: 'new() is not implemented yet!'
-         });*/
-    },
+     /* return res.json({
+     todo: 'new() is not implemented yet!'
+     });
+     },*/
 
 
     productNewValidation: function (req, res) {
@@ -217,18 +193,6 @@ module.exports = {
             return res.view('back/commun-back/main.ejs', result);
 
             console.log('productController - productNewValidation - req.body', data);
-
-            /* Product.create(data, function (err, product) {
-             if (err) {
-             return res.serverError(err);
-             }
-             else {
-
-             // once created we increment the id produit in counter table
-             //return res.ok('create of the product done', req.body);
-             }
-             //return res.redirect('/admin/product');
-             });*/
         }
         else {
             var result = {};
@@ -248,9 +212,9 @@ module.exports = {
             var result = {};
             result.templateToInclude = 'moduleInstallNew';
             result.idProduct = 0;
-            result.listCoreModule='';
-            if (data){
-            result.listCoreModule = data;
+            result.listCoreModule = '';
+            if (data) {
+                result.listCoreModule = data;
             }
             return res.view('back/commun-back/main.ejs', result);
 
@@ -264,7 +228,7 @@ module.exports = {
 
         console.log('ModuleController - install - reqAllParam', allParam); // name contains the name of the module to install
 
-        if (allParam.moduleToInstall){
+        if (allParam.moduleToInstall) {
 
             var moduleToInstall = allParam.moduleToInstall;
 
@@ -285,9 +249,9 @@ module.exports = {
 
             result.templateToInclude = 'installModuleDone';
 
-           // console.log('typeof',  typeof result.isTemplateToIncludeFullPath );
+            // console.log('typeof',  typeof result.isTemplateToIncludeFullPath );
 
-            output =  res.view('back/commun-back/main.ejs', result);
+            output = res.view('back/commun-back/main.ejs', result);
         }
         else {
             // return to the module page
@@ -295,73 +259,66 @@ module.exports = {
         return output;
     },
 
-    edit: function(req, res){
-
+    edit: function (req, res) {
 
         var nameModule = req.params.nameModule;
+
+        console.log('ModuleController - edit - nameModule', nameModule);
+
         var result = {};
-        if (nameModule == 'paypal'){
-            result.templateToInclude = 'view_module_payment_'+nameModule;
-            result.listConfiguration=[];
-            result.listConfiguration[0]='Mode';
-            result.listConfiguration[1]= 'Client Id';
-            result.listConfiguration[2]= 'Client Secret';
 
-        }
-        else{
+
+        CoreReadDbService.getConfigurationModule(nameModule).then(function (configurationModule) {
+
+
+            console.log('listconfiguration', configurationModule[0].configuration);
             result.templateToInclude = 'edit_module';
-            result.listConfiguration=[];
-            result.listConfiguration[0]='configuration1';
-            result.listConfiguration[1]= 'configuration2';
-        }
-
-        console.log('ModuleController - edit',req.params.nameModule);
-
-        result.nameModule = nameModule;
+            //view_module_payment_'+nameModule;
 
 
+            result.listConfiguration = configurationModule[0].configuration; //[];
 
-        //{userNameApi:'userNameApi',passwordApi:'passwordApi'};
-        return res.view('back/commun-back/main.ejs', result);
+            console.log('ModuleController - edit', req.params.nameModule);
+
+            result.nameModule = nameModule;
+
+            //{userNameApi:'userNameApi',passwordApi:'passwordApi'};
+            return res.view('back/commun-back/main.ejs', result);
+
+
+        });
+
     },
 
-    inactivate:function(req, res, nameModule){
+    inactivate: function (req, res, nameModule) {
 
         console.log('ModuleController - inactivate', nameModule);
-
     },
 
 
-    editValidation: function(req, res){ // validate the edit of one module
+    editValidation: function (req, res) { // validate the edit of one module
 
         var allParam = req.params.all();
         // get the parameters and update the table core_module_installed ( field configuration , field is active)
         console.log('ModuleController.js - editValidation - req', allParam);
 
-
         return res.ok('Edit is done', req.body);
-
-
-
-
-
-
     },
 
 
-    paypal: function (req, res){
+    paypal: function (req, res) {
 
         var paypal = require('paypal-rest-sdk');
         //Create config options, with parameters (mode, client_id, secret).
 
         paypal.configure({
 
-        'mode': 'sandbox', //sandbox or live
+            'mode': 'sandbox', //sandbox or live
             'client_id': 'EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM',
             'client_secret': 'EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM'
         });
-       // For multiple configuration support, have a look at the sample
-       // Invoke the rest api (eg: store a credit card) with required parameters (eg: data, config_options, callback).
+        // For multiple configuration support, have a look at the sample
+        // Invoke the rest api (eg: store a credit card) with required parameters (eg: data, config_options, callback).
 
         var card_data = {
             "type": "visa",
@@ -373,7 +330,7 @@ module.exports = {
             "last_name": "Shopper"
         };
 
-        paypal.creditCard.create(card_data, function(error, credit_card){
+        paypal.creditCard.create(card_data, function (error, credit_card) {
             if (error) {
                 console.log(error);
                 throw error;
@@ -386,57 +343,53 @@ module.exports = {
         return res.ok('paypal paiementmissing one parameter');
 
 
+        /*      var create_payment_json = {
+         "intent": "sale",
+         "payer": {
+         "payment_method": "credit_card",
+         "funding_instruments": [{
+         "credit_card": {
+         "type": "visa",
+         "number": "4417119669820331",
+         "expire_month": "11",
+         "expire_year": "2018",
+         "cvv2": "874",
+         "first_name": "Joe",
+         "last_name": "Shopper",
+         "billing_address": {
+         "line1": "52 N Main ST",
+         "city": "Johnstown",
+         "state": "OH",
+         "postal_code": "43210",
+         "country_code": "US"
+         }
+         }
+         }]
+         },
+         "transactions": [{
+         "amount": {
+         "total": "7",
+         "currency": "USD",
+         "details": {
+         "subtotal": "5",
+         "tax": "1",
+         "shipping": "1"
+         }
+         },
+         "description": "This is the payment transaction description."
+         }]
+         };
 
-
-
-  /*      var create_payment_json = {
-            "intent": "sale",
-            "payer": {
-                "payment_method": "credit_card",
-                "funding_instruments": [{
-                    "credit_card": {
-                        "type": "visa",
-                        "number": "4417119669820331",
-                        "expire_month": "11",
-                        "expire_year": "2018",
-                        "cvv2": "874",
-                        "first_name": "Joe",
-                        "last_name": "Shopper",
-                        "billing_address": {
-                            "line1": "52 N Main ST",
-                            "city": "Johnstown",
-                            "state": "OH",
-                            "postal_code": "43210",
-                            "country_code": "US"
-                        }
-                    }
-                }]
-            },
-            "transactions": [{
-                "amount": {
-                    "total": "7",
-                    "currency": "USD",
-                    "details": {
-                        "subtotal": "5",
-                        "tax": "1",
-                        "shipping": "1"
-                    }
-                },
-                "description": "This is the payment transaction description."
-            }]
-        };
-
-        paypal.payment.create(create_payment_json, function (error, payment) {
-            if (error) {
-                throw error;
-            } else {
-                console.log("Create Payment Response");
-                console.log(payment);
-            }
-        });
-*/
+         paypal.payment.create(create_payment_json, function (error, payment) {
+         if (error) {
+         throw error;
+         } else {
+         console.log("Create Payment Response");
+         console.log(payment);
+         }
+         });
+         */
     }
-
 
 
 };
