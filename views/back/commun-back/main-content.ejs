@@ -81,11 +81,16 @@
         <%- include ../product/creationKo.ejs %>
         <% } %>
 
-        <% if (templateToInclude == 'productModification') { %>
+        <% if (templateToInclude == 'product_edit') { %>
         <%- include ./navbar.light.ejs %>
-        <%- include ../product/modification.ejs %>
+        <%- include ../product/edit.ejs %>
         <% } %>
 
+
+        <% if (templateToInclude == 'product_edit_ok') { %>
+        <%- include ./navbar.light.ejs %>
+        <%- include ../product/edit-ok.ejs %>
+        <% } %>
 
         <% if (templateToInclude == 'installModuleDone') { %>
         <%- include ./navbar.light.ejs %>

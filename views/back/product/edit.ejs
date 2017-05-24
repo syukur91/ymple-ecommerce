@@ -1,13 +1,16 @@
 <div class="">
     <h4 style="color:forestgreen"><a href="/admin"></a>PRODUCT MODIFICATION</h4>
 
-    <form role="form" action="/admin/product/new/validation" method="POST">
+    <form role="form" action="/admin/product/edit/validation/<%=product.id%>" method="POST">
         <div class="row">
             <div class="col-sm-6">
                 <label> <%= __('name') %> </label>
                            <input type="text" class="form-control" id="name" name="name"
                                   placeholder="<%= __('Please enter your name') %>"
                                   value="<% if (product && product.name) { %> <%= product.name %>  <% } %>">
+
+                <input type="hidden" name="id" id="id" value="<%= product.id %>">
+
             </div>
             <div class="col-sm-6">
                 <label style="align-content: center;text-align: center">  <%= __('price') %> </label>
