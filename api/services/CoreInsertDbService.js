@@ -9,6 +9,7 @@ var transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: sails.config.project.nodemailer.auth
 });
+var ObjectId = require('mongodb').ObjectID;
 
 
 console.log('sails.config.connections');
@@ -118,6 +119,78 @@ getValueFromArray = function (data, element, type) {
 
             });
         },
+
+
+        updateProduct: function (data) { // Insert a product in table product
+
+            var MongoClient = require('mongodb').MongoClient;
+            console.log('InsertDbService - url connexion ', urlConnection);
+
+            //Connect to the db
+            MongoClient.connect(urlConnection).then(function (db) {
+
+                console.log('data.name', data.name);
+                var date = new Date();
+                var createdAt = date.toISOString();
+                var updatedAt = date.toISOString();
+                console.log('date', date);
+
+                var idProduct = parseInt(data.idProduct);
+                var price = parseInt(data.price);
+                var stock = data.stock;
+                var video = data.video;
+                var description = data.description;
+                var name = data.name;
+                var image = [];
+                image[0]= '/images/product/'+idProduct+'.png';
+
+
+                var dataToInsert = {
+                    name: name,
+                    idProduct: idProduct,
+                    price: price,
+                    stock: stock,
+                    video: video,
+                    description: description,
+                    createdAt: createdAt,
+                    updatedAt: updatedAt,
+                    image: image
+                }
+
+
+                if ( sails.config.demoMode != 1 ) {
+
+
+                    console.log('[db] update product');
+                    console.log('data', data);
+
+                    db.collection('product').update(
+                        {_id: ObjectId(data.id)},
+                        {$set: dataToInsert},
+                        function (err, result) {
+
+                            if (err)
+                            {
+                                throw err;
+                            }
+                            else{
+                                //console.log(result);
+                            }
+
+                        }
+                    );
+
+                }
+
+               // var collection = db.collection('product');
+                //var lotsOfDocs = [{'hello': 'doc3'}, {'hello': 'doc4'}];
+
+               //     collection.insert(dataToInsert);
+              //  }
+
+            });
+        },
+
 
         insertOrder: function (data) { // Insert an order
 

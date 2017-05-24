@@ -199,7 +199,7 @@ module.exports = {
 
                 console.info('edit query result', products);
                 console.info('edit - result', result);
-                result.templateToInclude = 'productModification';
+                result.templateToInclude = 'product_edit';
                 return res.view('back/commun-back/main.ejs', result);
             });
 
@@ -253,6 +253,37 @@ module.exports = {
             result.idProduct = productId;
 
             return res.view('back/commun-back/main.ejs', result);
+        }
+    },
+
+
+    editValidation: function (req, res) {
+
+        console.info('req');
+        console.info(req.body);
+
+        if (req && req.body && req.body.name) {
+            var data = {};
+
+            data = req.body;
+
+            CoreInsertDbService.updateProduct(data);
+
+            //CoreInsertDbService.incrementId('product');
+
+            var result = {};
+
+            result.templateToInclude = 'product_edit_ok';
+
+            return res.view('back/commun-back/main.ejs', result);
+
+            console.log('productController - productNewValidation - req.body',data );
+
+        }
+        else {
+            //var result = {};
+            //result.templateToInclude = 'product_edit_ok';
+            //return res.view('back/commun-back/main.ejs', result);
         }
     },
 
