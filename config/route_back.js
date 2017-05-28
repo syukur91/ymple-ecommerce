@@ -45,6 +45,9 @@ module.exports.routes = {
     'GET    /admin/category/list': 'back/CategoryController.list',
     'GET    /admin/category/create': 'back/CategoryController.create',
     '/admin/category/edit/:id': 'back/CategoryController.edit',
+    '/admin/category/edit/validation/:id': 'back/CategoryController.editValidation',
+
+
     '/admin/category/delete/:id': 'back/CategoryController.delete',
     '/admin/category/delete/confirmation/:id': 'back/CategoryController.deleteConfirmation',
 
