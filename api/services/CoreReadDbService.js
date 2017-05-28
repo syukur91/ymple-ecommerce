@@ -104,6 +104,24 @@ module.exports = {
             })
     },
 
+    getCategoryItem: function (idCategory) { // return the category item
+
+        return new Promise(
+            function (resolve, reject) {
+
+                var MongoClient = require('mongodb').MongoClient;
+
+                MongoClient.connect(url, function (err, db) {
+                    var collectionName = "category";
+                    var col = db.collection(collectionName);
+                    var data = col.find({_id: ObjectId(idCategory)}).toArray(function (err, data) {
+                        db.close();
+                        console.log('getCategoryItem', data);
+                        resolve(data);//docs[0].name.toString()); // returns to the function that calls the callback
+                    });
+                })
+            })
+    },
 
     getListCoreModuleInstalled: function () {
 
