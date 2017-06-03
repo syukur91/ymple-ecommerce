@@ -8,6 +8,8 @@ var bcrypt = require('bcrypt');
 
 var CoreReadDbService = require('../../services/back/CoreReadDbService');
 var CoreInsertDbService = require('../../services/back/CoreInsertDbService');
+var CoreFrontInsertDbService = require('../../services/back/CoreFrontInsertDbService');
+
 
 module.exports = {
     profile: function (req, res) {

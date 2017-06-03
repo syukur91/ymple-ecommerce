@@ -5,6 +5,9 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
+var CoreDeleteDbService = require('../../services/back/CoreDeleteDbService');
+
+
 module.exports = {
 
     list: function (req, res) {

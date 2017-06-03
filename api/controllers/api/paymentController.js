@@ -7,6 +7,7 @@
 
 var CoreReadDbService = require('../../services/back/CoreReadDbService');
 var CoreInsertDbService = require('../../services/back/CoreInsertDbService');
+var ModulePaymentPaypalService = require('../../services/api/ModulePaymentPaypalService');
 
 
 const async = require('promise-async')
