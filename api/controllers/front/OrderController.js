@@ -7,6 +7,9 @@
 
 var SHIPPING_FEE = 3000;
 
+var CoreReadDbService = require('../../services/back/CoreReadDbService');
+var CoreInsertDbService = require('../../services/back/CoreInsertDbService');
+
 module.exports = {
     find: function (req, res) {
         return res.view('complete.ejs', {failed: true});

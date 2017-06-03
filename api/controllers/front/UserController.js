@@ -6,6 +6,9 @@
  */
 var bcrypt = require('bcrypt');
 
+var CoreReadDbService = require('../../services/back/CoreReadDbService');
+var CoreInsertDbService = require('../../services/back/CoreInsertDbService');
+
 module.exports = {
     profile: function (req, res) {
         var result = {};
