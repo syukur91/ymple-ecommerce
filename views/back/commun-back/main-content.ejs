@@ -16,6 +16,17 @@
         <%- include ../module/installNew %>
         <% } %>
 
+        <% if (templateToInclude == 'customer_edit') { %>
+        <%- include ./navbar.light.ejs %>
+        <%- include ../customer/edit.ejs %>
+        <% } %>
+
+        <% if (templateToInclude == 'customer_item') { %>
+        <%- include ./navbar.light.ejs %>
+        <%- include ../customer/item.ejs %>
+        <% } %>
+
+
 
         <% if (templateToInclude == 'customer_list') { %>
         <%- include ./navbar.light.ejs %>

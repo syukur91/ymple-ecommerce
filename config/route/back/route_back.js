@@ -55,7 +55,11 @@ module.exports.routes = {
     'POST    /admin/category/create/validation': 'back/CategoryController.createValidation',
 
     'GET    /admin/order/manage': 'back/OrderController.manage',
+
     'GET    /admin/customer/list': 'back/CustomerController.user',
+    'GET    /admin/customer/item/:idCustomer': 'back/CustomerController.item',
+    'GET    /admin/customer/edit/:idCustomer': 'back/CustomerController.edit',
+
 
     // page of admin preference
     'GET    /admin/preference': {view: 'back/preference'},
