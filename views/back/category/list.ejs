@@ -85,8 +85,10 @@
                         <% }  else { %>
                                  
                         <td>
-                            <button class="btn btn-xs btn-warning" button-action="status"> <%= __('Disable') %>
-                            </button>
+
+
+                            <input id="toggle-product-<%= product.id %>" type="checkbox" checked data-toggle="toggle" >
+
                         </td>
                         <% } %>
                         
