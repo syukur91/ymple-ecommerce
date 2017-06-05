@@ -45,6 +45,9 @@ module.exports.routes = {
     'GET    /admin/category/list': 'back/CategoryController.list',
     'GET    /admin/category/create': 'back/CategoryController.create',
     '/admin/category/edit/:id': 'back/CategoryController.edit',
+    '/admin/category/edit/validation/:id': 'back/CategoryController.editValidation',
+
+
     '/admin/category/delete/:id': 'back/CategoryController.delete',
     '/admin/category/delete/confirmation/:id': 'back/CategoryController.deleteConfirmation',
 
@@ -52,7 +55,11 @@ module.exports.routes = {
     'POST    /admin/category/create/validation': 'back/CategoryController.createValidation',
 
     'GET    /admin/order/manage': 'back/OrderController.manage',
+
     'GET    /admin/customer/list': 'back/CustomerController.user',
+    'GET    /admin/customer/item/:idCustomer': 'back/CustomerController.item',
+    'GET    /admin/customer/edit/:idCustomer': 'back/CustomerController.edit',
+
 
     // page of admin preference
     'GET    /admin/preference': {view: 'back/preference'},
@@ -78,7 +85,13 @@ module.exports.routes = {
 
     '/admin/module/paypal/': 'back/moduleController.paypal',
 
-    '/admin/product/preview/:id': 'back/productController.preview'
+    '/admin/product/preview/:id': 'back/productController.preview',
+
+    '/admin/stat/dashboard': 'back/statController.dashboard',
+    '/admin/stat/report': 'back/statController.report'
+
+
+
 
 
 

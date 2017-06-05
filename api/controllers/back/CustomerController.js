@@ -9,6 +9,135 @@
 module.exports = {
 
 
+
+    edit: function (req, res) {
+        var result = {};
+        var skip = 0;
+        var page = 1;
+
+        if (req.query.hasOwnProperty('page')) {
+            skip = (req.query.page - 1) * 10;
+            page = req.query.page;
+        }
+
+        var queryOptions = {
+            where: {},
+            skip: skip,
+            limit: 10,
+            sort: 'createdAt DESC'
+        };
+
+        result.page = page;
+
+        result.order = {};
+
+
+        // we check if the session id user is set.
+
+
+        var idCustomer = req.params.idCustomer;
+
+
+
+
+
+        async.waterfall([
+
+            function GetUserAndOrders(next) {
+
+                console.info('user id ', idCustomer);
+
+
+                User.findOne(idCustomer).populate('orders', queryOptions).exec(function (err, user) {
+                    if (err) return next(err);
+                    if (!user) return next('NO_USER_FOUND');
+
+                    result.user = user;
+                    result.cart = req.session.cart;
+                    result.orders = user.orders;
+
+                    return next(null);
+                });
+            }
+        ], function (err) {
+            if (err) return res.serverError(err);
+
+
+
+            result.templateToInclude = 'customer_edit';
+
+            return res.view('back/commun-back/main.ejs', result);
+
+
+
+        });
+    },
+
+
+    item: function (req, res) {
+        var result = {};
+        var skip = 0;
+        var page = 1;
+
+        if (req.query.hasOwnProperty('page')) {
+            skip = (req.query.page - 1) * 10;
+            page = req.query.page;
+        }
+
+        var queryOptions = {
+            where: {},
+            skip: skip,
+            limit: 10,
+            sort: 'createdAt DESC'
+        };
+
+        result.page = page;
+
+        result.order = {};
+
+
+        // we check if the session id user is set.
+
+
+        var idCustomer = req.params.idCustomer;
+
+
+
+
+
+        async.waterfall([
+
+            function GetUserAndOrders(next) {
+
+                console.info('user id ', idCustomer);
+
+
+                User.findOne(idCustomer).populate('orders', queryOptions).exec(function (err, user) {
+                    if (err) return next(err);
+                    if (!user) return next('NO_USER_FOUND');
+
+                    result.user = user;
+                    result.cart = req.session.cart;
+                    result.orders = user.orders;
+
+                    return next(null);
+                });
+            }
+        ], function (err) {
+            if (err) return res.serverError(err);
+
+
+
+            result.templateToInclude = 'customer_item';
+
+            return res.view('back/commun-back/main.ejs', result);
+
+
+
+        });
+    },
+
+
     user: function (req, res) {
         var result = {
             admin: req.session.user

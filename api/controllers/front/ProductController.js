@@ -5,6 +5,10 @@
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 
+
+var CoreReadDbService = require('../../services/back/CoreReadDbService');
+var CoreInsertDbService = require('../../services/back/CoreInsertDbService');
+
 module.exports = {
     create: function (req, res) {
         Product.create(req.body, function (err, product) {

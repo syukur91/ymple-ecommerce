@@ -5,6 +5,11 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
+var CoreDeleteDbService = require('../../services/back/CoreDeleteDbService');
+
+var CoreReadDbService = require('../../services/back/CoreReadDbService');
+var CoreInsertDbService = require('../../services/back/CoreInsertDbService');
+
 module.exports = {
 
     list: function (req, res) {
@@ -94,7 +99,23 @@ module.exports = {
 
         result.templateToInclude = 'category_edit';
 
-        return res.view('back/commun-back/main.ejs', result);
+        var idCategory = req.params.id;
+
+        console.log('CategoryController - idCategory ', idCategory);
+
+        CoreReadDbService.getCategoryItem(idCategory).then(function (categoryItem){
+
+            console.log ('categoryItem', categoryItem);
+
+            if  ( categoryItem[0]){
+
+            result.item = categoryItem[0];
+
+            }
+            return res.view('back/commun-back/main.ejs', result);
+
+        });
+
 
     },
 
@@ -149,6 +170,32 @@ module.exports = {
     },
 
     createValidation: function (req, res) {
+
+        console.info('req');
+        console.info(req.body);
+
+        if (req && req.body && req.body.name) {
+            var data = {};
+            data = req.body;
+
+            console.log('CategoryController - createValidation', data);
+
+            CoreInsertDbService.insertCategory(data);
+            CoreInsertDbService.incrementId('category');
+
+            var result = {};
+            result.templateToInclude = 'categoryCreationOk';
+            return res.view('back/commun-back/main.ejs', result);
+        }
+        else {
+            var result = {};
+            result.templateToInclude = 'categoryCreationKo';
+            return res.view('back/commun-back/main.ejs', result);
+        }
+    },
+
+
+    editValidation: function (req, res) {
 
         console.info('req');
         console.info(req.body);

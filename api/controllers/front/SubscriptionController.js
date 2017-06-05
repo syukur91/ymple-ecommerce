@@ -5,6 +5,9 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
+var CoreReadDbService = require('../../services/back/CoreReadDbService');
+var CoreInsertDbService = require('../../services/back/CoreInsertDbService');
+
 module.exports = {
     newsletter: function (req, res) {
 

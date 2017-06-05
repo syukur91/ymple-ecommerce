@@ -57,8 +57,10 @@
                         <% }  %>
                     </td>
                     <td>
-                        <a href="/user/<%= user.id %>" class="btn btn-xs btn-default">DETAILS</a>
-                        <button class="btn btn-xs btn-danger" button-action="delete">EDIT</button>
+                        <a href="/admin/customer/item/<%= user.id %>" class="btn btn-xs btn-default">DETAILS</a>
+
+                        <a href="/admin/customer/edit/<%= user.id %>" class="btn btn-xs btn-danger">EDIT</a>
+
                     </td>
                 </tr>
 
