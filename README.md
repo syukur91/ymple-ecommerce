@@ -22,24 +22,28 @@ How To Run
 
     npm install ymple-ecommerce
 
-- With Github
-
-    Clone the Git project
-    For Ubuntu and Centos run: 
-    npm install bcrypt
-
-
 - INSTALLATION NPM
 
 npm install ymple-ecommerce
 
 cd ymple-ecommerce
 
-npm install connect-mongo --save
+npm install
 
-npm install bcrypt --save
+node app.js
 
 
+- With Github
+
+Clone the Git project
+
+For Ubuntu and Centos run:
+
+npm install bcrypt
+
+npm install connect-mongo
+
+node app.js
 
 - CONFIGURATION
 
