@@ -240,7 +240,8 @@ getValueFromArray = function (data, element, type) {
                     list_product: list_product,
                     cart: cart,
                     createdAt: createdAt,
-                    updatedAt: updatedAt
+                    updatedAt: updatedAt,
+                    status: data['status']
                 }
                 //  console.log('insertOrder - dataToInsert', dataToInsert);
 
@@ -609,33 +610,4 @@ getValueFromArray = function (data, element, type) {
             });
         },
 
-        setInstallationDone: function () {         // set to done the installation step inserting data in installation collection
-
-            console.log('[start]: CoreInsertDbService - setInstallation done')
-
-            var MongoClient = require('mongodb').MongoClient;
-            console.log('start - createUserAdminDefault  - urlConnexion ', urlConnection);
-
-            MongoClient.connect(urlConnection).then(function (db) {//Connect to the db
-
-                var date = new Date();
-                var createdAt = date.toISOString();
-                var data = {
-                    status: 'done',
-                    createAt: createdAt
-                }
-                console.log('InsertDbService - setInstallationDone - data', data);
-                var collection = db.collection('installation');
-
-                if ( sails.config.demoMode != 1 ) {
-
-                    collection.insert(data, function (err, result) {
-
-                        console.log('insert err', err);
-                        console.log('insert result', result);
-                    });
-                }
-            })
-            console.log('[end]: CoreInsertDbService - setInstallation done')
-        }
     }
