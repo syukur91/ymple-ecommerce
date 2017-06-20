@@ -8,6 +8,7 @@
 
 var CoreReadDbService = require('../../services/back/CoreReadDbService');
 var CoreInsertDbService = require('../../services/back/CoreInsertDbService');
+var CoreInitDbService = require('../../services/back/CoreInitDbService');
 
 module.exports = {
 
@@ -24,8 +25,8 @@ module.exports = {
 
             if (data == false) {
 
-                CoreInsertDbService.setInstallationDone();
-
+                CoreInitDbService.initTableStatus();
+                CoreInitDbService.setInstallationDone();
                 CoreInsertDbService.createUserAdminDefault();
                 CoreInsertDbService.installCounter('order'); // create the collection order
                 CoreInsertDbService.installCounter('product'); // create the collection product
