@@ -229,6 +229,7 @@ module.exports = {
         var comment = getValueFromReq(req.body, 'comment');
         var payment = getValueFromReq(req.body, 'payment');
         var cart = getValueFromReq(req.session, 'cart');
+        var status = 1;
 
         // creation of the order json
         var data = {
@@ -242,7 +243,8 @@ module.exports = {
             shipping: 0,
             price: 0,
             list_product: [],
-            cart: cart
+            cart: cart,
+            status: status
         }
 
         console.log('order', data);
