@@ -8,6 +8,9 @@ Version 0.2.0 (released 2017.4)
 
 ### [www.ymple.com](http://www.ymple.com/)
 
+### [Demo](http://demo.ymple.com/)
+
+
 Open Source E-Commerce Solution for Everyone built with Sails.js (Node.js + MongoDB)
 
 System Dependencies
