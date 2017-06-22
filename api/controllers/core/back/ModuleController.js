@@ -11,6 +11,7 @@ var Promise = require('bluebird');
 var pathToService = '../../../services/core/';
 var CoreReadDbService = require(pathToService + 'back/CoreReadDbService');
 var CoreInsertDbService = require(pathToService + '/back/CoreInsertDbService');
+var pathTemplateBackCore =  sails.config.globals.templatePathBackCore;
 
 module.exports = {
 
@@ -46,18 +47,18 @@ module.exports = {
                 var result = {};
                 result.templateToInclude = 'moduleInstallNew';
                 result.idProduct = data;
-                return res.view('back/commun-back/main.ejs', result);
+                return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
 
             }
 
             //result.templateToInclude  = 'adminUserProfile';
 
-            // return res.view('back/commun-back/main.ejs', result);
+            // return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
         });
 
         //result.templateToInclude  = 'adminUserProfile';
 
-        //return res.view('back/commun-back/main.ejs', result);
+        //return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
     },
 
 
@@ -102,7 +103,7 @@ module.exports = {
         ], function (err, result) {
             if (err) res.serverError(err);
 
-            return res.view('back/product/detail.ejs', result);
+            return res.view(pathTemplateBackCore + 'product/detail.ejs', result);
         });
     },
 
@@ -120,7 +121,7 @@ module.exports = {
             if (data) {
                 result.listModule = data;
             }
-            return res.view('back/commun-back/main.ejs', result);
+            return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
 
         });
 
@@ -160,13 +161,13 @@ module.exports = {
      console.info('edit query result', products);
      console.info('edit - result', result);
      result.templateToInclude = 'productModification';
-     return res.view('back/commun-back/main.ejs', result);
+     return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
      });
 
      }
      else {
      result.templateToInclude = 'productModification';
-     return res.view('back/commun-back/main.ejs', result);
+     return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
      }
 
 
@@ -194,14 +195,14 @@ module.exports = {
 
             result.templateToInclude = 'productCreationOk';
 
-            return res.view('back/commun-back/main.ejs', result);
+            return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
 
             console.log('productController - productNewValidation - req.body', data);
         }
         else {
             var result = {};
             result.templateToInclude = 'productCreationKo';
-            return res.view('back/commun-back/main.ejs', result);
+            return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
 
         }
     },
@@ -220,7 +221,7 @@ module.exports = {
             if (data) {
                 result.listCoreModule = data;
             }
-            return res.view('back/commun-back/main.ejs', result);
+            return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
 
         });
     },
@@ -255,7 +256,7 @@ module.exports = {
 
             // console.log('typeof',  typeof result.isTemplateToIncludeFullPath );
 
-            output = res.view('back/commun-back/main.ejs', result);
+            output = res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
         }
         else {
             // return to the module page
@@ -287,7 +288,7 @@ module.exports = {
             result.nameModule = nameModule;
 
             //{userNameApi:'userNameApi',passwordApi:'passwordApi'};
-            return res.view('back/commun-back/main.ejs', result);
+            return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
 
 
         });

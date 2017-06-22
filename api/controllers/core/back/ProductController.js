@@ -15,6 +15,7 @@ var CoreReadDbService = require(pathToService + 'back/CoreReadDbService');
 var CoreInsertDbService = require(pathToService + 'back/CoreInsertDbService');
 var CoreDeleteDbService = require(pathToService + 'back/CoreDeleteDbService');
 
+var pathTemplateBackCore =  sails.config.globals.templatePathBackCore;
 
 //module.exports = CoreReadDbService;
 
@@ -70,7 +71,7 @@ module.exports = {
                 var result = {};
                 result.templateToInclude = 'product';
                 result.idProduct = data;
-                return res.view('back/commun-back/main.ejs', result);
+                return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
             }
         });
     },
@@ -106,7 +107,7 @@ module.exports = {
 
                 result.templateToInclude = 'product_preview';
 
-                return res.view('back/commun-back/main.ejs', result);
+                return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
 
             }
         });
@@ -174,7 +175,7 @@ module.exports = {
         ], function (err) {
             if (err) return res.serverError(err);
             result.templateToInclude = 'product_list';
-            return res.view('back/commun-back/main.ejs', result);
+            return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
         });
     },
 
@@ -212,13 +213,13 @@ module.exports = {
                 console.info('edit query result', products);
                 console.info('edit - result', result);
                 result.templateToInclude = 'product_edit';
-                return res.view('back/commun-back/main.ejs', result);
+                return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
             });
 
         }
         else {
             result.templateToInclude = 'productModification';
-            return res.view('back/commun-back/main.ejs', result);
+            return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
         }
     },
 
@@ -236,14 +237,14 @@ module.exports = {
             CoreDeleteDbService.deleteProduct(productId);
 
             result.templateToInclude = 'product_delete_ok';
-            return res.view('back/commun-back/main.ejs', result);
+            return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
 
 
 
         }
         else {
             result.templateToInclude = 'product_list';
-            return res.view('back/commun-back/main.ejs', result);
+            return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
         }
     },
 
@@ -264,7 +265,7 @@ module.exports = {
             result.templateToInclude = 'product_delete';
             result.idProduct = productId;
 
-            return res.view('back/commun-back/main.ejs', result);
+            return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
         }
     },
 
@@ -287,7 +288,7 @@ module.exports = {
 
             result.templateToInclude = 'product_edit_ok';
 
-            return res.view('back/commun-back/main.ejs', result);
+            return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
 
             console.log('productController - productNewValidation - req.body',data );
 
@@ -295,7 +296,7 @@ module.exports = {
         else {
             //var result = {};
             //result.templateToInclude = 'product_edit_ok';
-            //return res.view('back/commun-back/main.ejs', result);
+            //return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
         }
     },
 
@@ -318,7 +319,7 @@ module.exports = {
 
             result.templateToInclude = 'productCreationOk';
 
-            return res.view('back/commun-back/main.ejs', result);
+            return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
 
             console.log('productController - productNewValidation - req.body',data );
 
@@ -337,7 +338,7 @@ module.exports = {
         else {
             var result = {};
             result.templateToInclude = 'productCreationKo';
-            return res.view('back/commun-back/main.ejs', result);
+            return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
             //return res.ok('missing one parameter');
         }
     },
@@ -369,7 +370,7 @@ module.exports = {
             if (err) {res.serverError(err);}
             else{
 
-            return res.view('back/product/preview.ejs', result);
+            return res.view(pathTemplateBackCore + 'product/preview.ejs', result);
             }
         });
     },

@@ -6,8 +6,10 @@
  */
 
 
-var pathToService = '../../../services/core/';
+var pathTemplateFrontCore =  sails.config.globals.templatePathFrontCore;
 
+var pathToService = '../../../services/core/';
+var async = require('async');
 var CoreReadDbService = require(pathToService + 'back/CoreReadDbService');
 var CoreInsertDbService = require(pathToService + 'back/CoreInsertDbService');
 
@@ -63,7 +65,7 @@ module.exports = {
     ], function (err, result) {
       if (err) return res.serverError (err);
 
-      return res.view('front/cart/cart.ejs', result);
+      return res.view(pathTemplateFrontCore + 'cart/cart.ejs', result);
     });
   },
 
@@ -181,7 +183,7 @@ module.exports = {
     ], function (err, result) {
       if (err) return res.serverError(err);
 
-      return res.view('front/checkout/checkout.ejs', result);
+      return res.view(pathTemplateFrontCore + 'checkout/checkout.ejs', result);
     });
   },
 

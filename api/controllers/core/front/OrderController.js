@@ -12,6 +12,9 @@ var pathToService = '../../../services/core/';
 var CoreReadDbService = require(pathToService + 'back/CoreReadDbService');
 var CoreInsertDbService = require(pathToService + 'back/CoreInsertDbService');
 
+var pathTemplateFrontCore =  sails.config.globals.templatePathFrontCore;
+var async = require('async');
+
 module.exports = {
     find: function (req, res) {
         return res.view('complete.ejs', {failed: true});
@@ -204,7 +207,7 @@ module.exports = {
         ], function (err) {
             if (err) return res.redirect('/order/' + req.params.id + '?error=' + err);
 
-            return res.view('front/payment/pay.ejs', result)
+            return res.view(pathTemplateFrontCore + 'payment/pay.ejs', result)
         });
     },
 

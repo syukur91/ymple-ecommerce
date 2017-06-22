@@ -6,6 +6,10 @@
  * @creator :: Fabien Thetis
  */
 
+
+var pathTemplateBackCore =  sails.config.globals.templatePathBackCore;
+
+
 module.exports = {
 
 
@@ -66,7 +70,7 @@ module.exports = {
 
             result.templateToInclude = 'customer_edit';
 
-            return res.view('back/commun-back/main.ejs', result);
+            return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
 
 
 
@@ -130,7 +134,7 @@ module.exports = {
 
             result.templateToInclude = 'customer_item';
 
-            return res.view('back/commun-back/main.ejs', result);
+            return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
 
 
 
@@ -191,7 +195,7 @@ module.exports = {
 
             result.templateToInclude = 'customer_list';
 
-            return res.view('back/commun-back/main.ejs', result);
+            return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
         });
     }
 

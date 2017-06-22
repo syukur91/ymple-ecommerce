@@ -4,6 +4,8 @@
  * @description :: Server-side logic for managing admin/users
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
+var pathTemplateBackCore =  sails.config.globals.templatePathBackCore;
+
 
 module.exports = {
 
@@ -92,7 +94,7 @@ module.exports = {
 
             result.templateToInclude = 'admin_profile';
 
-            return res.view('back/commun-back/main.ejs', result);
+            return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
         });
     },
 

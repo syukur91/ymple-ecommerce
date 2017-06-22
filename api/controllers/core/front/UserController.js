@@ -4,11 +4,16 @@
  * @description :: Server-side logic for managing users
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
+
+
+var async = require('async');
 var bcrypt = require('bcrypt');
 var pathToService = '../../../services/core/';
 var CoreReadDbService = require(pathToService + 'back/CoreReadDbService');
 var CoreInsertDbService = require(pathToService + 'back/CoreInsertDbService');
 var CoreFrontInsertDbService = require(pathToService + 'back/CoreFrontInsertDbService');
+
+var pathTemplateFrontCore =  sails.config.globals.templatePathFrontCore;
 
 
 module.exports = {
@@ -86,7 +91,7 @@ module.exports = {
         ], function (err) {
             if (err) return res.serverError(err);
 
-            return res.view('front/profile/profile.ejs', result);
+            return res.view(pathTemplateFrontCore + 'profile/profile.ejs', result);
         });
     },
 
@@ -168,7 +173,7 @@ module.exports = {
                         else { // login view with error message
                             var dataView = [];
                             dataView.message = 'user or password not correct';
-                            return res.view('front/login.ejs', dataView);
+                            return res.view(pathTemplateFrontCore + 'login.ejs', dataView);
 
 //              return res.redirect('/login?error_login');
                         }

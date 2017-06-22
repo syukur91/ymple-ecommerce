@@ -85,7 +85,7 @@ module.exports = {
             result.templateToInclude = 'list_product';
 
 
-            return res.view('back/commun-back/main.ejs', result);
+            return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
         });
     },
 

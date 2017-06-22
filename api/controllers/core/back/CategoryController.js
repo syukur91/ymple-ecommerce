@@ -11,6 +11,7 @@ var CoreDeleteDbService = require('../../../services/core/back/CoreDeleteDbServi
 
 var CoreReadDbService = require('../../../services/core/back/CoreReadDbService');
 var CoreInsertDbService = require('../../../services/core/back/CoreInsertDbService');
+var pathTemplateBackCore =  sails.config.globals.templatePathBackCore;
 
 module.exports = {
 
@@ -76,7 +77,7 @@ module.exports = {
         ], function (err) {
             if (err) return res.serverError(err);
             result.templateToInclude = 'categoryList';
-            return res.view('back/commun-back/main.ejs', result);
+            return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
         });
     },
 
@@ -90,7 +91,7 @@ module.exports = {
 
         result.templateToInclude = 'category_create';
 
-        return res.view('back/commun-back/main.ejs', result);
+        return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
 
     },
 
@@ -114,7 +115,7 @@ module.exports = {
             result.item = categoryItem[0];
 
             }
-            return res.view('back/commun-back/main.ejs', result);
+            return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
 
         });
 
@@ -137,7 +138,7 @@ module.exports = {
             result.templateToInclude = 'category_delete';
             result.idProduct = productId;
 
-            return res.view('back/commun-back/main.ejs', result);
+            return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
         }
     },
 
@@ -154,11 +155,11 @@ module.exports = {
 
             CoreDeleteDbService.deleteCategory(categoryId);
             result.templateToInclude = 'category_delete_ok';
-            return res.view('back/commun-back/main.ejs', result);
+            return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
         }
         else {
             result.templateToInclude = 'category_list';
-            return res.view('back/commun-back/main.ejs', result);
+            return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
         }
     },
 
@@ -187,12 +188,12 @@ module.exports = {
 
             var result = {};
             result.templateToInclude = 'categoryCreationOk';
-            return res.view('back/commun-back/main.ejs', result);
+            return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
         }
         else {
             var result = {};
             result.templateToInclude = 'categoryCreationKo';
-            return res.view('back/commun-back/main.ejs', result);
+            return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
         }
     },
 
@@ -213,12 +214,12 @@ module.exports = {
 
             var result = {};
             result.templateToInclude = 'categoryCreationOk';
-            return res.view('back/commun-back/main.ejs', result);
+            return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
         }
         else {
             var result = {};
             result.templateToInclude = 'categoryCreationKo';
-            return res.view('back/commun-back/main.ejs', result);
+            return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
         }
     }
 

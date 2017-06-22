@@ -10,6 +10,7 @@ var pathToService = '../../../services/core/';
 var CoreReadDbService = require(pathToService + 'back/CoreReadDbService');
 var CoreInsertDbService = require(pathToService + 'back/CoreInsertDbService');
 var CoreInitDbService = require(pathToService + 'back/CoreInitDbService');
+var pathTemplateBackCore =  sails.config.globals.templatePathBackCore;
 
 module.exports = {
 
@@ -46,7 +47,7 @@ module.exports = {
             var dataView = []; //{status: msg};
             dataView.templateToInclude = 'install_installation_done';
             dataView.status = msg;
-            return res.view('back/commun-back/main.ejs', dataView);
+            return res.view(pathTemplateBackCore + 'commun-back/main.ejs', dataView);
 
 
            // return res.view('install/installation_done.ejs', dataView);
