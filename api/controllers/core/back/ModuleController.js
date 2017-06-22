@@ -5,10 +5,12 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
-var Promise = require('bluebird');
+var async = require('async');
 
-var CoreReadDbService = require('../../services/back/CoreReadDbService');
-var CoreInsertDbService = require('../../services/back/CoreInsertDbService');
+var Promise = require('bluebird');
+var pathToService = '../../../services/core/';
+var CoreReadDbService = require(pathToService + 'back/CoreReadDbService');
+var CoreInsertDbService = require(pathToService + '/back/CoreInsertDbService');
 
 module.exports = {
 

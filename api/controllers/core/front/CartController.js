@@ -4,8 +4,12 @@
  * @description :: Server-side logic for managing carts
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
-var CoreReadDbService = require('../../services/back/CoreReadDbService');
-var CoreInsertDbService = require('../../services/back/CoreInsertDbService');
+
+
+var pathToService = '../../../services/core/';
+
+var CoreReadDbService = require(pathToService + 'back/CoreReadDbService');
+var CoreInsertDbService = require(pathToService + 'back/CoreInsertDbService');
 
 module.exports = {
   index: function (req, res) {

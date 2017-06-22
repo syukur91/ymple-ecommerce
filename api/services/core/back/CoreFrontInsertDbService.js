@@ -1,11 +1,11 @@
-var nodemailer = require('nodemailer');
+//var nodemailer = require('nodemailer');
 var bcrypt = require('bcrypt');
 
 // create reusable transporter object using SMTP transport
-var transporter = nodemailer.createTransport({
-    service: 'Gmail',
-    auth: sails.config.project.nodemailer.auth
-});
+//var transporter = nodemailer.createTransport({
+ //   service: 'Gmail',
+ //   auth: sails.config.project.nodemailer.auth
+//});
 
 console.log('sails.config.connections');
 var host = sails.config.connections.mongodbServer.host;

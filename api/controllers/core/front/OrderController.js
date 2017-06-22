@@ -7,8 +7,10 @@
 
 var SHIPPING_FEE = 3000;
 
-var CoreReadDbService = require('../../services/back/CoreReadDbService');
-var CoreInsertDbService = require('../../services/back/CoreInsertDbService');
+
+var pathToService = '../../../services/core/';
+var CoreReadDbService = require(pathToService + 'back/CoreReadDbService');
+var CoreInsertDbService = require(pathToService + 'back/CoreInsertDbService');
 
 module.exports = {
     find: function (req, res) {

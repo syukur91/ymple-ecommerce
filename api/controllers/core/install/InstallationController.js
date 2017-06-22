@@ -4,11 +4,12 @@
  * @description :: Server-side logic for managing installations
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
+var pathToService = '../../../services/core/';
 
 
-var CoreReadDbService = require('../../services/back/CoreReadDbService');
-var CoreInsertDbService = require('../../services/back/CoreInsertDbService');
-var CoreInitDbService = require('../../services/back/CoreInitDbService');
+var CoreReadDbService = require(pathToService + 'back/CoreReadDbService');
+var CoreInsertDbService = require(pathToService + 'back/CoreInsertDbService');
+var CoreInitDbService = require(pathToService + 'back/CoreInitDbService');
 
 module.exports = {
 

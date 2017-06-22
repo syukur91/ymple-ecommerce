@@ -5,10 +5,10 @@
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 var bcrypt = require('bcrypt');
-
-var CoreReadDbService = require('../../services/back/CoreReadDbService');
-var CoreInsertDbService = require('../../services/back/CoreInsertDbService');
-var CoreFrontInsertDbService = require('../../services/back/CoreFrontInsertDbService');
+var pathToService = '../../../services/core/';
+var CoreReadDbService = require(pathToService + 'back/CoreReadDbService');
+var CoreInsertDbService = require(pathToService + 'back/CoreInsertDbService');
+var CoreFrontInsertDbService = require(pathToService + 'back/CoreFrontInsertDbService');
 
 
 module.exports = {

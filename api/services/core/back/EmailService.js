@@ -1,12 +1,12 @@
 // EmailService.js
 
-var nodemailer = require('nodemailer');
+//var nodemailer = require('nodemailer');
 
 // create reusable transporter object using SMTP transport
-var transporter = nodemailer.createTransport({
-    service: 'Gmail',
-    auth: sails.config.project.nodemailer.auth
-});
+//var transporter = nodemailer.createTransport({
+ //   service: 'Gmail',
+ ///   auth: sails.config.project.nodemailer.auth
+//});
 
 module.exports = {
   sendAlertEmail: function () {

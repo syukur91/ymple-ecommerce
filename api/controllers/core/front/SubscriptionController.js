@@ -4,9 +4,9 @@
  * @description :: Server-side logic for managing Subscriptions
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
-
-var CoreReadDbService = require('../../services/back/CoreReadDbService');
-var CoreInsertDbService = require('../../services/back/CoreInsertDbService');
+var pathToService = '../../../services/core/';
+var CoreReadDbService = require(pathToService + 'back/CoreReadDbService');
+var CoreInsertDbService = require(pathToService + 'back/CoreInsertDbService');
 
 module.exports = {
     newsletter: function (req, res) {

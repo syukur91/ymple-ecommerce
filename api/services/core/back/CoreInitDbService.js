@@ -1,4 +1,4 @@
-var CoreCommunDbService = require('../../services/back/CoreCommunDbService');
+var CoreCommunDbService = require('../../../services/core/back/CoreCommunDbService');
 
 var bcrypt = require('bcrypt');
 

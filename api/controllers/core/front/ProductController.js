@@ -5,9 +5,15 @@
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 
+var async = require('async');
 
-var CoreReadDbService = require('../../services/back/CoreReadDbService');
-var CoreInsertDbService = require('../../services/back/CoreInsertDbService');
+var pathToService = '../../../services/core/';
+
+var CoreReadDbService = require(pathToService + 'back/CoreReadDbService');
+var CoreInsertDbService = require(pathToService + 'back/CoreInsertDbService');
+
+var pathTemplateFrontCore =  sails.config.globals.templatePathFrontCore;
+
 
 module.exports = {
     create: function (req, res) {
@@ -49,7 +55,7 @@ module.exports = {
         ], function (err, result) {
             if (err) res.serverError(err);
 
-            return res.view('front/product/single-item.ejs', result);
+            return res.view(pathTemplateFrontCore + 'product/single-item.ejs', result);
         });
     },
 
@@ -113,7 +119,10 @@ module.exports = {
             }
             result.query = req.query.name;
             result.showSearchMenu = 1;
-            return res.view('front/index.ejs', result);
+
+
+
+            return res.view(pathTemplateFrontCore+ 'index.ejs', result);
         });
     },
 

@@ -4,8 +4,10 @@
  * @description :: Server-side logic for managing admins
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
-var CoreReadDbService = require('../../services/back/CoreReadDbService');
-var CoreInsertDbService = require('../../services/back/CoreInsertDbService');
+var CoreReadDbService = require('../../../services/core/back/CoreReadDbService');
+var CoreInsertDbService = require('../../../services/core/back/CoreInsertDbService');
+
+var pathTemplateBackCore =  sails.config.globals.templatePathBackCore;
 
 module.exports = {
     index: function (req, res) {
@@ -108,7 +110,7 @@ module.exports = {
 
         result.templateToInclude = 'admin';
 
-        return res.view('back/commun-back/main.ejs', result);
+        return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
 
     },
 

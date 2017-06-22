@@ -5,9 +5,9 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
-var CoreReadDbService = require('../../services/back/CoreReadDbService');
-var CoreInsertDbService = require('../../services/back/CoreInsertDbService');
-var CoreDeleteDbService = require('../../services/back/CoreDeleteDbService');
+var CoreReadDbService = require('../../../services/core/back/CoreReadDbService');
+var CoreInsertDbService = require('../../../services/core/back/CoreInsertDbService');
+var CoreDeleteDbService = require('../../../services/core/back/CoreDeleteDbService');
 
 module.exports = {
 

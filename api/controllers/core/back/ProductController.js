@@ -7,10 +7,13 @@
 
 var Promise = require('bluebird');
 
+var async = require('async');
 
-var CoreReadDbService = require('../../services/back/CoreReadDbService');
-var CoreInsertDbService = require('../../services/back/CoreInsertDbService');
-var CoreDeleteDbService = require('../../services/back/CoreDeleteDbService');
+var pathToService = '../../../services/core/';
+
+var CoreReadDbService = require(pathToService + 'back/CoreReadDbService');
+var CoreInsertDbService = require(pathToService + 'back/CoreInsertDbService');
+var CoreDeleteDbService = require(pathToService + 'back/CoreDeleteDbService');
 
 
 //module.exports = CoreReadDbService;

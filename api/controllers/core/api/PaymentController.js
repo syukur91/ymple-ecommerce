@@ -5,9 +5,9 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
-var CoreReadDbService = require('../../services/back/CoreReadDbService');
-var CoreInsertDbService = require('../../services/back/CoreInsertDbService');
-var ModulePaymentPaypalService = require('../../services/api/ModulePaymentPaypalService');
+var CoreReadDbService = require('../../../services/core/back/CoreReadDbService');
+var CoreInsertDbService = require('../../../services/core/back/CoreInsertDbService');
+var ModulePaymentPaypalService = require('../../../services/core/api/ModulePaymentPaypalService');
 
 
 const async = require('promise-async')

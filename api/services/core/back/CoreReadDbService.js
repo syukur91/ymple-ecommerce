@@ -1,6 +1,6 @@
 // InsertDbService.js
 
-var nodemailer = require('nodemailer');
+//var nodemailer = require('nodemailer');
 var host = sails.config.connections.mongodbServer.host;
 var port = sails.config.connections.mongodbServer.port;
 var database = sails.config.connections.mongodbServer.database;
@@ -9,10 +9,10 @@ var url = "mongodb://" + host + ":" + port + '/' + database;
 var ObjectId = require('mongodb').ObjectID;
 
 // create reusable transporter object using SMTP transport
-var transporter = nodemailer.createTransport({
-    service: 'Gmail',
-    auth: sails.config.project.nodemailer.auth
-});
+//var transporter = nodemailer.createTransport({
+ //   service: 'Gmail',
+ //   auth: sails.config.project.nodemailer.auth
+//});
 
 
 module.exports = {
