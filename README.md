@@ -2,9 +2,12 @@
 <a href="http://www.ymple.com"><img alt="Ymple Ecommerce" src="http://www.ymple.com/assets/img/colors/blue/logo_big.png" title="Ymple Ecommerce"/></a>
 </h1>
 
-Version 0.1.1 (released 2016.11)
+Version 1.0.0 (released 2017.6)
 
 Version 0.2.0 (released 2017.4)
+
+Version 0.1.1 (released 2016.11)
+
 
 ### [www.ymple.com](http://www.ymple.com/)
 
