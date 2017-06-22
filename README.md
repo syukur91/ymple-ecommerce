@@ -1,10 +1,13 @@
 <h1>
-<a href="http://www.ymple.com"><img alt="Ymple Ecommerce" src="http://www.ymple.com/assets/img/colors/blue/logo_big.png" title="Ymple Ecommerce"/>Ymple Ecommerce</a>
+<a href="http://www.ymple.com"><img alt="Ymple Ecommerce" src="http://www.ymple.com/assets/img/colors/blue/logo_big.png" title="Ymple Ecommerce"/></a>
 </h1>
+
+Version 1.0.0 (released 2017.6)
+
+Version 0.2.0 (released 2017.4)
 
 Version 0.1.1 (released 2016.11)
 
-Version 0.2.0 (released 2017.4)
 
 ### [www.ymple.com](http://www.ymple.com/)
 
@@ -16,7 +19,7 @@ Open Source E-Commerce Solution for Everyone built with Sails.js (Node.js + Mong
 System Dependencies
 --------
 
-* Node.js v4.4.1, v5, v7
+* Node.js v4.4.1, v5 or v7
 * MongoDB v3.2.6
 
 How To Run
