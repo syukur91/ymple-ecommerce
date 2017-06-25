@@ -16,6 +16,27 @@ var pathTemplateBackCore =  sails.config.globals.templatePathBackCore;
 module.exports = {
 
 
+    manage: function (req, res) {
+
+
+        CoreReadDbService.getListCoreModuleInstalled().then(function (data) {
+
+            console.log('ModuleController - search', data);
+
+            var result = {};
+            result.templateToInclude = 'module_manage';
+            result.pathToInclude =  '../module/manage.ejs';
+            result.idProduct = 0;
+            result.listCoreModule = '';
+            if (data) {
+                result.listModule = data;
+            }
+            return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
+
+        });
+
+    },
+
     /**
      * `Admin/productController.new()`
      */
