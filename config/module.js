@@ -1,4 +1,3 @@
-
 module.exports.module = {
 
     /***************************************************************************
@@ -7,39 +6,41 @@ module.exports.module = {
      * connections (see `config/connections.js`)                                *
      *                                                                          *
      ***************************************************************************/
-    category:{
+    category: {
 
 
-	payment : {
-	
+        payment: {
 
-		paypal: {
 
-			back:{
-				controller: "xx",
-				service: "xx",
-				template: "xx"				
-},
-			front:{
+            paypal: {
 
-				controller: "xx",
-                                service: "xx",
-                                template: "xx"
+                back: {
+                    controller: "xx",
+                    service: "xx",
+                    template: "xx"
+                },
+                front: {
 
+                    controller: "xx",
+                    service: "xx",
+                    template: "xx"
+
+
+                }
+            }
+
+        },
+
+        /***************************************************************************
+         *                                                                          *
+         * How and whether Sails will attempt to automatically rebuild the          *
+         * tables/collections/etc. in your schema.                                  *
+         *                                                                          *
+         * See http://sailsjs.org/#/documentation/concepts/ORM/model-settings.html  *
+         *                                                                          *
+         ***************************************************************************/
+        migrate: 'xx'
+
+    }
 
 }
-			}
-
-}, 
-
-    /***************************************************************************
-     *                                                                          *
-     * How and whether Sails will attempt to automatically rebuild the          *
-     * tables/collections/etc. in your schema.                                  *
-     *                                                                          *
-     * See http://sailsjs.org/#/documentation/concepts/ORM/model-settings.html  *
-     *                                                                          *
-     ***************************************************************************/
-    migrate: 'xx'
-
-};
