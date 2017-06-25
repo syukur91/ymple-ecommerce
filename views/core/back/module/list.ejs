@@ -1,16 +1,5 @@
 <div class="">
-    <h3 class="submenu"><a href="/admin"></a>Module List</h3>
-    <hr/>
-
-    <% if (typeof loop == 'edit' && edit) { %>
-    <form role="form" action="/module/{{ edit.id }}" method="POST">
-        <% }else { %>
-        <form role="form" action="/module" method="POST">
-            <% } %>
-
-            <%#- include admin_module/include.admin.module.ejs %>
-        </form>
-        <hr/>
+    <h3 class="submenu"><a href="/admin"></a>MODULE LIST</h3>
 
         <div class="row">
             <div class="col-lg-12">

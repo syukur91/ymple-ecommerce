@@ -5,7 +5,9 @@
         <% if (typeof templateToInclude == 'string') { %>
 
         <% if (templateToInclude == 'admin') { %>
-        <%- include ../admin %>
+
+        <%- include(pathToInclude) %>
+
         <% } %>
 
         <% if (templateToInclude == 'product') { %>
@@ -26,8 +28,6 @@
         <%- include ../customer/item.ejs %>
         <% } %>
 
-
-
         <% if (templateToInclude == 'customer_list') { %>
         <%- include ./navbar.light.ejs %>
         <%- include ../customer/list.ejs %>
@@ -43,7 +43,6 @@
         <%- include ../product/list.ejs %>
         <% } %>
 
-
         <% if (templateToInclude == 'product_delete_ok') { %>
         <%- include ./navbar.light.ejs %>
         <%- include ../product/delete-ok.ejs %>
@@ -54,6 +53,14 @@
         <%- include ../module/list.ejs %>
         <% } %>
 
+        <% if (templateToInclude == 'module_manage') { %>
+        <%- include ./navbar.light.ejs %>
+        <%- include(pathToInclude) %>
+
+
+
+
+        <% } %>
 
         <% if (templateToInclude == 'categoryList') { %>
         <%- include ./navbar.light.ejs %>
@@ -71,8 +78,6 @@
         <%- include ../product/creationOk.ejs %>
         <% } %>
 
-
-
         <% if (templateToInclude == 'categoryCreationOk') { %>
         <%- include ../category/creationOk.ejs %>
         <% } %>
@@ -80,8 +85,6 @@
         <% if (templateToInclude == 'categoryCreationKo') { %>
         <%- include ../category/creationKo.ejs %>
         <% } %>
-
-
 
         <% if (templateToInclude == 'category_delete_ok') { %>
         <%- include ./navbar.light.ejs %>
@@ -96,7 +99,6 @@
         <%- include ./navbar.light.ejs %>
         <%- include ../product/edit.ejs %>
         <% } %>
-
 
         <% if (templateToInclude == 'product_edit_ok') { %>
         <%- include ./navbar.light.ejs %>
@@ -113,20 +115,15 @@
         <%- include ../module/edit.ejs %>
         <% } %>
 
-
-
         <% if (templateToInclude == 'install_installation_done') { %>
         <%- include ./navbar.light.ejs %>
         <%- include ../../install/installation_done.ejs %>
         <% } %>
 
-
         <% if (templateToInclude == 'view_module_payment_paypal') { %>
         <%- include ./navbar.light.ejs %>
         <%#- include ../module/payment/paypal.ejs %>
         <% } %>
-
-
 
         <% if (templateToInclude == 'product_preview') { %>
         <%- include ./navbar.light.ejs %>
@@ -138,10 +135,8 @@
         <%- include ../product/delete.ejs %>
         <% } %>
 
-
         <%# [END]: template to manage the product%>
         <% } %>
-
 
         <% if (templateToInclude == 'category_create') { %>
         <%- include ../commun-back/navbar.light.ejs %>
@@ -152,7 +147,6 @@
         <%- include ../commun-back/navbar.light.ejs %>
         <%- include ../category/edit.ejs %>
         <% } %>
-
 
         <% if (templateToInclude == 'category_delete') { %>
         <%- include ./navbar.light.ejs %>

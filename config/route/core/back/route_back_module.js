@@ -12,6 +12,6 @@ module.exports.routes = {
     '/admin/module/inactivate/:nameModule': 'core/back/moduleController.inactivate', // inactivate a module
 
     '/admin/module/paypal/': 'core/back/moduleController.paypal',
-    '/admin/module/manager/': 'core/back/moduleController.manager',
+    '/admin/module/manage/': 'core/back/moduleController.manage',
 
 }

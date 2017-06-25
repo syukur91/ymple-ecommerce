@@ -109,6 +109,7 @@ module.exports = {
         var result = {};
 
         result.templateToInclude = 'admin';
+        result.pathToInclude = '../admin';
 
         return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
 

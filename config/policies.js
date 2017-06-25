@@ -33,8 +33,8 @@ module.exports.policies = {
     'profile': 'sessionAuth'
   },
 
-  'AdminController': {
-    '*': 'sessionAdmin'
+  'core/back/AdminController': {
+    //'*': 'sessionAdmin'
   },
 
   'ProductController': {
