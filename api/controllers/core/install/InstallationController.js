@@ -46,6 +46,7 @@ module.exports = {
             console.log('[END]: firstInstallation');
             var dataView = []; //{status: msg};
             dataView.templateToInclude = 'install_installation_done';
+            dataView.pathToInclude = '../../install/installation_done.ejs';
             dataView.status = msg;
             return res.view(pathTemplateBackCore + 'commun-back/main.ejs', dataView);
 
