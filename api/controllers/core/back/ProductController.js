@@ -70,6 +70,7 @@ module.exports = {
                 console.log('productController - result', data);
                 var result = {};
                 result.templateToInclude = 'product';
+                result.pathToInclude = '../product/create';
                 result.idProduct = data;
                 return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
             }
@@ -106,6 +107,7 @@ module.exports = {
             else {
 
                 result.templateToInclude = 'product_preview';
+                result.pathToInclude = '../product/preview.ejs';
 
                 return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
 
@@ -175,6 +177,7 @@ module.exports = {
         ], function (err) {
             if (err) return res.serverError(err);
             result.templateToInclude = 'product_list';
+            result.pathToInclude = '../product/list.ejs';
             return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
         });
     },
@@ -213,6 +216,7 @@ module.exports = {
                 console.info('edit query result', products);
                 console.info('edit - result', result);
                 result.templateToInclude = 'product_edit';
+                result.pathToInclude  = '../product/edit.ejs';
                 return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
             });
 
@@ -237,6 +241,7 @@ module.exports = {
             CoreDeleteDbService.deleteProduct(productId);
 
             result.templateToInclude = 'product_delete_ok';
+            result.pathToInclude = '../product/delete-ok.ejs';
             return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
 
 
@@ -263,6 +268,7 @@ module.exports = {
 
 
             result.templateToInclude = 'product_delete';
+            result.pathToInclude = '../product/delete.ejs';
             result.idProduct = productId;
 
             return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
@@ -287,6 +293,7 @@ module.exports = {
             var result = {};
 
             result.templateToInclude = 'product_edit_ok';
+            result.pathToInclude = '../product/edit-ok.ejs';
 
             return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
 
@@ -318,6 +325,7 @@ module.exports = {
             var result = {};
 
             result.templateToInclude = 'productCreationOk';
+            result.pathToInclude = '../product/creationOk.ejs';
 
             return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
 
@@ -338,6 +346,7 @@ module.exports = {
         else {
             var result = {};
             result.templateToInclude = 'productCreationKo';
+            result.pathToInclude = '../product/creationKo.ejs';
             return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
             //return res.ok('missing one parameter');
         }

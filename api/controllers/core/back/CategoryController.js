@@ -77,6 +77,7 @@ module.exports = {
         ], function (err) {
             if (err) return res.serverError(err);
             result.templateToInclude = 'categoryList';
+            result.pathToInclude = '../category/list.ejs';
             return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
         });
     },
@@ -90,6 +91,7 @@ module.exports = {
         var result = {};
 
         result.templateToInclude = 'category_create';
+        result.pathToInclude = '../category/create';
 
         return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
 
@@ -101,6 +103,7 @@ module.exports = {
         var result = {};
 
         result.templateToInclude = 'category_edit';
+        result.pathToInclude = '../category/edit.ejs';
 
         var idCategory = req.params.id;
 
@@ -136,6 +139,7 @@ module.exports = {
 
 
             result.templateToInclude = 'category_delete';
+            result.pathToInclude = '../category/delete.ejs';
             result.idProduct = productId;
 
             return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
@@ -155,6 +159,7 @@ module.exports = {
 
             CoreDeleteDbService.deleteCategory(categoryId);
             result.templateToInclude = 'category_delete_ok';
+            result.pathToInclude = '../category/delete-ok.ejs';
             return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
         }
         else {
@@ -188,11 +193,13 @@ module.exports = {
 
             var result = {};
             result.templateToInclude = 'categoryCreationOk';
+            result.pathToInclude = '../category/creationOk.ejs';
             return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
         }
         else {
             var result = {};
             result.templateToInclude = 'categoryCreationKo';
+            result.pathToInclude = '../category/creationKo.ejs';
             return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
         }
     },

@@ -93,6 +93,7 @@ module.exports = {
             if (err) return res.serverError(err);
 
             result.templateToInclude = 'admin_profile';
+            result.pathToInclude = '../admin/profile.ejs';
 
             return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
         });

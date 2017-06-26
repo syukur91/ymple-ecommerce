@@ -77,6 +77,7 @@ module.exports = {
 
 
       result.templateToInclude  = 'order_list';
+      result.pathToInclude = '../order/list.ejs';
       // res.json(result);
       return res.view('back/commun-back/main.ejs', result);
     });
