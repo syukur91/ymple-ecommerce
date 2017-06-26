@@ -14,6 +14,8 @@ module.exports.module = {
 
             paypal: {
 
+                isActive: 1,
+
                 back: {
                     controller: "xx",
                     service: "xx",
