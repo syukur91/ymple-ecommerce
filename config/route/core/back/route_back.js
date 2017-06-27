@@ -51,7 +51,6 @@ module.exports.routes = {
     '/admin/category/delete/:id': 'core/back/CategoryController.delete',
     '/admin/category/delete/confirmation/:id': 'core/back/CategoryController.deleteConfirmation',
 
-
     'POST    /admin/category/create/validation': 'core/back/CategoryController.createValidation',
 
     'GET    /admin/order/manage': 'core/back/OrderController.manage',
@@ -71,13 +70,12 @@ module.exports.routes = {
 
     '/admin/install/database': 'core/install/InstallationController.firstInstallation',
 
-
-
     '/admin/product/preview/:id': 'core/back/productController.preview',
 
     '/admin/stat/dashboard': 'core/back/statController.dashboard',
-    '/admin/stat/report': 'core/back/statController.report'
+    '/admin/stat/report': 'core/back/statController.report',
 
+    '/admin/notification/configuration': 'core/back/Notification.configuration'
 
 
 

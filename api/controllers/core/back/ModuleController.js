@@ -19,6 +19,19 @@ module.exports = {
     manage: function (req, res) {
 
 
+
+       /*
+
+
+       To display the configuration we read the configuration file
+
+       var jsonfile = require('jsonfile')
+        var file = '/tmp/data.json'
+        jsonfile.readFile(file, function(err, obj) {
+            console.dir(obj)
+        })*/
+
+
         CoreReadDbService.getListCoreModuleInstalled().then(function (data) {
 
             console.log('ModuleController - search', data);
@@ -137,6 +150,7 @@ module.exports = {
 
             var result = {};
             result.templateToInclude = 'list_module';
+            result.pathToInclude = '../module/list.ejs';
             result.idProduct = 0;
             result.listCoreModule = '';
             if (data) {
@@ -237,6 +251,7 @@ module.exports = {
 
             var result = {};
             result.templateToInclude = 'moduleInstallNew';
+            result.pathToInclude = '../module/installNew';
             result.idProduct = 0;
             result.listCoreModule = '';
             if (data) {
@@ -274,6 +289,7 @@ module.exports = {
             //result.isTemplateToIncludeFullPath = 1;
 
             result.templateToInclude = 'installModuleDone';
+            result.pathToInclude = '../module/installModuleDone.ejs';
 
             // console.log('typeof',  typeof result.isTemplateToIncludeFullPath );
 
@@ -299,6 +315,7 @@ module.exports = {
 
             console.log('listconfiguration', configurationModule[0].configuration);
             result.templateToInclude = 'edit_module';
+            result.pathToInclude = '../module/edit.ejs';
             //view_module_payment_'+nameModule;
 
 

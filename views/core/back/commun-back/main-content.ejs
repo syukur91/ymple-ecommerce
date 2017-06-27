@@ -4,120 +4,29 @@
 
         <% if (typeof templateToInclude == 'string') { %>
 
-        <% if (templateToInclude == 'admin') { %>
+        <% if (templateToInclude == 'admin' || templateToInclude == 'product' || templateToInclude == 'productCreationOk' || templateToInclude == 'productCreationKo'
+
+                || templateToInclude == 'categoryCreationOk' || templateToInclude == 'categoryCreationKo' || templateToInclude == 'moduleInstallNew'
+        ) { %>
 
         <%- include(pathToInclude) %>
 
         <% } %>
 
-        <% if (templateToInclude == 'product') { %>
-        <%- include ../product/create %>
-        <% } %>
+        <% if (templateToInclude == 'order_list' || templateToInclude == 'product_list' || templateToInclude == 'product_delete_ok' || templateToInclude == 'product_edit' ||
 
-        <% if (templateToInclude == 'moduleInstallNew') { %>
-        <%- include ../module/installNew %>
-        <% } %>
+                templateToInclude == 'module_manage' || templateToInclude == 'product_delete' || templateToInclude == 'product_preview' || templateToInclude == 'product_edit_ok'
 
-        <% if (templateToInclude == 'customer_edit') { %>
-        <%- include ./navbar.light.ejs %>
-        <%- include ../customer/edit.ejs %>
-        <% } %>
+                || templateToInclude == 'category_delete_ok' || templateToInclude == 'categoryList' || templateToInclude == 'category_create' || templateToInclude == 'category_edit'
 
-        <% if (templateToInclude == 'customer_item') { %>
-        <%- include ./navbar.light.ejs %>
-        <%- include ../customer/item.ejs %>
-        <% } %>
+                || templateToInclude == 'category_delete' || templateToInclude == 'edit_module' || templateToInclude == 'list_module' || templateToInclude == 'install_installation_done'
 
-        <% if (templateToInclude == 'customer_list') { %>
-        <%- include ./navbar.light.ejs %>
-        <%- include ../customer/list.ejs %>
-        <% } %>
+                || templateToInclude == 'installModuleDone' || templateToInclude == 'admin_profile' || templateToInclude == 'customer_list' || templateToInclude == 'customer_item'
 
-        <% if (templateToInclude == 'order_list') { %>
-        <%- include ./navbar.light.ejs %>
-        <%- include ../order/list.ejs %>
-        <% } %>
+                || templateToInclude == 'customer_edit') { %>
 
-        <% if (templateToInclude == 'product_list') { %>
-        <%- include ./navbar.light.ejs %>
-        <%- include ../product/list.ejs %>
-        <% } %>
-
-        <% if (templateToInclude == 'product_delete_ok') { %>
-        <%- include ./navbar.light.ejs %>
-        <%- include ../product/delete-ok.ejs %>
-        <% } %>
-
-        <% if (templateToInclude == 'list_module') { %>
-        <%- include ./navbar.light.ejs %>
-        <%- include ../module/list.ejs %>
-        <% } %>
-
-        <% if (templateToInclude == 'module_manage') { %>
-        <%- include ./navbar.light.ejs %>
-        <%- include(pathToInclude) %>
-
-
-
-
-        <% } %>
-
-        <% if (templateToInclude == 'categoryList') { %>
-        <%- include ./navbar.light.ejs %>
-        <%- include ../category/list.ejs %>
-        <% } %>
-
-        <% if (templateToInclude == 'admin_profile') { %>
-        <%- include ./navbar.light.ejs %>
-        <%- include ../admin/profile.ejs %>
-        <% } %>
-
-        <%# [START]: template to manage the product%>
-
-        <% if (templateToInclude == 'productCreationOk') { %>
-        <%- include ../product/creationOk.ejs %>
-        <% } %>
-
-        <% if (templateToInclude == 'categoryCreationOk') { %>
-        <%- include ../category/creationOk.ejs %>
-        <% } %>
-
-        <% if (templateToInclude == 'categoryCreationKo') { %>
-        <%- include ../category/creationKo.ejs %>
-        <% } %>
-
-        <% if (templateToInclude == 'category_delete_ok') { %>
-        <%- include ./navbar.light.ejs %>
-        <%- include ../category/delete-ok.ejs %>
-        <% } %>
-
-        <% if (templateToInclude == 'productCreationKo') { %>
-        <%- include ../product/creationKo.ejs %>
-        <% } %>
-
-        <% if (templateToInclude == 'product_edit') { %>
-        <%- include ./navbar.light.ejs %>
-        <%- include ../product/edit.ejs %>
-        <% } %>
-
-        <% if (templateToInclude == 'product_edit_ok') { %>
-        <%- include ./navbar.light.ejs %>
-        <%- include ../product/edit-ok.ejs %>
-        <% } %>
-
-        <% if (templateToInclude == 'installModuleDone') { %>
-        <%- include ./navbar.light.ejs %>
-        <%- include ../module/installModuleDone.ejs %>
-        <% } %>
-
-        <% if (templateToInclude == 'edit_module') { %>
-        <%- include ./navbar.light.ejs %>
-        <%- include ../module/edit.ejs %>
-        <% } %>
-
-        <% if (templateToInclude == 'install_installation_done') { %>
-        <%- include ./navbar.light.ejs %>
-        <%- include ../../install/installation_done.ejs %>
+            <%- include ./navbar.light.ejs %>
+            <%- include(pathToInclude) %>
         <% } %>
 
         <% if (templateToInclude == 'view_module_payment_paypal') { %>
@@ -125,32 +34,6 @@
         <%#- include ../module/payment/paypal.ejs %>
         <% } %>
 
-        <% if (templateToInclude == 'product_preview') { %>
-        <%- include ./navbar.light.ejs %>
-        <%- include ../product/preview.ejs %>
-        <% } %>
-
-        <% if (templateToInclude == 'product_delete') { %>
-        <%- include ./navbar.light.ejs %>
-        <%- include ../product/delete.ejs %>
-        <% } %>
-
-        <%# [END]: template to manage the product%>
-        <% } %>
-
-        <% if (templateToInclude == 'category_create') { %>
-        <%- include ../commun-back/navbar.light.ejs %>
-        <%- include ../category/create %>
-        <% } %>
-
-        <% if (templateToInclude == 'category_edit') { %>
-        <%- include ../commun-back/navbar.light.ejs %>
-        <%- include ../category/edit.ejs %>
-        <% } %>
-
-        <% if (templateToInclude == 'category_delete') { %>
-        <%- include ./navbar.light.ejs %>
-        <%- include ../category/delete.ejs %>
         <% } %>
 
     </div>

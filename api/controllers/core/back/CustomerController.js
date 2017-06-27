@@ -69,6 +69,7 @@ module.exports = {
 
 
             result.templateToInclude = 'customer_edit';
+            result.pathTemplateBackCore = '../customer/edit.ejs';
 
             return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
 
@@ -133,6 +134,7 @@ module.exports = {
 
 
             result.templateToInclude = 'customer_item';
+            result.pathTemplateBackCore = '../customer/item.ejs';
 
             return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
 
@@ -194,6 +196,7 @@ module.exports = {
             // we add the name of the template to include
 
             result.templateToInclude = 'customer_list';
+            result.pathToInclude = '../customer/list.ejs';
 
             return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
         });
