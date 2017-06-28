@@ -14,6 +14,8 @@ var CoreInsertDbService = require(pathToService + 'back/CoreInsertDbService');
 
 var pathTemplateFrontCore =  sails.config.globals.templatePathFrontCore;
 
+var theme = sails.config.globals.theme;
+
 
 module.exports = {
     create: function (req, res) {
@@ -122,7 +124,7 @@ module.exports = {
 
 
 
-            return res.view(pathTemplateFrontCore+ 'index.ejs', result);
+            return res.view(theme + 'index.ejs', result);
         });
     },
 
