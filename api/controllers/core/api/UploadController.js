@@ -31,17 +31,40 @@ module.exports = {
 
             if (uploadedFiles[0].fd) {
                 var filePath = uploadedFiles[0].fd;
-                var productId = 1;
-                var filePathFinal = '/images/product/'+idProduct+ '.png';
+               // var productId = 1;
+
+
+                var dir = 'assets/images/product/'+idProduct+ '/';
+                var dir2 = '.tmp/public/images/product/'+idProduct+ '/';
+               // var dir2 = '/images/product/'+idProduct+ '/';
+
+
+                if (!fs.existsSync(dir)){
+                    fs.mkdirSync(dir);
+                }
+
+                if (!fs.existsSync(dir2)){
+                    fs.mkdirSync(dir2);
+                }
+
+                var filePathFinal1 = '/images/product/'+idProduct+ '/1.png';
+                var filePathFinal2 = '.tmp/public/images/product/'+idProduct+ '/1.png';
+
+
+                //TODO create the folder for this product with folder name = id
 
                 // copy of the file to assets/images/
-                fs.createReadStream(filePath).pipe(fs.createWriteStream('assets'+filePathFinal));
+                fs.createReadStream(filePath).pipe(fs.createWriteStream('assets'+filePathFinal1));
+                fs.createReadStream(filePath).pipe(fs.createWriteStream(filePathFinal2));
+
             }
 
             // add the imagePath for this product
 
             console.log('UploadController - saveImageProduct - start' );
-            CoreInsertDbService.saveImageProduct(idProduct, filePathFinal);
+           // CoreInsertDbService.saveImageProduct(idProduct, filePathFinal1);
+           // CoreInsertDbService.saveImageProduct(idProduct, filePathFinal2);
+
 
         });
 
