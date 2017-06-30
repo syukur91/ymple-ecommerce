@@ -65,6 +65,6 @@ module.exports.globals = {
 
     templatePathBackCore: "core/back/",
 
-    theme: "theme-default"
+    theme: "theme/theme-default/"
 
 };

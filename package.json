@@ -6,7 +6,7 @@
   },
   "homepage": "http://www.ymple.com",
   "private": false,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "a Nodejs and Sailsjs Ecommerce Solution ( E-commerce )",
   "keywords": [
     "ecommerce",

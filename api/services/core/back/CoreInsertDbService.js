@@ -135,7 +135,7 @@ getValueFromArray = function (data, element, type) {
                 var updatedAt = date.toISOString();
                 console.log('date', date);
 
-                var idProduct = parseInt(data.idProduct);
+                //var idProduct = parseInt(data.idProduct);
                 var price = parseInt(data.price);
                 var stock = data.stock;
                 var video = data.video;
@@ -147,7 +147,7 @@ getValueFromArray = function (data, element, type) {
 
                 var dataToInsert = {
                     name: name,
-                    idProduct: idProduct,
+                    //idProduct: idProduct,
                     price: price,
                     stock: stock,
                     video: video,
