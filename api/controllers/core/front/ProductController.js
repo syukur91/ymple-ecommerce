@@ -57,7 +57,7 @@ module.exports = {
         ], function (err, result) {
             if (err) res.serverError(err);
 
-            return res.view(pathTemplateFrontCore + 'product/single-item.ejs', result);
+            return res.view(theme + 'product/single-item.ejs', result);
         });
     },
 
