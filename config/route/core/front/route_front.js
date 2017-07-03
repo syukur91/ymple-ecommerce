@@ -1,9 +1,12 @@
 module.exports.routes = {
 
     // INDEX
-    'GET    /'                    : 'core/front/ProductController.list',
-    'GET    /login'               : { view: 'core/front/login' },
-    'GET    /account'             : { view: 'core/front/account'},
+    'GET    /': 'core/front/ProductController.list',
+    'GET    /category/:id': 'core/front/CategoryController.list',
+
+
+    'GET    /login': {view: 'core/front/login'},
+    'GET    /account': {view: 'core/front/account'},
 
     // USER
     'POST   /login': 'core/front/UserController.login',
