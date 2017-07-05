@@ -32,6 +32,7 @@ module.exports = {
                 CoreInsertDbService.createUserAdminDefault();
                 CoreInsertDbService.installCounter('order'); // create the collection order
                 CoreInsertDbService.installCounter('product'); // create the collection product
+                CoreInsertDbService.installCounter('category');
                 CoreInsertDbService.firstInstallCoreModule('paypal');
                 CoreInsertDbService.firstInstallCoreModule('stripe');
 
