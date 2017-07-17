@@ -25,6 +25,12 @@ module.exports.routes = {
     // old with menu toogle 'GET    /admin'               : 'core/back/AdminController.index',
 
     'GET    /admin': 'core/back/AdminController.menu',
+    '/admin/login': 'core/back/AdminController.login',
+    '/admin/logout': 'core/back/AdminController.logout',
+
+    '/admin/login_validation': 'core/back/AdminController.loginValidation',
+
+
     'GET    /admin/menu': 'core/back/AdminController.menu',
 
     // create the new product in db 
@@ -59,10 +65,8 @@ module.exports.routes = {
     'GET    /admin/customer/item/:idCustomer': 'core/back/CustomerController.item',
     'GET    /admin/customer/edit/:idCustomer': 'core/back/CustomerController.edit',
 
-
     // page of admin preference
     'GET    /admin/preference': {view: 'core/back/preference'},
-
 
     // install page
     'GET    /admin/install': {view: 'core/install/index'},
@@ -73,12 +77,9 @@ module.exports.routes = {
     '/admin/product/preview/:id': 'core/back/productController.preview',
 
     '/admin/stat/dashboard': 'core/back/statController.dashboard',
+
     '/admin/stat/report': 'core/back/statController.report',
 
     '/admin/notification/configuration': 'core/back/Notification.configuration'
-
-
-
-
 
 };

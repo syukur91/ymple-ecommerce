@@ -5,13 +5,18 @@
 
             <% categoryList.forEach(function(category, i){ %>
             <li class=" dropdown " style="float: left">
-                <a href="#" class="dropdown-toggle navbar-ymple" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= category.name %> <span class="caret"></span></a>
-                <ul class="dropdown-menu">
+                <a href="/category/<%= category.idCategory %>/" class="navbar-ymple" role="button" aria-haspopup="true" aria-expanded="false"><%= category.name %></a>
+
+                <!--a href="/category/<%= category.idCategory %>/" class="dropdown-toggle navbar-ymple" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><%= category.name %> <span class="caret"></span></a-->
+
+                <!--ul class="dropdown-menu">
                     <li class=" dropdown">
                         <a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sub Category 1</a>
                     </li>
                     <li><a href="#">Sub Category 2</a></li>
-                </ul>
+                </ul-->
+
+
             </li>
 
             <%})%>

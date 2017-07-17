@@ -2,7 +2,7 @@ module.exports.routes = {
 
     // INDEX
     'GET    /': 'core/front/ProductController.list',
-    'GET    /category/:id': 'core/front/CategoryController.list',
+    'GET    /category/:id': 'core/front/CategoryController.listProduct',
 
 
     'GET    /login': {view: 'core/front/login'},

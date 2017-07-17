@@ -1,6 +1,4 @@
 <%- include ../commun-back/navbar.light.ejs %>
-
-
 <div class="">
     <h4 style="color:forestgreen"><a href="/admin"></a>New Product</h4>
 
@@ -34,10 +32,29 @@
                                   placeholder="<%= __('Please enter the inventory') %>" value="">
             </div>
             <div class="col-sm-6">
-                <label style="align-content: center;text-align: center">  <%= __('VIMEO image ID') %> </label>
+                <label style="align-content: center;text-align: center">  <%= __('Category') %> </label>
 
-                           <input type="text" class="form-control" id="video" name="video"
-                                  placeholder="<%= __('VIMEO image ID input please.') %>" value="">
+
+                      <select name="related" class="form-control">            
+
+                    <% if (typeof categoryOption == 'object' && categoryOption) { %>
+
+                    <% categoryOption.forEach(function(category){ %>
+
+                    <option value="<% category.id %>"><%= category.name %>
+                    </option>
+
+                    <% }) %>
+
+                    <% } else { %>
+
+                    <option value="Empty"> <%= __('Empty') %></option>
+
+                    <% } %>
+
+                </select>
+
+
             </div>
         </div>
         <br>
@@ -58,13 +75,23 @@
         <div class="row">
             <div class="col-sm-6">
                 <label> <%= __('product') %> </label>
-                            <Select name="related" class="form-control">            
-                    <Option value=""> <%= __('No') %></option>
-                    {% for product in products %}
-                    <option value="{{ product.id %>">{{ product.name
-                        %>
+                      <Select name="related" class="form-control">            
+
+                    <% if (typeof products == 'object' && products) { %>
+
+                    <% products.forEach(function(product){ %>
+
+                    <option value="<% product.id %>"><%= product.name %>
                     </option>
-                    {% endfor %}
+
+                    <% }) %>
+
+                    <% } else { %>
+
+                    <option value="Empty"> <%= __('Empty') %></option>
+
+                    <% } %>
+
                 </select>
             </div>
             <div class="col-sm-6">
@@ -86,9 +113,12 @@
         <br>
         <div class="row">
             <div class="col-sm-6" style="text-align: center;align-content: center">
-                <% if (typeof edit == 'object' && edit) { %>         
-                <Button type="submit" class="btn btn-primary btn-lg pull-right"> <%= __('modify') %></button>          
-                <% } else { %>          
+                <% if (typeof edit == 'object' && edit) { %>
+                         
+                <Button type="submit" class="btn btn-primary btn-lg pull-right"> <%= __('modify') %></button>
+                          
+                <% } else { %>
+                          
                 <Button type="submit" class="btn btn-primary btn-lg pull-right"> <%= __('Save') %></button>
                 <% } %>
             </div>

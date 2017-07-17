@@ -351,18 +351,41 @@ getValueFromArray = function (data, element, type) {
             //Connect to the db
             MongoClient.connect(urlConnection).then(function (db) {
 
+
+
+
+                var fieldName = "category";
+                var col = db.collection('counter');
+                col.find({id: fieldName}).toArray(function (err, docs) {
+                    //db.close();
+                    if (docs[0]) {
+
+                        console.log('seq', docs[0].seq);
+                    }
+                    else {
+                        console.log('err', err);
+                    }
+
+
+                var newIdCategory = docs[0].seq;
+
+
                 var date = new Date();
                 var createdAt = date.toISOString();
                 var updatedAt = date.toISOString();
 
-                var idCategory = parseInt(data.idCategory);
+                //var idCategory = parseInt(data.idCategory);
                 var name = data.name;
                 var description = data.description;
                 var tag = data.tag;
 
+
+                var collectionName = "category";
+                var col = db.collection(collectionName);
+
                 var dataToInsert = {
                     name: name,
-                    idCategory: idCategory,
+                    idCategory: newIdCategory,
                     //price: price,
                     //stock: stock,
                     //video: video,
@@ -375,8 +398,14 @@ getValueFromArray = function (data, element, type) {
                 //var lotsOfDocs = [{'hello': 'doc3'}, {'hello': 'doc4'}];
 
                 if ( sails.config.demoMode != 1 ) {
+
                     collection.insert(dataToInsert);
+
+                    //this.incrementId('category');
+
                 }
+
+            });
 
             });
         },

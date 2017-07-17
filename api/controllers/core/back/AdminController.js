@@ -7,9 +7,75 @@
 var CoreReadDbService = require('../../../services/core/back/CoreReadDbService');
 var CoreInsertDbService = require('../../../services/core/back/CoreInsertDbService');
 
-var pathTemplateBackCore =  sails.config.globals.templatePathBackCore;
+var CoreLoginService = require('../../../services/core/back/CoreLoginService');
+
+var pathTemplateBackCore = sails.config.globals.templatePathBackCore;
 
 module.exports = {
+
+    loginValidation: function (req, res) {
+
+
+        var isLogged = false;
+
+        if ( req.body && req.body.email && req.body.password) {
+
+
+            var email = req.body.email;
+            var password = req.body.password;
+            isLogged = CoreLoginService.login(req, res, email , password);
+
+            console.log('loginValidation - req', req.body);
+
+            // set the session token based on the user and password
+        }
+
+
+        if ( isLogged )
+        {
+        var result = {};
+
+        result.templateToInclude = 'admin';
+        result.pathToInclude = '../admin';
+
+        return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
+        }
+        else{
+            return res.redirect('/admin');
+        }
+
+    },
+
+
+    logout: function (req, res) {
+
+        //remove the token from session
+
+        CoreLoginService.logout(req, res);
+        return res.redirect('/admin');
+    }
+        ,
+
+        login: function (req, res) {
+
+        console.log('login');
+        var result = {};
+
+        result.templateToInclude = 'admin';
+        result.pathToInclude = '../admin';
+
+        var result;
+
+        return res.view(pathTemplateBackCore + 'admin/login.ejs', result);
+
+        // return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
+
+//        return res.ok('ok');
+
+        // return res.view('back/admin.ejs', result);
+
+    },
+
     index: function (req, res) {
         var result = {
             admin: req.session.user
@@ -90,7 +156,6 @@ module.exports = {
     },
 
 
-
     productCreate: function (req, res) {
 
 
@@ -106,12 +171,25 @@ module.exports = {
     menu: function (req, res) {
 
 
-        var result = {};
+        console.log('is logged', CoreLoginService.isLogged());
 
-        result.templateToInclude = 'admin';
-        result.pathToInclude = '../admin';
+        if (CoreLoginService.isLogged(req, res)) {
+            var result = {};
 
-        return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
+            result.templateToInclude = 'admin';
+            result.pathToInclude = '../admin';
+
+            return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
+        }
+
+        else {
+
+
+            return res.redirect('/admin/login');
+
+
+        }
+
 
     },
 

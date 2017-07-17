@@ -23,7 +23,7 @@ var theme = sails.config.globals.theme;
 
 module.exports = {
 
-    list: function (req, res) {
+    listProduct: function (req, res) {
         var result = {
             user: (req.session.hasOwnProperty('user')) ? req.session.user : undefined
         };
@@ -31,6 +31,11 @@ module.exports = {
         var query = {
             isSelling: true
         }
+
+        console.log('category - list - start ');
+        console.log('req query',  req.params);
+
+        var idCategory = req.params.id;
 
         if (req.query.name) {
             // query.name = new RegExp('/\s?[^a-z0-9\_]'+req.query.name+'[^a-z0-9\_]/i', 'g', 'gi');

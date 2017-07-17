@@ -20,7 +20,7 @@ module.exports = {
         var result = {};
 
         result.templateToInclude = 'category_create';
-        result.pathToInclude = '../notification/create';
+        result.pathToInclude = '../notification/configuration';
 
         return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
     }
