@@ -26,6 +26,7 @@ module.exports = {
      * `Admin/productController.new()`
      */
     create: function (req, res) {
+        var result = {};
 
         async.waterfall([
 
@@ -39,18 +40,22 @@ module.exports = {
 
                     console.log('promise return value:', idProduct);
 
-                    return next(null, idProduct);
+                    result.idProduct = idProduct;
+
+                    return next(null);
                 });
             },
-            /*function GetUserAndOrders (thumbnail, next) {
+         /*   function GetCategoryOption (idProduct, next) {
 
-                console.info('value 2nd function', thumbnail);
+                //console.info('value 2nd function', thumbnail);
 
-                var data2 = 20;
+                var categoryOption  = 'categoryOptionTest';
+                result.categoryOption = categoryOption;
 
-                return next(null, data2);
 
-            },*/
+                return next(null);
+
+            }
 
             /*function GetUserAndOrders2 (thumbnail, next) {
 
@@ -61,17 +66,25 @@ module.exports = {
 
             }*/
 
-        ], function (err, data) {
+        ], function (err) {
+
+
+            console.log('result', result);
+
+            console.log('err',err);
+           // console.log('idProd', data);
+           // console.log('cate', categoryOption);
+
             if (err) {
                 return res.serverError (err);
             }
             else
             {
-                console.log('productController - result', data);
-                var result = {};
+                //console.log('productController - result', data);
+
                 result.templateToInclude = 'product';
                 result.pathToInclude = '../product/create';
-                result.idProduct = data;
+
                 return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
             }
         });
