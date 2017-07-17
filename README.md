@@ -72,7 +72,7 @@ node app.js
 
      You can access at http://localhost:1338/admin
 
-### [Screenshot](http://www.ymple.com/screenshot.html)
+### [Screenshot](http://www.ymple.com/screenshot-front.html)
 
 
 Community
@@ -80,16 +80,16 @@ Community
 
 ### [Gitter](https://gitter.im/Ymple/ymple-commerce)
 
-### [Stackoverflow](http://http://stackoverflow.com/search?q=ymple+ecommerce)
+### [Stackoverflow](https://stackoverflow.com/search?q=ymple+ecommerce)
 
 
 
 Contributing
 --------
 
-YmpleCommerce is an Open Source project.
+Ymple Ecommerce is an Open Source project.
 
-If you want to contribute code to Ymple-Ecommerce, read the [CONTRIBUTING.md][7] file in this repository or read the [tutorials about contribution][8] on the documentation site.
+If you want to contribute code to Ymple Ecommerce, read the [CONTRIBUTING.md][7] file in this repository or read the [tutorials about contribution][8] on the documentation site.
 
 
 ========
