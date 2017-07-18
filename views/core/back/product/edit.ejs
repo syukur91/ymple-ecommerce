@@ -32,9 +32,28 @@
             </div>
             <div class="col-sm-6">
                 <label style="align-content: center;text-align: center">  <%= __('Category') %> </label>
-                           <input type="text" class="form-control" id="video" name="video"
-                                  placeholder="<%= __('Select the category') %>"
-                                  value="<% if (product && product.video) { %> <%= product.video %>  <% } %>">
+
+
+                        <select name="related" class="form-control">            
+
+                    <% if (typeof categoryOption == 'object' && categoryOption) { %>
+
+                    <% categoryOption.forEach(function(category){ %>
+
+                    <option value="<% category.id %>"><%= category.name %>
+                    </option>
+
+                    <% }) %>
+
+                    <% } else { %>
+
+                    <option value="Empty"> <%= __('Empty') %></option>
+
+                    <% } %>
+
+                </select>
+
+
 
             </div>
         </div>
