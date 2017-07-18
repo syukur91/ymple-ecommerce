@@ -32,71 +32,30 @@ module.exports = {
 
             function getNewIdProducT (next) {
 
-                //var data = 1111;
-
-                //console.log('next value 1rst function', data );
-
-                var newIdProduct = CoreReadDbService.getNewIdProduct().then(function(idProduct){
+                CoreReadDbService.getNewIdProduct().then(function(idProduct){
 
                     console.log('promise return value:', idProduct);
 
                     result.idProduct = idProduct;
 
-                    return next(null);
+                    CoreReadDbService.getCategoryList().then(function(categoryList){
+
+                        console.log('ProductController - categoryList', categoryList);
+
+                        result.categoryOption = categoryList;
+                        result.templateToInclude = 'product';
+                        result.pathToInclude = '../product/create';
+
+                        return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
+
+                    })
+
+                    return next(null, idProduct);
                 });
-            },
-         /*   function GetCategoryOption (idProduct, next) {
-
-                //console.info('value 2nd function', thumbnail);
-
-                var categoryOption  = 'categoryOptionTest';
-                result.categoryOption = categoryOption;
-
-
-                return next(null);
-
             }
 
-            /*function GetUserAndOrders2 (thumbnail, next) {
-
-                console.info('value 3rd function', thumbnail);
-                  var data2 = 20;
-
-                return next(null, data2);
-
-            }*/
-
-        ], function (err) {
-
-
-            console.log('result', result);
-
-            console.log('err',err);
-           // console.log('idProd', data);
-           // console.log('cate', categoryOption);
-
-            if (err) {
-                return res.serverError (err);
-            }
-            else
-            {
-                //console.log('productController - result', data);
-
-                result.templateToInclude = 'product';
-                result.pathToInclude = '../product/create';
-
-                return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
-            }
-        });
+        ]);
     },
-
-   /*     function (req, res) {
-        async.waterfall([
-        var newIdProduct = CoreReadDbService.getNewIdProduct('product').then(function(doc){
-                    console.log('promise return value:', doc);
-            return doc;
-            //return res.json({photos: photos.length});
-        });*/
 
     preview: function (req, res) {
         var result = {
@@ -143,7 +102,7 @@ module.exports = {
         var queryOptions = {
             where: {},
             skip: skip,
-            limit: 10,
+            limit: 20,
             sort: 'createdAt DESC'
         };
 
@@ -225,12 +184,20 @@ module.exports = {
                 {
                     result.idProduct = 0;
                 }
+                
+                CoreReadDbService.getCategoryList().then(function(categoryList){
 
-                console.info('edit query result', products);
-                console.info('edit - result', result);
-                result.templateToInclude = 'product_edit';
-                result.pathToInclude  = '../product/edit.ejs';
-                return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
+                    console.log('ProductController - categoryList', categoryList);
+
+                    result.categoryOption = categoryList;
+
+                    console.info('edit query result', products);
+                    console.info('edit - result', result);
+                    result.templateToInclude = 'product_edit';
+                    result.pathToInclude  = '../product/edit.ejs';
+                    return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
+                })
+
             });
 
         }

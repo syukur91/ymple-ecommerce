@@ -71,6 +71,7 @@ node app.js
 - BACK END
 
      You can access at http://localhost:1338/admin
+
      You can loggin with the user:  admin@admin.com and password: admin
 
 
