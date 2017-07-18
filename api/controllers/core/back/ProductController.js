@@ -184,7 +184,7 @@ module.exports = {
                 {
                     result.idProduct = 0;
                 }
-                
+
                 CoreReadDbService.getCategoryList().then(function(categoryList){
 
                     console.log('ProductController - categoryList', categoryList);
