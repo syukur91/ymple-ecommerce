@@ -26,13 +26,10 @@ System Dependencies
 
 How To Run
 --------
-- With Node Package
 
-    npm install ymple-ecommerce
+- With Github
 
-- INSTALLATION NPM
-
-npm install ymple-ecommerce
+git clone https://github.com/Ymple/ymple-ecommerce.git
 
 cd ymple-ecommerce
 
@@ -41,17 +38,19 @@ npm install
 node app.js
 
 
-- With Github
+- With Node Package
 
-Clone the Git project
+npm install ymple-ecommerce
 
-For Ubuntu and Centos run:
+node app.js
+
+
+- If necessary for Ubuntu and Centos run additional :
 
 npm install bcrypt
 
 npm install connect-mongo
 
-node app.js
 
 - CONFIGURATION
 
