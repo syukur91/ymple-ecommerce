@@ -1,6 +1,6 @@
 var CoreCommunDbService = require('../../../services/core/back/CoreCommunDbService');
 
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 
 var ObjectId = require('mongodb').ObjectID;
 

@@ -6,7 +6,7 @@
   },
   "homepage": "http://www.ymple.com",
   "private": false,
-  "version": "1.0.7",
+  "version": "1.0.9",
   "description": "a Nodejs and Sailsjs Ecommerce Solution ( E-commerce )",
   "keywords": [
     "ecommerce",
@@ -19,7 +19,7 @@
   ],
   "dependencies": {
     "async": "^2.4.1",
-    "bcrypt": "^0.8.7",
+    "bcryptjs": "^2.4.3",
     "bluebird": "^3.4.6",
     "connect-mongo": "^0.8.2",
     "csextends": "^1.1.1",

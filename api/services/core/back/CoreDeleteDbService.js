@@ -1,5 +1,5 @@
 //var nodemailer = require('nodemailer');
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 
 var host = sails.config.connections.mongodbServer.host;
 var port = sails.config.connections.mongodbServer.port;
