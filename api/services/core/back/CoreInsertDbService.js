@@ -2,7 +2,7 @@
 
 //var nodemailer = require('nodemailer');
 
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 
 // create reusable transporter object using SMTP transport
 //var transporter = nodemailer.createTransport({

@@ -7,7 +7,7 @@
 
 
 var async = require('async');
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 var pathToService = '../../../services/core/';
 var CoreReadDbService = require(pathToService + 'back/CoreReadDbService');
 var CoreInsertDbService = require(pathToService + 'back/CoreInsertDbService');
