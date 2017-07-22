@@ -55,10 +55,17 @@
         <div class="col-sm-3 col-md-3">
             <div class="thumbnail">
                 <a href="/product/<%= product.id %>">
-                    <% if (product.image ){ %>
+                    <% if (product.isImageAvailable == 1 ){ %>
+
                     <img class="img-rounded-ymple" src="/images/product/<%= product.idProduct %>/1.png">
+
+
+
                     <% }else { %>
-                    <img class="img-rounded-ymple" src="/images/new_prod_trans.jpg">
+
+                    <img class="img-rounded-ymple" src="/images/ymple/product-example.png">
+
+
                     <% } %>
                 </a>
 
