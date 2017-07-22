@@ -324,6 +324,34 @@ module.exports = {
         var result = {};
 
 
+
+        //check if module configuration is in json file
+
+        if ( checkIfConfigurationIsInJsonFile(nameModule))
+
+        {
+            result.templateToInclude = 'edit_module';
+            result.pathToInclude = '../module/edit.ejs';
+            //view_module_payment_'+nameModule;
+
+
+            //result.listConfiguration = configurationModule[0].configuration; //[];
+            result.listConfiguration = null; //[];
+
+            //console.log('ModuleController - edit', req.params.nameModule);
+
+            result.nameModule = nameModule;
+
+            return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
+
+        }
+
+        else{
+
+
+
+
+
         CoreReadDbService.getConfigurationModule(nameModule).then(function (configurationModule) {
 
 
@@ -336,6 +364,8 @@ module.exports = {
 
 
                 result.listConfiguration = configurationModule[0].configuration; //[];
+
+                console.info('listConfiguration', result.listConfiguration);
 
                 console.log('ModuleController - edit', req.params.nameModule);
 
@@ -355,6 +385,7 @@ module.exports = {
 
 
         });
+        }
 
     },
 
@@ -461,6 +492,24 @@ module.exports = {
 
 
 };
+
+
+function checkIfConfigurationIsInJsonFile(moduleName){
+
+
+    var output = false;
+
+    if ( moduleName == 'carousel'){
+
+        output = true;
+
+    }
+
+    return output;
+
+
+
+}
 
 function Urlify(text) {
     var urlRegex = /(https?:\/\/[^\s]+)/g;
