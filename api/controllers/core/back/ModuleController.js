@@ -331,7 +331,8 @@ module.exports = {
 
         {
             result.templateToInclude = 'edit_module';
-            result.pathToInclude = '../module/edit.ejs';
+            result.pathToInclude = '../module/template/carousel/edit.ejs';
+            result.moduleName = nameModule;
             //view_module_payment_'+nameModule;
 
 
@@ -397,10 +398,15 @@ module.exports = {
 
     editValidation: function (req, res) { // validate the edit of one module
 
+
+        try{
         var allParam = req.params.all();
         // get the parameters and update the table core_module_installed ( field configuration , field is active)
         console.log('ModuleController.js - editValidation - req', allParam);
-
+        }
+        catch (err){
+            console.log('ModuleController - err', err);
+        }
         return res.ok('Edit is done', req.body);
     },
 

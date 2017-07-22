@@ -11,7 +11,8 @@ module.exports.module = {
         template: {
             carousel: {
                 isActive: "1",
-                pathCarouselImage: '/assets/images/carousel/'
+                pathCarouselImage: '/assets/images/carousel/',
+                pathToInclude:  '../module/template/carousel/edit.ejs'
             },
 
             footer: {
