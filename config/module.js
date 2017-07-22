@@ -10,7 +10,8 @@ module.exports.module = {
 
         template: {
             carousel: {
-                isActive: "1"
+                isActive: "1",
+                pathCarouselImage: '/assets/images/carousel/'
             },
 
             footer: {
