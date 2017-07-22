@@ -8,9 +8,18 @@ module.exports.module = {
      ***************************************************************************/
     category: {
 
+        template: {
+            carousel: {
+                isActive: "1"
+            },
+
+            footer: {
+
+                isActive: "0"
+            }
+        },
 
         payment: {
-
 
             paypal: {
 
@@ -26,8 +35,6 @@ module.exports.module = {
                     controller: "xx",
                     service: "xx",
                     template: "xx"
-
-
                 }
             }
 
