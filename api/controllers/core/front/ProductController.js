@@ -12,9 +12,11 @@ var pathToService = '../../../services/core/';
 var CoreReadDbService = require(pathToService + 'back/CoreReadDbService');
 var CoreInsertDbService = require(pathToService + 'back/CoreInsertDbService');
 
-var pathTemplateFrontCore =  sails.config.globals.templatePathFrontCore;
+var pathTemplateFrontCore = sails.config.globals.templatePathFrontCore;
 
 var theme = sails.config.globals.theme;
+
+var _ = require('underscore');
 
 
 module.exports = {
@@ -91,7 +93,34 @@ module.exports = {
                 }, function (err, products) {
                     if (err) next(err);
 
-                    result.products = products
+                    // check if the image is available
+                    var fs = require('fs');
+
+                    _.each(products, function (val, key) {
+                        if (val) {
+
+                            if (val && val.image && val.image[0]) {
+
+                                products[key]['isImageAvailable'] = 0;
+
+                                var path = val.image[0];
+
+                                console.log('val', val);
+
+                                var path = 'assets/images/product/' + val.idProduct + '/1.png';
+
+                                console.log('path', path);
+
+                                if (fs.existsSync(path)) {
+
+                                    products[key]['isImageAvailable'] = 1;
+                                }
+                            }
+                        }
+                    });
+
+                    console.log('new products', products);
+                    result.products = products;
 
                     console.info('productController products', products)
 
@@ -113,7 +142,7 @@ module.exports = {
         ], function (err) {
             if (err) return res.serverError(err);
 
-            if (req.session.hasOwnProperty('cart')){
+            if (req.session.hasOwnProperty('cart')) {
                 result.cart = req.session.cart;
             }
             else {
@@ -121,7 +150,6 @@ module.exports = {
             }
             result.query = req.query.name;
             result.showSearchMenu = 1;
-
 
 
             return res.view(theme + 'index.ejs', result);

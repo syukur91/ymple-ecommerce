@@ -8,9 +8,20 @@ module.exports.module = {
      ***************************************************************************/
     category: {
 
+        template: {
+            carousel: {
+                isActive: "1",
+                pathCarouselImage: '/assets/images/carousel/',
+                pathToInclude:  '../module/template/carousel/edit.ejs'
+            },
+
+            footer: {
+
+                isActive: "0"
+            }
+        },
 
         payment: {
-
 
             paypal: {
 
@@ -26,8 +37,6 @@ module.exports.module = {
                     controller: "xx",
                     service: "xx",
                     template: "xx"
-
-
                 }
             }
 

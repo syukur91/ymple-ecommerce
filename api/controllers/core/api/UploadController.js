@@ -71,6 +71,78 @@ module.exports = {
         return res.json({
             todo: 'imageProduct() is not implemented yet!'
         });
+    },
+
+    saveImageModule: function (req, res) {
+
+
+        try {
+
+            console.log('uploadController - req.params', req.params); // we have the product id
+
+            console.log('uploadController - imageProduct - idProduct', req.params.idProduct); // we have the product id
+        }
+        catch (err){
+            console.log ( err);
+        }
+
+
+        var idProduct = req.params.idProduct;
+
+        var fs = require("fs");
+
+        console.info('image upload');
+
+        req.file('file').upload(function (err, uploadedFiles) {
+
+            console.info('uploaded file');
+            console.info(uploadedFiles);
+
+            if (uploadedFiles[0].fd) {
+                var filePath = uploadedFiles[0].fd;
+
+                var numberImage = 1;
+
+                var dir = 'assets/images/carousel/'+numberImage+ '/';
+                var dir2 = '.tmp/public/images/carousel/'+numberImage+ '/';
+
+
+                if (!fs.existsSync(dir)){
+                    fs.mkdirSync(dir);
+                }
+
+                if (!fs.existsSync(dir2)){
+                    fs.mkdirSync(dir2);
+                }
+
+                var filePathFinal1 = '/images/carousel/'+numberImage + '/carousel.png';
+                var filePathFinal2 = '.tmp/public/images/carousel/'+numberImage+ '/carousel.png';
+
+
+                // copy of the file to assets/images/
+
+                try {
+                fs.createReadStream(filePath).pipe(fs.createWriteStream('assets'+filePathFinal1));
+                fs.createReadStream(filePath).pipe(fs.createWriteStream(filePathFinal2));
+                }
+                catch (err){
+                    console.log('create image carousel - err', err);
+                }
+            }
+
+            // add the imagePath for this product
+
+            console.log('UploadController - saveImageProduct - start' );
+            // CoreInsertDbService.saveImageProduct(idProduct, filePathFinal1);
+            // CoreInsertDbService.saveImageProduct(idProduct, filePathFinal2);
+
+
+        });
+
+        return res.json({
+            todo: 'imageProduct() is not implemented yet!'
+        });
     }
+
 };
 

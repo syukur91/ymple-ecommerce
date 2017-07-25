@@ -13,19 +13,19 @@
             <!-- Wrapper for slides -->
             <div class="carousel-inner">
                 <div class="item active">
-                    <img src="http://placehold.it/800x300" alt="...">
+                    <img src="/images/carousel/1/carousel.png" alt="...">
                     <div class="carousel-caption">
                         <h2>Heading</h2>
                     </div>
                 </div>
                 <div class="item">
-                    <img src="http://placehold.it/800x300" alt="...">
+                    <img src="/images/carousel/1/carousel.png" alt="...">
                     <div class="carousel-caption">
                         <h2>Heading</h2>
                     </div>
                 </div>
                 <div class="item">
-                    <img src="http://placehold.it/800x300" alt="...">
+                    <img src="/images/carousel/1/carousel.png" alt="...">
                     <div class="carousel-caption">
                         <h2>Heading</h2>
                     </div>
@@ -55,10 +55,17 @@
         <div class="col-sm-3 col-md-3">
             <div class="thumbnail">
                 <a href="/product/<%= product.id %>">
-                    <% if (product.image ){ %>
-                    <img class="img-rounded-ymple" src="/images/product/<%= product.idProduct %>/1.png">
+                    <% if (product.isImageAvailable == 1 ){ %>
+
+                    <img style="height: 200px;width: 250px;" class="img-rounded-ymple" src="/images/product/<%= product.idProduct %>/1.png">
+
+
+
                     <% }else { %>
-                    <img class="img-rounded-ymple" src="/images/new_prod_trans.jpg">
+
+                    <img style="height: 200px;width: 250px;" class="img-rounded-ymple" src="/images/ymple/product-example.png">
+
+
                     <% } %>
                 </a>
 

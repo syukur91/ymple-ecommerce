@@ -11,26 +11,14 @@ var Promise = require('bluebird');
 var pathToService = '../../../services/core/';
 var CoreReadDbService = require(pathToService + 'back/CoreReadDbService');
 var CoreInsertDbService = require(pathToService + '/back/CoreInsertDbService');
-var pathTemplateBackCore =  sails.config.globals.templatePathBackCore;
+var pathTemplateBackCore = sails.config.globals.templatePathBackCore;
+var _ = require('underscore');
+
 
 module.exports = {
 
 
     manage: function (req, res) {
-
-
-
-       /*
-
-
-       To display the configuration we read the configuration file
-
-       var jsonfile = require('jsonfile')
-        var file = '/tmp/data.json'
-        jsonfile.readFile(file, function(err, obj) {
-            console.dir(obj)
-        })*/
-
 
         CoreReadDbService.getListCoreModuleInstalled().then(function (data) {
 
@@ -38,7 +26,7 @@ module.exports = {
 
             var result = {};
             result.templateToInclude = 'module_manage';
-            result.pathToInclude =  '../module/manage.ejs';
+            result.pathToInclude = '../module/manage.ejs';
             result.idProduct = 0;
             result.listCoreModule = '';
             if (data) {
@@ -146,20 +134,45 @@ module.exports = {
 
         CoreReadDbService.getListCoreModuleInstalled().then(function (data) {
 
-            console.log('ModuleController - search', data);
+            console.log('ModuleController - search', data); // add the module list from the configuration file
+            var configurationModuleTemplate = sails.config.module.category.template;
+            console.log('configurationModule', configurationModuleTemplate);
+
+            var connections = require('../../../../config/module');
+
+            console.log('connections', connections.module.category.template);
 
             var result = {};
+            if (data) {
+                result.listModule = data;
+            }
+            try {
+
+                _.each(configurationModuleTemplate, function (val, key) {
+                    var item = {
+
+                        idModule: 0, category: "template", configuration: "", description: "", createAt: "", name: key,
+                        isActive: val.isActive
+                    };
+
+                    result.listModule.push(item);
+
+                })
+
+            } catch (err) {
+                // Handle the error here.
+                console.log(err);
+
+            }
+
             result.templateToInclude = 'list_module';
             result.pathToInclude = '../module/list.ejs';
             result.idProduct = 0;
             result.listCoreModule = '';
-            if (data) {
-                result.listModule = data;
-            }
+
             return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
 
         });
-
     },
 
     /* edit: function (req, res, id) {
@@ -307,29 +320,73 @@ module.exports = {
 
         console.log('ModuleController - edit - nameModule', nameModule);
 
+
         var result = {};
+
+
+
+        //check if module configuration is in json file
+
+        if ( checkIfConfigurationIsInJsonFile(nameModule))
+
+        {
+            result.templateToInclude = 'edit_module';
+            result.pathToInclude = '../module/template/carousel/edit.ejs';
+            result.moduleName = nameModule;
+            //view_module_payment_'+nameModule;
+
+
+            //result.listConfiguration = configurationModule[0].configuration; //[];
+            result.listConfiguration = null; //[];
+
+            //console.log('ModuleController - edit', req.params.nameModule);
+
+            result.nameModule = nameModule;
+
+            return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
+
+        }
+
+        else{
+
+
+
 
 
         CoreReadDbService.getConfigurationModule(nameModule).then(function (configurationModule) {
 
 
-            console.log('listconfiguration', configurationModule[0].configuration);
-            result.templateToInclude = 'edit_module';
-            result.pathToInclude = '../module/edit.ejs';
-            //view_module_payment_'+nameModule;
+            try {
+
+                console.log('listconfiguration', configurationModule[0].configuration);
+                result.templateToInclude = 'edit_module';
+                result.pathToInclude = '../module/edit.ejs';
+                //view_module_payment_'+nameModule;
 
 
-            result.listConfiguration = configurationModule[0].configuration; //[];
+                result.listConfiguration = configurationModule[0].configuration; //[];
 
-            console.log('ModuleController - edit', req.params.nameModule);
+                console.info('listConfiguration', result.listConfiguration);
 
-            result.nameModule = nameModule;
+                console.log('ModuleController - edit', req.params.nameModule);
+
+                result.nameModule = nameModule;
+
+            }
+            catch (err) {
+
+                console.log('err', err);
+
+            }
 
             //{userNameApi:'userNameApi',passwordApi:'passwordApi'};
+
+
             return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
 
 
         });
+        }
 
     },
 
@@ -341,10 +398,15 @@ module.exports = {
 
     editValidation: function (req, res) { // validate the edit of one module
 
+
+        try{
         var allParam = req.params.all();
         // get the parameters and update the table core_module_installed ( field configuration , field is active)
         console.log('ModuleController.js - editValidation - req', allParam);
-
+        }
+        catch (err){
+            console.log('ModuleController - err', err);
+        }
         return res.ok('Edit is done', req.body);
     },
 
@@ -436,6 +498,24 @@ module.exports = {
 
 
 };
+
+
+function checkIfConfigurationIsInJsonFile(moduleName){
+
+
+    var output = false;
+
+    if ( moduleName == 'carousel'){
+
+        output = true;
+
+    }
+
+    return output;
+
+
+
+}
 
 function Urlify(text) {
     var urlRegex = /(https?:\/\/[^\s]+)/g;
