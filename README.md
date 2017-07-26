@@ -22,7 +22,6 @@ System Dependencies
 * Node.js v4.4.1, v5 or v7
 * MongoDB v3.2.6
 * npm v 4.6.1 ( npm install npm@4 -g )
-* bcrypt@0.8.7 (npm install bcrypt)
 
 How To Run
 --------
