@@ -4,6 +4,10 @@ module.exports.routes = {
     'GET    /admin/module': {view: 'core/back/module/index'},
     'GET    /admin/module/create': 'core/back/moduleController.create',
     'GET    /admin/module/list/': 'core/back/moduleController.list',
+    // list all the modules for one category
+    'GET    /admin/module/list/:nameModule': 'core/back/moduleController.listForOneModule',
+
+
     'GET    /admin/module/search': 'core/back/moduleController.search', // return the list of module to be added
     '/admin/module/install/': 'core/back/moduleController.install', // edit a module
     '/admin/module/edit/:nameModule': 'core/back/moduleController.edit', // edit a module

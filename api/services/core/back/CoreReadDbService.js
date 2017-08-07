@@ -123,6 +123,14 @@ module.exports = {
             })
     },
 
+
+    getListModuleOneCategory: function(){
+
+
+      // return the list of module for one category
+
+    },
+
     getListCoreModuleInstalled: function () {
 
         return new Promise(
