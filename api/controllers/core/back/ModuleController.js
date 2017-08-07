@@ -63,19 +63,15 @@ module.exports = {
                 return res.serverError(err);
             }
             else {
-
                 console.log('productController - result', data);
 
                 var result = {};
-                result.templateToInclude = 'moduleInstallNew';
+                result.templateToInclude = 'installNew';
+                result.pathToInclude = '../module/manage.ejs';
                 result.idProduct = data;
                 return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
 
             }
-
-            //result.templateToInclude  = 'adminUserProfile';
-
-            // return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
         });
 
         //result.templateToInclude  = 'adminUserProfile';
@@ -128,6 +124,55 @@ module.exports = {
             return res.view(pathTemplateBackCore + 'product/detail.ejs', result);
         });
     },
+
+
+    // list all the module for one category
+    listForOneModule: function (req, res) {
+
+
+        CoreReadDbService.getListModuleOneCategory().then(function (data) {
+
+            console.log('ModuleController - search', data); // add the module list from the configuration file
+            var configurationModuleTemplate = sails.config.module.category.template;
+            console.log('configurationModule', configurationModuleTemplate);
+
+            var connections = require('../../../../config/module');
+
+            console.log('connections', connections.module.category.template);
+
+            var result = {};
+            if (data) {
+                result.listModule = data;
+            }
+            try {
+
+                _.each(configurationModuleTemplate, function (val, key) {
+                    var item = {
+
+                        idModule: 0, category: "template", configuration: "", description: "", createAt: "", name: key,
+                        isActive: val.isActive
+                    };
+
+                    result.listModule.push(item);
+
+                })
+
+            } catch (err) {
+                // Handle the error here.
+                console.log(err);
+
+            }
+
+            result.templateToInclude = 'list_module';
+            result.pathToInclude = '../module/list.ejs';
+            result.idProduct = 0;
+            result.listCoreModule = '';
+
+            return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
+
+        });
+    },
+
 
     list: function (req, res) {
 
@@ -324,12 +369,9 @@ module.exports = {
         var result = {};
 
 
-
         //check if module configuration is in json file
 
-        if ( checkIfConfigurationIsInJsonFile(nameModule))
-
-        {
+        if (checkIfConfigurationIsInJsonFile(nameModule)) {
             result.templateToInclude = 'edit_module';
             result.pathToInclude = '../module/template/carousel/edit.ejs';
             result.moduleName = nameModule;
@@ -347,45 +389,42 @@ module.exports = {
 
         }
 
-        else{
+        else {
 
 
+            CoreReadDbService.getConfigurationModule(nameModule).then(function (configurationModule) {
 
 
+                try {
 
-        CoreReadDbService.getConfigurationModule(nameModule).then(function (configurationModule) {
-
-
-            try {
-
-                console.log('listconfiguration', configurationModule[0].configuration);
-                result.templateToInclude = 'edit_module';
-                result.pathToInclude = '../module/edit.ejs';
-                //view_module_payment_'+nameModule;
+                    console.log('listconfiguration', configurationModule[0].configuration);
+                    result.templateToInclude = 'edit_module';
+                    result.pathToInclude = '../module/edit.ejs';
+                    //view_module_payment_'+nameModule;
 
 
-                result.listConfiguration = configurationModule[0].configuration; //[];
+                    result.listConfiguration = configurationModule[0].configuration; //[];
 
-                console.info('listConfiguration', result.listConfiguration);
+                    console.info('listConfiguration', result.listConfiguration);
 
-                console.log('ModuleController - edit', req.params.nameModule);
+                    console.log('ModuleController - edit', req.params.nameModule);
 
-                result.nameModule = nameModule;
+                    result.nameModule = nameModule;
 
-            }
-            catch (err) {
+                }
+                catch (err) {
 
-                console.log('err', err);
+                    console.log('err', err);
 
-            }
+                }
 
-            //{userNameApi:'userNameApi',passwordApi:'passwordApi'};
-
-
-            return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
+                //{userNameApi:'userNameApi',passwordApi:'passwordApi'};
 
 
-        });
+                return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
+
+
+            });
         }
 
     },
@@ -399,12 +438,12 @@ module.exports = {
     editValidation: function (req, res) { // validate the edit of one module
 
 
-        try{
-        var allParam = req.params.all();
-        // get the parameters and update the table core_module_installed ( field configuration , field is active)
-        console.log('ModuleController.js - editValidation - req', allParam);
+        try {
+            var allParam = req.params.all();
+            // get the parameters and update the table core_module_installed ( field configuration , field is active)
+            console.log('ModuleController.js - editValidation - req', allParam);
         }
-        catch (err){
+        catch (err) {
             console.log('ModuleController - err', err);
         }
         return res.ok('Edit is done', req.body);
@@ -500,19 +539,18 @@ module.exports = {
 };
 
 
-function checkIfConfigurationIsInJsonFile(moduleName){
+function checkIfConfigurationIsInJsonFile(moduleName) {
 
 
     var output = false;
 
-    if ( moduleName == 'carousel'){
+    if (moduleName == 'carousel') {
 
         output = true;
 
     }
 
     return output;
-
 
 
 }

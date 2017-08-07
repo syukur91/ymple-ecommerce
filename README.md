@@ -2,6 +2,12 @@
 <a href="http://www.ymple.com"><img alt="Ymple Ecommerce" src="http://www.ymple.com/assets/img/colors/blue/logo_big.png" title="Ymple Ecommerce"/></a>
 </h1>
 
+Version 1.3.0 (planned 2018.9)
+
+Version 1.2.0 (planned 2018.3)
+
+Version 1.1.0 (planned 2017.9)
+
 Version 1.0.0 (released 2017.6)
 
 Version 0.2.0 (released 2017.4)
@@ -14,7 +20,9 @@ Version 0.1.1 (released 2016.11)
 ### [Demo](http://demo.ymple.com/)
 
 
-Open Source E-Commerce Solution for Everyone built with Sails.js (Node.js + MongoDB)
+Open Source Ecommerce Open Source Solution for Everyone built with Sails.js (Node.js + MongoDB)
+
+It's intended to be a fully engaged community project, and we're greatly welcoming contributions from the development community.
 
 System Dependencies
 --------
@@ -42,14 +50,6 @@ node app.js
 npm install ymple-ecommerce
 
 node app.js
-
-
-- If necessary for Ubuntu and Centos run additional :
-
-npm install bcrypt
-
-npm install connect-mongo
-
 
 - CONFIGURATION
 
