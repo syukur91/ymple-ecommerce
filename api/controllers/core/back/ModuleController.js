@@ -128,7 +128,72 @@ module.exports = {
 
     // list all the module for one category
     listForOneModule: function (req, res) {
+        console.log('getListModuleOneCategory - req', req.params);
 
+
+        var result = [];
+        result.listModule = [];
+
+        if (req.params && req.params.nameModule) {
+
+            var nameModule = req.params.nameModule;
+
+            if (nameModule == "deliver") {
+
+                var item = {
+
+                    idModule: 0,
+                    category: "delivery",
+                    configuration: "",
+                    description: "",
+                    createAt: "",
+                    name: nameModule,
+                    isActive: 1
+                };
+
+                result.listModule.push(item);
+
+            }
+            else if (nameModule == "payment") {
+
+                var item =[ {
+
+                    idModule: 0,
+                    category: nameModule,
+                    configuration: "",
+                    description: "",
+                    createAt: "",
+                    name: "Paypal",
+                    isActive: 1
+                },
+
+                    {
+
+                        idModule: 0,
+                        category: nameModule,
+                        configuration: "",
+                        description: "",
+                        createAt: "",
+                        name: "Stripe",
+                        isActive: 1
+                    }]
+
+
+
+
+                ;
+
+                result.listModule = item;
+
+            }
+
+            result.templateToInclude = 'list_module';
+            result.pathToInclude = '../module/list.ejs';
+            result.idProduct = 0;
+            result.listCoreModule = '';
+
+            return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
+        }
 
         CoreReadDbService.getListModuleOneCategory().then(function (data) {
 
@@ -220,59 +285,8 @@ module.exports = {
         });
     },
 
-    /* edit: function (req, res, id) {
-
-     var result = {};
-     // we take the id of the product and get all the product details to set the template
-     //     console.info('modification product - req: ', req);
-     console.info('modification product id: ', req.params.id);
-     console.info(req.params.id.length);
-
-     if (req.params.id && (req.params.id.length > 0 )) {
-     // we retrieve the product informations
-     var productId = req.params.id;
-     var queryOptions = {
-     where: {id: productId},
-     //         skip: skip,
-     limit: 10,
-     sort: 'createdAt DESC'
-     };
-
-     Product.find(queryOptions, function (err, products) {
-     if (err) next(err);
-
-     result.product = {};
-     result.product = products[0];
-
-     if (products[0].idProduct) {
-     result.idProduct = products[0].idProduct;
-     }
-     else {
-     result.idProduct = 0;
-     }
-
-     console.info('edit query result', products);
-     console.info('edit - result', result);
-     result.templateToInclude = 'productModification';
-     return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
-     });
-
-     }
-     else {
-     result.templateToInclude = 'productModification';
-     return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
-     }
-
-
-     /* return res.json({
-     todo: 'new() is not implemented yet!'
-     });
-     },*/
-
 
     productNewValidation: function (req, res) {
-
-        console.info('req');
         console.info(req.body);
 
         if (req && req.body && req.body.name) {
@@ -368,7 +382,6 @@ module.exports = {
 
         var result = {};
 
-
         //check if module configuration is in json file
 
         if (checkIfConfigurationIsInJsonFile(nameModule)) {
@@ -376,8 +389,6 @@ module.exports = {
             result.pathToInclude = '../module/template/carousel/edit.ejs';
             result.moduleName = nameModule;
             //view_module_payment_'+nameModule;
-
-
             //result.listConfiguration = configurationModule[0].configuration; //[];
             result.listConfiguration = null; //[];
 
@@ -387,13 +398,9 @@ module.exports = {
 
             return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
 
-        }
-
-        else {
-
+        } else {
 
             CoreReadDbService.getConfigurationModule(nameModule).then(function (configurationModule) {
-
 
                 try {
 
@@ -401,7 +408,6 @@ module.exports = {
                     result.templateToInclude = 'edit_module';
                     result.pathToInclude = '../module/edit.ejs';
                     //view_module_payment_'+nameModule;
-
 
                     result.listConfiguration = configurationModule[0].configuration; //[];
 
@@ -413,20 +419,15 @@ module.exports = {
 
                 }
                 catch (err) {
-
                     console.log('err', err);
-
                 }
 
                 //{userNameApi:'userNameApi',passwordApi:'passwordApi'};
 
-
                 return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
-
 
             });
         }
-
     },
 
     inactivate: function (req, res, nameModule) {

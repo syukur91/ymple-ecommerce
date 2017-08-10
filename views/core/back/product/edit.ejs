@@ -34,13 +34,13 @@
                 <label style="align-content: center;text-align: center">  <%= __('Category') %> </label>
 
 
-                        <select name="related" class="form-control">            
+                        <select id = "idCategory" name="idCategory" class="form-control">            
 
                     <% if (typeof categoryOption == 'object' && categoryOption) { %>
 
                     <% categoryOption.forEach(function(category){ %>
 
-                    <option value="<% category.id %>"><%= category.name %>
+                    <option value="<%= category.idCategory %>"><%= category.name %>
                     </option>
 
                     <% }) %>

@@ -105,7 +105,8 @@ getValueFromArray = function (data, element, type) {
                     description: description,
                     createdAt: createdAt,
                     updatedAt: updatedAt,
-                    image: image
+                    image: image,
+                    idCategory: parseInt(data.idCategory)
                 }
 
                 console.log('insert test2');

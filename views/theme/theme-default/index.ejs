@@ -1,6 +1,5 @@
 <%- include ../../core/commun/library.ejs %>
 
-
 <%- include ../../core/front/templates.navbar.ejs %>
 
 <%- include ../../core/front/bar/category.ejs %>
@@ -9,23 +8,14 @@
 <%#= __('name_shop') %>
 
 <div class="container" width="100%">
-    <% if (products.length == 0) { %>
-    <div style="text-align: center; margin: 150px;">
-        <h3><i class="fa fa-fw fa-warning"></i></h3>
-        <h3><%= __('This item is not yet registered.') %></h3>
-    </div>
-    <% } %>
-
 
     <%- include product/list.ejs %>
 
 
-</div><!-- /.container -->
-
+</div>
 
 <%- include ../../core/front/bar/news-letter.ejs %>
 
 <%- include ../../core/front/layout %>
-
 
 <%- include ../../core/front/product/javascript.ejs%>
