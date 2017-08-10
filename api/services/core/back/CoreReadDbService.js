@@ -207,6 +207,46 @@ module.exports = {
         return promise;
     },
 
+
+
+    getProductListFromOneCategory: function (idCategory) { // return the data and item information about one order
+
+        var promise = new Promise(
+            function (resolve, reject) {
+
+                var collection = "product";
+
+                console.log('getProductListFromOneCategory - idCategory', idCategory);
+
+                var MongoClient = require('mongodb').MongoClient;
+
+                MongoClient.connect(url, function (err, db) {
+
+                    var col = db.collection(collection);
+
+                    //var idProduct = input[0].id;
+
+                    var findQuery =  {"idCategory": idCategory};
+
+                    col.find(
+                        findQuery
+                    ).toArray(function (err, data) {
+                        //db.close();
+                        console.log(err);
+
+                        console.log('returnItemWithPriceForOrder - data', data);
+
+                        resolve(data);    //docs[0].name.toString()); // returns to the function that calls the callback
+                    })
+                })
+            })
+
+        return promise;
+
+    },
+
+
+
     returnItemWithPriceForOrder: function (input) { // return the data and item information about one order
 
         var promise = new Promise(
