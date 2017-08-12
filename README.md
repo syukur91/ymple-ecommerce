@@ -1,10 +1,10 @@
 <h1>
-<a href="http://www.ymple.com"><img alt="Ymple Ecommerce" src="http://www.ymple.com/assets/img/colors/blue/logo_big.png" title="Ymple Ecommerce"/></a>
+<a href="http://www.ymple.com"><img alt="Ymple Ecommerce" src="https://www.ymple.com/img/colors/blue/logo_big.png" title="Ymple Ecommerce"/></a>
 </h1>
 
-Version 1.3.0 (planned 2018.9)
+Version 1.3.0 (planned 2017.12)
 
-Version 1.2.0 (planned 2018.3)
+Version 1.2.0 (planned 2017.10)
 
 Version 1.1.0 (planned 2017.9)
 
