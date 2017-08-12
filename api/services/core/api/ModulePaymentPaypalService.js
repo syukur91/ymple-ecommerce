@@ -1,6 +1,8 @@
 /* Copyright 2016 PayPal */
 "use strict";
 var paypal = require('paypal-rest-sdk');
+var CoreReadDbService = require('../back/CoreReadDbService');
+
 
 
 module.exports = {
@@ -155,34 +157,54 @@ module.exports = {
             'client_secret': client_secret
         });
 
-        var payerId = req.query.PayerID;
-        var paymentId = req.query.paymentId;
-        var execute_payment_json = {
-            "payer_id": payerId,
-            "transactions": [{
-                "amount": {
-                    "currency": "EUR",
-                    "total": "22"
+
+
+
+
+        var idOrder = req.params.idPayment;
+
+
+
+        //[start]: query to get total amount
+        CoreReadDbService.getTotalAmountForOneOrder(idOrder).then(function (total) {
+
+
+            console.log( 'from query to get total amount - total',total );
+
+            var payerId = req.query.PayerID;
+            var paymentId = req.query.paymentId;
+            var execute_payment_json = {
+                "payer_id": payerId,
+                "transactions": [{
+                    "amount": {
+                        "currency": "EUR",
+                        "total": "22"
+                    }
+                }]
+            };
+
+            paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
+                if (error) {
+                    console.log(error.response);
+
+                    res.redirect(redirectUrlConfirmationError); // confirmation of the execute
+
+                    throw error;
+                } else {
+
+
+                    console.log("Get Payment Response");
+                    console.log(JSON.stringify(payment));
+
+                    res.redirect(redirectUrlConfirmationSuccess); // confirmation of the execute
                 }
-            }]
-        };
-
-        paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
-            if (error) {
-                console.log(error.response);
-
-                res.redirect(redirectUrlConfirmationError); // confirmation of the execute
-
-                throw error;
-            } else {
+            });
 
 
-                console.log("Get Payment Response");
-                console.log(JSON.stringify(payment));
-
-                res.redirect(redirectUrlConfirmationSuccess); // confirmation of the execute
-            }
         });
+        // [end query to get total amount]
+
+
     }
 
 
