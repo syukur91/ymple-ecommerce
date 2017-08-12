@@ -6,27 +6,19 @@ var paypal = require('paypal-rest-sdk');
 module.exports = {
 
 
-
-
-    paymentActionWithPaypal: function(req, res, mode, client_id, client_secret, itemList, amount) {
-
+    paymentActionWithPaypal: function (req, res, mode, client_id, client_secret, itemList, amount) {
 
         // using the req.session we set the item and amount for paypal json data
-
-
         // we get the mode, client_id, and client_secret from collection
 
         var idPayment = req.params.idPayment;
-
         var baseUrl = req.baseUrl;
 
         console.log('req.path', req.path);
 
         var urlPath = req.path; // containing the id payment
-
-        var redirectUrlSuccess = baseUrl+'/payment/paypal/execute/success/'+idPayment;
-
-        var redirectUrlCancel= baseUrl+'/payment/paypal/execute/cancel/'+idPayment;
+        var redirectUrlSuccess = baseUrl + '/payment/paypal/execute/success/' + idPayment;
+        var redirectUrlCancel = baseUrl + '/payment/paypal/execute/cancel/' + idPayment;
 
         paypal.configure({
             'mode': mode, //sandbox or live
@@ -69,8 +61,7 @@ module.exports = {
     },
 
 
-
-    paymentActionWithCreditCard: function(req, res, mode, client_id, client_secret){
+    paymentActionWithCreditCard: function (req, res, mode, client_id, client_secret) {
 
         paypal.configure({
             'mode': mode, //sandbox or live
@@ -79,18 +70,17 @@ module.exports = {
         });
 
 
-       /* 'mode': 'sandbox', //sandbox or live
-            'client_id': '',
-            'client_secret': ''
-*/
+        /* 'mode': 'sandbox', //sandbox or live
+         'client_id': '',
+         'client_secret': ''
+         */
 
 
         /*paypal.configure({
-            'mode': 'live', // live
-            'client_id': '',
-            'client_secret': ''
-        });*/
-
+         'mode': 'live', // live
+         'client_id': '',
+         'client_secret': ''
+         });*/
 
 
         console.log('[start]: paymentActionWithCreditCard');
@@ -106,7 +96,7 @@ module.exports = {
                         "number": "",
                         "expire_month": "",
                         "expire_year": "",
-                        "cvv2":"" ,
+                        "cvv2": "",
                         "first_name": "",
                         "last_name": "",
                         "billing_address": {
@@ -140,37 +130,23 @@ module.exports = {
                 console.log("Create Payment Response");
                 console.log(payment);
             }
-
-            return  'transaction done';
-
-
+            return 'transaction done';
         });
     },
 
 
-    paymentPaypalExecute: function(req, res, mode, client_id, client_secret){
-
-
-
+    paymentPaypalExecute: function (req, res, mode, client_id, client_secret) {
 
         var idPayment = req.params.idPayment;
-
         var baseUrl = req.baseUrl;
 
         // console.log('req.path', req.path);
-
         // var urlPath = req.path; // containing the id payment
 
-        var redirectUrlConfirmationSuccess = baseUrl+'/payment/paypal/execute/confirmation/success/'+idPayment;
-        var redirectUrlConfirmationError = baseUrl+'/payment/paypal/execute/confirmation/error/'+idPayment;
-
-
-
-
+        var redirectUrlConfirmationSuccess = baseUrl + '/payment/paypal/execute/confirmation/success/' + idPayment;
+        var redirectUrlConfirmationError = baseUrl + '/payment/paypal/execute/confirmation/error/' + idPayment;
 
         // we retrieve from the redirect the value payerId and paymentId
-
-
         console.log('ModulePaymentPaypalService - paymentPaypalExecute - req.query', req.query);
 
         paypal.configure({
@@ -179,23 +155,17 @@ module.exports = {
             'client_secret': client_secret
         });
 
-
-
         var payerId = req.query.PayerID;
-
         var paymentId = req.query.paymentId;
-
         var execute_payment_json = {
             "payer_id": payerId,
             "transactions": [{
                 "amount": {
-                    "currency": "USD",
-                    "total": "0.07"
+                    "currency": "EUR",
+                    "total": "22"
                 }
             }]
         };
-
-
 
         paypal.payment.execute(paymentId, execute_payment_json, function (error, payment) {
             if (error) {

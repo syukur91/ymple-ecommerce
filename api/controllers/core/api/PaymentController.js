@@ -71,8 +71,11 @@ module.exports = {
                 console.log('arg1 at the end', arg1);
                 console.log('arg2 at the end', arg2);
                 console.log('paypalpay - getItemPaymentFromOrder');
-                var itemList = getItemListFromDataOrder(arg2);
-                var amount = getAmountFromDataOrder(arg2);
+
+                var currency = "EUR";
+
+                var itemList = getItemListFromDataOrder(arg2, currency);
+                var amount = getAmountFromDataOrder(arg2, currency);
 
                 //process.exit();
 
@@ -119,25 +122,27 @@ module.exports = {
 }
 
 
-function getItemListFromDataOrder(input) {
+function getItemListFromDataOrder(input, currency) {
 
     var output = {
-        "items": [{
-            "name":input[0].name,
-            "sku": "item12222",
-            "price": input[0].price,
-            "currency": "USD",
-            "quantity": 1
-        },
-
+        "items": [
 
             {
-                "name": "item2",
-                "sku": "item2",
-                "price": "0.00",
-                "currency": "USD",
+                "name": input[0].name,
+                "sku": "item12222",
+                "price": input[0].price,
+                "currency": currency,
                 "quantity": 1
             }
+
+            /*,
+             {
+             "name": "item2",
+             "sku": "item2",
+             "price": "0.00",
+             "currency": "USD",
+             "quantity": 1
+             }*/
         ]
     };
 
@@ -146,10 +151,10 @@ function getItemListFromDataOrder(input) {
 
 }
 
-function getAmountFromDataOrder(input) {
+function getAmountFromDataOrder(input, currency) {
 
     var output = {
-        "currency": "USD",
+        "currency": currency,
         "total": input[0].price,
         "details": {
             "subtotal": input[0].price,
