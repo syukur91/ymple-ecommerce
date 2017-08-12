@@ -1,18 +1,8 @@
-// InsertDbService.js
-
-//var nodemailer = require('nodemailer');
 var host = sails.config.connections.mongodbServer.host;
 var port = sails.config.connections.mongodbServer.port;
 var database = sails.config.connections.mongodbServer.database;
-//var urlConnection = "mongodb://localhost:27017/ymple-commerce"; // get the connexion.js database name
 var url = "mongodb://" + host + ":" + port + '/' + database;
 var ObjectId = require('mongodb').ObjectID;
-
-// create reusable transporter object using SMTP transport
-//var transporter = nodemailer.createTransport({
- //   service: 'Gmail',
- //   auth: sails.config.project.nodemailer.auth
-//});
 
 
 module.exports = {
@@ -29,7 +19,6 @@ module.exports = {
             else return console.log('Message sent: ' + info.response);
         });
     },
-
 
     getNewIdProduct: function () { // initialize the counter for name field, for example the productId
 
@@ -124,10 +113,10 @@ module.exports = {
     },
 
 
-    getListModuleOneCategory: function(){
+    getListModuleOneCategory: function () {
 
 
-      // return the list of module for one category
+        // return the list of module for one category
 
     },
 
@@ -208,7 +197,6 @@ module.exports = {
     },
 
 
-
     getProductListFromOneCategory: function (idCategory) { // return the data and item information about one order
 
         var promise = new Promise(
@@ -226,7 +214,7 @@ module.exports = {
 
                     //var idProduct = input[0].id;
 
-                    var findQuery =  {"idCategory": idCategory};
+                    var findQuery = {"idCategory": idCategory};
 
                     col.find(
                         findQuery
@@ -234,7 +222,7 @@ module.exports = {
                         //db.close();
                         console.log(err);
 
-                        console.log('returnItemWithPriceForOrder - data', data);
+                        console.log('getProductListFromOneCategory - data', data);
 
                         resolve(data);    //docs[0].name.toString()); // returns to the function that calls the callback
                     })
@@ -245,6 +233,58 @@ module.exports = {
 
     },
 
+
+    getTotalAmountForOneOrder: function (idOrder) { // return the total amount for one order based on the item list
+
+        var promise = new Promise(
+            function (resolve, reject) {
+
+                var collectionName = "order";
+
+                console.log('getTotalAmountForOneOrder - idOrder', idOrder);
+
+                var MongoClient = require('mongodb').MongoClient;
+
+                MongoClient.connect(url, function (err, db) {
+
+                    var col = db.collection(collectionName);
+
+                    col.find({idOrder: parseInt(idOrder)}).toArray(function (err, data1) {
+                        //db.close();
+                        console.log('getTotalAmountForOneOrder - data1', data1);
+
+                        var item1 = data1[0].cart;
+
+                        var collection2 = 'product';
+
+                        var col2 = db.collection(collection2);
+
+                        var idProduct = item1[0].id;
+
+                        var findQuery = {_id: ObjectId(idProduct)};
+
+                        col2.find(
+                            findQuery
+                        ).toArray(function (err, data2) {
+
+                                console.log('getTotalAmountForOneOrder - data2', data2);
+
+                                var price = data2[0].price;
+
+                                console.log('price', price);
+
+                                console.log(err);
+
+                                resolve(price);
+
+                            }
+                        )
+                    });
+                })
+            })
+
+        return promise;
+    },
 
 
     returnItemWithPriceForOrder: function (input) { // return the data and item information about one order
@@ -265,10 +305,10 @@ module.exports = {
 
                     var idProduct = input[0].id;
 
-                    var findQuery =  {_id: ObjectId(idProduct)};
+                    var findQuery = {_id: ObjectId(idProduct)};
 
                     col.find(
-                       findQuery
+                        findQuery
                     ).toArray(function (err, data) {
                         //db.close();
                         console.log(err);
@@ -291,7 +331,7 @@ module.exports = {
 
                 var collection = "core_module_installed";
 
-               // console.log('getItemPaymentFromOrder - idOrder', input);
+                // console.log('getItemPaymentFromOrder - idOrder', input);
 
 
                 var MongoClient = require('mongodb').MongoClient;
@@ -300,7 +340,7 @@ module.exports = {
 
                     var col = db.collection(collection);
 
-                    var findQuery =  {name: input};
+                    var findQuery = {name: input};
 
                     col.find(
                         findQuery
@@ -318,7 +358,6 @@ module.exports = {
         return promise;
 
     },
-
 
 
 };
