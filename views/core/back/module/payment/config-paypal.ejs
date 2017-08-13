@@ -1,6 +1,6 @@
 <div class="">
     <h4 style="color:forestgreen"><a href="/admin"></a>Module Configuration For Payment</h4>
-    <form role="form" action="/admin/module/<%= nameModule %>/edit/validation" method="POST">
+    <form role="form" action="/admin/module/edit/validation/<%= nameModule %>" method="POST">
         <div class="row">
             <div class="col-sm-12">
                 <label> <%= __('name') %> </label>
@@ -26,14 +26,11 @@
 
                 <label> Mode (sandbox or live ) </label>
 
-
-                <Select name="related" class="form-control">            
+                <Select name="mode" class="form-control">            
                     <Option value="sandbox"> <%= __('sandbox') %></option>
                     <Option value="live"> <%= __('live') %></option>
 
-
                 </select>
-
 
             </div>
 
@@ -46,15 +43,29 @@
             <div class="col-sm-12">
 
                 <label> Client Id </label>
-                <input type="text" class="form-control" id="thumbnail" name="thumbnail" placeholder=""
+                <input type="text" class="form-control" id="client_id" name="client_id" placeholder=""
 
                        value="<% if (typeof configuration !== 'undefined' && typeof configuration.mode !== 'undefined' ) { %>
 
                         <%= configuration %>
 
-                         <% } %>" >
+                         <% } %>">
             </div>
+        </div>
+        <br>
 
+        <div class="row">
+
+            <div class="col-sm-12">
+
+                <label> Client Secret </label>
+                <input type="text" class="form-control" id="client_secret" name="client_secret" placeholder=""
+
+                       value="<% if (typeof configuration !== 'undefined' && typeof configuration.mode !== 'undefined' ) { %>
+
+                        <%= configuration %>
+                         <% } %>">
+            </div>
         </div>
 
         <br>
@@ -63,16 +74,14 @@
 
             <div class="col-sm-12">
 
-                <label> Client Secret </label>
-                <input type="text" class="form-control" id="thumbnail" name="thumbnail" placeholder=""
+                <label> Currency </label>
 
-                       value="<% if (typeof configuration !== 'undefined' && typeof configuration.mode !== 'undefined' ) { %>
+                <select name="currency" class="form-control">            
+                    <Option value="eur"> <%= __('EUR') %></option>
+                    <Option value="usd"> <%= __('USD') %></option>
 
-                        <%= configuration %>
-
-                         <% } %>" >
+                </select>
             </div>
-
         </div>
 
         <br>
@@ -91,7 +100,4 @@
         </div>
     </form>
 </div>
-
-
-
 

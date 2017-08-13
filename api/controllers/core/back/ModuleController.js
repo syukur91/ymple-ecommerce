@@ -156,32 +156,30 @@ module.exports = {
             }
             else if (nameModule == "payment") {
 
-                var item =[ {
-
-                    idModule: 0,
-                    category: nameModule,
-                    configuration: "",
-                    description: "",
-                    createAt: "",
-                    name: "Paypal",
-                    isActive: 1
-                },
-
-                    {
+                var item = [{
 
                         idModule: 0,
                         category: nameModule,
                         configuration: "",
                         description: "",
                         createAt: "",
-                        name: "Stripe",
+                        name: "paypal",
                         isActive: 1
-                    }]
+                    },
+
+                        {
+
+                            idModule: 0,
+                            category: nameModule,
+                            configuration: "",
+                            description: "",
+                            createAt: "",
+                            name: "stripe",
+                            isActive: 1
+                        }]
 
 
-
-
-                ;
+                    ;
 
                 result.listModule = item;
 
@@ -400,11 +398,7 @@ module.exports = {
 
         } else {
 
-
-
-
-            if ( nameModule.toLowerCase() == "paypal")
-            {
+            if (nameModule.toLowerCase() == "paypal") {
 
                 console.log('display paypal edit page');
 
@@ -414,7 +408,7 @@ module.exports = {
 
                 //result.listConfiguration = configurationModule[0].configuration; //[];
 
-               // console.info('listConfiguration', result.listConfiguration);
+                // console.info('listConfiguration', result.listConfiguration);
 
                 console.log('ModuleController - edit', req.params.nameModule);
 
@@ -422,44 +416,38 @@ module.exports = {
 
                 return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
 
-
             }
 
+            else {
 
-            else{
+                CoreReadDbService.getConfigurationModule(nameModule).then(function (configurationModule) {
 
+                    try {
 
-            CoreReadDbService.getConfigurationModule(nameModule).then(function (configurationModule) {
+                        console.log('listconfiguration', configurationModule[0].configuration);
+                        result.templateToInclude = 'edit_module';
+                        result.pathToInclude = '../module/edit.ejs';
+                        //view_module_payment_'+nameModule;
 
-                try {
+                        result.listConfiguration = configurationModule[0].configuration; //[];
 
-                    console.log('listconfiguration', configurationModule[0].configuration);
-                    result.templateToInclude = 'edit_module';
-                    result.pathToInclude = '../module/edit.ejs';
-                    //view_module_payment_'+nameModule;
+                        console.info('listConfiguration', result.listConfiguration);
 
-                    result.listConfiguration = configurationModule[0].configuration; //[];
+                        console.log('ModuleController - edit', req.params.nameModule);
 
-                    console.info('listConfiguration', result.listConfiguration);
+                        result.nameModule = nameModule;
 
-                    console.log('ModuleController - edit', req.params.nameModule);
+                    }
+                    catch (err) {
+                        console.log('err', err);
+                    }
 
-                    result.nameModule = nameModule;
+                    //{userNameApi:'userNameApi',passwordApi:'passwordApi'};
 
-                }
-                catch (err) {
-                    console.log('err', err);
-                }
+                    return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
 
-                //{userNameApi:'userNameApi',passwordApi:'passwordApi'};
-
-                return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
-
-            });
+                });
             }
-
-
-
 
 
         }
@@ -475,9 +463,36 @@ module.exports = {
 
 
         try {
-            var allParam = req.params.all();
+            var allParam = req.allParams();
             // get the parameters and update the table core_module_installed ( field configuration , field is active)
             console.log('ModuleController.js - editValidation - req', allParam);
+
+
+
+            if ( allParam.nameModule && allParam.nameModule == "paypal"){
+
+
+                if ( allParam.mode && allParam.client_id && allParam.client_secret && allParam.client_id.length > 0 && allParam.client_secret.length > 0){
+
+                    console.log( 'set configuration paypal in db ');
+                }
+
+                else{
+
+
+                    return res.ok('Missing parameter');
+
+
+                }
+
+
+
+
+
+            }
+
+
+
         }
         catch (err) {
             console.log('ModuleController - err', err);
