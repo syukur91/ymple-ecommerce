@@ -13,41 +13,83 @@
         <div class="row">
             <div class="col-sm-12">
                 <label> <%= __('Category') %> </label>
-                 <input disabled type="text" class="form-control" id="name" name="name" placeholder="" value="">
+                 <input disabled type="text" class="form-control" id="name" name="name" placeholder="" value="Payment">
             </div>
+        </div>
+
+
+        <h5 style="color:forestgreen"> <%= __('Configuration') %> </h5>
+
+        <div class="row">
+
+            <div class="col-sm-12">
+
+                <label> Mode (sandbox or live ) </label>
+                <input type="text" class="form-control" id="thumbnail" name="thumbnail" placeholder=""
+
+                       value="<% if (typeof configuration !== 'undefined' && typeof configuration.mode !== 'undefined' ) { %>
+
+                        <%= configuration %>
+
+                         <% } %>" >
+            </div>
+
         </div>
 
         <br>
+
         <div class="row">
+
             <div class="col-sm-12">
-                <label> <%= __('Configuration') %> </label><br>
 
-                <% if (typeof listConfiguration == 'object' && listConfiguration) { %>
+                <label> Client Id </label>
+                <input type="text" class="form-control" id="thumbnail" name="thumbnail" placeholder=""
 
-                <% listConfiguration.forEach(function(configuration){ %>
-                <%= configuration %>
-                <input type="text" class="form-control" id="thumbnail" name="thumbnail"
-                       placeholder="" value="<%= configuration %>">
+                       value="<% if (typeof configuration !== 'undefined' && typeof configuration.mode !== 'undefined' ) { %>
 
-                <% }) %>
-                <% } %>
+                        <%= configuration %>
 
+                         <% } %>" >
             </div>
+
+
+
+
+
+
         </div>
+
+        <br>
+
+        <div class="row">
+
+            <div class="col-sm-12">
+
+                <label> Client Secret </label>
+                <input type="text" class="form-control" id="thumbnail" name="thumbnail" placeholder=""
+
+                       value="<% if (typeof configuration !== 'undefined' && typeof configuration.mode !== 'undefined' ) { %>
+
+                        <%= configuration %>
+
+                         <% } %>" >
+            </div>
+
+
+
+
+
+
+        </div>
+
+
+
+
         <br>
         <div class="row">
             <div class="col-sm-12">
                 <label> <%= __('product') %> </label>
-                            <Select name="related" class="form-control">            
-                    <Option value=""> <%= __('No') %></option>
-                    <% if (typeof products == 'object' && products) { %>
-                    <% products.forEach(function(product){ %>
-                    <option value="<% product.id %>"
-                    <% product.name %>
-                    </option>
-                    <% }); %>
-                    <% } %>
-                </select>
+                      
             </div>
         </div>
         <div class="row">

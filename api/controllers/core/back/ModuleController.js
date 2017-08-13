@@ -400,6 +400,35 @@ module.exports = {
 
         } else {
 
+
+
+
+            if ( nameModule.toLowerCase() == "paypal")
+            {
+
+                console.log('display paypal edit page');
+
+                result.templateToInclude = 'yes';
+                result.pathToInclude = '../module/payment/config-paypal.ejs';
+                //view_module_payment_'+nameModule;
+
+                //result.listConfiguration = configurationModule[0].configuration; //[];
+
+               // console.info('listConfiguration', result.listConfiguration);
+
+                console.log('ModuleController - edit', req.params.nameModule);
+
+                result.nameModule = nameModule;
+
+                return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
+
+
+            }
+
+
+            else{
+
+
             CoreReadDbService.getConfigurationModule(nameModule).then(function (configurationModule) {
 
                 try {
@@ -427,6 +456,12 @@ module.exports = {
                 return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
 
             });
+            }
+
+
+
+
+
         }
     },
 
