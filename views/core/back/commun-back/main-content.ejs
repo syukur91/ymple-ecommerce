@@ -23,10 +23,10 @@
 
                 || templateToInclude == 'installModuleDone' || templateToInclude == 'admin_profile' || templateToInclude == 'customer_list' || templateToInclude == 'customer_item'
 
-                || templateToInclude == 'customer_edit') { %>
+                || templateToInclude == 'customer_edit' || templateToInclude == 'yes') { %>
 
-            <%- include ./navbar.light.ejs %>
-            <%- include(pathToInclude) %>
+        <%- include ./navbar.light.ejs %>
+        <%- include(pathToInclude) %>
         <% } %>
 
         <% if (templateToInclude == 'view_module_payment_paypal') { %>

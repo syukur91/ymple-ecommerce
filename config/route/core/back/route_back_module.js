@@ -11,7 +11,7 @@ module.exports.routes = {
     'GET    /admin/module/search': 'core/back/moduleController.search', // return the list of module to be added
     '/admin/module/install/': 'core/back/moduleController.install', // edit a module
     '/admin/module/edit/:nameModule': 'core/back/moduleController.edit', // edit a module
-    '/admin/module/:nameModule/edit/validation': 'core/back/moduleController.editValidation', // validate the edit of one module, update the configuration
+    '/admin/module/edit/validation/:nameModule': 'core/back/moduleController.editValidation', // validate the edit of one module, update the configuration
 
     '/admin/module/inactivate/:nameModule': 'core/back/moduleController.inactivate', // inactivate a module
 
