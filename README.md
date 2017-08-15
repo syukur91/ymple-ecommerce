@@ -20,7 +20,7 @@ Version 0.1.1 (released 2016.11)
 ### [Demo](http://demo.ymple.com/)
 
 
-Open Source Ecommerce Open Source Solution for Everyone built with Sails.js (Node.js + MongoDB)
+Open Source Ecommerce Open Source Framework for Everyone built with Sails.js (Node.js + MongoDB)
 
 It's intended to be a fully engaged community project, and we're greatly welcoming contributions from the development community.
 
