@@ -9,6 +9,8 @@ var CoreReadDbService = require('../../../services/core/back/CoreReadDbService')
 var CoreInsertDbService = require('../../../services/core/back/CoreInsertDbService');
 var ModulePaymentPaypalService = require('../../../services/core/api/ModulePaymentPaypalService');
 
+var pathTemplateBackCore =  sails.config.globals.templatePathFrontCore;
+
 
 const async = require('promise-async')
 
@@ -112,7 +114,19 @@ module.exports = {
 
     paypalExecuteConfirmationSuccess: function (req, res) {
 
-        return res.ok('Payment Paypal Confirmation done');
+
+        var result = {};
+
+        result.templateToInclude = 'yes';
+        result.pathToInclude = '../payment/paypal/success.ejs';
+
+        return res.view(pathTemplateBackCore + 'payment/paypal/success.ejs', result);
+
+        //return res.ok('Payment Paypal Confirmation done');
+
+
+
+
     },
 
     paypalExecuteConfirmationError: function (req, res) {
