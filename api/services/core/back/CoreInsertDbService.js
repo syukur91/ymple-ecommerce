@@ -6,8 +6,8 @@ var bcrypt = require('bcryptjs');
 
 // create reusable transporter object using SMTP transport
 //var transporter = nodemailer.createTransport({
-  //  service: 'Gmail',
-  //  auth: sails.config.project.nodemailer.auth
+//  service: 'Gmail',
+//  auth: sails.config.project.nodemailer.auth
 //});
 var ObjectId = require('mongodb').ObjectID;
 
@@ -94,7 +94,7 @@ getValueFromArray = function (data, element, type) {
                 var description = data.description;
                 var name = data.name;
                 var image = [];
-                image[0]= '/images/product/'+idProduct+'.png';
+                image[0] = '/images/product/' + idProduct + '.png';
 
                 var dataToInsert = {
                     name: name,
@@ -113,7 +113,7 @@ getValueFromArray = function (data, element, type) {
 
                 var collection = db.collection('product');
                 //var lotsOfDocs = [{'hello': 'doc3'}, {'hello': 'doc4'}];
-                if ( sails.config.demoMode != 1 ) {
+                if (sails.config.demoMode != 1) {
 
                     collection.insert(dataToInsert);
                 }
@@ -143,7 +143,7 @@ getValueFromArray = function (data, element, type) {
                 var description = data.description;
                 var name = data.name;
                 var image = [];
-                image[0]= '/images/product/'+idProduct+'.png';
+                image[0] = '/images/product/' + idProduct + '.png';
 
 
                 var dataToInsert = {
@@ -159,7 +159,7 @@ getValueFromArray = function (data, element, type) {
                 }
 
 
-                if ( sails.config.demoMode != 1 ) {
+                if (sails.config.demoMode != 1) {
 
 
                     console.log('[db] update product');
@@ -170,11 +170,10 @@ getValueFromArray = function (data, element, type) {
                         {$set: dataToInsert},
                         function (err, result) {
 
-                            if (err)
-                            {
+                            if (err) {
                                 throw err;
                             }
-                            else{
+                            else {
                                 //console.log(result);
                             }
 
@@ -183,11 +182,11 @@ getValueFromArray = function (data, element, type) {
 
                 }
 
-               // var collection = db.collection('product');
+                // var collection = db.collection('product');
                 //var lotsOfDocs = [{'hello': 'doc3'}, {'hello': 'doc4'}];
 
-               //     collection.insert(dataToInsert);
-              //  }
+                //     collection.insert(dataToInsert);
+                //  }
 
             });
         },
@@ -248,7 +247,7 @@ getValueFromArray = function (data, element, type) {
 
                 var collection = db.collection('order');
 
-                if ( sails.config.demoMode != 1 ) {
+                if (sails.config.demoMode != 1) {
 
                     collection.insert(dataToInsert, function (error, result) {
                         if (error) console.log(error); //info about what went wrong
@@ -281,6 +280,54 @@ getValueFromArray = function (data, element, type) {
             });
         },
 
+        insertModuleConfiguration: function (collectionName, dataToInsert) { // Insert one configuration for a module
+            // the rules for the collection name is module_[category]_[moduleName]
+
+            var MongoClient = require('mongodb').MongoClient;
+
+            //Connect to the db
+            MongoClient.connect(urlConnection).then(function (db) {
+
+                //console.log('data.name', data);
+
+                var date = new Date();
+                var createdAt = date.toISOString();
+                var updatedAt = date.toISOString();
+
+
+                dataToInsert.createdAt = createdAt;
+                dataToInsert.updatedAt = updatedAt;
+
+                var collection = db.collection(collectionName);
+
+                if (sails.config.demoMode != 1) {
+
+                    collection.update({name: "configuration"},
+                        {$set: dataToInsert},
+                        {upsert: true}, function (error, result) {
+                            if (error) {
+
+                                console.log(error);
+                            }
+                            if (result) {
+                                console.log(result);
+                            }
+                        })
+
+
+                    /* collection.insert(dataToInsert, function (error, result) {
+                     if (error) {
+                     console.log(error);
+                     } //info about what went wrong
+                     if (result) {
+
+                     console.log('module configuration inserted - result', result);
+                     }
+                     });*/
+                }
+
+            });
+        },
 
         installCounter: function (counterType) { // Insert an order
 
@@ -296,14 +343,14 @@ getValueFromArray = function (data, element, type) {
                 var collection = db.collection('counter');
                 var data = {_id: counterType, id: counterType, seq: 1};
 
-                if ( sails.config.demoMode != 1 ) {
+                if (sails.config.demoMode != 1) {
 
                     collection.insert(data, function (error, result) {
-                    if (error) console.log(error);
-                    if (result) {
-                        console.log(result);
-                    }
-                })
+                        if (error) console.log(error);
+                        if (result) {
+                            console.log(result);
+                        }
+                    })
                 }
 
             });
@@ -325,7 +372,7 @@ getValueFromArray = function (data, element, type) {
                     var collection = db.collection('front_subscription_newsletter');
                     var data = {createdAt: createdAt, updatedAt: updatedAt, email: email};
 
-                    if ( sails.config.demoMode != 1 ) {
+                    if (sails.config.demoMode != 1) {
 
                         collection.insert(data, function (error, result) {
                             if (error) console.log(error);
@@ -338,7 +385,7 @@ getValueFromArray = function (data, element, type) {
                 });
 
             }
-            else{
+            else {
                 return false;
             }
         },
@@ -351,8 +398,6 @@ getValueFromArray = function (data, element, type) {
 
             //Connect to the db
             MongoClient.connect(urlConnection).then(function (db) {
-
-
 
 
                 var fieldName = "category";
@@ -368,45 +413,45 @@ getValueFromArray = function (data, element, type) {
                     }
 
 
-                var newIdCategory = docs[0].seq;
+                    var newIdCategory = docs[0].seq;
 
 
-                var date = new Date();
-                var createdAt = date.toISOString();
-                var updatedAt = date.toISOString();
+                    var date = new Date();
+                    var createdAt = date.toISOString();
+                    var updatedAt = date.toISOString();
 
-                //var idCategory = parseInt(data.idCategory);
-                var name = data.name;
-                var description = data.description;
-                var tag = data.tag;
+                    //var idCategory = parseInt(data.idCategory);
+                    var name = data.name;
+                    var description = data.description;
+                    var tag = data.tag;
 
 
-                var collectionName = "category";
-                var col = db.collection(collectionName);
+                    var collectionName = "category";
+                    var col = db.collection(collectionName);
 
-                var dataToInsert = {
-                    name: name,
-                    idCategory: newIdCategory,
-                    //price: price,
-                    //stock: stock,
-                    //video: video,
-                    description: description,
-                    createdAt: createdAt,
-                    updatedAt: updatedAt
-                }
-                console.log('InsertDbService - insertCategory - dataToInsert', dataToInsert);
-                var collection = db.collection('category');
-                //var lotsOfDocs = [{'hello': 'doc3'}, {'hello': 'doc4'}];
+                    var dataToInsert = {
+                        name: name,
+                        idCategory: newIdCategory,
+                        //price: price,
+                        //stock: stock,
+                        //video: video,
+                        description: description,
+                        createdAt: createdAt,
+                        updatedAt: updatedAt
+                    }
+                    console.log('InsertDbService - insertCategory - dataToInsert', dataToInsert);
+                    var collection = db.collection('category');
+                    //var lotsOfDocs = [{'hello': 'doc3'}, {'hello': 'doc4'}];
 
-                if ( sails.config.demoMode != 1 ) {
+                    if (sails.config.demoMode != 1) {
 
-                    collection.insert(dataToInsert);
+                        collection.insert(dataToInsert);
 
-                    //this.incrementId('category');
+                        //this.incrementId('category');
 
-                }
+                    }
 
-            });
+                });
 
             });
         },
@@ -430,12 +475,12 @@ getValueFromArray = function (data, element, type) {
                 //collection.insert(dataToInsert);
 
                 console.log('saveImageProduct - update');
-                if ( sails.config.demoMode != 1 ) {
+                if (sails.config.demoMode != 1) {
 
-                collection.update(
-                    {idProduct: parseInt(idProduct)},
-                    {$set: {image: [imagePath]}},
-                    {upsert: true})
+                    collection.update(
+                        {idProduct: parseInt(idProduct)},
+                        {$set: {image: [imagePath]}},
+                        {upsert: true})
                 }
             });
         },
@@ -474,7 +519,7 @@ getValueFromArray = function (data, element, type) {
                 console.log('InsertDbService - installAndActiveCoreModule - data', data);
                 var collection = db.collection('core_module_installed');
 
-                if ( sails.config.demoMode != 1 ) {
+                if (sails.config.demoMode != 1) {
 
                     collection.insert(data);
                 }
@@ -513,7 +558,7 @@ getValueFromArray = function (data, element, type) {
                 }
                 console.log('InsertDbService - installAndActiveCoreModule - data', data);
                 var collection = db.collection('core_module');
-                if ( sails.config.demoMode != 1 ) {
+                if (sails.config.demoMode != 1) {
 
                     collection.insert(data);
                 }
@@ -629,7 +674,7 @@ getValueFromArray = function (data, element, type) {
                                 }
 
                                 var collection = db.collection(collection);
-                                if ( sails.config.demoMode != 1 ) {
+                                if (sails.config.demoMode != 1) {
 
                                     collection.insert(dataToInsert);
                                 }

@@ -467,31 +467,34 @@ module.exports = {
             // get the parameters and update the table core_module_installed ( field configuration , field is active)
             console.log('ModuleController.js - editValidation - req', allParam);
 
-
-
             if ( allParam.nameModule && allParam.nameModule == "paypal"){
-
 
                 if ( allParam.mode && allParam.client_id && allParam.client_secret && allParam.client_id.length > 0 && allParam.client_secret.length > 0){
 
                     console.log( 'set configuration paypal in db ');
+                    // we set in db module paypal a line collection name is module_category_moduleName
+                    var collectionName = 'module_payment_paypal';
+                    var client_id = allParam.client_id;
+                    var client_secret = allParam.client_secret;
+
+                    var mode = 'sandbox';
+
+                    if (allParam.mode) {
+                         mode = allParam.mode;
+                    }
+
+                    var dataToInsert = {'client_id': client_id, 'client_secret': client_secret,'mode': mode, 'name': "configuration"} ;
+
+                    CoreInsertDbService.insertModuleConfiguration(collectionName, dataToInsert);
+
                 }
 
                 else{
 
-
-                    return res.ok('Missing parameter');
-
-
+                    return res.ok('One parameter is missing or not correct.');
                 }
 
-
-
-
-
             }
-
-
 
         }
         catch (err) {
