@@ -31,39 +31,39 @@ module.exports = {
 
             if (uploadedFiles[0].fd) {
                 var filePath = uploadedFiles[0].fd;
-               // var productId = 1;
+                // var productId = 1;
 
 
-                var dir = 'assets/images/product/'+idProduct+ '/';
-                var dir2 = '.tmp/public/images/product/'+idProduct+ '/';
-               // var dir2 = '/images/product/'+idProduct+ '/';
+                var dir = 'assets/images/product/' + idProduct + '/';
+                var dir2 = '.tmp/public/images/product/' + idProduct + '/';
+                // var dir2 = '/images/product/'+idProduct+ '/';
 
 
-                if (!fs.existsSync(dir)){
+                if (!fs.existsSync(dir)) {
                     fs.mkdirSync(dir);
                 }
 
-                if (!fs.existsSync(dir2)){
-                    fs.mkdirSync(dir2);
-                }
+                // if (!fs.existsSync(dir2)){
+                //      fs.mkdirSync(dir2);
+                //}
 
-                var filePathFinal1 = '/images/product/'+idProduct+ '/1.png';
-                var filePathFinal2 = '.tmp/public/images/product/'+idProduct+ '/1.png';
+                var filePathFinal1 = '/images/product/' + idProduct + '/1.png';
+                var filePathFinal2 = '.tmp/public/images/product/' + idProduct + '/1.png';
 
 
                 //TODO create the folder for this product with folder name = id
 
                 // copy of the file to assets/images/
-                fs.createReadStream(filePath).pipe(fs.createWriteStream('assets'+filePathFinal1));
-                fs.createReadStream(filePath).pipe(fs.createWriteStream(filePathFinal2));
+                fs.createReadStream(filePath).pipe(fs.createWriteStream('assets' + filePathFinal1));
+                // fs.createReadStream(filePath).pipe(fs.createWriteStream(filePathFinal2));
 
             }
 
             // add the imagePath for this product
 
-            console.log('UploadController - saveImageProduct - start' );
-           // CoreInsertDbService.saveImageProduct(idProduct, filePathFinal1);
-           // CoreInsertDbService.saveImageProduct(idProduct, filePathFinal2);
+            console.log('UploadController - saveImageProduct - start');
+            // CoreInsertDbService.saveImageProduct(idProduct, filePathFinal1);
+            // CoreInsertDbService.saveImageProduct(idProduct, filePathFinal2);
 
 
         });
@@ -82,8 +82,8 @@ module.exports = {
 
             console.log('uploadController - imageProduct - idProduct', req.params.idProduct); // we have the product id
         }
-        catch (err){
-            console.log ( err);
+        catch (err) {
+            console.log(err);
         }
 
 
@@ -103,39 +103,32 @@ module.exports = {
 
                 var numberImage = 1;
 
-                var dir = 'assets/images/carousel/'+numberImage+ '/';
-                var dir2 = '.tmp/public/images/carousel/'+numberImage+ '/';
+                var dir = 'assets/images/carousel/' + numberImage + '/';
+                var dir2 = '.tmp/public/images/carousel/' + numberImage + '/';
 
 
-                if (!fs.existsSync(dir)){
+                if (!fs.existsSync(dir)) {
                     fs.mkdirSync(dir);
                 }
 
-                if (!fs.existsSync(dir2)){
-                    fs.mkdirSync(dir2);
-                }
-
-                var filePathFinal1 = '/images/carousel/'+numberImage + '/carousel.png';
-                var filePathFinal2 = '.tmp/public/images/carousel/'+numberImage+ '/carousel.png';
+                var filePathFinal1 = '/images/carousel/' + numberImage + '/carousel.png';
+                // var filePathFinal2 = '.tmp/public/images/carousel/'+numberImage+ '/carousel.png';
 
 
                 // copy of the file to assets/images/
 
                 try {
-                fs.createReadStream(filePath).pipe(fs.createWriteStream('assets'+filePathFinal1));
-                fs.createReadStream(filePath).pipe(fs.createWriteStream(filePathFinal2));
+                    fs.createReadStream(filePath).pipe(fs.createWriteStream('assets' + filePathFinal1));
                 }
-                catch (err){
+                catch (err) {
                     console.log('create image carousel - err', err);
                 }
             }
 
             // add the imagePath for this product
 
-            console.log('UploadController - saveImageProduct - start' );
+            console.log('UploadController - saveImageProduct - start');
             // CoreInsertDbService.saveImageProduct(idProduct, filePathFinal1);
-            // CoreInsertDbService.saveImageProduct(idProduct, filePathFinal2);
-
 
         });
 
