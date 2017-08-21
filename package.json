@@ -4,9 +4,9 @@
     "name": "Fabien Thetis",
     "email": "@thetisfabien"
   },
-  "homepage": "http://www.ymple.com",
+  "homepage": "https://www.ymple.com",
   "private": false,
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "a Nodejs and Sailsjs Ecommerce Solution ( E-commerce / M-commerce)",
   "keywords": [
     "ecommerce",

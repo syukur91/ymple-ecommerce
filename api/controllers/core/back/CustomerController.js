@@ -6,7 +6,7 @@
  * @creator :: Fabien Thetis
  */
 
-
+var async = require('async');
 var pathTemplateBackCore =  sails.config.globals.templatePathBackCore;
 
 

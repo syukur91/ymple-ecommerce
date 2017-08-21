@@ -4,6 +4,9 @@
  * @description :: Server-side logic for managing orders
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
+var async = require('async');
+var pathTemplateBackCore =  sails.config.globals.templatePathBackCore;
+
 
 module.exports = {
 	
@@ -76,10 +79,11 @@ module.exports = {
       if (err) return res.serverError(err);
 
 
-      result.templateToInclude  = 'order_list';
+      result.templateToInclude  = 'yes';
+
       result.pathToInclude = '../order/list.ejs';
       // res.json(result);
-      return res.view('back/commun-back/main.ejs', result);
+      return res.view(pathTemplateBackCore +'commun-back/main.ejs', result);
     });
   },
 
