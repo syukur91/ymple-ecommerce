@@ -1,5 +1,5 @@
 <h1>
-<a href="http://www.ymple.com"><img alt="Ymple Ecommerce" src="https://www.ymple.com/img/colors/blue/logo_big.png" title="Ymple Ecommerce"/></a>
+<a href="https://www.ymple.com"><img alt="Ymple Ecommerce" src="https://www.ymple.com/img/colors/blue/logo_big.png" title="Ymple Ecommerce"/></a>
 </h1>
 
 Version 1.3.0 (planned 2017.12)
@@ -15,7 +15,7 @@ Version 0.2.0 (released 2017.4)
 Version 0.1.1 (released 2016.11)
 
 
-### [www.ymple.com](http://www.ymple.com/)
+### [www.ymple.com](https://www.ymple.com/)
 
 ### [Demo](http://demo.ymple.com/)
 
@@ -75,7 +75,7 @@ node app.js
      You can loggin with the user:  admin@admin.com and password: admin
 
 
-### [Screenshot](http://www.ymple.com/screenshot-front.html)
+### [Screenshot](https://www.ymple.com/screenshot-front/)
 
 
 Community
