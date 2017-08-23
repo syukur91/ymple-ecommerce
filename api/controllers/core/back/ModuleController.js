@@ -345,28 +345,16 @@ module.exports = {
 
             console.log('ModuleController - install - moduleToInstall', moduleToInstall);
 
-            // we add a line to the module table
-
-            CoreInsertDbService.installAndActiveCoreModule(moduleToInstall);
-
-
-            //console.log ('configuration', sails.config);
-
+            CoreInsertDbService.installAndActiveCoreModule(moduleToInstall);// we add a line to the module table
 
             var result = {};
             result.nameModule = moduleToInstall;
-            //result.templateToInclude = '../../back/module/installDone.ejs';
-            //result.isTemplateToIncludeFullPath = 1;
-
             result.templateToInclude = 'installModuleDone';
             result.pathToInclude = '../module/installModuleDone.ejs';
-
-            // console.log('typeof',  typeof result.isTemplateToIncludeFullPath );
-
             output = res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
         }
-        else {
-            // return to the module page
+        else { // return to the module page
+
         }
         return output;
     },
@@ -386,11 +374,9 @@ module.exports = {
             result.templateToInclude = 'edit_module';
             result.pathToInclude = '../module/template/carousel/edit.ejs';
             result.moduleName = nameModule;
-            //view_module_payment_'+nameModule;
-            //result.listConfiguration = configurationModule[0].configuration; //[];
-            result.listConfiguration = null; //[];
 
-            //console.log('ModuleController - edit', req.params.nameModule);
+            //view_module_payment_'+nameModule; //result.listConfiguration = configurationModule[0].configuration; //[];
+            result.listConfiguration = null; //[];//console.log('ModuleController - edit', req.params.nameModule);
 
             result.nameModule = nameModule;
 
@@ -404,11 +390,7 @@ module.exports = {
 
                 result.templateToInclude = 'yes';
                 result.pathToInclude = '../module/payment/config-paypal.ejs';
-                //view_module_payment_'+nameModule;
-
-                //result.listConfiguration = configurationModule[0].configuration; //[];
-
-                // console.info('listConfiguration', result.listConfiguration);
+                //view_module_payment_'+nameModule; //result.listConfiguration = configurationModule[0].configuration; //[]; // console.info('listConfiguration', result.listConfiguration);
 
                 console.log('ModuleController - edit', req.params.nameModule);
 
@@ -500,7 +482,15 @@ module.exports = {
         catch (err) {
             console.log('ModuleController - err', err);
         }
-        return res.ok('Edit is done', req.body);
+
+        var result = [];
+
+        result.pathToInclude = '../module/editOk.ejs';
+        result.nameModule = allParam.nameModule;
+
+        return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
+
+        //return res.ok('Edit is done', req.body);
     },
 
 

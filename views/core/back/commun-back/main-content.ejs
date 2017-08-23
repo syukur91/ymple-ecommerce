@@ -1,5 +1,8 @@
 <!-- Page Content -->
+
 <div id="page-content-wrapper">
+
+
     <div class="container-fluid">
 
         <% if (typeof templateToInclude == 'string') { %>
@@ -9,7 +12,11 @@
                 || templateToInclude == 'categoryCreationOk' || templateToInclude == 'categoryCreationKo' || templateToInclude == 'moduleInstallNew'
         ) { %>
 
+        <% if (typeof pathToInclude !== 'undefined' ) { %>
+
         <%- include(pathToInclude) %>
+
+        <% } %>
 
         <% } %>
 
@@ -26,15 +33,32 @@
                 || templateToInclude == 'customer_edit' || templateToInclude == 'yes') { %>
 
         <%- include ./navbar.light.ejs %>
+
+        <% if ( typeof  pathToInclude !== 'undefined' ){ %>
         <%- include(pathToInclude) %>
         <% } %>
 
-        <% if (templateToInclude == 'view_module_payment_paypal') { %>
-        <%- include ./navbar.light.ejs %>
-        <%#- include ../module/payment/paypal.ejs %>
         <% } %>
 
+        <% if (templateToInclude == 'view_module_payment_paypal') { %>
+
+        <%- include ./navbar.light.ejs %>
+
         <% } %>
+
+        <% } else { %>
+
+
+        <% if (typeof pathToInclude !== 'undefined' ) { %>
+
+        <%- include(pathToInclude) %>
+
+        <% } %>
+
+
+
+        <%}%>
+
 
     </div>
 </div>
