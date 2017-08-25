@@ -2,7 +2,7 @@
 <div id="sidebar-wrapper">
     <ul class="sidebar-nav" style="font-size: 14px;color: forestgreen;">
         <li class="sidebar-brand" style="margin-left: 21px;">
-            ADMIN PANEL
+            ADMINISTRATION
         </li>
         <!--li>
             <a href="/"><i class="fa fa-shopping-bag" aria-hidden="true"></i>&nbsp;Front End</a>
@@ -10,29 +10,29 @@
 
         <li class="dropdown dropdown-submenu"><a href="/install"><i
                         class="fa fa-cog" aria-hidden="true"></i>
-                &nbsp;&nbsp;Database Installation
+                &nbsp;&nbsp;DATABASE INSTALLATION
             </a>
         </li>
 
 
         <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
                         class="fa fa-product-hunt" aria-hidden="true"></i>
-                &nbsp;&nbsp;Product<i class="fa fa-caret-down" aria-hidden="true"></i>
+                &nbsp;&nbsp;PRODUCT<i class="fa fa-caret-down" aria-hidden="true"></i>
             </a>
-            <ul class="dropdown-menu">
-                <li><a href="/admin/product/create">New</a></li>
-                <li><a href="/admin/product/list">Full List</a></li>
+            <ul class="dropdown-menu dropdown-menu-right">
+                <li><a style="color: forestgreen"href="/admin/product/create">NEW</a></li>
+                <li><a style="color: forestgreen"href="/admin/product/list">COMPLETE LIST</a></li>
             </ul>
         </li>
 
         <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <i class="fa fa-plus-square" aria-hidden="true"></i>
 
-                &nbsp;&nbsp;Category<i class="fa fa-caret-down" aria-hidden="true"></i>
+                &nbsp;&nbsp;CATEGORY<i class="fa fa-caret-down" aria-hidden="true"></i>
             </a>
-            <ul class="dropdown-menu">
-                <li><a href="/admin/category/create">New</a></li>
-                <li><a href="/admin/category/list">Full List</a></li>
+            <ul class="dropdown-menu dropdown-menu-right">
+                <li><a style="color: forestgreen"href="/admin/category/create">NEW</a></li>
+                <li><a style="color: forestgreen" href="/admin/category/list">COMPLETE LIST</a></li>
             </ul>
         </li>
 
@@ -42,19 +42,21 @@
                 <i class="fa fa-check-square-o" aria-hidden="true"></i>
 
 
-                &nbsp;&nbsp;Module
+                &nbsp;&nbsp;MODULE
                 <i class="fa fa-caret-down" aria-hidden="true"></i>
             </a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu dropdown-menu-right">
 
 
-                <li><a href="/admin/module/list/">Full List </a></li>
+                <!--li><a href="/admin/module/list/">Full List </a></li-->
 
-                <li><a href="/admin/module/list/payment/">Payment</a></li>
+                <li ><a style="color: forestgreen" href="/admin/module/list/payment/">PAYMENT</a></li>
 
-                <li><a href="/admin/module/list/deliver/">Delivering</a></li>
+                <li><a style="color: forestgreen"href="/admin/module/list/deliver/">DELIVERY</a></li>
 
-                <li><a href="/admin/module/list/theme/">Theme</a></li>
+                <li><a style="color: forestgreen"href="/admin/module/list/theme/">THEME</a></li>
+
+                <li><a style="color: forestgreen" href="#/admin/module/search/">SEARCH NEW MODULE</a></li>
 
 
                 <!--li><a href="/admin/module/create">Install</a></li-->
@@ -66,11 +68,11 @@
 
         <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
                         class="fa fa-shopping-cart" aria-hidden="true"></i>
-                &nbsp;&nbsp;Orders<i class="fa fa-caret-down" aria-hidden="true"></i>
+                &nbsp;&nbsp;ORDERS<i class="fa fa-caret-down" aria-hidden="true"></i>
             </a>
-            <ul class="dropdown-menu">
-                <li><a href="/admin/order/manage">Order</a></li>
-                <li><a href="#">Abandoned checkout</a></li>
+            <ul class="dropdown-menu dropdown-menu-right">
+                <li><a style="color: forestgreen" href="/admin/order/manage">ORDER</a></li>
+                <li><a style="color: forestgreen" href="#">ABANDONED CHECKOUT</a></li>
 
 
             </ul>
@@ -78,10 +80,10 @@
 
         <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
                         class="fa fa-users" aria-hidden="true"></i>
-                &nbsp;&nbsp;Customers<i class="fa fa-caret-down" aria-hidden="true"></i>
+                &nbsp;&nbsp;CUSTOMERS<i class="fa fa-caret-down" aria-hidden="true"></i>
             </a>
-            <ul class="dropdown-menu">
-                <li><a href="/admin/customer/list">List</a></li>
+            <ul class="dropdown-menu dropdown-menu-right">
+                <li><a style="color: forestgreen" href="/admin/customer/list">LIST</a></li>
 
             </ul>
         </li>
@@ -89,7 +91,7 @@
         <!--li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-line-chart" aria-hidden="true"></i>
                 &nbsp;&nbsp;Analysis<i class="fa fa-caret-down" aria-hidden="true"></i>
             </a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu dropdown-menu-right">
                 <li><a href="/admin/analysis/traffic">Traffic</a></li>
                 <li><a href="/admin/analysis/search">Search</a></li>
 
@@ -107,35 +109,27 @@
                 </i> &nbsp;Preferences</a>
         </li-->
 
-        <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                        class="fa fa-area-chart" aria-hidden="true"></i>
-                &nbsp;&nbsp;Statistics<i class="fa fa-caret-down" aria-hidden="true"></i>
-            </a>
-            <ul class="dropdown-menu">
-                <li><a href="/admin/stat/dashboard">&nbsp;Dashboard</a></li>
-                <li><a href="/admin/stat/report">&nbsp;Report</a></li>
 
-                <!--li><a href="/admin/user/list">&nbsp;Users</a></li-->
-            </ul>
-        </li>
 
         <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
                         class="fa fa-user" aria-hidden="true"></i>
-                &nbsp;&nbsp;Admin<i class="fa fa-caret-down" aria-hidden="true"></i>
+                &nbsp;&nbsp;ADMIN<i class="fa fa-caret-down" aria-hidden="true"></i>
             </a>
-            <ul class="dropdown-menu">
-                <li><a href="/admin/administrator/edit/">&nbsp;Profile</a></li>
+            <ul class="dropdown-menu dropdown-menu-right">
+                <li><a style="color: forestgreen"href="/admin/administrator/edit/">&nbsp;PROFILE</a></li>
                 <!--li><a href="/admin/user/list">&nbsp;Users</a></li-->
             </ul>
         </li>
 
         <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
                         class="fa fa-cog" aria-hidden="true"></i>
-                &nbsp;&nbsp;Setting<i class="fa fa-caret-down" aria-hidden="true"></i>
+                &nbsp;&nbsp;SETTING<i class="fa fa-caret-down" aria-hidden="true"></i>
             </a>
-            <ul class="dropdown-menu">
-                <li><a href="#">&nbsp;General</a></li>
-                <li><a href="#">&nbsp;Payment</a></li>
+            <ul class="dropdown-menu dropdown-menu-right">
+                <li><a style="color: forestgreen"href="#">&nbsp;GENERAL</a></li>
+                <li><a style="color: forestgreen"href="#">&nbsp;PAYMENT</a></li>
+                <li><a style="color: forestgreen"href="#">&nbsp;DEMO MODE</a></li>
+                <li><a style="color: forestgreen"href="#">&nbsp;LANGUAGE</a></li>
 
                 <!--li><a href="/admin/user/list">&nbsp;Users</a></li-->
             </ul>
@@ -144,17 +138,29 @@
 
         <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
                         class="fa fa-cog" aria-hidden="true"></i>
-                &nbsp;&nbsp;Notification<i class="fa fa-caret-down" aria-hidden="true"></i>
+                &nbsp;&nbsp;NOTIFICATION<i class="fa fa-caret-down" aria-hidden="true"></i>
             </a>
-            <ul class="dropdown-menu">
-                <li><a href="/admin/notification/configuration/">&nbsp;Configuration</a></li>
+            <ul class="dropdown-menu dropdown-menu-right">
+                <li><a style="color: forestgreen"href="#/admin/notification/configuration/">&nbsp;CONFGURATION</a></li>
+
+                <!--li><a href="/admin/user/list">&nbsp;Users</a></li-->
+            </ul>
+        </li>
+
+        <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                        class="fa fa-area-chart" aria-hidden="true"></i>
+                &nbsp;&nbsp;STATISTICS<i class="fa fa-caret-down" aria-hidden="true"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-right">
+                <li><a style="color: forestgreen"href="#/admin/stat/dashboard">&nbsp;DASHBOARD</a></li>
+                <li><a style="color: forestgreen"href="#/admin/stat/report">&nbsp;REPORT</a></li>
 
                 <!--li><a href="/admin/user/list">&nbsp;Users</a></li-->
             </ul>
         </li>
 
         <li>
-            <a href="/admin/logout"> <i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;Logout</a>
+            <a href="/admin/logout"> <i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;LOGOUT</a>
         </li>
     </ul>
 </div>
