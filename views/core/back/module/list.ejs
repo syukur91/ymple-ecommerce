@@ -6,15 +6,12 @@
                 <table class="table table-hover">
                     <thead>
                     <tr>
-                        <th>#</th>
-
-                        <Th> <%= __('Date of Installation') %></th>
                                     
-                        <Th> <%= __('name') %></th>
+                        <Th> <%= __('Name') %></th>
                                     
                         <th> <%= __('Category') %></th>
 
-                        <Th> <%= __('tags') %></th>
+                        <Th> <%= __('Description') %></th>
                                     
                         <Th> <%= __('State') %></th>
 
@@ -24,24 +21,19 @@
                     <tbody>
                     <% listModule.forEach(function(module){ %>
                     <tr data-id="<%= module.id %>">
-                        <td>
-                            <%#= loop.index %>
-                        </td>
-                        <td><%= module.createdAt %></td>
+
+                        <!--td><%= module.createdAt %></td-->
                         <td><%= module.name %></td>
                         <td><%= module.category %></td>
 
 
                         <td>
 
-                            <% if (typeof module.tags == 'object') { %>
-                            <% module.tags.forEach(function(tag){ %>
-                            <%= tag %>
+                            <% if (typeof module.description !== 'undefined') { %>
+                            <% module.description %>
+                            <%} %>
 
-                            <% }); %>
-
-                            <% } %>
-                        </td>
+                                                   </td>
                         <% if (module.isActive) { %>
                         <td>
                             <button style="pointer-events: none;" class="btn btn-xs btn-success" button-action="status"> <%= __('Active') %></button>
@@ -77,8 +69,8 @@
 
                 <div style="text-align: center;">
                     <ul class="pagination">
-                        <a href="/admin/module">&laquo;</a>
-                        <a href="/admin/module">&raquo;</a>
+                        <button><a class="btn btn-sm"  href="#/admin/module">&laquo;</a></button>
+                        <button><a class="btn btn-sm" href="#/admin/module">&raquo;</a>
 
 
                         <!--% if (page == 1 ) {%-->

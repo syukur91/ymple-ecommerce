@@ -154,6 +154,22 @@ module.exports = {
                 result.listModule.push(item);
 
             }
+            else if (nameModule == "theme") {
+
+                var item = {
+
+                    idModule: 0,
+                    category: nameModule,
+                    configuration: "",
+                    description: "",
+                    createAt: "",
+                    name: "carousel",
+                    isActive: 1
+                };
+
+                result.listModule.push(item);
+
+            }
             else if (nameModule == "payment") {
 
                 var item = [{
