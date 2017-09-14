@@ -44,13 +44,6 @@ npm install
 
 node app.js
 
-
-- With Node Package
-
-npm install ymple-ecommerce
-
-node app.js
-
 - CONFIGURATION
 
      [1]Configure and run a mongodb instance ( the default is  host: 'localhost', port: 27017)
