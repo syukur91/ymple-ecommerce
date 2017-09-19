@@ -2927,8 +2927,8 @@ textarea.form-control:focus {
   top: 8px;
   right: 9px;
   font-size: 11px;
-  content: "\f105";
-  position: absolute;
+  #content: "\f105";
+  #position: absolute;
   font-weight: normal;
   display: inline-block;
   font-family: FontAwesome;
@@ -2936,7 +2936,7 @@ textarea.form-control:focus {
 .dropdown > a:after {
   top: 18px;
   right: 15px;
-  content: "\f107";
+ #content: "\f107";
 }
 .dropdown-submenu > .dropdown-menu {
   top: -1px;
@@ -2983,7 +2983,7 @@ textarea.form-control:focus {
   .dropdown.open > a:after {
     top: 10px;
     right: 15px;
-    content: "\f107";
+    #content: "\f107";
   }
 }
 .dropdown-submenu.pull-left {
@@ -3158,13 +3158,13 @@ a.thumbnail.active {
   border-bottom: 0;
 }
 .navbar-default .navbar-brand {
-  font-size: 28px;
+  #font-size: 28px;
   font-weight: 300;
   text-transform: lowercase;
   font-family: "Muli", sans-serif;
   word-spacing: -6px;
   -webkit-text-stroke: 0;
-  background-image: url("../img/colors/blue/logo.png");
+  #background-image: url("../img/colors/blue/logo.png");
   background-position: left center;
   background-repeat: no-repeat;
   padding-left: 45px;

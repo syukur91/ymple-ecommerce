@@ -1,4 +1,27 @@
 
+
+<link href="/css/preload-ymple.css" rel="stylesheet">
+
+<!-- Compiled in vendors.js -->
+<!--
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+<link href="/css/bootstrap-switch.min.css" rel="stylesheet">
+<link href="/css/font-awesome.min.css" rel="stylesheet">
+<link href="/css/animate.min.css" rel="stylesheet">
+<link href="/css/slidebars.min.css" rel="stylesheet">
+<link href="/css/lightbox.css" rel="stylesheet">
+<link href="/css/jquery.bxslider.css" rel="stylesheet" />
+<link href="/css/buttons.css" rel="stylesheet">
+-->
+
+<!--link href="/css/vendors-ymple.css" rel="stylesheet"-->
+<link href="/css/syntaxhighlighter/shCore.css" rel="stylesheet" >
+
+<link href="/css/style-blue-ymple.css" rel="stylesheet" title="default">
+<link href="/css/width-full-ymple.css" rel="stylesheet" title="default">
+
+
+
 <section class="section-white">
     <div class="container">
 
@@ -13,19 +36,19 @@
             <!-- Wrapper for slides -->
             <div class="carousel-inner">
                 <div class="item active">
-                    <img src="/images/carousel/1/carousel.png" alt="...">
+                    <img src="/img/demo/banner-emac-3000-800.png" alt="...">
                     <div class="carousel-caption">
                         <h2>Heading</h2>
                     </div>
                 </div>
                 <div class="item">
-                    <img src="/images/carousel/1/carousel.png" alt="...">
+                    <img src="/img/demo/banner-emac-3000-800.png" alt="...">
                     <div class="carousel-caption">
                         <h2>Heading</h2>
                     </div>
                 </div>
                 <div class="item">
-                    <img src="/images/carousel/1/carousel.png" alt="...">
+                    <img src="/img/demo/banner-emac-3000-800.png" alt="...">
                     <div class="carousel-caption">
                         <h2>Heading</h2>
                     </div>
@@ -46,69 +69,85 @@
 
 <br>
 
+
+
+
 <div class="container">
-
-    <% products.forEach(function(product, i){ %>
-    <% if (i == 0 || i == 4 || i == 8 || i == 12 || i == 16  ) { %>
     <div class="row">
-        <% } %>
-        <div class="col-sm-3 col-md-3">
-            <div class="thumbnail">
-                <a href="/product/<%= product.id %>">
-                    <% if (product.isImageAvailable == 1 ){ %>
-
-                    <img style="height: 200px;width: 250px;" class="img-rounded-ymple" src="/images/product/<%= product.idProduct %>/1.png">
-
-
-
-                    <% }else { %>
-
-                    <img style="height: 200px;width: 250px;" class="img-rounded-ymple" src="/images/ymple/product-example.png">
-
-
-                    <% } %>
-                </a>
-
-                <%# if (product.thumbnail){ %>
-                <%#  product.thumbnail  } else {  "http://lorempixel.com/500/500" } %>
-                <div class="caption text-left">
-                    <h3><%= product.name %></h3>
-
-                        <span class="badge badge-info pull-right"><%= sails.config.project.currency.symbol %>
-                            <%= product.price %>
-                        </span>
-                    </h3>
-
-                    <p class="ellipsis"> <%= product.description %> </p>
-
-                    <div>
-                        <select class="" name="quantity" id = "quantity-<%= product.id %>">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                        </select>
-
-                        <button data-id="<%= product.id %>"   data-role="add" class="btn btn-default btn-sm"><%= __('Add') %></button>
-                        <button data-id="<%= product.id %>" data-role="buy"   class="btn btn-primary btn-sm"><%= __('Purchase') %></button>
-                    </div>
-                    <br>
-                </div>
+        <div class="col-md-3 hidden-sm hidden-xs">
+            <div class="ec-filters-menu">
+                <h3 class="section-title no-margin-top">Filters</h3>
+                <h4>Select Category</h4>
+                <ul>
+                    <li><a href="javascript:void(0);" class="filter" data-filter="all">All</a></li>
+                    <li><a href="javascript:void(0);" class="filter" data-filter=".category-smartphone">Smaprtphones</a></li>
+                    <li><a href="javascript:void(0);" class="filter" data-filter=".category-tv">Smart TV</a></li>
+                    <li><a href="javascript:void(0);" class="filter" data-filter=".category-keyboard">Keyboards</a></li>
+                    <li><a href="javascript:void(0);" class="filter" data-filter=".category-graphic">Graphics Cards</a></li>
+                </ul>
+                <h4>Order by</h4>
+                <ul>
+                    <li><a href="javascript:void(0);" class="sort" data-sort="price:asc">Price: Low to High</a></li>
+                    <li><a href="javascript:void(0);" class="sort" data-sort="price:desc">Price: High to Lo</a></li>
+                    <li><a href="javascript:void(0);" class="sort" data-sort="popularity:desc">Most Popular</a></li>
+                    <li><a href="javascript:void(0);" class="sort" data-sort="date:desc">Release Date</a></li>
+                </ul>
             </div>
+            <h3 class="section-title">Latest Offers</h3>
+            <div class="bxslider-controls">
+                <span id="bx-prev5"></span>
+                <span id="bx-next5"></span>
+            </div>
+            <ul class="bxslider" id="offers">
+                <li>
+                    <div class="ec-box">
+                        <div class="ec-box-header"><a href="#">Bq Aquaris 5 16GB White</a></div>
+                        <a href="#"><img src="/img/demo/e_img03.jpg" alt=""></a>
+                        <div class="ec-box-footer">
+                            <span class="label label-primary">$ 249.99</span>
+                            <a href="#" class="btn btn-ar btn-success btn-sm pull-right"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ec-box">
+                        <div class="ec-box-header"><a href="#">LG 55LA620S 55" LED 3D</a></div>
+                        <a href="#"><img src="/img/demo/e_img07.jpg" alt=""></a>
+                        <div class="ec-box-footer">
+                            <span class="label label-primary">$ 999.99</span>
+                            <a href="#" class="btn btn-ar btn-success btn-sm pull-right"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="ec-box">
+                        <div class="ec-box-header"><a href="#">Iphone 5S</a></div>
+                        <a href="#"><img src="/img/demo/e_img01.jpg" alt=""></a>
+                        <div class="ec-box-footer">
+                            <span class="label label-primary">$ 649.00</span>
+                            <a href="#" class="btn btn-ar btn-success btn-sm pull-right"><i class="fa fa-shopping-cart"></i> Add to Cart</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </div>
 
-        <% if ( i == 3 || i == 7 || i == 11 || i == 15  ) { %>
+
+
+
+
+
+        <%- include item.ejs %>
+
+
+
+
+
+
+
+
     </div>
-    <br>
-    <% } %>
-    <% }) %>
-</div>
+</div> <!-- container -->
 
 
 
@@ -127,3 +166,16 @@
 -->
 
 <link href="/css/vendors-ymple.css" rel="stylesheet">
+
+<script src="/js/vendors-ymple.js"></script>
+
+<!--script src="/js/styleswitcher-ymple.js"></script-->
+
+<!-- Syntaxhighlighter -->
+<script src="/js/syntaxhighlighter/shCore.js"></script>
+<script src="/js/syntaxhighlighter/shBrushXml.js"></script>
+<script src="/js/syntaxhighlighter/shBrushJScript.js"></script>
+
+<script src="/js/app-ymple.js"></script>
+<script src="/js/commerce-ymple.js"></script>
+
