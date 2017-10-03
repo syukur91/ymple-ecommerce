@@ -28,6 +28,10 @@ Please also realize that the following notes may be slightly out of date from ti
 + **Payment with Stripe**
   + possibility to configure the payment option with Stripe for credit card
 
++ **Mobile Commerce API**
+  + API to get the product list, category list to allow to create Mobile Application using the API
+
+
 
 ## 1.2.0 and beyond
 
