@@ -14,7 +14,18 @@
                 <form class="form-signin" action="/admin/login_validation" method="post">
                     <input name="email" type="text" class="form-control" placeholder="Email" required autofocus>
                     <input name ="password" type="password" class="form-control" placeholder="Password" required>
+
+                    <%if (typeof demoMode == 'undefined'){ %>
+
                     <p>Default Credential<br> Email: admin@admin.com, Pass: admin </p>
+
+                    <%}else{%>
+
+                    <p>Demo Credential<br> Email: admin@admin.com, Pass: admin<br>
+                        <span style="color: red;">On Demo you will not be able to modify product</span></p>
+
+                    <%}%>
+
 
                     <button class="btn btn-lg btn-primary btn-block" type="submit">
                         Sign in</button>

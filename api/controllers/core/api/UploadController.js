@@ -24,52 +24,62 @@ module.exports = {
 
         console.info('image upload');
 
-        req.file('file').upload(function (err, uploadedFiles) {
+        if (sails.config.demoMode != 1) {
+            req.file('file').upload(function (err, uploadedFiles) {
 
-            console.info('uploaded file');
-            console.info(uploadedFiles);
+                console.info('uploaded file');
+                console.info(uploadedFiles);
 
-            if (uploadedFiles[0].fd) {
-                var filePath = uploadedFiles[0].fd;
-                // var productId = 1;
-
-
-                var dir = 'assets/images/product/' + idProduct + '/';
-                var dir2 = '.tmp/public/images/product/' + idProduct + '/';
-                // var dir2 = '/images/product/'+idProduct+ '/';
+                if (uploadedFiles[0].fd) {
+                    var filePath = uploadedFiles[0].fd;
+                    // var productId = 1;
 
 
-                if (!fs.existsSync(dir)) {
-                    fs.mkdirSync(dir);
+                    var dir = 'assets/images/product/' + idProduct + '/';
+                    var dir2 = '.tmp/public/images/product/' + idProduct + '/';
+                    // var dir2 = '/images/product/'+idProduct+ '/';
+
+
+                    if (!fs.existsSync(dir)) {
+                        fs.mkdirSync(dir);
+                    }
+
+                    // if (!fs.existsSync(dir2)){
+                    //      fs.mkdirSync(dir2);
+                    //}
+
+                    var filePathFinal1 = '/images/product/' + idProduct + '/1.png';
+                    var filePathFinal2 = '.tmp/public/images/product/' + idProduct + '/1.png';
+
+
+                    //TODO create the folder for this product with folder name = id
+
+                    // copy of the file to assets/images/
+                    fs.createReadStream(filePath).pipe(fs.createWriteStream('assets' + filePathFinal1));
+                    // fs.createReadStream(filePath).pipe(fs.createWriteStream(filePathFinal2));
+
                 }
 
-                // if (!fs.existsSync(dir2)){
-                //      fs.mkdirSync(dir2);
-                //}
+                // add the imagePath for this product
 
-                var filePathFinal1 = '/images/product/' + idProduct + '/1.png';
-                var filePathFinal2 = '.tmp/public/images/product/' + idProduct + '/1.png';
-
-
-                //TODO create the folder for this product with folder name = id
-
-                // copy of the file to assets/images/
-                fs.createReadStream(filePath).pipe(fs.createWriteStream('assets' + filePathFinal1));
-                // fs.createReadStream(filePath).pipe(fs.createWriteStream(filePathFinal2));
-
-            }
-
-            // add the imagePath for this product
-
-            console.log('UploadController - saveImageProduct - start');
-            // CoreInsertDbService.saveImageProduct(idProduct, filePathFinal1);
-            // CoreInsertDbService.saveImageProduct(idProduct, filePathFinal2);
+                console.log('UploadController - saveImageProduct - start');
+                // CoreInsertDbService.saveImageProduct(idProduct, filePathFinal1);
+                // CoreInsertDbService.saveImageProduct(idProduct, filePathFinal2);
 
 
-        });
+            });
 
-        return res.json({
-            todo: 'imageProduct() is not implemented yet!'
+            var msg = 'updload of image done';
+
+        }
+        else
+        {
+            var msg = 'demo mode';
+
+        }
+
+            return res.json({
+            msg: msg
         });
     },
 
