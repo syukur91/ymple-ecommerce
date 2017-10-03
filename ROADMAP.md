@@ -22,9 +22,11 @@ Please also realize that the following notes may be slightly out of date from ti
 ## 1.1.0 and beyond
 
 + **Export / Import of Product.**
-  +
+  + .
++ **Creation of a complete documentation on http://doc.ymple.com.**
+
 + **Payment with Stripe**
-  +
+  + .
 
 
 ## 1.2.0 and beyond
