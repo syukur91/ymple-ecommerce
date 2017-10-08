@@ -8,15 +8,12 @@
 var CoreReadDbService = require('../../../services/core/back/CoreReadDbService');
 var CoreInsertDbService = require('../../../services/core/back/CoreInsertDbService');
 var ModulePaymentPaypalService = require('../../../services/core/api/ModulePaymentPaypalService');
-
 var pathTemplateBackCore =  sails.config.globals.templatePathFrontCore;
-
 
 const async = require('promise-async')
 
 
 module.exports = {
-
 
     paypalPay: function (req, res) {
 
@@ -27,20 +24,19 @@ module.exports = {
 
         // get all the information about this order
 
-        var modeDemo = true;
+        var modeDemo = this.getPaypalMode();
 
-        if (modeDemo) {
-            var mode = 'sandbox';
-            var client_id = 'EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM';
-            var client_secret = 'EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM';
+        if (modeDemo == 'live') {
+            var mode = modeDemo;
+            var client_id = this.getClientIdPaypal();
+            var client_secret = this.getClientSecretPaypal();
         }
-        else {
+        else if (modeDemo == 'sandbox') {
 
-            var mode = 'live';
-            var client_id = 'EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM';
-            var client_secret = 'EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM';
+            var mode = modeDemo;
+            var client_id = this.getClientIdPaypal();
+            var client_secret = this.getClientSecretPaypal();
         }
-
 
         async.waterfall([
             function (callback) {
@@ -48,10 +44,8 @@ module.exports = {
                 CoreReadDbService.getItemPaymentFromOrder(idOrder).then(function (dataOrder) {
 
                     var itemCart = dataOrder[0].cart;
-
                     callback(null, itemCart);
                 });
-
             },
 
             function (arg1, callback) {
@@ -64,7 +58,6 @@ module.exports = {
                     callback(null, arg1, dataWithPriceOrder)
 
                 })
-
             },
 
             function (arg1, arg2, callback) {
@@ -75,7 +68,6 @@ module.exports = {
                 console.log('paypalpay - getItemPaymentFromOrder');
 
                 var currency = "EUR";
-
                 var itemList = getItemListFromDataOrder(arg2, currency);
                 var amount = getAmountFromDataOrder(arg2, currency);
 
@@ -85,7 +77,6 @@ module.exports = {
 
                 callback(null, 'done')
             }
-
 
         ]).then(function (value) {
             console.log(value === 'done') // => true
@@ -124,14 +115,34 @@ module.exports = {
 
         //return res.ok('Payment Paypal Confirmation done');
 
-
-
-
     },
 
     paypalExecuteConfirmationError: function (req, res) {
 
         return res.ok('Payment Paypal Confirmation error');
+    },
+
+
+
+    getClientIdPaypal: function (){
+
+        var output = 'EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM';
+        return output;
+
+
+    },
+
+    getClientSecretPaypal : function (){
+
+        var output = 'EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM';
+        return output;
+    },
+
+    getPaypalMode: function(){
+
+        var output = 'sandbox';
+        return output;
+
     }
 }
 
@@ -180,12 +191,6 @@ function getAmountFromDataOrder(input, currency) {
 
     return output;
 }
-
-
-
-
-
-
 
 
 
