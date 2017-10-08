@@ -27,9 +27,11 @@ It's intended to be a fully engaged community project, and we're greatly welcomi
 System Dependencies
 --------
 
-* Node.js v4.4.1, v5 or v7
 * MongoDB v3.2.6
-* npm v 4.6.1 ( npm install npm@4 -g )
+* Node.js 4.4.2, 6.9.0, 8.6.0
+* npm v 4.6.1, 5.3.0
+
+
 
 How To Run
 --------

@@ -5,7 +5,7 @@ module.exports.routes = {
     'GET    /category/:id': 'core/front/CategoryController.listProduct',
 
 
-    'GET    /login': {view: 'core/front/login'},
+    'GET    /login': 'core/front/UserController.loginStep1',
     'GET    /account': {view: 'core/front/account'},
 
     // USER

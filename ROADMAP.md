@@ -17,21 +17,29 @@ This section is an early list of some of the features, enhancements, and other i
 
 Please also realize that the following notes may be slightly out of date from time to time.  Until the release is finalized, API changes, deprecation announcements, additions, etc. are all tentative.  (But we're getting close.)
 
+## 1.2.0 and beyond
+
 
 
 ## 1.1.0 and beyond
 
 + **Export / Import of Product.**
   + possibility to import / export product with csv or excel file
+
 + **Creation of a complete documentation on http://doc.ymple.com.**
+
 
 + **Payment with Stripe**
   + possibility to configure the payment option with Stripe for credit card
 
+
++ **Payment with Paypal**
+  + configure for sandbox and production credential
+
+
 + **Mobile Commerce API**
-  + API to get the product list, category list to allow to create Mobile Application using the API
+  + API to get the product list, category list to allow to create Mobile Application using the API to be compatible with http://mobile.ymple.com
 
 
 
-## 1.2.0 and beyond
 

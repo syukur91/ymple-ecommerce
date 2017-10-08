@@ -13,7 +13,7 @@ var CoreReadDbService = require(pathToService + 'back/CoreReadDbService');
 var CoreInsertDbService = require(pathToService + 'back/CoreInsertDbService');
 var CoreFrontInsertDbService = require(pathToService + 'back/CoreFrontInsertDbService');
 
-var pathTemplateFrontCore =  sails.config.globals.templatePathFrontCore;
+var pathTemplateFrontCore = sails.config.globals.templatePathFrontCore;
 
 
 module.exports = {
@@ -125,15 +125,6 @@ module.exports = {
 
         }
 
-        //  });
-
-
-        // User.create(req.body, function (err, user) {
-        // if (err) return next(err);
-
-        // return res.redirect('/');
-
-
     },
 
     update: function (req, res) {
@@ -149,6 +140,7 @@ module.exports = {
     },
 
     login: function (req, res) {
+
         async.waterfall([
             function GetUser(next) {
                 User.findOne({'email': req.body.email}).exec(function (err, user) {
@@ -159,7 +151,6 @@ module.exports = {
             },
 
             function Validate(user, next) {
-
 
                 if (user && user.password) {
 
@@ -174,8 +165,6 @@ module.exports = {
                             var dataView = [];
                             dataView.message = 'user or password not correct';
                             return res.view(pathTemplateFrontCore + 'login.ejs', dataView);
-
-//              return res.redirect('/login?error_login');
                         }
 
                         return next(null, isSuccess);
@@ -188,11 +177,37 @@ module.exports = {
                 return res.serverError('Or permission. The password is different.');
             }
             else {
-                return res.redirect('/');
+
+                console.log('redirect_url', req.query);
+
+                var url = '/';
+
+                if (req.query.redirect_url) {
+
+                    url = req.query.redirect_url;
+                }
+
+                return res.redirect(url);
             }
-
-
         });
+    },
+
+
+    loginStep1: function (req, res) {
+
+        console.log('UserController - loginStep1', req.query);
+
+        var redirectUrl = '';
+
+        if (req.query.redirect_url) {
+            redirectUrl = req.query.redirect_url;
+        }
+
+        var dataView = [];
+        dataView.message = '';
+        dataView.redirectUrl = redirectUrl;
+        return res.view(pathTemplateFrontCore + 'login.ejs', dataView);
+
     },
 
     reset: function (req, res) {
