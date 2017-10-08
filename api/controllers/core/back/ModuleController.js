@@ -467,11 +467,14 @@ module.exports = {
 
             if ( allParam.nameModule && allParam.nameModule == "paypal"){
 
+                var category = 'payment';
+
                 if ( allParam.mode && allParam.client_id && allParam.client_secret && allParam.client_id.length > 0 && allParam.client_secret.length > 0){
+
 
                     console.log( 'set configuration paypal in db ');
                     // we set in db module paypal a line collection name is module_category_moduleName
-                    var collectionName = 'module_payment_paypal';
+                    var collectionName = 'module_payment';
                     var client_id = allParam.client_id;
                     var client_secret = allParam.client_secret;
 
@@ -481,8 +484,8 @@ module.exports = {
                          mode = allParam.mode;
                     }
 
-                    var dataToInsert = {'client_id': client_id, 'client_secret': client_secret,'mode': mode, 'name': "configuration"} ;
-
+                    var dataToInsert = {'client_id': client_id, 'client_secret': client_secret,'mode': mode, 'name': "configuration", 'category': category} ;
+                    console.log( 'insert data in module paypal');
                     CoreInsertDbService.insertModuleConfiguration(collectionName, dataToInsert);
 
                 }
