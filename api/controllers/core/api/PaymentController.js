@@ -24,18 +24,18 @@ module.exports = {
 
         // get all the information about this order
 
-        var modeDemo = this.getPaypalMode();
+        var modeDemo = getPaypalMode();
 
         if (modeDemo == 'live') {
             var mode = modeDemo;
-            var client_id = this.getClientIdPaypal();
-            var client_secret = this.getClientSecretPaypal();
+            var client_id = getClientIdPaypal();
+            var client_secret = getClientSecretPaypal();
         }
         else if (modeDemo == 'sandbox') {
 
             var mode = modeDemo;
-            var client_id = this.getClientIdPaypal();
-            var client_secret = this.getClientSecretPaypal();
+            var client_id = getClientIdPaypal();
+            var client_secret = getClientSecretPaypal();
         }
 
         async.waterfall([
@@ -124,26 +124,29 @@ module.exports = {
 
 
 
-    getClientIdPaypal: function (){
 
-        var output = 'EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM';
-        return output;
+}
 
 
-    },
+function getClientIdPaypal (){
 
-    getClientSecretPaypal : function (){
+    var output = 'EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM';
+    return output;
 
-        var output = 'EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM';
-        return output;
-    },
 
-    getPaypalMode: function(){
+}
 
-        var output = 'sandbox';
-        return output;
+function getClientSecretPaypal (){
 
-    }
+    var output = 'EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM';
+    return output;
+}
+
+function getPaypalMode (){
+
+    var output = 'sandbox';
+    return output;
+
 }
 
 

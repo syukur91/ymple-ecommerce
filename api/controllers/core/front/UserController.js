@@ -124,7 +124,7 @@ module.exports = {
             return res.redirect('/login');
 
         }
-        
+
     },
 
     update: function (req, res) {
