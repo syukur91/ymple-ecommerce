@@ -360,4 +360,41 @@ module.exports = {
     },
 
 
+    getConfigurationOneModule: function (categoryModule, nameModule) { // return the data and item information about one order
+
+        var promise = new Promise(
+            function (resolve, reject) {
+
+                var collection = "module_" + categoryModule;
+
+                // console.log('getItemPaymentFromOrder - idOrder', input);
+
+
+                var MongoClient = require('mongodb').MongoClient;
+
+                MongoClient.connect(url, function (err, db) {
+
+                    var col = db.collection(collection);
+
+                    var findQuery = {name: nameModule};
+
+                    col.find(
+                        findQuery
+                    ).toArray(function (err, data) {
+                        //db.close();
+                        console.log(err);
+
+                        console.log('getConfigurationOneModule - data', data);
+
+                        resolve(data);
+                    })
+                })
+            })
+
+        return promise;
+
+    },
+
+
+
 };

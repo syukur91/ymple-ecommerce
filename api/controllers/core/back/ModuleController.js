@@ -412,8 +412,16 @@ module.exports = {
 
                 result.nameModule = nameModule;
 
-                return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
+                var categoryModule = 'payment';
 
+                CoreReadDbService.getConfigurationOneModule(categoryModule, nameModule).then(function (configurationModule) {
+
+                    console.log ('data configuration paypal', configurationModule);
+
+                    result.configuration = configurationModule[0];
+
+                    return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
+                })
             }
 
             else {
@@ -465,14 +473,15 @@ module.exports = {
             // get the parameters and update the table core_module_installed ( field configuration , field is active)
             console.log('ModuleController.js - editValidation - req', allParam);
 
-            if ( allParam.nameModule && allParam.nameModule == "paypal"){
+            if (allParam.nameModule && allParam.nameModule == "paypal") {
 
                 var category = 'payment';
+                var nameModule = allParam.nameModule;
 
-                if ( allParam.mode && allParam.client_id && allParam.client_secret && allParam.client_id.length > 0 && allParam.client_secret.length > 0){
+                if (allParam.mode && allParam.client_id && allParam.client_secret && allParam.client_id.length > 0 && allParam.client_secret.length > 0) {
 
 
-                    console.log( 'set configuration paypal in db ');
+                    console.log('set configuration paypal in db ');
                     // we set in db module paypal a line collection name is module_category_moduleName
                     var collectionName = 'module_payment';
                     var client_id = allParam.client_id;
@@ -481,16 +490,22 @@ module.exports = {
                     var mode = 'sandbox';
 
                     if (allParam.mode) {
-                         mode = allParam.mode;
+                        mode = allParam.mode;
                     }
 
-                    var dataToInsert = {'client_id': client_id, 'client_secret': client_secret,'mode': mode, 'name': "configuration", 'category': category} ;
-                    console.log( 'insert data in module paypal');
-                    CoreInsertDbService.insertModuleConfiguration(collectionName, dataToInsert);
+                    var dataToInsert = {
+                        'client_id': client_id,
+                        'client_secret': client_secret,
+                        'mode': mode,
+                        'name': nameModule,
+                        'category': category
+                    };
+                    console.log('insert data in module paypal');
+                    CoreInsertDbService.insertModuleConfiguration(collectionName, nameModule, dataToInsert);
 
                 }
 
-                else{
+                else {
 
                     return res.ok('One parameter is missing or not correct.');
                 }

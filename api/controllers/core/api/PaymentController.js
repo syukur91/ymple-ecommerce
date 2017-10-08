@@ -24,21 +24,14 @@ module.exports = {
 
         // get all the information about this order
 
-        var modeDemo = getPaypalMode();
 
-        if (modeDemo == 'live') {
-            var mode = modeDemo;
-            var client_id = getClientIdPaypal();
-            var client_secret = getClientSecretPaypal();
-        }
-        else if (modeDemo == 'sandbox') {
-
-            var mode = modeDemo;
-            var client_id = getClientIdPaypal();
-            var client_secret = getClientSecretPaypal();
-        }
 
         async.waterfall([
+
+
+
+
+
             function (callback) {
 
                 CoreReadDbService.getItemPaymentFromOrder(idOrder).then(function (dataOrder) {
@@ -73,9 +66,65 @@ module.exports = {
 
                 //process.exit();
 
-                ModulePaymentPaypalService.paymentActionWithPaypal(req, res, mode, client_id, client_secret, itemList, amount);
 
-                callback(null, 'done')
+                /*function (callback){
+
+
+                    var modeDemo = getPaypalMode();
+
+                    if (modeDemo == 'live') {
+                        var mode = modeDemo;
+                        var client_id = getClientIdPaypal();
+                        var client_secret = getClientSecretPaypal();
+                    }
+                    else if (modeDemo == 'sandbox') {
+
+                        var mode = modeDemo;
+                        var client_id = getClientIdPaypal();
+                        var client_secret = getClientSecretPaypal();
+                    }
+                    callback(null, mode);
+
+                },*/
+
+
+                var categoryModule = "payment";
+                var nameModule = "paypal";
+
+                 CoreReadDbService.getConfigurationOneModule(categoryModule, nameModule).then(function (data) {
+                      console.log('getPaypalMode - data', data);
+
+                //callback(null, arg1, dataWithPriceOrder)
+
+                //     return output;
+
+
+                     var modeDemo = data[0].mode;
+
+                     if (modeDemo == 'live') {
+                         var mode = modeDemo;
+                         var client_id = data[0].client_id;
+                         var client_secret = data[0].client_secret;
+                     }
+                     else if (modeDemo == 'sandbox') {
+
+                         var mode = modeDemo;
+                         var client_id = data[0].client_id;
+                         var client_secret = data[0].client_secret;
+                     }
+
+                     ModulePaymentPaypalService.paymentActionWithPaypal(req, res, mode, client_id, client_secret, itemList, amount);
+
+                     callback(null, 'done')
+
+
+                 })
+
+
+
+
+
+
             }
 
         ]).then(function (value) {
@@ -144,8 +193,24 @@ function getClientSecretPaypal (){
 
 function getPaypalMode (){
 
+
+    var arg1 = 1 ;
+    var categoryModule = 'payment';
+    var nameModule = 'paypal';
     var output = 'sandbox';
+
+   // CoreReadDbService.getConfigurationOneModule(categoryModule, nameModule).then(function (data) {
+  //      console.log('getPaypalMode - data', data);
+
+        //callback(null, arg1, dataWithPriceOrder)
+
+   //     return output;
+
+   // })
+
     return output;
+
+
 
 }
 

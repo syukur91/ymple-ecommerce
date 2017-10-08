@@ -45,8 +45,11 @@
                 <label> Mode (sandbox or live ) </label>
 
                 <Select name="mode" class="form-control">            
-                    <Option value="sandbox"> <%= __('sandbox') %></option>
-                    <Option value="live"> <%= __('live') %></option>
+                    <Option value="sandbox" <% if (typeof configuration !== 'undefined' &&  configuration.mode == 'sandbox' ) { %>
+                    <%= 'selected' %><% } %>> <%= __('Sandbox') %></option>
+
+                    <Option value="live"  <% if (typeof configuration !== 'undefined' &&  configuration.mode == 'live' ) { %>
+                            <%= 'selected' %><% } %>> <%= __('Live') %></option>
 
                 </select>
 
@@ -63,11 +66,9 @@
                 <label> Client Id </label>
                 <input type="text" class="form-control" id="client_id" name="client_id" placeholder=""
 
-                       value="<% if (typeof configuration !== 'undefined' && typeof configuration.mode !== 'undefined' ) { %>
+                       value="<% if (typeof configuration !== 'undefined' && typeof configuration.client_id !== 'undefined' ) { %>
 
-                        <%= configuration %>
-
-                         <% } %>">
+<%= configuration.client_id %><% } %>">
             </div>
         </div>
         <br>
@@ -79,10 +80,8 @@
                 <label> Client Secret </label>
                 <input type="text" class="form-control" id="client_secret" name="client_secret" placeholder=""
 
-                       value="<% if (typeof configuration !== 'undefined' && typeof configuration.mode !== 'undefined' ) { %>
-
-                        <%= configuration %>
-                         <% } %>">
+                       value="<% if (typeof configuration !== 'undefined' && typeof configuration.client_secret !== 'undefined' ) { %>
+<%= configuration.client_secret %><% } %>">
             </div>
         </div>
 

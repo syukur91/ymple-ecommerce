@@ -21,8 +21,6 @@ var urlConnection = "mongodb://" + host + ":" + port + '/' + database;
 
 getValueFromArray = function (data, element, type) {
 
-    //return 10;
-
     var output = '';
     // console.log('enter function getValueArray');
     // console.log('data.element',data.[element] );
@@ -145,7 +143,6 @@ getValueFromArray = function (data, element, type) {
                 var image = [];
                 image[0] = '/images/product/' + idProduct + '.png';
 
-
                 var dataToInsert = {
                     name: name,
                     //idProduct: idProduct,
@@ -158,9 +155,7 @@ getValueFromArray = function (data, element, type) {
                     image: image
                 }
 
-
                 if (sails.config.demoMode != 1) {
-
 
                     console.log('[db] update product');
                     console.log('data', data);
@@ -280,7 +275,7 @@ getValueFromArray = function (data, element, type) {
             });
         },
 
-        insertModuleConfiguration: function (collectionName, dataToInsert) { // Insert one configuration for a module
+        insertModuleConfiguration: function (collectionName,nameModule, dataToInsert) { // Insert one configuration for a module
             // the rules for the collection name is module_[category]_[moduleName]
 
             var MongoClient = require('mongodb').MongoClient;
@@ -288,12 +283,9 @@ getValueFromArray = function (data, element, type) {
             //Connect to the db
             MongoClient.connect(urlConnection).then(function (db) {
 
-                //console.log('data.name', data);
-
                 var date = new Date();
                 var createdAt = date.toISOString();
                 var updatedAt = date.toISOString();
-
 
                 dataToInsert.createdAt = createdAt;
                 dataToInsert.updatedAt = updatedAt;
@@ -302,7 +294,7 @@ getValueFromArray = function (data, element, type) {
 
                 if (sails.config.demoMode != 1) {
 
-                    collection.update({name: "configuration"},
+                    collection.update({name: nameModule},
                         {$set: dataToInsert},
                         {upsert: true}, function (error, result) {
                             if (error) {
@@ -414,8 +406,6 @@ getValueFromArray = function (data, element, type) {
 
 
                     var newIdCategory = docs[0].seq;
-
-
                     var date = new Date();
                     var createdAt = date.toISOString();
                     var updatedAt = date.toISOString();
@@ -424,7 +414,6 @@ getValueFromArray = function (data, element, type) {
                     var name = data.name;
                     var description = data.description;
                     var tag = data.tag;
-
 
                     var collectionName = "category";
                     var col = db.collection(collectionName);
@@ -446,11 +435,8 @@ getValueFromArray = function (data, element, type) {
                     if (sails.config.demoMode != 1) {
 
                         collection.insert(dataToInsert);
-
                         //this.incrementId('category');
-
                     }
-
                 });
 
             });
@@ -460,9 +446,7 @@ getValueFromArray = function (data, element, type) {
         saveImageProduct: function (idProduct, imagePath) { // Insert a product in table product
 
             console.log('InsertDbService - saveImageProduct - imagePath ', imagePath);
-
             MongoClient = this.getConnexion();
-            //Connect to the db
             MongoClient.connect(urlConnection).then(function (db) {
 
                 //console.log('data.name' , data.name);
@@ -495,11 +479,9 @@ getValueFromArray = function (data, element, type) {
                 var usernameApi = '';
                 var passwordApi = '';
                 var firmaApi = '';
-
                 var date = new Date();
                 var createdAt = date.toISOString();
                 var updatedAt = date.toISOString();
-
                 var idModule = 0;
                 var name = nameModule;
                 var description = nameModule;
