@@ -275,7 +275,7 @@ module.exports = {
 
                             _.each(data2, function (val, key) {
 
-                                price = price + val.price;
+                                price = price + ( val.price * item1[key].quantity);
 
                             })
 

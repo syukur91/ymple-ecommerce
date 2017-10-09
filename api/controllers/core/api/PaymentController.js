@@ -59,8 +59,8 @@ module.exports = {
 
                 var currency = "EUR";
 
-                var itemList = getItemListFromDataOrder(arg2, currency);
-                var amount = getAmountFromDataOrder(arg2, currency);
+                var itemList = getItemListFromDataOrder(arg1, arg2, currency);
+                var amount = getAmountFromDataOrder(arg1, arg2, currency);
 
                 var categoryModule = "payment";
                 var nameModule = "paypal";
@@ -170,20 +170,20 @@ function getClientSecretPaypal (){
 }*/
 
 
-function getItemListFromDataOrder(input, currency) {
+function getItemListFromDataOrder(input1, input2, currency) {
 
 
 
     var output = {};
      output.items = [];
 
-    _.each(input, function (val, key) {
+    _.each(input2, function (val, key) {
         var item = {
             "name": val.name,
             "sku": val.name,
             "price": val.price,
             "currency": currency,
-            "quantity": 1
+            "quantity": input1[key].quantity
         }
 
         output.items.push(item);
@@ -219,17 +219,12 @@ function getItemListFromDataOrder(input, currency) {
 
 }
 
-function getAmountFromDataOrder(input, currency) {
-
+function getAmountFromDataOrder(input1, input2, currency) {
 
     var amount = 0 ;
+    _.each(input2, function (val, key) {
 
-   // var output = {};
-    //output.items = [];
-
-    _.each(input, function (val, key) {
-
-            amount = amount + val.price;
+            amount = amount +  ( val.price * input1[key].quantity);
 
         })
 
