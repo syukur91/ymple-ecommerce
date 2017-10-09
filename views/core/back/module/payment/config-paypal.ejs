@@ -9,7 +9,6 @@
             </div>
         </div>
 
-
         <div class="row">
             <div class="col-sm-12">
                 <label> <%= __('Category') %> </label>
@@ -19,15 +18,10 @@
 
         <br>
 
-
         <h5 style="color:forestgreen"> <%= __('Configuration') %> </h5>
-
         <div class="row">
-
             <div class="col-sm-12">
-
                 <label style="color: red;"> STATUS </label>
-
                 <select name="currency" class="form-control">            
                     <Option value="actived"> <%= __('Active') %></option>
                     <Option value="desactivated"> <%= __('Not Active') %></option>
@@ -39,22 +33,16 @@
         <br>
 
         <div class="row">
-
             <div class="col-sm-12">
-
                 <label> Mode (sandbox or live ) </label>
-
                 <Select name="mode" class="form-control">            
                     <Option value="sandbox" <% if (typeof configuration !== 'undefined' &&  configuration.mode == 'sandbox' ) { %>
                     <%= 'selected' %><% } %>> <%= __('Sandbox') %></option>
 
                     <Option value="live"  <% if (typeof configuration !== 'undefined' &&  configuration.mode == 'live' ) { %>
                             <%= 'selected' %><% } %>> <%= __('Live') %></option>
-
                 </select>
-
             </div>
-
         </div>
 
         <br>
@@ -67,16 +55,13 @@
                 <input type="text" class="form-control" id="client_id" name="client_id" placeholder=""
 
                        value="<% if (typeof configuration !== 'undefined' && typeof configuration.client_id !== 'undefined' ) { %>
-
 <%= configuration.client_id %><% } %>">
             </div>
         </div>
         <br>
 
         <div class="row">
-
             <div class="col-sm-12">
-
                 <label> Client Secret </label>
                 <input type="text" class="form-control" id="client_secret" name="client_secret" placeholder=""
 
@@ -86,26 +71,17 @@
         </div>
 
         <br>
-
         <div class="row">
-
             <div class="col-sm-12">
-
                 <label> Currency </label>
-
                 <select name="currency" class="form-control">            
                     <Option value="eur"> <%= __('EUR') %></option>
                     <Option value="usd"> <%= __('USD') %></option>
-
                 </select>
             </div>
         </div>
 
         <br>
-
-
-
-
 
         <div class="row">
             <div class="col-sm-12" style="text-align: center;align-content: center">
@@ -117,13 +93,7 @@
                 <Button type="submit" class="btn btn-primary btn-lg pull-center"> <%= __('Save') %></button>
                 <% } %>
             </div>
-
         </div>
-
-
-
-
-
     </form>
 </div>
 

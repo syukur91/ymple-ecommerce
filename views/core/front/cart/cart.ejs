@@ -32,8 +32,28 @@
                         <!--td>{{ loop.index %></td-->
                         <td><%= product.name %></td>
                         <td><%= sails.config.project.currency.symbol %> <%= product.price | 'currency' %></td>
-                        <td><input class="form-control" type="text" value="<%= product.quantity %>"/></td>
+                        <!--td><input class="form-control" type="text" value="<%= product.quantity %>"/></td-->
+
+                        <td>
+                            <select  type="text" class="form-control" name="quantity">
+
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4 </option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8 </option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+
+                        </select>
+
+                        </td>
+
                         <td><%= sails.config.project.currency.symbol %><%= (product.price * product.quantity) | 'currency' %></td>
+
                         <td>
                             <button class="btn btn-xs btn-primary" button-action="apply">APPLY</button>
                             <button class="btn btn-xs btn-danger" button-action="delete">DELETE</button>
@@ -63,7 +83,8 @@
     $(document).ready(function () {
         $('[button-action="apply"]').on('click', function () {
             var product_id = $(this).parent().parent().data('id');
-            var quantity = $(this).parent().parent().find('input').val();
+
+            var quantity = $('select[name=quantity]').val();
 
             $.ajax({
                 type: 'PUT',
