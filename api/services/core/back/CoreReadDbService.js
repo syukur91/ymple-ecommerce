@@ -296,16 +296,15 @@ module.exports = {
 
                 console.log('getItemPaymentFromOrder - idOrder', input);
 
-
                 var MongoClient = require('mongodb').MongoClient;
 
                 MongoClient.connect(url, function (err, db) {
 
                     var col = db.collection(collection);
 
-                    var idProduct = input[0].id;
+                    var obj_ids = input.map(function (item){ return ObjectId(item.id)});
 
-                    var findQuery = {_id: ObjectId(idProduct)};
+                    var findQuery =  { "_id": { "$in": obj_ids } }
 
                     col.find(
                         findQuery
@@ -315,7 +314,7 @@ module.exports = {
 
                         console.log('returnItemWithPriceForOrder - data', data);
 
-                        resolve(data);    //docs[0].name.toString()); // returns to the function that calls the callback
+                        resolve(data);
                     })
                 })
             })
