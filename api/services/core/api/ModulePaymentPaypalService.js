@@ -178,7 +178,7 @@ module.exports = {
                 "transactions": [{
                     "amount": {
                         "currency": "EUR",
-                        "total": "22"
+                        "total": total
                     }
                 }]
             };

@@ -3,6 +3,8 @@ var port = sails.config.connections.mongodbServer.port;
 var database = sails.config.connections.mongodbServer.database;
 var url = "mongodb://" + host + ":" + port + '/' + database;
 var ObjectId = require('mongodb').ObjectID;
+var _ = require('underscore');
+
 
 
 module.exports = {
@@ -230,7 +232,6 @@ module.exports = {
             })
 
         return promise;
-
     },
 
 
@@ -250,18 +251,19 @@ module.exports = {
                     var col = db.collection(collectionName);
 
                     col.find({idOrder: parseInt(idOrder)}).toArray(function (err, data1) {
-                        //db.close();
+
                         console.log('getTotalAmountForOneOrder - data1', data1);
 
                         var item1 = data1[0].cart;
-
                         var collection2 = 'product';
-
                         var col2 = db.collection(collection2);
 
-                        var idProduct = item1[0].id;
+                        var obj_ids = item1.map(function (item) {
+                            return ObjectId(item.id)
+                        });
 
-                        var findQuery = {_id: ObjectId(idProduct)};
+                        var findQuery = {"_id": {"$in": obj_ids}}
+
 
                         col2.find(
                             findQuery
@@ -269,7 +271,16 @@ module.exports = {
 
                                 console.log('getTotalAmountForOneOrder - data2', data2);
 
-                                var price = data2[0].price;
+                            var price = 0 ;
+
+                            _.each(data2, function (val, key) {
+
+                                price = price + val.price;
+
+                            })
+
+
+                                //var price = data2[0].price;
 
                                 console.log('price', price);
 
@@ -302,9 +313,11 @@ module.exports = {
 
                     var col = db.collection(collection);
 
-                    var obj_ids = input.map(function (item){ return ObjectId(item.id)});
+                    var obj_ids = input.map(function (item) {
+                        return ObjectId(item.id)
+                    });
 
-                    var findQuery =  { "_id": { "$in": obj_ids } }
+                    var findQuery = {"_id": {"$in": obj_ids}}
 
                     col.find(
                         findQuery
@@ -393,7 +406,6 @@ module.exports = {
         return promise;
 
     },
-
 
 
 };
