@@ -4,7 +4,6 @@ var paypal = require('paypal-rest-sdk');
 var CoreReadDbService = require('../back/CoreReadDbService');
 
 
-
 module.exports = {
 
 
@@ -44,7 +43,6 @@ module.exports = {
             }]
         };
 
-
         paypal.payment.create(create_payment_json, function (error, payment) {
             if (error) {
                 throw error;
@@ -54,9 +52,7 @@ module.exports = {
                 console.log(JSON.stringify(payment, null, 2));
 
                 var redirectUrl = payment.links[1].href;
-
                 res.redirect(redirectUrl); // redirect to paypal approval_url
-
 
             }
         });
@@ -71,22 +67,7 @@ module.exports = {
             'client_secret': client_secret
         });
 
-
-        /* 'mode': 'sandbox', //sandbox or live
-         'client_id': '',
-         'client_secret': ''
-         */
-
-
-        /*paypal.configure({
-         'mode': 'live', // live
-         'client_id': '',
-         'client_secret': ''
-         });*/
-
-
         console.log('[start]: paymentActionWithCreditCard');
-
 
         var create_payment_json = {
             "intent": "sale",
@@ -142,9 +123,6 @@ module.exports = {
         var idPayment = req.params.idPayment;
         var baseUrl = req.baseUrl;
 
-        // console.log('req.path', req.path);
-        // var urlPath = req.path; // containing the id payment
-
         var redirectUrlConfirmationSuccess = baseUrl + '/payment/paypal/execute/confirmation/success/' + idPayment;
         var redirectUrlConfirmationError = baseUrl + '/payment/paypal/execute/confirmation/error/' + idPayment;
 
@@ -157,17 +135,9 @@ module.exports = {
             'client_secret': client_secret
         });
 
-
-
-
-
         var idOrder = req.params.idPayment;
 
-
-
-        //[start]: query to get total amount
         CoreReadDbService.getTotalAmountForOneOrder(idOrder).then(function (total) {
-
 
             console.log( 'from query to get total amount - total',total );
 
@@ -178,7 +148,7 @@ module.exports = {
                 "transactions": [{
                     "amount": {
                         "currency": "EUR",
-                        "total": "22"
+                        "total": total
                     }
                 }]
             };
@@ -192,7 +162,6 @@ module.exports = {
                     throw error;
                 } else {
 
-
                     console.log("Get Payment Response");
                     console.log(JSON.stringify(payment));
 
@@ -202,10 +171,6 @@ module.exports = {
 
 
         });
-        // [end query to get total amount]
-
 
     }
-
-
 }

@@ -9,9 +9,10 @@ var CoreReadDbService = require('../../../services/core/back/CoreReadDbService')
 var CoreInsertDbService = require('../../../services/core/back/CoreInsertDbService');
 var ModulePaymentPaypalService = require('../../../services/core/api/ModulePaymentPaypalService');
 var pathTemplateBackCore =  sails.config.globals.templatePathFrontCore;
+var _ = require('underscore');
+
 
 const async = require('promise-async')
-
 
 module.exports = {
 
@@ -24,26 +25,15 @@ module.exports = {
 
         // get all the information about this order
 
-        var modeDemo = getPaypalMode();
-
-        if (modeDemo == 'live') {
-            var mode = modeDemo;
-            var client_id = getClientIdPaypal();
-            var client_secret = getClientSecretPaypal();
-        }
-        else if (modeDemo == 'sandbox') {
-
-            var mode = modeDemo;
-            var client_id = getClientIdPaypal();
-            var client_secret = getClientSecretPaypal();
-        }
-
         async.waterfall([
+
             function (callback) {
 
                 CoreReadDbService.getItemPaymentFromOrder(idOrder).then(function (dataOrder) {
 
+                    console.log('paymentController - dataOrder', dataOrder);
                     var itemCart = dataOrder[0].cart;
+
                     callback(null, itemCart);
                 });
             },
@@ -61,21 +51,42 @@ module.exports = {
             },
 
             function (arg1, arg2, callback) {
+
                 var dataOrder;
 
                 console.log('arg1 at the end', arg1);
                 console.log('arg2 at the end', arg2);
-                console.log('paypalpay - getItemPaymentFromOrder');
 
                 var currency = "EUR";
-                var itemList = getItemListFromDataOrder(arg2, currency);
-                var amount = getAmountFromDataOrder(arg2, currency);
 
-                //process.exit();
+                var itemList = getItemListFromDataOrder(arg1, arg2, currency);
+                var amount = getAmountFromDataOrder(arg1, arg2, currency);
 
-                ModulePaymentPaypalService.paymentActionWithPaypal(req, res, mode, client_id, client_secret, itemList, amount);
+                var categoryModule = "payment";
+                var nameModule = "paypal";
 
-                callback(null, 'done')
+                 CoreReadDbService.getConfigurationOneModule(categoryModule, nameModule).then(function (data) {
+                      console.log('getPaypalMode - data', data);
+
+                     var modeDemo = data[0].mode;
+
+                     if (modeDemo == 'live') {
+                         var mode = modeDemo;
+                         var client_id = data[0].client_id;
+                         var client_secret = data[0].client_secret;
+                     }
+                     else if (modeDemo == 'sandbox') {
+
+                         var mode = modeDemo;
+                         var client_id = data[0].client_id;
+                         var client_secret = data[0].client_secret;
+                     }
+
+                     ModulePaymentPaypalService.paymentActionWithPaypal(req, res, mode, client_id, client_secret, itemList, amount);
+
+                     callback(null, 'done')
+
+                 })
             }
 
         ]).then(function (value) {
@@ -84,7 +95,6 @@ module.exports = {
             console.log('end of call list ');
 
         })
-
 
         console.log('[end]: payment controller');
     },
@@ -128,31 +138,59 @@ module.exports = {
 }
 
 
-function getClientIdPaypal (){
-
-    var output = 'EBWKjlELKMYqRNQ6sYvFo64FtaRLRR5BdHEESmha49TM';
+/*function getClientIdPaypal (){
+    var output = '';
     return output;
-
-
 }
 
 function getClientSecretPaypal (){
 
-    var output = 'EO422dn3gQLgDbuwqTjzrFgFtaRLRR5BdHEESmha49TM';
+    var output = '';
     return output;
-}
+}*/
 
-function getPaypalMode (){
+/*function getPaypalMode (){
 
+    var arg1 = 1 ;
+    var categoryModule = 'payment';
+    var nameModule = 'paypal';
     var output = 'sandbox';
+
+   // CoreReadDbService.getConfigurationOneModule(categoryModule, nameModule).then(function (data) {
+  //      console.log('getPaypalMode - data', data);
+
+        //callback(null, arg1, dataWithPriceOrder)
+
+   //     return output;
+
+   // })
+
     return output;
 
-}
+}*/
 
 
-function getItemListFromDataOrder(input, currency) {
+function getItemListFromDataOrder(input1, input2, currency) {
 
-    var output = {
+
+
+    var output = {};
+     output.items = [];
+
+    _.each(input2, function (val, key) {
+        var item = {
+            "name": val.name,
+            "sku": val.name,
+            "price": val.price,
+            "currency": currency,
+            "quantity": input1[key].quantity
+        }
+
+        output.items.push(item);
+
+    })
+
+    /*var output = {
         "items": [
 
             {
@@ -171,21 +209,30 @@ function getItemListFromDataOrder(input, currency) {
              "currency": "USD",
              "quantity": 1
              }*/
-        ]
-    };
+        //]
+    //};
+
+    console.log ('getItemListFromDataOrder - output', output);
 
     return output;
 
 
 }
 
-function getAmountFromDataOrder(input, currency) {
+function getAmountFromDataOrder(input1, input2, currency) {
+
+    var amount = 0 ;
+    _.each(input2, function (val, key) {
+
+            amount = amount +  ( val.price * input1[key].quantity);
+
+        })
 
     var output = {
         "currency": currency,
-        "total": input[0].price,
+        "total": amount,
         "details": {
-            "subtotal": input[0].price,
+            "subtotal": amount,
             "tax": "0.00",
             "shipping": "0.00",
             "handling_fee": "0.00"

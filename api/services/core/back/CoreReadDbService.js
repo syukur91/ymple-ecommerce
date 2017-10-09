@@ -3,6 +3,8 @@ var port = sails.config.connections.mongodbServer.port;
 var database = sails.config.connections.mongodbServer.database;
 var url = "mongodb://" + host + ":" + port + '/' + database;
 var ObjectId = require('mongodb').ObjectID;
+var _ = require('underscore');
+
 
 
 module.exports = {
@@ -230,7 +232,6 @@ module.exports = {
             })
 
         return promise;
-
     },
 
 
@@ -250,18 +251,19 @@ module.exports = {
                     var col = db.collection(collectionName);
 
                     col.find({idOrder: parseInt(idOrder)}).toArray(function (err, data1) {
-                        //db.close();
+
                         console.log('getTotalAmountForOneOrder - data1', data1);
 
                         var item1 = data1[0].cart;
-
                         var collection2 = 'product';
-
                         var col2 = db.collection(collection2);
 
-                        var idProduct = item1[0].id;
+                        var obj_ids = item1.map(function (item) {
+                            return ObjectId(item.id)
+                        });
 
-                        var findQuery = {_id: ObjectId(idProduct)};
+                        var findQuery = {"_id": {"$in": obj_ids}}
+
 
                         col2.find(
                             findQuery
@@ -269,7 +271,16 @@ module.exports = {
 
                                 console.log('getTotalAmountForOneOrder - data2', data2);
 
-                                var price = data2[0].price;
+                            var price = 0 ;
+
+                            _.each(data2, function (val, key) {
+
+                                price = price + ( val.price * item1[key].quantity);
+
+                            })
+
+
+                                //var price = data2[0].price;
 
                                 console.log('price', price);
 
@@ -296,16 +307,17 @@ module.exports = {
 
                 console.log('getItemPaymentFromOrder - idOrder', input);
 
-
                 var MongoClient = require('mongodb').MongoClient;
 
                 MongoClient.connect(url, function (err, db) {
 
                     var col = db.collection(collection);
 
-                    var idProduct = input[0].id;
+                    var obj_ids = input.map(function (item) {
+                        return ObjectId(item.id)
+                    });
 
-                    var findQuery = {_id: ObjectId(idProduct)};
+                    var findQuery = {"_id": {"$in": obj_ids}}
 
                     col.find(
                         findQuery
@@ -315,7 +327,7 @@ module.exports = {
 
                         console.log('returnItemWithPriceForOrder - data', data);
 
-                        resolve(data);    //docs[0].name.toString()); // returns to the function that calls the callback
+                        resolve(data);
                     })
                 })
             })
@@ -349,6 +361,42 @@ module.exports = {
                         console.log(err);
 
                         console.log('getConfigurationModule - data', data);
+
+                        resolve(data);
+                    })
+                })
+            })
+
+        return promise;
+
+    },
+
+
+    getConfigurationOneModule: function (categoryModule, nameModule) { // return the data and item information about one order
+
+        var promise = new Promise(
+            function (resolve, reject) {
+
+                var collection = "module_" + categoryModule;
+
+                // console.log('getItemPaymentFromOrder - idOrder', input);
+
+
+                var MongoClient = require('mongodb').MongoClient;
+
+                MongoClient.connect(url, function (err, db) {
+
+                    var col = db.collection(collection);
+
+                    var findQuery = {name: nameModule};
+
+                    col.find(
+                        findQuery
+                    ).toArray(function (err, data) {
+                        //db.close();
+                        console.log(err);
+
+                        console.log('getConfigurationOneModule - data', data);
 
                         resolve(data);
                     })
