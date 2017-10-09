@@ -100,22 +100,11 @@ module.exports = {
 
         var data = {};
 
-        //data = req;
-
-        data.password = 'f';
-        data.name = 'f';
-        data.email = 'f@gmail.com';
-
-
         if (req.body.name && req.body.email && req.body.password) {
-
 
             CoreFrontInsertDbService.startCreateUserFront(req);
 
             console.log('UserController.js - step 1 subscription done');
-
-
-            //  if (err) return next(err);
 
             return res.redirect('/');
         }
