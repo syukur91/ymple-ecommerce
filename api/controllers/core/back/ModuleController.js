@@ -174,28 +174,24 @@ module.exports = {
 
                 var item = [{
 
+                    idModule: 0,
+                    category: nameModule,
+                    configuration: "",
+                    description: "",
+                    createAt: "",
+                    name: "paypal",
+                    isActive: 1
+                },
+                    {
+
                         idModule: 0,
                         category: nameModule,
                         configuration: "",
                         description: "",
                         createAt: "",
-                        name: "paypal",
+                        name: "stripe",
                         isActive: 1
-                    },
-
-                        {
-
-                            idModule: 0,
-                            category: nameModule,
-                            configuration: "",
-                            description: "",
-                            createAt: "",
-                            name: "stripe",
-                            isActive: 1
-                        }]
-
-
-                    ;
+                    }];
 
                 result.listModule = item;
 
@@ -416,7 +412,7 @@ module.exports = {
 
                 CoreReadDbService.getConfigurationOneModule(categoryModule, nameModule).then(function (configurationModule) {
 
-                    console.log ('data configuration paypal', configurationModule);
+                    console.log('data configuration paypal', configurationModule);
 
                     result.configuration = configurationModule[0];
 

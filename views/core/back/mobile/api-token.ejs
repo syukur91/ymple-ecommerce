@@ -1,0 +1,49 @@
+<div class="">
+    <h4 style="color:forestgreen"><a href="/admin"></a>Mobile Configuration</h4>
+    <form role="form" action="/admin/mobile/api_token/save_configuration/" method="POST">
+
+        <h5 style="color:forestgreen"> <%= __('Configuration') %> </h5>
+        <div class="row">
+            <div class="col-sm-6">
+                <label style="color: red;"> Status of Activation of the Api</label>
+                <select name="currency" class="form-control">            
+                    <Option value="actived"> <%= __('Active') %></option>
+                    <Option value="desactivated"> <%= __('Not Active') %></option>
+
+                </select>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+
+            <label class="col-sm-6">
+
+                <label>Token</label><br>
+                <div>This token is necessary to have access to API.<br>
+                    Necessary for example in case of Mobile Implementation</div>
+                <input type="text" class="form-control" id="client_id" name="client_id" placeholder=""
+                       value="<% if (typeof configuration !== 'undefined' && typeof configuration.client_id !== 'undefined' ) { %>
+<%= configuration.client_id %><% } %>">
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col-sm-6" style="text-align: center;align-content: center">
+
+                <a href="/admin/mobile/api_token/generate_token/"  class="btn btn-primary btn pull-center"> <%= __('Generate a token') %></a>
+
+                <% if (typeof edit == 'object' && edit) { %>
+                 
+                <Button type="submit" class="btn btn-primary btn pull-center"> <%= __('modify') %></button>
+                <% } else { %>
+                <Button type="submit" class="btn btn-primary btn pull-center"> <%= __('Save') %></button>
+                <% } %>
+            </div>
+        </div>
+    </form>
+</div>
+
