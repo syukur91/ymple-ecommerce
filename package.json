@@ -6,7 +6,7 @@
   },
   "homepage": "https://www.ymple.com",
   "private": false,
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Ymple Ecommerce Nodejs a Node.js and Sailsjs Ecommerce Solution ( E-commerce / M-commerce)",
   "keywords": [
     "nodejs",

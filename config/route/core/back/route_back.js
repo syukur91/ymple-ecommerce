@@ -80,6 +80,13 @@ module.exports.routes = {
 
     '/admin/stat/report': 'core/back/statController.report',
 
-    '/admin/notification/configuration': 'core/back/Notification.configuration'
+    '/admin/notification/configuration': 'core/back/Notification.configuration',
+
+    // [start mobile section]
+
+    '/admin/mobile/api_token': 'core/back/Mobile.apiToken',
+
+
+    // [end mobile section]
 
 };
