@@ -19,10 +19,11 @@ module.exports.routes = {
     '/payment/paypal/execute/confirmation/success/:idPayment': 'core/api/paymentController.paypalExecuteConfirmationSuccess', // double confirmation paypal step
 
 
-    '/payment/paypal/execute/confirmation/error/:idPayment': 'core/api/paymentController.paypalExecuteConfirmationError' // double confirmation paypal step
+    '/payment/paypal/execute/confirmation/error/:idPayment': 'core/api/paymentController.paypalExecuteConfirmationError', // double confirmation paypal step
 
 
 
+    'GET /api/v1/test/': 'core/api/ApiController.test'
 
 
 };
