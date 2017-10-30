@@ -84,7 +84,9 @@ module.exports.routes = {
 
     // [start mobile section]
 
-    '/admin/mobile/api_token': 'core/back/Mobile.apiToken',
+    'GET /admin/mobile/api_token': 'core/back/Mobile.apiToken',
+
+    'GET /admin/mobile/api_token/generate_token': 'core/back/Mobile.apiGenerateToken',
 
 
     // [end mobile section]

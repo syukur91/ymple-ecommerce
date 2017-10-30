@@ -6,6 +6,7 @@ var CoreReadDbService = require(pathToService + 'back/CoreReadDbService');
 var CoreInsertDbService = require(pathToService + '/back/CoreInsertDbService');
 var pathTemplateBackCore = sails.config.globals.templatePathBackCore;
 var _ = require('underscore');
+var hat = require('hat');
 
 
 module.exports = {
@@ -14,17 +15,39 @@ module.exports = {
 
     apiToken: function (req, res){
 
-        var result = {};
+        var api_key = '';
+
+        if (req.query.api_key) {
+            var apiKey = req.query.api_key;
+
+            console.log('apiToken - apiKey', apiKey);
+        }
+
+        var data = {};
 
 
+        data.pathToInclude = '../mobile/api-token.ejs';
+        data.api_key = apiKey;
 
-        result.pathToInclude = '../mobile/api-token.ejs';
 
-        return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
+        return res.view(pathTemplateBackCore + 'commun-back/main.ejs', data);
 
 
         return res.ok('ok pour api token ');
 
+    },
+
+
+    apiGenerateToken: function (req, res){
+
+        var result = {};
+        var id = hat();
+
+        console.log('MobileController' + id);
+
+        var url = '/admin/mobile/api_token?api_key='+ id;
+
+        return res.redirect(url);
     },
 
     edit: function (req, res) {
