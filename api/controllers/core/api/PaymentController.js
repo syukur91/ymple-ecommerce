@@ -70,7 +70,7 @@ module.exports = {
 
                      if (typeof data[0] == "undefined"){
 
-                         var url = '/?error_configuration_paypal';
+                         var url = '/?missing_configuration_paypal=1';
                          return res.redirect(url);
 
                      }
