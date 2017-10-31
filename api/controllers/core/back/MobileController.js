@@ -12,8 +12,7 @@ var hat = require('hat');
 module.exports = {
 
 
-
-    apiToken: function (req, res){
+    apiToken: function (req, res) {
 
         var api_key = '';
 
@@ -38,14 +37,33 @@ module.exports = {
     },
 
 
-    apiGenerateToken: function (req, res){
+    apiGenerateToken: function (req, res) {
 
         var result = {};
         var id = hat();
 
         console.log('MobileController' + id);
 
-        var url = '/admin/mobile/api_token?api_key='+ id;
+        var url = '/admin/mobile/api_token?api_key=' + id;
+
+        return res.redirect(url);
+    },
+
+    // store the token in table api
+    apiSaveToken: function (req, res) {
+
+        var apiKey = '';
+        if (req.body.api_key) {
+            apiKey = req.body.api_key;
+        }
+
+        CoreInsertDbService.saveApiKey(apiKey);
+
+        console.log('apiSaveToken - apiKey', apiKey);
+
+        var result = {};
+
+        var url = '/admin/mobile/api_token?api_key=' + apiKey;
 
         return res.redirect(url);
     },

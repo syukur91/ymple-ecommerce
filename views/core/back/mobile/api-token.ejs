@@ -1,6 +1,6 @@
 <div class="">
     <h4 style="color:forestgreen"><a href="/admin"></a>Mobile Configuration</h4>
-    <form role="form" action="/admin/mobile/api_token/save_configuration/" method="POST">
+    <form role="form" action="/admin/mobile/api_token/save_configuration" method="POST">
 
         <h5 style="color:forestgreen"> <%= __('Configuration') %> </h5>
         <br>
@@ -24,8 +24,8 @@
                 <label>Token</label><br>
                 <div>This token is necessary to have access to API Data.<br>
                 </div>
-                <input type="text" class="form-control" id="client_id" name="client_id" placeholder=""
-                       value="<% if (typeof api_key !== 'undefined' ) { %> <%= api_key %><% } %>">
+                <input type="text" class="form-control" id="api_key" name="api_key" placeholder=""
+                       value="<% if (typeof api_key !== 'undefined' ){ %><%=api_key%><%}%>">
         </div>
         </div>
 
