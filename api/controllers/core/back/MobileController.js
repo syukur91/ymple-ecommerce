@@ -110,6 +110,14 @@ module.exports = {
 
                     console.log('data configuration paypal', configurationModule);
 
+                    // in this case the configuration paypal is missing
+                    if (typeof configurationModule[0] == "undefined"){
+
+                        var url = '/?error_configuration_paypal';
+                        return res.redirect(url);
+
+                    }
+
                     result.configuration = configurationModule[0];
 
                     return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);

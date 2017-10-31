@@ -130,35 +130,75 @@ module.exports = {
 
     login: function (req, res) {
 
+        console.log('UserController - login');
+
         async.waterfall([
             function GetUser(next) {
-                User.findOne({'email': req.body.email}).exec(function (err, user) {
+
+
+            try {
+            User.findOne({'email': req.body.email}).exec(function (err, user) {
+
+
+                console.log('UserController - login - user', user);
+
                     if (err) return next(err);
 
                     return next(null, user);
                 });
+            }
+            catch (err) {
+                // Handle the error here.
+                console.log(err);
+
+            }
+
+
             },
 
             function Validate(user, next) {
 
-                if (user && user.password) {
+                try {
 
-                    bcrypt.compare(req.body.password, user.password, function (err, isSuccess) {
-                        if (err) return next(err);
+                    if (user && user.password) {
 
-                        if (isSuccess) {
-                            req.session.authenticated = true;
-                            req.session.user = user;
-                        }
-                        else { // login view with error message
-                            var dataView = [];
-                            dataView.message = 'user or password not correct';
-                            return res.view(pathTemplateFrontCore + 'login.ejs', dataView);
-                        }
+                        bcrypt.compare(req.body.password, user.password, function (err, isSuccess) {
+                            if (err) return next(err);
 
-                        return next(null, isSuccess);
-                    });
+                            if (isSuccess) {
+                                req.session.authenticated = true;
+                                req.session.user = user;
+                            }
+                            else { // login view with error message
+                                var dataView = [];
+                                dataView.message = 'user or password not correct';
+                                return res.view(pathTemplateFrontCore + 'login.ejs', dataView);
+                            }
+
+                            return next(null, isSuccess);
+                        });
+                    }
+                    else{
+
+                        console.log ('UserController - User not found');
+
+                        // error of user password
+
+                        var url = '/login?error_user=1';
+
+                        return res.redirect(url);
+
+                    }
+
+
                 }
+                catch (err) {
+                    // Handle the error here.
+                    console.log(err);
+
+                }
+
+
             }
         ], function (err, isSuccess) {
             if (err) return res.serverError(err);
@@ -186,7 +226,7 @@ module.exports = {
 
         console.log('UserController - loginStep1', req.query);
 
-        var redirectUrl = '';
+        var redirectUrl = '/';
 
         if (req.query.redirect_url) {
             redirectUrl = req.query.redirect_url;
