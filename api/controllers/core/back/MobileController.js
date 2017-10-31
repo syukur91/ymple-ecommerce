@@ -6,25 +6,66 @@ var CoreReadDbService = require(pathToService + 'back/CoreReadDbService');
 var CoreInsertDbService = require(pathToService + '/back/CoreInsertDbService');
 var pathTemplateBackCore = sails.config.globals.templatePathBackCore;
 var _ = require('underscore');
+var hat = require('hat');
 
 
 module.exports = {
 
 
+    apiToken: function (req, res) {
 
-    apiToken: function (req, res){
+        var api_key = '';
 
-        var result = {};
+        if (req.query.api_key) {
+            var apiKey = req.query.api_key;
+
+            console.log('apiToken - apiKey', apiKey);
+        }
+
+        var data = {};
 
 
+        data.pathToInclude = '../mobile/api-token.ejs';
+        data.api_key = apiKey;
 
-        result.pathToInclude = '../mobile/api-token.ejs';
 
-        return res.view(pathTemplateBackCore + 'commun-back/main.ejs', result);
+        return res.view(pathTemplateBackCore + 'commun-back/main.ejs', data);
 
 
         return res.ok('ok pour api token ');
 
+    },
+
+
+    apiGenerateToken: function (req, res) {
+
+        var result = {};
+        var id = hat();
+
+        console.log('MobileController' + id);
+
+        var url = '/admin/mobile/api_token?api_key=' + id;
+
+        return res.redirect(url);
+    },
+
+    // store the token in table api
+    apiSaveToken: function (req, res) {
+
+        var apiKey = '';
+        if (req.body.api_key) {
+            apiKey = req.body.api_key;
+        }
+
+        CoreInsertDbService.saveApiKey(apiKey);
+
+        console.log('apiSaveToken - apiKey', apiKey);
+
+        var result = {};
+
+        var url = '/admin/mobile/api_token?api_key=' + apiKey;
+
+        return res.redirect(url);
     },
 
     edit: function (req, res) {
@@ -68,6 +109,14 @@ module.exports = {
                 CoreReadDbService.getConfigurationOneModule(categoryModule, nameModule).then(function (configurationModule) {
 
                     console.log('data configuration paypal', configurationModule);
+
+                    // in this case the configuration paypal is missing
+                    if (typeof configurationModule[0] == "undefined"){
+
+                        var url = '/?error_configuration_paypal';
+                        return res.redirect(url);
+
+                    }
 
                     result.configuration = configurationModule[0];
 

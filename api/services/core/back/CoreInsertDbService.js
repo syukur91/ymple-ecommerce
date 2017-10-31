@@ -667,4 +667,31 @@ getValueFromArray = function (data, element, type) {
             });
         },
 
+
+        saveApiKey: function (apiKey) { // Save the api key used for api call as a security key
+
+            //console.log('InsertDbService - saveImageProduct - imagePath ', imagePath);
+            MongoClient = this.getConnexion();
+            MongoClient.connect(urlConnection).then(function (db) {
+
+                //console.log('data.name' , data.name);
+
+                var date = new Date();
+                var createdAt = date.toISOString();
+                var updatedAt = date.toISOString();
+                var collection = db.collection('api');
+                var name_key = 'api_key';
+                var data = {'value':apiKey, 'name_key':name_key};
+
+                //console.log('saveImageProduct - update');
+
+                if (sails.config.demoMode != 1) {
+
+                    collection.update(
+                        {name_key: name_key},
+                        {$set: data},
+                        {upsert: true})
+                }
+            });
+        },
     }

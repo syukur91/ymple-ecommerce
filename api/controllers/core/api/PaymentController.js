@@ -68,6 +68,13 @@ module.exports = {
                  CoreReadDbService.getConfigurationOneModule(categoryModule, nameModule).then(function (data) {
                       console.log('getPaypalMode - data', data);
 
+                     if (typeof data[0] == "undefined"){
+
+                         var url = '/?missing_configuration_paypal=1';
+                         return res.redirect(url);
+
+                     }
+
                      var modeDemo = data[0].mode;
 
                      if (modeDemo == 'live') {

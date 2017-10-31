@@ -1,11 +1,12 @@
 <div class="">
     <h4 style="color:forestgreen"><a href="/admin"></a>Mobile Configuration</h4>
-    <form role="form" action="/admin/mobile/api_token/save_configuration/" method="POST">
+    <form role="form" action="/admin/mobile/api_token/save_configuration" method="POST">
 
         <h5 style="color:forestgreen"> <%= __('Configuration') %> </h5>
+        <br>
         <div class="row">
             <div class="col-sm-6">
-                <label style="color: red;"> Status of Activation of the Api</label>
+                <label style=""> Status of Activation of the Api</label>
                 <select name="currency" class="form-control">            
                     <Option value="actived"> <%= __('Active') %></option>
                     <Option value="desactivated"> <%= __('Not Active') %></option>
@@ -18,16 +19,16 @@
 
         <div class="row">
 
-            <label class="col-sm-6">
+            <div class="col-sm-6">
 
                 <label>Token</label><br>
-                <div>This token is necessary to have access to API.<br>
-                    Necessary for example in case of Mobile Implementation</div>
-                <input type="text" class="form-control" id="client_id" name="client_id" placeholder=""
-                       value="<% if (typeof configuration !== 'undefined' && typeof configuration.client_id !== 'undefined' ) { %>
-<%= configuration.client_id %><% } %>">
-            </div>
+                <div>This token is necessary to have access to API Data.<br>
+                </div>
+                <input type="text" class="form-control" id="api_key" name="api_key" placeholder=""
+                       value="<% if (typeof api_key !== 'undefined' ){ %><%=api_key%><%}%>">
         </div>
+        </div>
+
 
         <br>
 
