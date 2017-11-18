@@ -8,7 +8,7 @@
 var CoreReadDbService = require('../../../services/core/back/CoreReadDbService');
 var CoreInsertDbService = require('../../../services/core/back/CoreInsertDbService');
 var ModulePaymentPaypalService = require('../../../services/core/api/ModulePaymentPaypalService');
-var pathTemplateBackCore =  sails.config.globals.templatePathFrontCore;
+var pathTemplateBackCore = sails.config.globals.templatePathFrontCore;
 var _ = require('underscore');
 
 
@@ -65,35 +65,35 @@ module.exports = {
                 var categoryModule = "payment";
                 var nameModule = "paypal";
 
-                 CoreReadDbService.getConfigurationOneModule(categoryModule, nameModule).then(function (data) {
-                      console.log('getPaypalMode - data', data);
+                CoreReadDbService.getConfigurationOneModule(categoryModule, nameModule).then(function (data) {
+                    console.log('getPaypalMode - data', data);
 
-                     if (typeof data[0] == "undefined"){
+                    if (typeof data[0] == "undefined") {
 
-                         var url = '/?missing_configuration_paypal=1';
-                         return res.redirect(url);
+                        var url = '/?missing_configuration_paypal=1';
+                        return res.redirect(url);
 
-                     }
+                    }
 
-                     var modeDemo = data[0].mode;
+                    var modeDemo = data[0].mode;
 
-                     if (modeDemo == 'live') {
-                         var mode = modeDemo;
-                         var client_id = data[0].client_id;
-                         var client_secret = data[0].client_secret;
-                     }
-                     else if (modeDemo == 'sandbox') {
+                    if (modeDemo == 'live') {
+                        var mode = modeDemo;
+                        var client_id = data[0].client_id;
+                        var client_secret = data[0].client_secret;
+                    }
+                    else if (modeDemo == 'sandbox') {
 
-                         var mode = modeDemo;
-                         var client_id = data[0].client_id;
-                         var client_secret = data[0].client_secret;
-                     }
+                        var mode = modeDemo;
+                        var client_id = data[0].client_id;
+                        var client_secret = data[0].client_secret;
+                    }
 
-                     ModulePaymentPaypalService.paymentActionWithPaypal(req, res, mode, client_id, client_secret, itemList, amount);
+                    ModulePaymentPaypalService.paymentActionWithPaypal(req, res, mode, client_id, client_secret, itemList, amount);
 
-                     callback(null, 'done')
+                    callback(null, 'done')
 
-                 })
+                })
             }
 
         ]).then(function (value) {
@@ -140,8 +140,6 @@ module.exports = {
     },
 
 
-
-
 }
 
 
@@ -180,9 +178,8 @@ function getClientSecretPaypal (){
 function getItemListFromDataOrder(input1, input2, currency) {
 
 
-
     var output = {};
-     output.items = [];
+    output.items = [];
 
     _.each(input2, function (val, key) {
         var item = {
@@ -216,10 +213,10 @@ function getItemListFromDataOrder(input1, input2, currency) {
              "currency": "USD",
              "quantity": 1
              }*/
-        //]
+    //]
     //};
 
-    console.log ('getItemListFromDataOrder - output', output);
+    console.log('getItemListFromDataOrder - output', output);
 
     return output;
 
@@ -228,12 +225,12 @@ function getItemListFromDataOrder(input1, input2, currency) {
 
 function getAmountFromDataOrder(input1, input2, currency) {
 
-    var amount = 0 ;
+    var amount = 0;
     _.each(input2, function (val, key) {
 
-            amount = amount +  ( val.price * input1[key].quantity);
+        amount = amount + ( val.price * input1[key].quantity);
 
-        })
+    })
 
     var output = {
         "currency": currency,
