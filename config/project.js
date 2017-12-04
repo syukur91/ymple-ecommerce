@@ -1,7 +1,7 @@
 // PROJECT SETTINGS
 
 module.exports.project = {
-  name: 'Ymple',
+  name: 'Toko Hijab',
   author: 'WASD Inc.',
   description: 'OPEN SHOP for FLIT electronics.',
   version: '0.2.0',
@@ -14,7 +14,8 @@ module.exports.project = {
       'kr': '원',
       'en': 'Won'
     },
-    symbol: '€'
+    // symbol: '€'
+    symbol: 'Rp'
   },
   paymentMethods: {
     iamport: {
@@ -34,8 +35,8 @@ module.exports.project = {
   disqusShortname: '',
   nodemailer: {
     auth: {
-      user: 'google@gmail.com',
-      pass: ''
+      user: 'syukur.jtk09@gmail.com',
+      pass: 'Ea88615C'
     },
     sender: 'YMPLE COMMERCE ✔ <google@gmail.com>',
     mailToAlert: 'admin@gmail.com'
