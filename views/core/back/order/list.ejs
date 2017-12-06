@@ -10,7 +10,7 @@
                     <!--<th>#</th>-->
                     <th> <%= __('Created Date') %> </th>          
                     <th> <%= __('Name') %> </th>
-                    <th> <%= __('Products') %> </th>
+                    <th> <%= __('Product') %> </th>
                     <Th> <%= __('Price') %> </th>
                     <Th> <%= __('Telephone') %> </th>
                     <Th> <%= __('Address') %> </th>
@@ -36,13 +36,14 @@
                         <%= order.name %>
                         <% } %>
                     </td>
-                    <td>
+                    <!--<td>
 
                         <% if (order.products) { order.products.forEach(function(product){ %>
                         <a href="/product/view/<%= product.id %>"><%= product.name %></a>
                         <%= product.quantity %>
                         <% })}; %>
-                    </td>
+                    </td>-->
+                    <td><%= order.productName %></td>
                     <td><%= order.price %></td>
                     <td><%= order.phone %></td>
                     <td><%= order.address %></td>

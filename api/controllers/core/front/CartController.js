@@ -128,6 +128,7 @@ module.exports = {
 
     // need to check the login status
     var isLogin = false;
+    var productName =  '';
 
     if (req.session.user){
       isLogin = true;
@@ -163,6 +164,8 @@ module.exports = {
               quantity: item.quantity
             };
 
+            productName = prodcutInfo.name
+
             cart.push(prodcutInfo);
             done(null, product);
           });
@@ -176,12 +179,16 @@ module.exports = {
             result.total += cart[i].quantity;
           }
 
+          result.productName = productName
+
           next(null, result);
           return;
         });
       }
     ], function (err, result) {
       if (err) return res.serverError(err);
+
+      UpdateSessionCart(req.session, result.cart[0].id, result.total, result.summary, result.productName);
 
       return res.view(pathTemplateFrontCore + 'checkout/checkout.ejs', result);
     });
@@ -209,6 +216,37 @@ function AddToSessionCart (session, id, quantity) {
     for ( var i in cart ) {
       if ( cart[i].id == id ) {
         session.cart[i].quantity += parseInt(quantity);
+        isAlreadyExist = true;
+      }
+    }
+
+    if ( !isAlreadyExist )
+      session.cart.push(product);
+  } else {
+    session.cart = [];
+    session.cart.push(product);
+  }
+}
+
+
+function UpdateSessionCart (session, id, quantity, summary, name) {
+  var product = {
+    id: id,
+    quantity: parseInt(quantity),
+    price: summary,
+    productName : name
+  };
+
+  if ( session.hasOwnProperty('cart') ) {
+    var cart = session.cart;
+    var isAlreadyExist = false;
+
+    for ( var i in cart ) {
+      if ( cart[i].id == id ) {
+        // session.cart[i].quantity += parseInt(quantity);
+        // session.cart[i].price =parseInt(quantity) * parseInt(product.price);
+        session.cart[i].price = parseInt(product.price);
+        session.cart[i].productName = product.productName;
         isAlreadyExist = true;
       }
     }

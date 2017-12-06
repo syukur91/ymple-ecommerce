@@ -121,8 +121,10 @@
         });
 
         $('[button-action="apply"]').on('click', function () {
+            
             var product_id = $(this).parent().parent().data('id');
             var quantity = $(this).parent().parent().find('input').val();
+           alert("tes")
 
             $.ajax({
                 type: 'PUT',

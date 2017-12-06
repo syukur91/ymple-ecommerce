@@ -214,6 +214,7 @@ module.exports = {
 
     create: function (req, res) { // create the order based on the client information and the cart
 
+        
         if (!req.session.user) {
             return res.redirect('/login');
         }
@@ -246,8 +247,9 @@ module.exports = {
             comment: comment,
             payment: payment,
             shipping: 0,
-            price: 0,
-            list_product: [],
+            price: req.session.cart[0].price,
+            list_product: req.session.cart,
+            productName: req.session.cart[0].productName,
             cart: cart,
             status: status
         }
@@ -270,6 +272,7 @@ module.exports = {
 
 
                     data['idOrder'] = idOrder;
+                    // data['price'] = req.session.cart[0].price
 
                     CoreInsertDbService.insertOrder(data);
                     console.log('orderController - increment id [START]');

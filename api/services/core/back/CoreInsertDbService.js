@@ -27,7 +27,7 @@ getValueFromArray = function (data, element, type) {
     if (data && data[element]) {
 
         if (type == 'int') {
-            //  output = parseInt(data[element])
+              output = parseInt(data[element])
         }
         else {
             output = data[element];
@@ -215,9 +215,11 @@ getValueFromArray = function (data, element, type) {
                 var comment = getValueFromArray(data, 'comment', '');
                 var payment = getValueFromArray(data, 'payment', '');
                 var shipping = getValueFromArray(data, 'shipping', '');
-                var price = getValueFromArray(data, 'price', 'int');
+                // var price = getValueFromArray(data, 'price', 'int');
+                var price = data.price;
                 var list_product = getValueFromArray(data, 'list_product', '');
                 var cart = getValueFromArray(data, 'cart', '');
+                var productName = data.productName;
 
                 //console.log('insertOrder - cart', cart);
 
@@ -233,6 +235,7 @@ getValueFromArray = function (data, element, type) {
                     shipping: shipping,
                     price: price,
                     list_product: list_product,
+                    productName: productName,
                     cart: cart,
                     createdAt: createdAt,
                     updatedAt: updatedAt,
