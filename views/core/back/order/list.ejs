@@ -14,7 +14,7 @@
                     <Th> <%= __('Price') %> </th>
                     <Th> <%= __('Telephone') %> </th>
                     <Th> <%= __('Address') %> </th>
-                    <Th> <%= __('Shipping') %> </th>
+                    <!--<Th> <%= __('Shipping') %> </th>-->
                     <Th> <%= __('Payment') %> </th>
                     <Th> <%= __('Status') %> </th>
                     <!--<th> <%= __('Details') %> </th>
@@ -48,18 +48,28 @@
                     <td><%= order.phone %></td>
                     <td><%= order.address %></td>
 
-                    <td>
+                    <!--<td>
                         <Span class="badge badge-success"> <%= __('advance payment') %> </span>
-                    </td>
+                    </td>-->
                                 
                     <td>
                         <span class="badge badge-default"> <%= order.payment %>
                         </span>
                     </td>
+
+                     <% if (order.status == 2) { %>
+                        <td>
+                         <Span class="badge badge-default"> <%= __('standby payment') %> </span>
+                        </td>
+                        <% } else { %>
+                        <td>
+                         <Span class="badge badge-default"> <%= __('paid') %> </span>
+                        </td>
+                    <% } %>
                                 
-                    <td>
+                    <!--<td>
                         <Span class="badge badge-default"> <%= __('standby payment') %> </span>
-                    </td>
+                    </td>-->
                     <!--<td>Status</td>-->
 
                     <!--<td>
