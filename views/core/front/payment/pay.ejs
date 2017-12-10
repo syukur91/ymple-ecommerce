@@ -12,31 +12,46 @@
 
     <ul>
         <% cart.forEach(function(cartItem){ %>
-        Name: <%= cartItem.name %> <br>
+        <!--Name: <%= cartItem.name %> <br>-->
         Price <%= cartItem.price %> <br>
         Quantity: <%= cartItem.quantity %> <br>
         <% }); %>
     </ul>
 
 
-    <h3 class="title-green"><%= __('Customer information') %> </h3>
+    <h3 class="title-green"><%= __('Customer Information') %> </h3>
 
       
     <div>Customer information</div>
-
 
     <ul>
         Name: <%= user.name %> <br>
         Price <%= user.email %> <br>
     </ul>
 
+    <h3 class="title-green"><%= __('How To Pay') %> </h3>
+
+     <div>How To Pay</div>
+
+    <div>Mandiri Account</div>
+    <ul>
+        <li>Please transfer to this account 9000017275919 - RIKA RIZKIA PRATIWI</li>
+        <li>Confirm and send the transfer receipt to 082115521549 </li>
+    </ul>
+
+    <div>BCA Account</div>
+    <ul>
+        <li>Please transfer to this account 2790075946 - RIKA RIZKIA PRATIWI</li>
+        <li>Confirm and send the transfer receipt to 082115521549 </li>
+    </ul>
+
     <br><br>
 
-    <div>
+    <!--<div>
 
         <a href="/payment/paypal/pay/<%= orderReference %>"><img src="/images/express-checkout-paypal.png" style="max-width: 150px"></a>
 
-    </div>
+    </div>-->
 
           <!--div id="paypal-button"  style="    text-align: -webkit-center;"></div-->
 
